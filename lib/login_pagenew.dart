@@ -1,21 +1,16 @@
 import 'dart:convert';
 import 'package:flutter_page_transition/flutter_page_transition.dart';
 import 'package:partyapp/Colors/colors.dart';
-import 'package:partyapp/about_dakibaa.dart';
 import 'package:partyapp/common/shared_preferences.dart';
 import 'package:partyapp/network/network.dart';
 import 'package:partyapp/number_of_person.dart';
-import 'package:partyapp/paytm_screen.dart';
 import 'package:partyapp/signup_pagenew.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-//import 'package:party_app/forget_password.dart';
-
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:http/http.dart' as http;
-
 import 'ApiList.dart';
 import 'Services.dart';
 import 'common/constant.dart';
@@ -25,7 +20,6 @@ import 'home_page.dart';
 class LoginPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _LoginPageState();
   }
 }

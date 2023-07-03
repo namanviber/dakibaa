@@ -133,103 +133,85 @@
 99            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 99-->[:url_launcher] C:\Users\lenovo\Documents\GitHub\dakibaa\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-71
 100
-101        <provider
-101-->[:flutter_webview_plugin] C:\Users\lenovo\Documents\GitHub\dakibaa\build\flutter_webview_plugin\intermediates\library_manifest\debug\AndroidManifest.xml:9:9-18:20
-102            android:name="androidx.core.content.FileProvider"
-102-->[:flutter_webview_plugin] C:\Users\lenovo\Documents\GitHub\dakibaa\build\flutter_webview_plugin\intermediates\library_manifest\debug\AndroidManifest.xml:10:13-62
-103            android:authorities="com.Party.partyapp.fileprovider"
-103-->[:flutter_webview_plugin] C:\Users\lenovo\Documents\GitHub\dakibaa\build\flutter_webview_plugin\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-64
-104            android:exported="false"
-104-->[:flutter_webview_plugin] C:\Users\lenovo\Documents\GitHub\dakibaa\build\flutter_webview_plugin\intermediates\library_manifest\debug\AndroidManifest.xml:12:13-37
-105            android:grantUriPermissions="true" >
-105-->[:flutter_webview_plugin] C:\Users\lenovo\Documents\GitHub\dakibaa\build\flutter_webview_plugin\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-47
-106            <meta-data
-106-->[:image_picker] C:\Users\lenovo\Documents\GitHub\dakibaa\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:16:13-18:75
-107                android:name="android.support.FILE_PROVIDER_PATHS"
-107-->[:image_picker] C:\Users\lenovo\Documents\GitHub\dakibaa\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:17:17-67
-108                android:resource="@xml/filepaths" />
-108-->[:image_picker] C:\Users\lenovo\Documents\GitHub\dakibaa\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:18:17-72
-109        </provider>
-110
-111        <uses-library
-111-->[androidx.window:window:1.0.0-beta04] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\e30e175c73a7067fc20795d0c0da9773\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
-112            android:name="androidx.window.extensions"
-112-->[androidx.window:window:1.0.0-beta04] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\e30e175c73a7067fc20795d0c0da9773\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
-113            android:required="false" />
-113-->[androidx.window:window:1.0.0-beta04] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\e30e175c73a7067fc20795d0c0da9773\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
-114        <uses-library
-114-->[androidx.window:window:1.0.0-beta04] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\e30e175c73a7067fc20795d0c0da9773\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
-115            android:name="androidx.window.sidecar"
-115-->[androidx.window:window:1.0.0-beta04] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\e30e175c73a7067fc20795d0c0da9773\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
-116            android:required="false" />
-116-->[androidx.window:window:1.0.0-beta04] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\e30e175c73a7067fc20795d0c0da9773\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
-117
-118        <activity
-118-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:23:9-26:66
-119            android:name="com.paytm.pgsdk.PaytmPGActivity"
-119-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:24:13-59
-120            android:screenOrientation="portrait"
-120-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:25:13-49
-121            android:theme="@style/Theme.AppCompat.NoActionBar" />
-121-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:26:13-63
-122        <activity
-122-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:27:9-29:63
-123            android:name="com.paytm.pgsdk.AioMatchUserActivity"
-123-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:28:13-64
-124            android:theme="@style/TransparentActivityTheme" />
-124-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:29:13-60
-125
-126        <service
-126-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:31:9-33:40
-127            android:name="com.paytm.pgsdk.IntentServicePostNotification"
-127-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:32:13-73
-128            android:exported="false" />
-128-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:33:13-37
-129        <service
-129-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:34:9-36:40
-130            android:name="com.paytm.pgsdk.IntentServicePreNotification"
-130-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:35:13-72
-131            android:exported="false" />
-131-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:36:13-37
-132
-133        <activity
-133-->[com.google.android.gms:play-services-base:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\6b9f7476acf1e759bbd812f0db142d4e\jetified-play-services-base-17.6.0\AndroidManifest.xml:23:9-26:75
-134            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-134-->[com.google.android.gms:play-services-base:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\6b9f7476acf1e759bbd812f0db142d4e\jetified-play-services-base-17.6.0\AndroidManifest.xml:24:13-79
+101        <uses-library
+101-->[androidx.window:window:1.0.0-beta04] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\e30e175c73a7067fc20795d0c0da9773\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+102            android:name="androidx.window.extensions"
+102-->[androidx.window:window:1.0.0-beta04] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\e30e175c73a7067fc20795d0c0da9773\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+103            android:required="false" />
+103-->[androidx.window:window:1.0.0-beta04] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\e30e175c73a7067fc20795d0c0da9773\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+104        <uses-library
+104-->[androidx.window:window:1.0.0-beta04] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\e30e175c73a7067fc20795d0c0da9773\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+105            android:name="androidx.window.sidecar"
+105-->[androidx.window:window:1.0.0-beta04] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\e30e175c73a7067fc20795d0c0da9773\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+106            android:required="false" />
+106-->[androidx.window:window:1.0.0-beta04] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\e30e175c73a7067fc20795d0c0da9773\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+107
+108        <activity
+108-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:23:9-26:66
+109            android:name="com.paytm.pgsdk.PaytmPGActivity"
+109-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:24:13-59
+110            android:screenOrientation="portrait"
+110-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:25:13-49
+111            android:theme="@style/Theme.AppCompat.NoActionBar" />
+111-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:26:13-63
+112        <activity
+112-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:27:9-29:63
+113            android:name="com.paytm.pgsdk.AioMatchUserActivity"
+113-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:28:13-64
+114            android:theme="@style/TransparentActivityTheme" />
+114-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:29:13-60
+115
+116        <service
+116-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:31:9-33:40
+117            android:name="com.paytm.pgsdk.IntentServicePostNotification"
+117-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:32:13-73
+118            android:exported="false" />
+118-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:33:13-37
+119        <service
+119-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:34:9-36:40
+120            android:name="com.paytm.pgsdk.IntentServicePreNotification"
+120-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:35:13-72
+121            android:exported="false" />
+121-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:36:13-37
+122
+123        <activity
+123-->[com.google.android.gms:play-services-base:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\6b9f7476acf1e759bbd812f0db142d4e\jetified-play-services-base-17.6.0\AndroidManifest.xml:23:9-26:75
+124            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+124-->[com.google.android.gms:play-services-base:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\6b9f7476acf1e759bbd812f0db142d4e\jetified-play-services-base-17.6.0\AndroidManifest.xml:24:13-79
+125            android:exported="false"
+125-->[com.google.android.gms:play-services-base:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\6b9f7476acf1e759bbd812f0db142d4e\jetified-play-services-base-17.6.0\AndroidManifest.xml:25:13-37
+126            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+126-->[com.google.android.gms:play-services-base:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\6b9f7476acf1e759bbd812f0db142d4e\jetified-play-services-base-17.6.0\AndroidManifest.xml:26:13-72
+127
+128        <service
+128-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:14:9-17:72
+129            android:name="easypay.appinvoke.utils.EasyPayConfigDownloader"
+129-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:15:13-75
+130            android:exported="false"
+130-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:16:13-37
+131            android:permission="android.permission.BIND_JOB_SERVICE" />
+131-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:17:13-69
+132        <service
+132-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:18:9-22:72
+133            android:name="easypay.appinvoke.utils.AnalyticsService"
+133-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:19:13-68
+134            android:enabled="true"
+134-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:20:13-35
 135            android:exported="false"
-135-->[com.google.android.gms:play-services-base:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\6b9f7476acf1e759bbd812f0db142d4e\jetified-play-services-base-17.6.0\AndroidManifest.xml:25:13-37
-136            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-136-->[com.google.android.gms:play-services-base:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\6b9f7476acf1e759bbd812f0db142d4e\jetified-play-services-base-17.6.0\AndroidManifest.xml:26:13-72
+135-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:21:13-37
+136            android:permission="android.permission.BIND_JOB_SERVICE" />
+136-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:22:13-69
 137
-138        <service
-138-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:14:9-17:72
-139            android:name="easypay.appinvoke.utils.EasyPayConfigDownloader"
-139-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:15:13-75
-140            android:exported="false"
-140-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:16:13-37
-141            android:permission="android.permission.BIND_JOB_SERVICE" />
-141-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:17:13-69
-142        <service
-142-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:18:9-22:72
-143            android:name="easypay.appinvoke.utils.AnalyticsService"
-143-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:19:13-68
-144            android:enabled="true"
-144-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:20:13-35
-145            android:exported="false"
-145-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:21:13-37
-146            android:permission="android.permission.BIND_JOB_SERVICE" />
-146-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:22:13-69
-147
-148        <activity android:name="easypay.appinvoke.AnalyticsManagerInfoDisplayActivity" />
-148-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:24:9-90
-148-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:24:19-87
-149
-150        <meta-data
-150-->[com.google.android.gms:play-services-basement:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\33122cc9946f28b4285de715133f5f52\jetified-play-services-basement-17.6.0\AndroidManifest.xml:23:9-25:69
-151            android:name="com.google.android.gms.version"
-151-->[com.google.android.gms:play-services-basement:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\33122cc9946f28b4285de715133f5f52\jetified-play-services-basement-17.6.0\AndroidManifest.xml:24:13-58
-152            android:value="@integer/google_play_services_version" />
-152-->[com.google.android.gms:play-services-basement:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\33122cc9946f28b4285de715133f5f52\jetified-play-services-basement-17.6.0\AndroidManifest.xml:25:13-66
-153    </application>
-154
-155</manifest>
+138        <activity android:name="easypay.appinvoke.AnalyticsManagerInfoDisplayActivity" />
+138-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:24:9-90
+138-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:24:19-87
+139
+140        <meta-data
+140-->[com.google.android.gms:play-services-basement:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\33122cc9946f28b4285de715133f5f52\jetified-play-services-basement-17.6.0\AndroidManifest.xml:23:9-25:69
+141            android:name="com.google.android.gms.version"
+141-->[com.google.android.gms:play-services-basement:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\33122cc9946f28b4285de715133f5f52\jetified-play-services-basement-17.6.0\AndroidManifest.xml:24:13-58
+142            android:value="@integer/google_play_services_version" />
+142-->[com.google.android.gms:play-services-basement:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\33122cc9946f28b4285de715133f5f52\jetified-play-services-basement-17.6.0\AndroidManifest.xml:25:13-66
+143    </application>
+144
+145</manifest>
