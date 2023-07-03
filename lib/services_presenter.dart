@@ -1,5 +1,3 @@
-
-import 'package:flutter/material.dart';
 import 'package:partyapp/rest_api/rest_api.dart';
 import 'package:partyapp/services_model/services_model.dart';
 

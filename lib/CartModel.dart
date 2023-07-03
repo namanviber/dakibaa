@@ -7,7 +7,7 @@ class CartModel{
   var productImages;
   var Description;
   var productPrice;
-  int count;
+  int? count;
   var price;
 
   CartModel(this.Id,this.cid,this.unitId, this.Productname, this.productImages, this.Description,

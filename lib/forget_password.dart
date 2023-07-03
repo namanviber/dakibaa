@@ -17,13 +17,13 @@ class ForgotPass extends StatefulWidget {
 }
 
 class _ForgotPass extends State<ForgotPass> {
-  SharedPreferences sharedPreferences;
-  bool checkValue;
-  Map<String, dynamic> value;
+  late SharedPreferences sharedPreferences;
+  bool? checkValue;
+  Map<String, dynamic>? value;
   final _formkey = GlobalKey<FormState>();
   @override
  final user_NameController = TextEditingController();
-  ProgressDialog pr;
+  late ProgressDialog pr;
 
   Widget build(BuildContext context) {
     return Form(
@@ -151,7 +151,7 @@ class _ForgotPass extends State<ForgotPass> {
                       maxLength: 10,
                       textAlign: TextAlign.center,
                       validator: (value){
-                        if(value.isEmpty){
+                        if(value!.isEmpty){
                           return 'Enter your contact number';
                         }else if(value.length != 10){
                           return "contact must be of 10 digits";
@@ -221,8 +221,8 @@ class _ForgotPass extends State<ForgotPass> {
                             style: TextStyle(color:AppTheme().color_white,fontWeight: FontWeight.bold,fontSize: 17),),
                           onPressed: () {
 
-                            if (_formkey.currentState.validate()) {
-                              _formkey.currentState.save();
+                            if (_formkey.currentState!.validate()) {
+                              _formkey.currentState!.save();
                               setState(() {});
 
                               _onChanged( user_NameController.text);

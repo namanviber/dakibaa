@@ -13,20 +13,20 @@ import 'otp_screen.dart';
 
 class ForgetForm extends StatefulWidget {
 
-  String number;
+  String? number;
   ForgetForm({this.number});
   @override
   _ForgetForm createState() => _ForgetForm(number: number);
 }
 
 class _ForgetForm extends State<ForgetForm> {
-  String number;
+  String? number;
   _ForgetForm({this.number});
   @override
   final new_PasswordController = TextEditingController();
   final confirmNew_PasswordController = TextEditingController();
-  ProgressDialog pr;
-  Map<String, dynamic> value;
+  late ProgressDialog pr;
+  Map<String, dynamic>? value;
 bool passwordVisible=true;
 bool passwordVisible1=true;
   final _formkey = GlobalKey<FormState>();
@@ -108,7 +108,7 @@ bool passwordVisible1=true;
                           margin: EdgeInsets.only(left: 20.0,top: 30.0,right: 20.0),
                           child: TextFormField(
                             validator: (value) {
-                              if (value.isEmpty) {
+                              if (value!.isEmpty) {
                                 return 'Please enter password';
                               }
                               return null;
@@ -181,7 +181,7 @@ bool passwordVisible1=true;
                             margin: EdgeInsets.only(left: 20.0,top: 25.0,right: 20.0),
                             child: TextFormField(
                               validator: (value) {
-                                if (value.isEmpty) {
+                                if (value!.isEmpty) {
                                   return 'Please confirm your password';
                                 }
                                 if(value!=new_PasswordController.text){
@@ -265,7 +265,7 @@ bool passwordVisible1=true;
                             child: Text("SUBMIT",
                               style: TextStyle(color: AppTheme().color_white,fontWeight: FontWeight.bold,fontSize: 17),),
                             onPressed: (){
-                              if (_formkey.currentState.validate()) {
+                              if (_formkey.currentState!.validate()) {
                                 getData();
                               }
 

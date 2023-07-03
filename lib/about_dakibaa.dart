@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_page_transition/flutter_page_transition.dart';
 import 'package:flutter_page_transition/page_transition_type.dart';
 import 'package:partyapp/Colors/colors.dart';
@@ -23,7 +24,7 @@ class AboutDakibaa extends StatefulWidget {
 
 class _AboutDakibaaState extends State<AboutDakibaa> {
   var name, email, id, gender, mobile, noperson, phone, dob;
-  bool checkValue;
+  bool? checkValue;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   void initState() {
@@ -36,7 +37,7 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
     setState(() {
       checkValue = sharedPreferences.getBool("check");
       if (checkValue != null) {
-        if (checkValue) {
+        if (checkValue!) {
           name = sharedPreferences.getString("name");
           print("$name");
           id = sharedPreferences.getString("id");
@@ -299,7 +300,25 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: drawar(),
-      body: new Container(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        scrolledUnderElevation: 1,
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
+        leading: Builder(
+          builder: (BuildContext context) {
+            return GestureDetector(
+              child: Image.asset("images/menu.png"),
+              onTap: () {
+                Scaffold.of(context).openDrawer();
+              },
+              // tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            );
+          },
+        ),
+      ),
+      body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
@@ -313,27 +332,12 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
               colorFilter: new ColorFilter.mode(
                   Colors.black.withOpacity(0.3), BlendMode.dstATop),
             )),
-        child: new ListView(
+        child: ListView(
           physics: BouncingScrollPhysics(),
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(top: 30, left: 20),
-                  child: new Row(
-                    children: [
-                      new InkWell(
-                        onTap: () {
-                          _scaffoldKey.currentState.openDrawer();
-                        },
-                        child: new Container(
-                          child: new Image.asset("images/menu.png"),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: Container(
@@ -457,10 +461,14 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
                         top: 30, left: 20, right: 20, bottom: 20),
                     child: InkWell(
                       onTap: () {
-                        Navigator.of(context).pushAndRemoveUntil(
+                        Navigator.push(
+                            context,
                             MaterialPageRoute(
-                                builder: (context) => Number_of_Person()),
-                            (Route<dynamic> route) => false);
+                                builder: (context) => Number_of_Person()));
+                        // Navigator.of(context).pushAndRemoveUntil(
+                        //     MaterialPageRoute(
+                        //         builder: (context) => Number_of_Person()),
+                        //     (Route<dynamic> route) => false);
                       },
                       child: new Container(
                         height: 45,

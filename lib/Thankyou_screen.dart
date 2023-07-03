@@ -13,6 +13,7 @@ class _ThankyouScreenState extends State<ThankyouScreen> {
   Future<bool> _onWillPop() async {
    /* Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
         Number_of_Person()), (Route<dynamic> route) => false);*/
+    return false;
   }
   @override
   Widget build(BuildContext context) {
@@ -62,7 +63,7 @@ class _ThankyouScreenState extends State<ThankyouScreen> {
                   alignment: WrapAlignment.center,
                   children: [
                     new Container(
-                      child: Text(payment_mesg != null?"Your Order has been placed \nReference Number :  "+payment_OrderID:""
+                      child: Text(payment_mesg != null?"Your Order has been placed \nReference Number :  "+payment_OrderID!:""
                         ,textAlign: TextAlign.center,style: TextStyle(color: AppTheme().color_white,fontSize: 15,fontFamily: 'Montserrat-SemiBold'),),
                     ),
                   ],

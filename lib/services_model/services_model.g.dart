@@ -10,7 +10,7 @@ ServicesModel _$ServicesModelFromJson(Map<String, dynamic> json) {
   return ServicesModel(
       json['status'],
       json['message'],
-      (json['data'] as List)
+      (json["data"])
           ?.map((e) => e == null
               ? null
               : ServicesModel_list.fromJson(e as Map<String, dynamic>))
@@ -26,14 +26,14 @@ Map<String, dynamic> _$ServicesModelToJson(ServicesModel instance) =>
 
 ServicesModel_list _$ServicesModel_listFromJson(Map<String, dynamic> json) {
   return ServicesModel_list(
-      json['id'] as int,
+      json['id'] as int?,
       json['productname'],
       json['product_descr'],
-      json['rate15'] as int,
-      json['rate30'] as int,
-      json['rate50'] as int,
-      json['rate75'] as int,
-      json['rate100'] as int);
+      json['rate15'] as int?,
+      json['rate30'] as int?,
+      json['rate50'] as int?,
+      json['rate75'] as int?,
+      json['rate100'] as int?);
 }
 
 Map<String, dynamic> _$ServicesModel_listToJson(ServicesModel_list instance) =>

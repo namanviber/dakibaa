@@ -145,7 +145,7 @@ class _ItemDescriptionState extends State<ItemDescription> {
                       child: new Row(
                         children: [
                           new Container(
-                            child: new Text(titlename==null?"":titlename,style: TextStyle(color: AppTheme().color_black,fontFamily: "Montserrat-SemiBold",fontSize: 17),
+                            child: new Text(titlename==null?"":titlename!,style: TextStyle(color: AppTheme().color_black,fontFamily: "Montserrat-SemiBold",fontSize: 17),
                           ))
                         ],
                       ),
@@ -156,7 +156,7 @@ class _ItemDescriptionState extends State<ItemDescription> {
                       child: new Wrap(
                         children: [
                           new Container(
-                              child: new Text(descp==null?"":descp,style: TextStyle(color: AppTheme().color_black,
+                              child: new Text(descp==null?"":descp!,style: TextStyle(color: AppTheme().color_black,
                                   fontFamily: "Montserrat-SemiBold",fontSize: 14),
                               ))
                         ],
@@ -221,7 +221,7 @@ class _ItemDescriptionState extends State<ItemDescription> {
                       child: new Row(
                         children: [
                           new Container(
-                              child: new Text(price==null?"":"Price   "+"₹"+price,style: TextStyle(color: AppTheme().color_red,fontFamily: "Montserrat-SemiBold",fontSize: 18),
+                              child: new Text(price==null?"":"Price   "+"₹"+price!,style: TextStyle(color: AppTheme().color_red,fontFamily: "Montserrat-SemiBold",fontSize: 18),
                               ))
                         ],
                       ),

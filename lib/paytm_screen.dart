@@ -24,7 +24,7 @@ class _PaytmscreenState extends State<Paytmscreen>implements PaytmModelContract 
 
   String payment_amount = null;*/
 
-  PaytmModelPresenter _presenter;
+  late PaytmModelPresenter _presenter;
 
   _PaytmscreenState() {
     _presenter = new PaytmModelPresenter(this);
@@ -41,11 +41,11 @@ class _PaytmscreenState extends State<Paytmscreen>implements PaytmModelContract 
   String PAYTM_MERCHANT_KEY = "dM0xTZCzkiKtJF4p";
   String website = "DEFAULT";
   bool testing = false;
-  ProgressDialog pr;
+  late ProgressDialog pr;
   double amount = 1;
   bool loading = false;
-  SharedPreferences sharedPreferences;
-  bool checkValue;
+  late SharedPreferences sharedPreferences;
+  bool? checkValue;
   var id;
   @override
   void initState() {
@@ -58,7 +58,7 @@ class _PaytmscreenState extends State<Paytmscreen>implements PaytmModelContract 
     setState(() {
       checkValue = sharedPreferences.getBool("check");
       if (checkValue != null) {
-        if (checkValue) {
+        if (checkValue!) {
           id = sharedPreferences.getString("id");
           print(id);
         } else {

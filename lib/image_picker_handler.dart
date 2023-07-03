@@ -8,8 +8,8 @@ import 'package:image_picker/image_picker.dart';
 import 'image_picker_dialog.dart';
 
 class ImagePickerHandler {
-  ImagePickerDialog imagePicker;
-  AnimationController _controller;
+  late ImagePickerDialog imagePicker;
+  AnimationController? _controller;
   ImagePickerListener _listener;
 
   ImagePickerHandler(this._listener, this._controller);

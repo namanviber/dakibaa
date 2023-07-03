@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:partyapp/setting.dart';
@@ -16,11 +18,11 @@ class HomePage extends StatefulWidget {
 
 class _State extends State<HomePage> {
   int _currentIndex = 0;
-  int counter = 0;
-  SharedPreferences sharedPreferences;
-  var id;
+  int? counter = 0;
+  late SharedPreferences sharedPreferences;
+  late var id;
   bool checkValue = false;
-  Map<String, dynamic> value;
+  Map<String, dynamic>? value;
   final List<Widget> _children = [
     Services(),
     Cart(),
@@ -28,7 +30,7 @@ class _State extends State<HomePage> {
     EditProfilePage()
   ];
   Future<bool> _onWillPop() async {
-    return (await showDialog(
+    return (await (showDialog(
       context: context,
       builder: (context) => new AlertDialog(
         title: new Text('Are you sure?'),
@@ -44,7 +46,7 @@ class _State extends State<HomePage> {
           ),
         ],
       ),
-    )) ?? false;
+    ) as FutureOr<bool>?)) ?? false;
   }
   @override
   void initState() {

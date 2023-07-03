@@ -19,7 +19,7 @@ import 'home_page.dart';
 
 
 class CheckOutScreen extends StatefulWidget {
-  String id_list;
+  String? id_list;
   var price;
   CheckOutScreen({this.price,this.id_list});
 
@@ -28,16 +28,16 @@ class CheckOutScreen extends StatefulWidget {
 }
 
 class _CheckOutScreen extends State<CheckOutScreen> {
-  String id_list;
+  String? id_list;
   var price;
   _CheckOutScreen({this.price,this.id_list});
-  ProgressDialog pr;
-  SharedPreferences sharedPreferences;
+  late ProgressDialog pr;
+  late SharedPreferences sharedPreferences;
   var id;
   var finaldate;
-  bool checkValue;
+  bool? checkValue;
   final _formkey = GlobalKey<FormState>();
-  Map<String, dynamic> value;
+  Map<String, dynamic>? value;
   @override
   final nameController = TextEditingController();
   final mailController = TextEditingController();
@@ -46,8 +46,8 @@ class _CheckOutScreen extends State<CheckOutScreen> {
   final dateController = TextEditingController();
   final controllereController = TextEditingController();
   final timeController = TextEditingController();
-  TimeOfDay timePicked1;
-  TimeOfDay _timeOfDay1=TimeOfDay.now();
+  TimeOfDay? timePicked1;
+  TimeOfDay? _timeOfDay1=TimeOfDay.now();
 
   @override
   void initState() {
@@ -58,7 +58,7 @@ class _CheckOutScreen extends State<CheckOutScreen> {
   Widget build(BuildContext context) {
     Pattern pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regex = new RegExp(pattern);
+    RegExp regex = new RegExp(pattern as String);
     return Scaffold(
         body: GestureDetector(
           onTap: () {
@@ -130,7 +130,7 @@ class _CheckOutScreen extends State<CheckOutScreen> {
                         child: TextFormField(
                           textAlign: TextAlign.center,
                           validator: (value){
-                            if(value.isEmpty){
+                            if(value!.isEmpty){
                               return "Please enter name";
                             }
                             else {
@@ -187,7 +187,7 @@ class _CheckOutScreen extends State<CheckOutScreen> {
                         child: TextFormField(
                           textAlign: TextAlign.center,
                           validator: (value){
-                            if(value.isEmpty){
+                            if(value!.isEmpty){
                               return "Please enter email";
                             }
                             else  if(!regex.hasMatch(value)){
@@ -250,7 +250,7 @@ class _CheckOutScreen extends State<CheckOutScreen> {
                         child: TextFormField(
                           textAlign: TextAlign.center,
                           validator: (value){
-                            if(value.isEmpty){
+                            if(value!.isEmpty){
                               return "Please enter number";
                             }else if(value.length != 10){
                               return "contact must be of 10 digits";
@@ -313,7 +313,7 @@ class _CheckOutScreen extends State<CheckOutScreen> {
                         child: TextFormField(
                           textAlign: TextAlign.center,
                           validator: (value){
-                            if(value.isEmpty){
+                            if(value!.isEmpty){
                               return "Please enter address";
                             }
                             else {
@@ -374,7 +374,7 @@ class _CheckOutScreen extends State<CheckOutScreen> {
                           child: TextFormField(
                             textAlign:TextAlign.center,
                             validator: (value){
-                              if(value.isEmpty){
+                              if(value!.isEmpty){
                                 return "Please enter date";
                               }
                               else {
@@ -440,7 +440,7 @@ class _CheckOutScreen extends State<CheckOutScreen> {
                               child: TextFormField(
                                 textAlign: TextAlign.center,
                                 validator: (value){
-                                  if(value.isEmpty){
+                                  if(value!.isEmpty){
                                     return "Please enter time";
                                   }
                                   else {
@@ -507,8 +507,8 @@ class _CheckOutScreen extends State<CheckOutScreen> {
                                 textStyle: TextStyle(color:AppTheme().color_red,fontWeight: FontWeight.bold,fontSize: 17),
                               ),
                               onPressed: (){
-                                if (_formkey.currentState.validate()) {
-                                  _formkey.currentState.save();
+                                if (_formkey.currentState!.validate()) {
+                                  _formkey.currentState!.save();
                                   setState(() {});
                                   getData();
 
@@ -584,7 +584,7 @@ class _CheckOutScreen extends State<CheckOutScreen> {
     setState(() {
       checkValue = sharedPreferences.getBool("check");
       if (checkValue != null) {
-        if (checkValue) {
+        if (checkValue!) {
           id = sharedPreferences.getString("id");
           print(id);
         } else {
@@ -612,12 +612,12 @@ class _CheckOutScreen extends State<CheckOutScreen> {
     // more complex and slow.
     timePicked1=await showTimePicker(
       context: context,
-      initialTime:_timeOfDay1!=null?_timeOfDay1:TimeOfDay.now(),
+      initialTime:_timeOfDay1!=null?_timeOfDay1!:TimeOfDay.now(),
     );
     setState(() {
       _timeOfDay1=timePicked1;
-      timeController.text=_timeOfDay1.format(context).toString();
-      print(_timeOfDay1.format(context));
+      timeController.text=_timeOfDay1!.format(context).toString();
+      print(_timeOfDay1!.format(context));
       print(timePicked1);
     });
   }
@@ -631,7 +631,7 @@ class _CheckOutScreen extends State<CheckOutScreen> {
       dateController.text=formatted.toString();
     });
   }*/
-  Future<DateTime> getDate()  {
+  Future<DateTime?> getDate()  {
     // Imagine that this function is
     // more complex and slow.
     return showDatePicker(
@@ -639,10 +639,10 @@ class _CheckOutScreen extends State<CheckOutScreen> {
       initialDate: DateTime.now(),
       firstDate: DateTime(2018),
       lastDate: DateTime(2030),
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData.light(),
-          child: child,
+          child: child!,
         );
       },
     );

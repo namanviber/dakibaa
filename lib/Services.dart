@@ -33,19 +33,19 @@ class Services extends StatefulWidget {
 }
 
 class ServicesPage extends State<Services> {
-  AnimationController _controller;
-  double screenHeight;
-  double screenwidth;
+  AnimationController? _controller;
+  double? screenHeight;
+  double? screenwidth;
   int counter = 0;
   bool checkValue = false;
-  SharedPreferences sharedPreferences;
+  late SharedPreferences sharedPreferences;
   var id;
-  File _image;
+  File? _image;
   bool _isProgressBarShown = true;
   bool hasData = false;
-  Map data;
-  List listData;
-  MediaQueryData queryData;
+  Map? data;
+  List? listData;
+  MediaQueryData? queryData;
   var pic_list = ["images/bartender.jpg","images/beverage.jpg","images/butler.jpg","images/glassware.jpg"];
 
   Future getData() async {
@@ -57,7 +57,7 @@ class ServicesPage extends State<Services> {
     if(parsedJson["status"]=="1"){
       if (mounted) {
         setState(() {
-          listData = data["data"];
+          listData = data!["data"];
           print(listData);
           // getCount();
           _isProgressBarShown = false;
@@ -87,6 +87,7 @@ class ServicesPage extends State<Services> {
   }
 
   Future<bool> _onWillPop() async {
+    return false;
 
   }
 
@@ -661,32 +662,32 @@ class ServicesPage extends State<Services> {
                              // childAspectRatio: (itemWidth / itemHeight/1.3),
                               mainAxisSpacing: 22),
                           itemCount:
-                          SERVICES_LIST == null ? 0 : SERVICES_LIST.length,
+                          SERVICES_LIST == null ? 0 : SERVICES_LIST!.length,
                           itemBuilder: (BuildContext context, int index) {
                             return new InkWell(
                                 onTap: (){
                                   setState(() {
-                                    titlename=SERVICES_LIST[index].productname;
+                                    titlename=SERVICES_LIST![index].productname;
                                     imageProduct= pic_list[index];
-                                    descp=SERVICES_LIST[index].product_descr;
-                                    if (person <=15) {
-                                      price=SERVICES_LIST[index].rate15.toString();
+                                    descp=SERVICES_LIST![index].product_descr;
+                                    if (person! <=15) {
+                                      price=SERVICES_LIST![index].rate15.toString();
 
-                                    } else if (person <= 30) {
-                                      price = SERVICES_LIST[index].rate30.toString();
+                                    } else if (person! <= 30) {
+                                      price = SERVICES_LIST![index].rate30.toString();
 
-                                    } else if (person <= 50) {
-                                      price = SERVICES_LIST[index].rate50.toString();
+                                    } else if (person! <= 50) {
+                                      price = SERVICES_LIST![index].rate50.toString();
 
-                                    } else if (person <=  75) {
-                                      price = SERVICES_LIST[index].rate75.toString();
+                                    } else if (person! <=  75) {
+                                      price = SERVICES_LIST![index].rate75.toString();
 
-                                    } else if (person <= 1000) {
-                                      price = SERVICES_LIST[index].rate100.toString();
+                                    } else if (person! <= 1000) {
+                                      price = SERVICES_LIST![index].rate100.toString();
 
                                     }
 
-                                    print("Title Name "+titlename);
+                                    print("Title Name "+titlename!);
                                   });
                                   Navigator.push(context, MaterialPageRoute(builder: (context) => ItemDescription()),);
                                 },
@@ -776,8 +777,8 @@ class ServicesPage extends State<Services> {
     return new Padding(
         padding: new EdgeInsets.only(top: 0.0),
         child: Shimmer.fromColors(
-            baseColor: Colors.grey[300],
-            highlightColor: Colors.grey[100],
+            baseColor: Colors.grey[300]!,
+            highlightColor: Colors.grey[100]!,
             child: new Column(
               children: [
                 new Row(
@@ -928,8 +929,8 @@ class ServicesPage extends State<Services> {
     return new Padding(
         padding: new EdgeInsets.only(top: 0.0),
         child: Shimmer.fromColors(
-            baseColor: Colors.grey[300],
-            highlightColor: Colors.grey[100],
+            baseColor: Colors.grey[300]!,
+            highlightColor: Colors.grey[100]!,
             child: new Column(
               children: [
                 new Row(
@@ -954,8 +955,8 @@ class ServicesPage extends State<Services> {
 }
 
 class Counter extends StatefulWidget {
-  final int index;
-  final List<ServicesModel_list>listData;
+  final int? index;
+  final List<ServicesModel_list>?listData;
 
   Counter({this.index, this.listData});
 
@@ -967,9 +968,9 @@ class _CounterState extends State<Counter> {
   int services = 1;
   int producttotal = 0;
   int total = 0;
-  int price;
-  int person_mult_price;
-  ProductServicesModel productModel;
+  int? price;
+  late int person_mult_price;
+  ProductServicesModel? productModel;
   var pic_list = ["images/bartender.jpg","images/beverage.jpg","images/butler.jpg","images/glassware.jpg"];
 
 
@@ -984,197 +985,197 @@ class _CounterState extends State<Counter> {
     totalrates();
   }
   void totalrates(){
-    if (person <= 15) {
-      for (int i = 0; i < widget.listData.length; i++) {
-        if(widget.listData[i].id==1){
-          producttotal += widget.listData[i].rate15;
+    if (person! <= 15) {
+      for (int i = 0; i < widget.listData!.length; i++) {
+        if(widget.listData![i].id==1){
+          producttotal += widget.listData![i].rate15!;
         }
-        if(widget.listData[i].id==2){
-          producttotal += widget.listData[i].rate15;
+        if(widget.listData![i].id==2){
+          producttotal += widget.listData![i].rate15!;
         }
       }
       totalamount = producttotal;
-      if(widget.listData[widget.index].id==3){
+      if(widget.listData![widget.index!].id==3){
 
         totalamount_bev=totalamount+person_mult_price;
         print("totalamount_bev :  "+totalamount_bev.toString());
       }
-      if(widget.listData[widget.index].id==4){
+      if(widget.listData![widget.index!].id==4){
         totalamount_bev=totalamount_bev+person_mult_price;
         totalamount=totalamount_bev;
         print("totalamountglas :  "+totalamount_bev.toString());
       }
-      for(int i=0;i<widget.listData.length;i++){
+      for(int i=0;i<widget.listData!.length;i++){
         productModel = new ProductServicesModel(
           "",
           "",
           0,
         );
-        productModel.prod_id=widget.listData[i].id.toString();
-        productModel.total=totalamount;
-        if(widget.listData[i].productname=="Beverage"){
-          productModel.qyt=person;
-        }else if(widget.listData[i].productname=="Glassware"){
-          productModel.qyt=person;
+        productModel!.prod_id=widget.listData![i].id.toString();
+        productModel!.total=totalamount;
+        if(widget.listData![i].productname=="Beverage"){
+          productModel!.qyt=person;
+        }else if(widget.listData![i].productname=="Glassware"){
+          productModel!.qyt=person;
         }else{
-          productModel.qyt=services;
+          productModel!.qyt=services;
         }
         product.add(productModel);
       }
-      jsons = jsonEncode(product.map((e) => e.toJson()).toList());
+      jsons = jsonEncode(product.map((e) => e!.toJson()).toList());
       print(jsons);
     }
-    else if (person <= 30) {
-      for (int i = 0; i < widget.listData.length; i++) {
-        if(widget.listData[i].id==1){
-          producttotal += widget.listData[i].rate30;
+    else if (person! <= 30) {
+      for (int i = 0; i < widget.listData!.length; i++) {
+        if(widget.listData![i].id==1){
+          producttotal += widget.listData![i].rate30!;
         }
-        if(widget.listData[i].id==2){
-          producttotal += widget.listData[i].rate30;
+        if(widget.listData![i].id==2){
+          producttotal += widget.listData![i].rate30!;
         }
       }
       totalamount = producttotal;
-      if(widget.listData[widget.index].id==3){
+      if(widget.listData![widget.index!].id==3){
 
         totalamount_bev=totalamount+person_mult_price;
         print("totalamount_bev :  "+totalamount_bev.toString());
       }
-      if(widget.listData[widget.index].id==4){
+      if(widget.listData![widget.index!].id==4){
         totalamount_bev=totalamount_bev+person_mult_price;
         totalamount=totalamount_bev;
         print("totalamountglas :  "+totalamount_bev.toString());
       }
-      for(int i=0;i<widget.listData.length;i++){
+      for(int i=0;i<widget.listData!.length;i++){
         productModel = new ProductServicesModel(
           "",
           "",
           0,
         );
-        productModel.prod_id=widget.listData[i].id.toString();
-        productModel.total=totalamount;
-        if(widget.listData[widget.index].id==3&& widget.listData[widget.index].id==4){
-          productModel.qyt=person;
+        productModel!.prod_id=widget.listData![i].id.toString();
+        productModel!.total=totalamount;
+        if(widget.listData![widget.index!].id==3&& widget.listData![widget.index!].id==4){
+          productModel!.qyt=person;
         }else{
-          productModel.qyt=services;
+          productModel!.qyt=services;
         }
         product.add(productModel);
       }
-      jsons = jsonEncode(product.map((e) => e.toJson()).toList());
+      jsons = jsonEncode(product.map((e) => e!.toJson()).toList());
       print(jsons);
 
     }
-    else if (person <= 50) {
-      for (int i = 0; i < widget.listData.length; i++) {
-        if(widget.listData[i].id==1){
-          producttotal += widget.listData[i].rate50;
+    else if (person! <= 50) {
+      for (int i = 0; i < widget.listData!.length; i++) {
+        if(widget.listData![i].id==1){
+          producttotal += widget.listData![i].rate50!;
         }
-        if(widget.listData[i].id==2){
-          producttotal += widget.listData[i].rate50;
+        if(widget.listData![i].id==2){
+          producttotal += widget.listData![i].rate50!;
         }
       }
       totalamount = producttotal;
-      if(widget.listData[widget.index].id==3){
+      if(widget.listData![widget.index!].id==3){
 
         totalamount_bev=totalamount+person_mult_price;
         print("totalamount_bev :  "+totalamount_bev.toString());
       }
-      if(widget.listData[widget.index].id==4){
+      if(widget.listData![widget.index!].id==4){
         totalamount_bev=totalamount_bev+person_mult_price;
         totalamount=totalamount_bev;
         print("totalamountglas :  "+totalamount_bev.toString());
       }
-      for(int i=0;i<widget.listData.length;i++){
+      for(int i=0;i<widget.listData!.length;i++){
         productModel = new ProductServicesModel(
           "",
           "",
           0,
         );
-        productModel.prod_id=widget.listData[i].id.toString();
-        productModel.total=totalamount;
-        if(widget.listData[widget.index].id==3&& widget.listData[widget.index].id==4){
-          productModel.qyt=person;
+        productModel!.prod_id=widget.listData![i].id.toString();
+        productModel!.total=totalamount;
+        if(widget.listData![widget.index!].id==3&& widget.listData![widget.index!].id==4){
+          productModel!.qyt=person;
         }else{
-          productModel.qyt=services;
+          productModel!.qyt=services;
         }
         product.add(productModel);
       }
-      jsons = jsonEncode(product.map((e) => e.toJson()).toList());
+      jsons = jsonEncode(product.map((e) => e!.toJson()).toList());
       print(jsons);
     }
-    else if (person <= 75) {
-      for (int i = 0; i < widget.listData.length; i++) {
-        if(widget.listData[i].id==1){
-          producttotal += widget.listData[i].rate75;
+    else if (person! <= 75) {
+      for (int i = 0; i < widget.listData!.length; i++) {
+        if(widget.listData![i].id==1){
+          producttotal += widget.listData![i].rate75!;
         }
-        if(widget.listData[i].id==2){
-          producttotal += widget.listData[i].rate75;
+        if(widget.listData![i].id==2){
+          producttotal += widget.listData![i].rate75!;
         }
       }
       totalamount = producttotal;
-      if(widget.listData[widget.index].id==3){
+      if(widget.listData![widget.index!].id==3){
 
         totalamount_bev=totalamount+person_mult_price;
         print("totalamount_bev :  "+totalamount_bev.toString());
       }
-      if(widget.listData[widget.index].id==4){
+      if(widget.listData![widget.index!].id==4){
         totalamount_bev=totalamount_bev+person_mult_price;
         totalamount=totalamount_bev;
         print("totalamountglas :  "+totalamount_bev.toString());
       }
-      for(int i=0;i<widget.listData.length;i++){
+      for(int i=0;i<widget.listData!.length;i++){
         productModel = new ProductServicesModel(
           "",
           "",
           0,
         );
-        productModel.prod_id=widget.listData[i].id.toString();
-        productModel.total=totalamount;
-        if(widget.listData[widget.index].id==3&& widget.listData[widget.index].id==4){
-          productModel.qyt=person;
+        productModel!.prod_id=widget.listData![i].id.toString();
+        productModel!.total=totalamount;
+        if(widget.listData![widget.index!].id==3&& widget.listData![widget.index!].id==4){
+          productModel!.qyt=person;
         }else{
-          productModel.qyt=services;
+          productModel!.qyt=services;
         }
         product.add(productModel);
       }
-      jsons = jsonEncode(product.map((e) => e.toJson()).toList());
+      jsons = jsonEncode(product.map((e) => e!.toJson()).toList());
       print(jsons);
     }
-    else if (person <= 1000) {
-      for (int i = 0; i < widget.listData.length; i++) {
-        if(widget.listData[i].id==1){
-          producttotal += widget.listData[i].rate100;
+    else if (person! <= 1000) {
+      for (int i = 0; i < widget.listData!.length; i++) {
+        if(widget.listData![i].id==1){
+          producttotal += widget.listData![i].rate100!;
         }
-        if(widget.listData[i].id==2){
-          producttotal += widget.listData[i].rate100;
+        if(widget.listData![i].id==2){
+          producttotal += widget.listData![i].rate100!;
         }
       }
       totalamount = producttotal;
-      if(widget.listData[widget.index].id==3){
+      if(widget.listData![widget.index!].id==3){
 
         totalamount_bev=totalamount+person_mult_price;
         print("totalamount_bev :  "+totalamount_bev.toString());
       }
-      if(widget.listData[widget.index].id==4){
+      if(widget.listData![widget.index!].id==4){
         totalamount_bev=totalamount_bev+person_mult_price;
         totalamount=totalamount_bev;
         print("totalamountglas :  "+totalamount_bev.toString());
       }
-      for(int i=0;i<widget.listData.length;i++){
+      for(int i=0;i<widget.listData!.length;i++){
         productModel = new ProductServicesModel(
           "",
           "",
           0,
         );
-        productModel.prod_id=widget.listData[i].id.toString();
-        productModel.total=totalamount;
-        if(widget.listData[widget.index].id==3&& widget.listData[widget.index].id==4){
-          productModel.qyt=person;
+        productModel!.prod_id=widget.listData![i].id.toString();
+        productModel!.total=totalamount;
+        if(widget.listData![widget.index!].id==3&& widget.listData![widget.index!].id==4){
+          productModel!.qyt=person;
         }else{
-          productModel.qyt=services;
+          productModel!.qyt=services;
         }
         product.add(productModel);
       }
-      jsons = jsonEncode(product.map((e) => e.toJson()).toList());
+      jsons = jsonEncode(product.map((e) => e!.toJson()).toList());
       print(jsons);
     }
   }
@@ -1186,52 +1187,52 @@ class _CounterState extends State<Counter> {
           "",
           0,
         );
-        productModel.prod_id=widget.listData[widget.index].id.toString();
-        if(person<=15){
-          productModel.total=price;
-        }else if(person<=30){
-          productModel.total=price;
-        }else if(person<=50){
-          productModel.total=price;
-        }else if(person<=75){
-          productModel.total=price;
-        }else if(person<=1000){
-          productModel.total=price;
+        productModel!.prod_id=widget.listData![widget.index!].id.toString();
+        if(person!<=15){
+          productModel!.total=price;
+        }else if(person!<=30){
+          productModel!.total=price;
+        }else if(person!<=50){
+          productModel!.total=price;
+        }else if(person!<=75){
+          productModel!.total=price;
+        }else if(person!<=1000){
+          productModel!.total=price;
         }
-        if(widget.listData[widget.index].id==3){
-          productModel.qyt=person;
+        if(widget.listData![widget.index!].id==3){
+          productModel!.qyt=person;
         }else{
-          productModel.qyt=services;
+          productModel!.qyt=services;
         }
-        if(widget.listData[widget.index].id==4){
-          productModel.qyt=person;
+        if(widget.listData![widget.index!].id==4){
+          productModel!.qyt=person;
         }else{
-          productModel.qyt=services;
+          productModel!.qyt=services;
         }
         product.add(productModel);
       }
       else{
-        if(product[widget.index].prod_id==widget.listData[widget.index].id.toString()){
-          if(person<=15){
-            productModel.total=price;
-          }else if(person<=30){
-            productModel.total=price;
-          }else if(person<=50){
-            productModel.total=price;
-          }else if(person<=75){
-            productModel.total=price;
-          }else if(person<=1000){
-            productModel.total=price;
+        if(product[widget.index!]!.prod_id==widget.listData![widget.index!].id.toString()){
+          if(person!<=15){
+            productModel!.total=price;
+          }else if(person!<=30){
+            productModel!.total=price;
+          }else if(person!<=50){
+            productModel!.total=price;
+          }else if(person!<=75){
+            productModel!.total=price;
+          }else if(person!<=1000){
+            productModel!.total=price;
           }
-          if(widget.listData[widget.index].id==3&& widget.listData[widget.index].id==4){
-            productModel.qyt=person;
+          if(widget.listData![widget.index!].id==3&& widget.listData![widget.index!].id==4){
+            productModel!.qyt=person;
           }else{
-            productModel.qyt=services;
+            productModel!.qyt=services;
           }
          for(int i=0;i<product.length;i++){
-           product[i].total=totalamount;
+           product[i]!.total=totalamount;
          }
-          product[widget.index].qyt=productModel.qyt;
+          product[widget.index!]!.qyt=productModel!.qyt;
 
         }
         /*else{
@@ -1257,7 +1258,7 @@ class _CounterState extends State<Counter> {
           product[widget.index].total=totalamount;
           product[widget.index].qyt=productModel.qyt;
         }*/
-        jsons = jsonEncode(product.map((e) => e.toJson()).toList());
+        jsons = jsonEncode(product.map((e) => e!.toJson()).toList());
         print(jsons);
       }
     });
@@ -1265,54 +1266,54 @@ class _CounterState extends State<Counter> {
   }
   void gls_rate(){
     if(checkedValue_2==true){
-      if (person <= 15) {
-        if(widget.listData[widget.index].id==3){
+      if (person! <= 15) {
+        if(widget.listData![widget.index!].id==3){
           totalamount = totalamount - person_mult_price;
           print("person_mult_price:     "+totalamount.toString());
         }
-        else if(widget.listData[widget.index].id==4){
+        else if(widget.listData![widget.index!].id==4){
           totalamount = totalamount - person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
       }
-      else if (person <= 30) {
-        if(widget.listData[widget.index].id==3){
+      else if (person! <= 30) {
+        if(widget.listData![widget.index!].id==3){
           totalamount = totalamount - person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
-        else if(widget.listData[widget.index].id==4){
+        else if(widget.listData![widget.index!].id==4){
           totalamount = totalamount - person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
 
 
       }
-      else if (person <= 50) {
-        if(widget.listData[widget.index].id==3){
+      else if (person! <= 50) {
+        if(widget.listData![widget.index!].id==3){
           totalamount = totalamount - person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
-        else if(widget.listData[widget.index].id==4){
-          totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     "+person_mult_price.toString());
-        }
-      }
-      else if (person <= 75) {
-        if(widget.listData[widget.index].id==3){
-          totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     "+person_mult_price.toString());
-        }
-        else if(widget.listData[widget.index].id==4){
+        else if(widget.listData![widget.index!].id==4){
           totalamount = totalamount - person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
       }
-      else if (person <= 1000) {
-        if(widget.listData[widget.index].id==3){
+      else if (person! <= 75) {
+        if(widget.listData![widget.index!].id==3){
           totalamount = totalamount - person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
-        else if(widget.listData[widget.index].id==4){
+        else if(widget.listData![widget.index!].id==4){
+          totalamount = totalamount - person_mult_price;
+          print("person_mult_price:     "+person_mult_price.toString());
+        }
+      }
+      else if (person! <= 1000) {
+        if(widget.listData![widget.index!].id==3){
+          totalamount = totalamount - person_mult_price;
+          print("person_mult_price:     "+person_mult_price.toString());
+        }
+        else if(widget.listData![widget.index!].id==4){
           totalamount = totalamount - person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
@@ -1321,54 +1322,54 @@ class _CounterState extends State<Counter> {
     }
 
     else if(checkedValue_2==false){
-      if (person <= 15) {
-        if(widget.listData[widget.index].id==3){
+      if (person! <= 15) {
+        if(widget.listData![widget.index!].id==3){
           totalamount = totalamount + person_mult_price;
           print("person_mult_price:     "+totalamount.toString());
         }
-        else if(widget.listData[widget.index].id==4){
+        else if(widget.listData![widget.index!].id==4){
           totalamount = totalamount + person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
       }
-      else if (person <= 30) {
-        if(widget.listData[widget.index].id==3){
+      else if (person! <= 30) {
+        if(widget.listData![widget.index!].id==3){
           totalamount = totalamount + person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
-        else if(widget.listData[widget.index].id==4){
+        else if(widget.listData![widget.index!].id==4){
           totalamount = totalamount + person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
 
 
       }
-      else if (person <= 50) {
-        if(widget.listData[widget.index].id==3){
+      else if (person! <= 50) {
+        if(widget.listData![widget.index!].id==3){
           totalamount = totalamount + person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
-        else if(widget.listData[widget.index].id==4){
-          totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     "+person_mult_price.toString());
-        }
-      }
-      else if (person <= 75) {
-        if(widget.listData[widget.index].id==3){
-          totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     "+person_mult_price.toString());
-        }
-        else if(widget.listData[widget.index].id==4){
+        else if(widget.listData![widget.index!].id==4){
           totalamount = totalamount + person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
       }
-      else if (person <= 1000) {
-        if(widget.listData[widget.index].id==3){
+      else if (person! <= 75) {
+        if(widget.listData![widget.index!].id==3){
           totalamount = totalamount + person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
-        else if(widget.listData[widget.index].id==4){
+        else if(widget.listData![widget.index!].id==4){
+          totalamount = totalamount + person_mult_price;
+          print("person_mult_price:     "+person_mult_price.toString());
+        }
+      }
+      else if (person! <= 1000) {
+        if(widget.listData![widget.index!].id==3){
+          totalamount = totalamount + person_mult_price;
+          print("person_mult_price:     "+person_mult_price.toString());
+        }
+        else if(widget.listData![widget.index!].id==4){
           totalamount = totalamount + person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
@@ -1377,54 +1378,54 @@ class _CounterState extends State<Counter> {
   }
   void bev_rate(){
     if(checkedValue_1==true){
-      if (person <= 15) {
-        if(widget.listData[widget.index].id==3){
+      if (person! <= 15) {
+        if(widget.listData![widget.index!].id==3){
           totalamount = totalamount - person_mult_price;
           print("person_mult_price:     "+totalamount.toString());
         }
-        else if(widget.listData[widget.index].id==4){
+        else if(widget.listData![widget.index!].id==4){
           totalamount = totalamount - person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
       }
-      else if (person <= 30) {
-        if(widget.listData[widget.index].id==3){
+      else if (person! <= 30) {
+        if(widget.listData![widget.index!].id==3){
           totalamount = totalamount - person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
-        else if(widget.listData[widget.index].id==4){
+        else if(widget.listData![widget.index!].id==4){
           totalamount = totalamount - person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
 
 
       }
-      else if (person <= 50) {
-        if(widget.listData[widget.index].id==3){
+      else if (person! <= 50) {
+        if(widget.listData![widget.index!].id==3){
           totalamount = totalamount - person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
-        else if(widget.listData[widget.index].id==4){
-          totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     "+person_mult_price.toString());
-        }
-      }
-      else if (person <= 75) {
-        if(widget.listData[widget.index].id==3){
-          totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     "+person_mult_price.toString());
-        }
-        else if(widget.listData[widget.index].id==4){
+        else if(widget.listData![widget.index!].id==4){
           totalamount = totalamount - person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
       }
-      else if (person <= 1000) {
-        if(widget.listData[widget.index].id==3){
+      else if (person! <= 75) {
+        if(widget.listData![widget.index!].id==3){
           totalamount = totalamount - person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
-        else if(widget.listData[widget.index].id==4){
+        else if(widget.listData![widget.index!].id==4){
+          totalamount = totalamount - person_mult_price;
+          print("person_mult_price:     "+person_mult_price.toString());
+        }
+      }
+      else if (person! <= 1000) {
+        if(widget.listData![widget.index!].id==3){
+          totalamount = totalamount - person_mult_price;
+          print("person_mult_price:     "+person_mult_price.toString());
+        }
+        else if(widget.listData![widget.index!].id==4){
           totalamount = totalamount - person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
@@ -1433,54 +1434,54 @@ class _CounterState extends State<Counter> {
     }
 
     else if(checkedValue_1==false){
-      if (person <= 15) {
-        if(widget.listData[widget.index].id==3){
+      if (person! <= 15) {
+        if(widget.listData![widget.index!].id==3){
           totalamount = totalamount + person_mult_price;
           print("person_mult_price:     "+totalamount.toString());
         }
-        else if(widget.listData[widget.index].id==4){
+        else if(widget.listData![widget.index!].id==4){
           totalamount = totalamount + person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
       }
-      else if (person <= 30) {
-        if(widget.listData[widget.index].id==3){
+      else if (person! <= 30) {
+        if(widget.listData![widget.index!].id==3){
           totalamount = totalamount + person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
-        else if(widget.listData[widget.index].id==4){
+        else if(widget.listData![widget.index!].id==4){
           totalamount = totalamount + person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
 
 
       }
-      else if (person <= 50) {
-        if(widget.listData[widget.index].id==3){
+      else if (person! <= 50) {
+        if(widget.listData![widget.index!].id==3){
           totalamount = totalamount + person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
-        else if(widget.listData[widget.index].id==4){
-          totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     "+person_mult_price.toString());
-        }
-      }
-      else if (person <= 75) {
-        if(widget.listData[widget.index].id==3){
-          totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     "+person_mult_price.toString());
-        }
-        else if(widget.listData[widget.index].id==4){
+        else if(widget.listData![widget.index!].id==4){
           totalamount = totalamount + person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
       }
-      else if (person <= 1000) {
-        if(widget.listData[widget.index].id==3){
+      else if (person! <= 75) {
+        if(widget.listData![widget.index!].id==3){
           totalamount = totalamount + person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
-        else if(widget.listData[widget.index].id==4){
+        else if(widget.listData![widget.index!].id==4){
+          totalamount = totalamount + person_mult_price;
+          print("person_mult_price:     "+person_mult_price.toString());
+        }
+      }
+      else if (person! <= 1000) {
+        if(widget.listData![widget.index!].id==3){
+          totalamount = totalamount + person_mult_price;
+          print("person_mult_price:     "+person_mult_price.toString());
+        }
+        else if(widget.listData![widget.index!].id==4){
           totalamount = totalamount + person_mult_price;
           print("person_mult_price:     "+person_mult_price.toString());
         }
@@ -1489,55 +1490,55 @@ class _CounterState extends State<Counter> {
 
   }
   void mult_rate(){
-    if (person <= 15) {
-      if(widget.listData[widget.index].id==3){
-        person_mult_price = person * widget.listData[widget.index].rate15;
+    if (person! <= 15) {
+      if(widget.listData![widget.index!].id==3){
+        person_mult_price = person! * widget.listData![widget.index!].rate15!;
         print("person_mult_price:     "+totalamount.toString());
       }
-      else if(widget.listData[widget.index].id==4){
-        person_mult_price = person * widget.listData[widget.index].rate15;
+      else if(widget.listData![widget.index!].id==4){
+        person_mult_price = person! * widget.listData![widget.index!].rate15!;
         print("person_mult_price:     "+person_mult_price.toString());
       }
     }
-    if (person <= 30) {
-      if(widget.listData[widget.index].id==3){
-        person_mult_price = person * widget.listData[widget.index].rate30;
+    if (person! <= 30) {
+      if(widget.listData![widget.index!].id==3){
+        person_mult_price = person! * widget.listData![widget.index!].rate30!;
         print("person_mult_price:     "+person_mult_price.toString());
       }
-      else if(widget.listData[widget.index].id==4){
-        person_mult_price = person * widget.listData[widget.index].rate30;
+      else if(widget.listData![widget.index!].id==4){
+        person_mult_price = person! * widget.listData![widget.index!].rate30!;
         print("person_mult_price:     "+person_mult_price.toString());
       }
 
 
     }
-    if (person <= 50) {
-      if(widget.listData[widget.index].id==3){
-        person_mult_price = person * widget.listData[widget.index].rate50;
+    if (person! <= 50) {
+      if(widget.listData![widget.index!].id==3){
+        person_mult_price = person! * widget.listData![widget.index!].rate50!;
         print("person_mult_price:     "+person_mult_price.toString());
       }
-      else if(widget.listData[widget.index].id==4){
-        person_mult_price = person * widget.listData[widget.index].rate50;
-        print("person_mult_price:     "+person_mult_price.toString());
-      }
-    }
-    if (person <= 75) {
-      if(widget.listData[widget.index].id==3){
-        person_mult_price = person * widget.listData[widget.index].rate75;
-        print("person_mult_price:     "+person_mult_price.toString());
-      }
-      else if(widget.listData[widget.index].id==4){
-        person_mult_price = person * widget.listData[widget.index].rate75;
+      else if(widget.listData![widget.index!].id==4){
+        person_mult_price = person! * widget.listData![widget.index!].rate50!;
         print("person_mult_price:     "+person_mult_price.toString());
       }
     }
-    if (person <= 1000) {
-      if(widget.listData[widget.index].id==3){
-        person_mult_price = person * widget.listData[widget.index].rate100;
+    if (person! <= 75) {
+      if(widget.listData![widget.index!].id==3){
+        person_mult_price = person! * widget.listData![widget.index!].rate75!;
         print("person_mult_price:     "+person_mult_price.toString());
       }
-      else if(widget.listData[widget.index].id==4){
-        person_mult_price = person * widget.listData[widget.index].rate100;
+      else if(widget.listData![widget.index!].id==4){
+        person_mult_price = person! * widget.listData![widget.index!].rate75!;
+        print("person_mult_price:     "+person_mult_price.toString());
+      }
+    }
+    if (person! <= 1000) {
+      if(widget.listData![widget.index!].id==3){
+        person_mult_price = person! * widget.listData![widget.index!].rate100!;
+        print("person_mult_price:     "+person_mult_price.toString());
+      }
+      else if(widget.listData![widget.index!].id==4){
+        person_mult_price = person! * widget.listData![widget.index!].rate100!;
         print("person_mult_price:     "+person_mult_price.toString());
       }
     }
@@ -1545,37 +1546,37 @@ class _CounterState extends State<Counter> {
   void add_services() {
     setState(() {
       services++;
-      if (person <= 15) {
-        price = services * widget.listData[widget.index].rate15;
-        totalamount = totalamount + widget.listData[widget.index].rate15;
+      if (person! <= 15) {
+        price = services * widget.listData![widget.index!].rate15!;
+        totalamount = totalamount + widget.listData![widget.index!].rate15!;
         producttotal = totalamount;
         print("total  add : " + totalamount.toString());
         addItemToList();
       }
-      else if (person <= 30) {
-        price = services * widget.listData[widget.index].rate30;
-        totalamount = totalamount + widget.listData[widget.index].rate30;
+      else if (person! <= 30) {
+        price = services * widget.listData![widget.index!].rate30!;
+        totalamount = totalamount + widget.listData![widget.index!].rate30!;
         producttotal = totalamount;
         print("total  add : " + totalamount.toString());
         addItemToList();
       }
-      else if (person <= 50) {
-        price = services * widget.listData[widget.index].rate50;
-        totalamount = totalamount + widget.listData[widget.index].rate50;
+      else if (person! <= 50) {
+        price = services * widget.listData![widget.index!].rate50!;
+        totalamount = totalamount + widget.listData![widget.index!].rate50!;
         producttotal = totalamount;
         print("total  add : " + totalamount.toString());
         addItemToList();
       }
-      else if (person <= 75) {
-        price = services * widget.listData[widget.index].rate75;
-        totalamount = totalamount + widget.listData[widget.index].rate75;
+      else if (person! <= 75) {
+        price = services * widget.listData![widget.index!].rate75!;
+        totalamount = totalamount + widget.listData![widget.index!].rate75!;
         producttotal = totalamount;
         print("total  add : " + totalamount.toString());
         addItemToList();
       }
-      else if (person <= 1000) {
-        price = services * widget.listData[widget.index].rate100;
-        totalamount = totalamount + widget.listData[widget.index].rate100;
+      else if (person! <= 1000) {
+        price = services * widget.listData![widget.index!].rate100!;
+        totalamount = totalamount + widget.listData![widget.index!].rate100!;
         producttotal = totalamount;
         print("total  add : " + totalamount.toString());
         addItemToList();
@@ -1585,33 +1586,33 @@ class _CounterState extends State<Counter> {
   void miuns_services() {
     setState(() {
       services--;
-      if (person <=15) {
-        price = services * widget.listData[widget.index].rate15;
-        totalamount = totalamount - widget.listData[widget.index].rate15;
+      if (person! <=15) {
+        price = services * widget.listData![widget.index!].rate15!;
+        totalamount = totalamount - widget.listData![widget.index!].rate15!;
         producttotal = totalamount;
         print("total minus : " + totalamount.toString());
         addItemToList();
-      } else if (person <= 30) {
-        price = services * widget.listData[widget.index].rate30;
-        totalamount = totalamount - widget.listData[widget.index].rate30;
+      } else if (person! <= 30) {
+        price = services * widget.listData![widget.index!].rate30!;
+        totalamount = totalamount - widget.listData![widget.index!].rate30!;
         producttotal = totalamount;
         print("total minus : " + totalamount.toString());
         addItemToList();
-      } else if (person <= 50) {
-        price = services * widget.listData[widget.index].rate50;
-        totalamount = totalamount - widget.listData[widget.index].rate50;
+      } else if (person! <= 50) {
+        price = services * widget.listData![widget.index!].rate50!;
+        totalamount = totalamount - widget.listData![widget.index!].rate50!;
         producttotal = totalamount;
         print("total minus : " + totalamount.toString());
         addItemToList();
-      } else if (person <=  75) {
-        price = services * widget.listData[widget.index].rate75;
-        totalamount = totalamount - widget.listData[widget.index].rate75;
+      } else if (person! <=  75) {
+        price = services * widget.listData![widget.index!].rate75!;
+        totalamount = totalamount - widget.listData![widget.index!].rate75!;
         producttotal = totalamount;
         print("total minus : " + totalamount.toString());
         addItemToList();
-      } else if (person <= 1000) {
-        price = services * widget.listData[widget.index].rate100;
-        totalamount = totalamount - widget.listData[widget.index].rate100;
+      } else if (person! <= 1000) {
+        price = services * widget.listData![widget.index!].rate100!;
+        totalamount = totalamount - widget.listData![widget.index!].rate100!;
         producttotal = totalamount;
         print("total minus : " + totalamount.toString());
         addItemToList();
@@ -1648,7 +1649,7 @@ class _CounterState extends State<Counter> {
                                               listData[index]["C_Pic"],fit: BoxFit.cover,
                                           ),*/
                 child: Image.asset(
-                  pic_list[widget.index],
+                  pic_list[widget.index!],
                   fit: BoxFit.cover,
                 ),
               ),
@@ -1660,7 +1661,7 @@ class _CounterState extends State<Counter> {
                  padding:  EdgeInsets.only(top: 10,left: 10),
                  child: new Container(
                    child: Text(
-                     '${widget.listData[widget.index].productname.toUpperCase()}',
+                     '${widget.listData![widget.index!].productname!.toUpperCase()}',
                      /*"${listData[0][index]["C_Name"]}".toUpperCase(),*/
                      textAlign: TextAlign.left,
                      overflow: TextOverflow.ellipsis,
@@ -1672,7 +1673,7 @@ class _CounterState extends State<Counter> {
                    ),
                  ),
                ),
-               widget.listData[widget.index].productname=="Beverage"?Padding(
+               widget.listData![widget.index!].productname=="Beverage"?Padding(
                  padding:  EdgeInsets.only(left: MediaQuery.of(context).size.width/9,top: 5),
                  child: SizedBox(
                    height: 20.0,
@@ -1690,7 +1691,7 @@ class _CounterState extends State<Counter> {
                        print("checkedValue_1:     "+checkedValue_1.toString());
                      }
                  ),)
-               ):widget.listData[widget.index].productname=="Glassware"?
+               ):widget.listData![widget.index!].productname=="Glassware"?
                Padding(
                  padding:EdgeInsets.only(left: MediaQuery.of(context).size.width/13,top: 5),
                  child: SizedBox(
@@ -1721,10 +1722,10 @@ class _CounterState extends State<Counter> {
                     child: new Container(
                         child: new Wrap(
                           children: [
-                            person <= 15
+                            person! <= 15
                                 ? new Text(
                               'Price '+ '₹ ' +
-                              (widget.listData[widget.index].rate15 )
+                              (widget.listData![widget.index!].rate15 )
                                       .toString(),
                               textAlign: TextAlign.left,
                               //overflow:TextOverflow.ellipsis ,
@@ -1734,10 +1735,10 @@ class _CounterState extends State<Counter> {
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold),
                               )
-                                : person <= 30
+                                : person! <= 30
                                 ? new Text(
                               'Price '+'₹' +
-                                  (widget.listData[widget.index].rate30 )
+                                  (widget.listData![widget.index!].rate30 )
                                       .toString(),
                               textAlign: TextAlign.left,
                               //overflow:TextOverflow.ellipsis ,
@@ -1747,10 +1748,10 @@ class _CounterState extends State<Counter> {
                                 fontSize: 12,
                               ),
                             )
-                                : person <= 50
+                                : person! <= 50
                                 ? new Text(
                               'Price '+'₹' +
-                                  (widget.listData[widget.index].rate50 )
+                                  (widget.listData![widget.index!].rate50 )
                                       .toString(),
                               textAlign: TextAlign.left,
                               //overflow:TextOverflow.ellipsis ,
@@ -1760,10 +1761,10 @@ class _CounterState extends State<Counter> {
                                 fontSize: 12,
                               ),
                             )
-                                : person <= 75
+                                : person! <= 75
                                 ? new Text(
                               'Price '+'₹' +
-                                  (widget.listData[widget.index].rate75 * services)
+                                  (widget.listData![widget.index!].rate75! * services)
                                       .toString(),
                               textAlign: TextAlign.left,
                               //overflow:TextOverflow.ellipsis ,
@@ -1773,10 +1774,10 @@ class _CounterState extends State<Counter> {
                                 fontSize: 12,
                               ),
                             )
-                                : person <= 1000
+                                : person! <= 1000
                                 ? new Text(
                               'Price '+'₹' +
-                                  (widget.listData[widget.index].rate100 * services)
+                                  (widget.listData![widget.index!].rate100! * services)
                                       .toString(),
                               textAlign: TextAlign.left,
                               //overflow:TextOverflow.ellipsis ,
@@ -1787,7 +1788,7 @@ class _CounterState extends State<Counter> {
                                 fontSize: 12,
                               ),
                             )
-                                : "",
+                                : "" as Widget,
                           ],
                         ),
 
@@ -1796,7 +1797,7 @@ class _CounterState extends State<Counter> {
 
                   Expanded(
                       child: new Container(
-                          child:widget.listData[widget.index].productname=="Beverage"
+                          child:widget.listData![widget.index!].productname=="Beverage"
                               ?new Row(
                             children: [
                                services == 0
@@ -1809,10 +1810,10 @@ class _CounterState extends State<Counter> {
                                 child: new Icon(Icons.remove_circle,
                                     color: AppTheme().color_white),
                               ),
-                              person <= 15
+                              person! <= 15
                                   ? new Text(
                                 person.toString()+'x'+
-                                    (widget.listData[widget.index].rate15 )
+                                    (widget.listData![widget.index!].rate15 )
                                         .toString(),
                                 textAlign: TextAlign.left,
                                 //overflow:TextOverflow.ellipsis ,
@@ -1822,10 +1823,10 @@ class _CounterState extends State<Counter> {
                                     fontSize: 15,
                                     ),
                               )
-                                  : person <= 30
+                                  : person! <= 30
                                   ? new Text(
                                 person.toString()+'x'+
-                                    (widget.listData[widget.index].rate30 )
+                                    (widget.listData![widget.index!].rate30 )
                                         .toString(),
                                 textAlign: TextAlign.left,
                                 //overflow:TextOverflow.ellipsis ,
@@ -1835,10 +1836,10 @@ class _CounterState extends State<Counter> {
                                   fontSize: 15,
                                 ),
                               )
-                                  : person <= 50
+                                  : person! <= 50
                                   ? new Text(
                                 person.toString()+'x'+
-                                    ( widget.listData[widget.index]
+                                    ( widget.listData![widget.index!]
                                         .rate50 )
                                         .toString(),
                                 textAlign: TextAlign.left,
@@ -1849,10 +1850,10 @@ class _CounterState extends State<Counter> {
                                   fontSize: 15,
                                 ),
                               )
-                                  : person <= 75
+                                  : person! <= 75
                                   ? new Text(
                                 person.toString()+'x'+
-                                    ( widget.listData[widget.index]
+                                    ( widget.listData![widget.index!]
                                         .rate75 )
                                         .toString(),
                                 textAlign: TextAlign.left,
@@ -1863,11 +1864,11 @@ class _CounterState extends State<Counter> {
                                   fontSize: 15,
                                 ),
                               )
-                                  : person <= 1000
+                                  : person! <= 1000
                                   ? new Text(
                                 person.toString()+'x'+
                                     (widget
-                                        .listData[widget.index].rate100 )
+                                        .listData![widget.index!].rate100 )
                                         .toString(),
                                 textAlign: TextAlign.left,
                                 //overflow:TextOverflow.ellipsis ,
@@ -1878,7 +1879,7 @@ class _CounterState extends State<Counter> {
                                   fontSize: 15,
                                 ),
                               )
-                                  : "",
+                                  : "" as Widget,
                               Padding(padding: EdgeInsets.only(left: 2)),
                               /*new InkWell(
                                 onTap: () {
@@ -1889,7 +1890,7 @@ class _CounterState extends State<Counter> {
                               )*/
                             ],
                           )
-                              :widget.listData[widget.index].productname=="Glassware"
+                              :widget.listData![widget.index!].productname=="Glassware"
                               ?new Row(
                             children: [
                               services == 0
@@ -1903,10 +1904,10 @@ class _CounterState extends State<Counter> {
                                     color: AppTheme().color_white),
                               ),
                               Padding(padding: EdgeInsets.only(left: 2)),
-                              person <= 15
+                              person! <= 15
                                   ? new Text(
                                 person.toString()+'x' +
-                               (widget.listData[widget.index].rate15 )
+                               (widget.listData![widget.index!].rate15 )
                                         .toString(),
                                 textAlign: TextAlign.left,
                                 //overflow:TextOverflow.ellipsis ,
@@ -1916,10 +1917,10 @@ class _CounterState extends State<Counter> {
                                     fontSize: 15,
                                     ),
                               )
-                                  : person <= 30
+                                  : person! <= 30
                                   ? new Text(
                                 person.toString()+'x' +
-                             (widget.listData[widget.index].rate30 )
+                             (widget.listData![widget.index!].rate30 )
                                         .toString(),
                                 textAlign: TextAlign.left,
                                 //overflow:TextOverflow.ellipsis ,
@@ -1929,10 +1930,10 @@ class _CounterState extends State<Counter> {
                                   fontSize: 15,
                                 ),
                               )
-                                  : person <= 50
+                                  : person! <= 50
                                   ? new Text(
                                 person.toString()+'x' +
-                                    (widget.listData[widget.index].rate50 )
+                                    (widget.listData![widget.index!].rate50 )
                                         .toString(),
                                 textAlign: TextAlign.left,
                                 //overflow:TextOverflow.ellipsis ,
@@ -1942,10 +1943,10 @@ class _CounterState extends State<Counter> {
                                   fontSize: 15,
                                 ),
                               )
-                                  : person <= 75
+                                  : person! <= 75
                                   ? new Text(
                                 person.toString()+'x'+
-                                    (widget.listData[widget.index].rate75)
+                                    (widget.listData![widget.index!].rate75)
                                         .toString(),
                                 textAlign: TextAlign.left,
                                 //overflow:TextOverflow.ellipsis ,
@@ -1955,10 +1956,10 @@ class _CounterState extends State<Counter> {
                                   fontSize: 15,
                                 ),
                               )
-                                  : person <= 1000
+                                  : person! <= 1000
                                   ? new Text(
                                 person.toString()+'x' +
-                                    (widget.listData[widget.index].rate100)
+                                    (widget.listData![widget.index!].rate100)
                                         .toString(),
                                 textAlign: TextAlign.left,
                                 //overflow:TextOverflow.ellipsis ,
@@ -1969,7 +1970,7 @@ class _CounterState extends State<Counter> {
                                   fontSize: 15,
                                 ),
                               )
-                                  : "",
+                                  : "" as Widget,
                               Padding(padding: EdgeInsets.only(left: 2)),
                               /*new InkWell(
                                 onTap: () {
@@ -2020,42 +2021,42 @@ class _CounterState extends State<Counter> {
                         color: AppTheme().color_black,
                         borderRadius: BorderRadius.circular(10)),
                     child: Center(
-                        child: person <= 15
+                        child: person! <= 15
                             ? new Text(
-                          widget.listData[widget.index].productname=="Glassware"?'₹' +person_mult_price
-                              .toString():widget.listData[widget.index].productname=="Beverage"?'₹' +person_mult_price
-                              .toString():'₹' +(widget.listData[widget.index].rate100 * services).toString(),
+                          widget.listData![widget.index!].productname=="Glassware"?'₹' +person_mult_price
+                              .toString():widget.listData![widget.index!].productname=="Beverage"?'₹' +person_mult_price
+                              .toString():'₹' +(widget.listData![widget.index!].rate100! * services).toString(),
                           style: TextStyle(
                               color: AppTheme().color_white,
                               fontFamily: "Montserrat",
                               fontSize: 15),
                         )
-                            : person <= 30
+                            : person! <= 30
                             ? new Text(
-                          widget.listData[widget.index].productname=="Glassware"?'₹' +person_mult_price
-                              .toString():widget.listData[widget.index].productname=="Beverage"?'₹' +person_mult_price
-                              .toString():'₹' +(widget.listData[widget.index].rate100 * services).toString(),
+                          widget.listData![widget.index!].productname=="Glassware"?'₹' +person_mult_price
+                              .toString():widget.listData![widget.index!].productname=="Beverage"?'₹' +person_mult_price
+                              .toString():'₹' +(widget.listData![widget.index!].rate100! * services).toString(),
                           style: TextStyle(
                               color: AppTheme().color_white,
                               fontFamily: "Montserrat",
                               fontSize: 15),
                         )
-                            : person <= 50
+                            : person! <= 50
                             ? new Text(
-                          widget.listData[widget.index].productname=="Glassware"?'₹' +person_mult_price
-                              .toString():widget.listData[widget.index].productname=="Beverage"?'₹' +person_mult_price
-                              .toString():'₹' +(widget.listData[widget.index].rate100 * services).toString(),
+                          widget.listData![widget.index!].productname=="Glassware"?'₹' +person_mult_price
+                              .toString():widget.listData![widget.index!].productname=="Beverage"?'₹' +person_mult_price
+                              .toString():'₹' +(widget.listData![widget.index!].rate100! * services).toString(),
                           style: TextStyle(
                               color: AppTheme()
                                   .color_white,
                               fontFamily: "Montserrat",
                               fontSize: 15),
                         )
-                            : person <= 75
+                            : person! <= 75
                             ? new Text(
-                          widget.listData[widget.index].productname=="Glassware"?'₹' +person_mult_price
-                              .toString():widget.listData[widget.index].productname=="Beverage"?'₹' +person_mult_price
-                              .toString():'₹' +(widget.listData[widget.index].rate100 * services) .toString(),
+                          widget.listData![widget.index!].productname=="Glassware"?'₹' +person_mult_price
+                              .toString():widget.listData![widget.index!].productname=="Beverage"?'₹' +person_mult_price
+                              .toString():'₹' +(widget.listData![widget.index!].rate100! * services) .toString(),
                           style: TextStyle(
                               color: AppTheme()
                                   .color_white,
@@ -2063,12 +2064,12 @@ class _CounterState extends State<Counter> {
                               "Montserrat",
                               fontSize: 15),
                         )
-                            : person <= 1000
+                            : person! <= 1000
                             ? new Text(
 
-                              widget.listData[widget.index].productname=="Glassware"?'₹' +person_mult_price
-                              .toString():widget.listData[widget.index].productname=="Beverage"?'₹' +person_mult_price
-                              .toString():'₹' +(widget.listData[widget.index].rate100 * services).toString(),
+                              widget.listData![widget.index!].productname=="Glassware"?'₹' +person_mult_price
+                              .toString():widget.listData![widget.index!].productname=="Beverage"?'₹' +person_mult_price
+                              .toString():'₹' +(widget.listData![widget.index!].rate100! * services).toString(),
                               style: TextStyle(
                               color: AppTheme()
                                   .color_white,
@@ -2076,7 +2077,7 @@ class _CounterState extends State<Counter> {
                               "Montserrat",
                               fontSize: 15),
                         )
-                            : ""
+                            : "" as Widget?
                            ))
             ),
           ],

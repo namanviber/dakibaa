@@ -17,7 +17,7 @@ import 'package:http/http.dart' as http;
 import 'login_pagenew.dart';
 
 class OtpScreen extends StatefulWidget {
-  String type;
+  String? type;
 
   OtpScreen({this.type});
   @override
@@ -26,7 +26,7 @@ class OtpScreen extends StatefulWidget {
 
 class Otp extends State<OtpScreen> {
   bool checkValue = false;
-  Timer _timer;
+  Timer? _timer;
   int _start = 60;
   var temp = 0;
   var otp, otp1, resendotp, num;
@@ -36,14 +36,14 @@ class Otp extends State<OtpScreen> {
   final controller4 = TextEditingController();
   TextEditingController currController = new TextEditingController();
   String baseUrl = 'http://partyapp.v2infotech.net/api';
-  ProgressDialog pr;
-  SharedPreferences sharedPreferences;
-  Map<String, dynamic> value;
+  late ProgressDialog pr;
+  late SharedPreferences sharedPreferences;
+  Map<String, dynamic>? value;
   FocusNode textFirstFocusNode = new FocusNode();
   FocusNode textSecondFocusNode = new FocusNode();
   FocusNode textThirdFocusNode = new FocusNode();
   FocusNode textFourthFocusNode = new FocusNode();
-  String type;
+  String? type;
 
   Otp({this.type});
 
@@ -443,7 +443,7 @@ class Otp extends State<OtpScreen> {
 /*
       Toast.show("" + parsedJson['message'], context,
           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);*/
-      _timer.cancel();
+      _timer!.cancel();
       if (type == "forget") {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => LoginPage()),
@@ -498,12 +498,12 @@ class Otp extends State<OtpScreen> {
     return parsedJson;
   }
 
-  _onChanged(bool value, Map<String, dynamic> response) async {
+  _onChanged(bool value, Map<String, dynamic>? response) async {
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
       checkValue = value;
       sharedPreferences.setBool("check", checkValue);
-      sharedPreferences.setString("name", response["Name"]);
+      sharedPreferences.setString("name", response!["Name"]);
       sharedPreferences.setString("id", response["Id"].toString());
       sharedPreferences.setString("gender", response["Gender"]);
       sharedPreferences.setString("dob", response["DOB"]);

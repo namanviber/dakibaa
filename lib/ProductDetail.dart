@@ -18,13 +18,13 @@ class ScreenState extends State<ProductDetail> {
   var data,image;
 
   ScreenState({this.data,this.image});
-  ProgressDialog pr;
+  ProgressDialog? pr;
   var id, count;
-  SharedPreferences sharedPreferences;
-  List listData;
-  http.Response response;
-  Map data1;
-  double screenHeight;
+  SharedPreferences? sharedPreferences;
+  List? listData;
+  http.Response? response;
+  Map? data1;
+  double? screenHeight;
 
   @override
   void initState() {

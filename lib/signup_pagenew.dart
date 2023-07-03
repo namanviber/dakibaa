@@ -17,8 +17,6 @@ import 'package:http_parser/http_parser.dart';
 import 'login_pagenew.dart';
 import 'otp_screen.dart';
 
-
-
 //import 'package:party_app/otp_screen.dart';
 //import 'otp_screen.dart';
 
@@ -28,28 +26,28 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin,ImagePickerListener{
-  double screenHeight;
-  double screenwidth;
-  AnimationController _controller;
-  ImagePickerHandler imagePicker;
-  SharedPreferences sharedPreferences;
-  ProgressDialog pr;
+  double? screenHeight;
+  double? screenwidth;
+  AnimationController? _controller;
+  late ImagePickerHandler imagePicker;
+  late SharedPreferences sharedPreferences;
+  late ProgressDialog pr;
   bool passwordVisible=true;
   bool passwordVisible1=true;
-  String username,contact,password,conPassword;
-  String usernameError,contactError,passwordError,conPasswordError;
+  String? username,contact,password,conPassword;
+  String? usernameError,contactError,passwordError,conPasswordError;
   final TextEditingController usernameController = new TextEditingController();
   final TextEditingController contactController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
   final TextEditingController conPasswordController = new TextEditingController();
-  File _image;
-  var token;
-  bool checkValue;
+  File? _image;
+  late var token;
+  bool? checkValue;
   bool status = false;
 
   List<Company> _companies = Company.getCompanies();
-  List<DropdownMenuItem<Company>> _dropdownMenuItems;
-  Company _selectedCompany;
+  late List<DropdownMenuItem<Company>> _dropdownMenuItems;
+  Company? _selectedCompany;
 
   final _formkey = GlobalKey<FormState>();
   @override
@@ -70,8 +68,8 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin,I
   }
 
   List<DropdownMenuItem<Company>> buildDropdownMenuItems(List companies) {
-    List<DropdownMenuItem<Company>> items = List();
-    for (Company company in companies) {
+    List<DropdownMenuItem<Company>> items = [];
+    for (Company company in companies as Iterable<Company>) {
       items.add(
         DropdownMenuItem(
           value: company,
@@ -108,7 +106,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin,I
         contactError = 'Enter Contact No.';
         status = false;
       });
-    }else if (contact.length < 10 || contact.length > 10) {
+    }else if (contact!.length < 10 || contact!.length > 10) {
       setState(() {
         contactError = 'Enter Correct Contact No.';
         status = false;
@@ -119,7 +117,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin,I
         passwordError = 'Enter Person';
         status = false;
       });
-    }else if (password.length < 8) {
+    }else if (password!.length < 8) {
       setState(() {
         contactError = 'Enter Enter minimum 8 characters.';
         status = false;
@@ -219,7 +217,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin,I
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.circular(200),
 
-                                          child: Image.file(_image,fit: BoxFit.cover,),
+                                          child: Image.file(_image!,fit: BoxFit.cover,),
                                         )
 
                                     ),
@@ -260,7 +258,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin,I
                             child: TextFormField(
                               textAlign: TextAlign.center,
                               validator: (value) {
-                                if (value.isEmpty) {
+                                if (value!.isEmpty) {
                                   return 'Please enter name';
                                 }
                                 return null;
@@ -350,7 +348,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin,I
                             child: TextFormField(
                               maxLength: 10,
                               validator: (value) {
-                                if (value.isEmpty) {
+                                if (value!.isEmpty) {
                                   return 'Please enter your contact';
                                 }else if(value.length != 10){
                                   return "contact must be of 10 digits";
@@ -411,7 +409,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin,I
                               padding: const EdgeInsets.only(left: 00.0,),
                               child: TextFormField(
                                 validator: (value) {
-                                  if (value.isEmpty) {
+                                  if (value!.isEmpty) {
                                     return 'Please enter password';
                                   }
                                   return null;
@@ -480,7 +478,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin,I
                             EdgeInsets.only(left: 20.0, top: 15.0, right: 20.0),
                             child: TextFormField(
                               validator: (value) {
-                                if (value.isEmpty) {
+                                if (value!.isEmpty) {
                                   return 'Please confirm your password';
                                 }
                                 if(value!=passwordController.text){
@@ -563,7 +561,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin,I
                                           letterSpacing: 2),
                                     ),
                                     onPressed: () {
-                                      if (_formkey.currentState.validate()) {
+                                      if (_formkey.currentState!.validate()) {
                                         if (_image != null) {
                                           getsignUpData(
                                               usernameController.text,
@@ -612,8 +610,9 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin,I
 
     );
   }
+  var returnData;
   Future<Map<String, dynamic>> getsignUpData(String username, String phone,
-      String gender,String dob,String email,String password,String deviceToken, File image) async {
+      String gender,String dob,String email,String password,String deviceToken, File? image) async {
     print("$username$phone$gender$dob$email$password$deviceToken");
     pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
     pr.show();
@@ -665,10 +664,11 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin,I
     } catch (e) {
       print(e);
     }
+    return returnData;
   }
   @override
   void dispose() {
-    _controller.dispose();
+    _controller!.dispose();
     super.dispose();
   }
   @override
@@ -683,7 +683,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin,I
     setState(() {
       checkValue = sharedPreferences.getBool("check");
       if (checkValue != null) {
-        if (checkValue) {
+        if (checkValue!) {
           token = sharedPreferences.getString("token");
 
         } else {
@@ -696,10 +696,10 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin,I
       }
     });
   }
-  _onChanged(String otp,String contact) async {
+  _onChanged(String? otp,String contact) async {
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
-      sharedPreferences.setString("otp", otp);
+      sharedPreferences.setString("otp", otp!);
       sharedPreferences.setString("number", contact);
       sharedPreferences.commit();
 

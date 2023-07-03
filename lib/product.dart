@@ -13,7 +13,7 @@ import 'ProductDetail.dart';
 import 'login_pagenew.dart';
 
 class ProductScreen extends StatefulWidget {
-  Map data;
+  Map? data;
   ProductScreen({this.data});
 
   @override
@@ -21,24 +21,24 @@ class ProductScreen extends StatefulWidget {
 }
 
 class Product extends State<ProductScreen> {
-  Map data;
+  Map? data;
  // var counter=0;
   //var price=0;
-  int p,sumP;
+  int? p,sumP;
   Product({this.data});
-  SharedPreferences sharedPreferences;
+  late SharedPreferences sharedPreferences;
   bool checkValue = false;
   var id;
-  String productId;
-  AnimationController _controller;
-  double screenHeight;
-  double screenwidth;
-  List <ProductModel> productModel= new List();
-  File _image;
-  ProgressDialog pr;
-  Map<String, dynamic> value;
-  Map<String, dynamic> value1;
-  List listData;
+  String? productId;
+  AnimationController? _controller;
+  double? screenHeight;
+  double? screenwidth;
+  List <ProductModel> productModel= [];
+  File? _image;
+  late ProgressDialog pr;
+  Map<String, dynamic>? value;
+  Map<String, dynamic>? value1;
+  List? listData;
   var sum = 0;
   var given_list = [];
 
@@ -58,7 +58,7 @@ class Product extends State<ProductScreen> {
     final response = await http.post(APIS.getProduct,
         headers: {'Accept': 'application/json'},
         body: {
-      "brandid": data['Id'].toString(),
+      "brandid": data!['Id'].toString(),
           "userid":id.toString()
     });
     var parsedJson = json.decode(response.body);
@@ -69,7 +69,7 @@ class Product extends State<ProductScreen> {
       pr.hide();
       if(mounted) {
         setState(() {
-          for (int i = 0; i < value["data"].length; i++) {
+          for (int i = 0; i < value!["data"].length; i++) {
             ProductModel _productModel = new ProductModel(
                 "",
                 "",
@@ -80,32 +80,32 @@ class Product extends State<ProductScreen> {
                 0,
                 0,
                 "");
-            print(value["data"][i]["Id"].toString());
-            _productModel.Id = value["data"][i]["Id"].toString();
-             _productModel.IsActive = value["data"][i]["IsActive"];
-            _productModel.Productname = value["data"][i]["Productname"];
-            if (value["data"][i].containsKey("productImages")) {
+            print(value!["data"][i]["Id"].toString());
+            _productModel.Id = value!["data"][i]["Id"].toString();
+             _productModel.IsActive = value!["data"][i]["IsActive"];
+            _productModel.Productname = value!["data"][i]["Productname"];
+            if (value!["data"][i].containsKey("productImages")) {
               _productModel.productImages =
-              value["data"][i]["productImages"][0]["Imagename"];
+              value!["data"][i]["productImages"][0]["Imagename"];
             }
-            _productModel.Description = value["data"][i]["Description"];
-            if (value["data"][i].containsKey("productPrice")) {
+            _productModel.Description = value!["data"][i]["Description"];
+            if (value!["data"][i].containsKey("productPrice")) {
               _productModel.productPrice =
-              value["data"][i]["productPrice"][0]["Price"];
+              value!["data"][i]["productPrice"][0]["Price"];
               _productModel.unitId =
-                  value["data"][i]["productPrice"][0]["Id"].toString();
+                  value!["data"][i]["productPrice"][0]["Id"].toString();
             }
-            if (value["data"][i].containsKey("productCount")) {
+            if (value!["data"][i].containsKey("productCount")) {
               _productModel.count =
-              value["data"][i]["productCount"][0]["quantity"];
+              value!["data"][i]["productCount"][0]["quantity"];
             }
             else {
               _productModel.count = 0;
             }
-            if (value["data"][i].containsKey("productCount")) {
+            if (value!["data"][i].containsKey("productCount")) {
               _productModel.price =
-              (value["data"][i]["productPrice"][0]["Price"] *
-                  value["data"][i]["productCount"][0]["quantity"]);
+              (value!["data"][i]["productPrice"][0]["Price"] *
+                  value!["data"][i]["productCount"][0]["quantity"]);
             }
             else {
               _productModel.price = 0;
@@ -507,8 +507,8 @@ class Product extends State<ProductScreen> {
 
   _addProduct(String productId,int index) {
     setState(() {
-      productModel[index].count++;
-      productModel[index].price=(p*productModel[index].count).toString();
+      productModel[index].count! + 1;
+      productModel[index].price=(p!*productModel[index].count!).toString();
       print(productModel[index].price.toString());
       getCount(productId.toString(),index, productModel[index].price);
     /*  sumP=productModel[index].price;
@@ -524,9 +524,9 @@ class Product extends State<ProductScreen> {
 
   _removeProduct(String productId,int index) {
     setState(() {
-      if (productModel[index].count > 0) {
-        productModel[index].count--;
-        productModel[index].price=int.parse(productModel[index].price.toString())-p;
+      if (productModel[index].count! > 0) {
+        productModel[index].count! -1;
+        productModel[index].price=int.parse(productModel[index].price.toString())-p!;
         getCount(productId.toString(),index, productModel[index].price);
 
        /* sumP=productModel[index].price;
@@ -571,12 +571,12 @@ class Product extends State<ProductScreen> {
     });
   }
 
-  _onChanged(bool value, Map<String, dynamic> response) async {
+  _onChanged(bool value, Map<String, dynamic>? response) async {
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
       checkValue = value;
       sharedPreferences.setBool("check", checkValue);
-      sharedPreferences.setString("pid", response["Id"]);
+      sharedPreferences.setString("pid", response!["Id"]);
       sharedPreferences.commit();
     });
   }

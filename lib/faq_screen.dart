@@ -20,10 +20,10 @@ class FaqScreen extends StatefulWidget{
 }
 
 class FaqScreen1 extends State<FaqScreen>{
-  List listData;
-  Map data;
+  List? listData;
+  Map? data;
   bool isSelected = false;
-  List<bool> setVisible = new List();
+  List<bool> setVisible = [];
   bool _isProgressBarShown = true;
   bool hasData=false;
 
@@ -158,7 +158,7 @@ class FaqScreen1 extends State<FaqScreen>{
               ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  itemCount: listData == null ? 0 :listData.length,
+                  itemCount: listData == null ? 0 :listData!.length,
                   itemBuilder: (BuildContext context, int index){
                     return Padding(
                       padding: const EdgeInsets.only(top: 10,right: 20,left: 20,bottom: 10),
@@ -179,7 +179,7 @@ class FaqScreen1 extends State<FaqScreen>{
                                 Expanded(
                                   child: Container(
                                     child: Text(
-                                      "${listData[index]["Question"]}",
+                                      "${listData![index]["Question"]}",
                                       style: TextStyle(
                                         color: AppTheme().color_red,
                                         //letterSpacing: 3,
@@ -229,7 +229,7 @@ class FaqScreen1 extends State<FaqScreen>{
 
                                 decoration: BoxDecoration(),
                                 child: Text(
-                                  "${listData[index]["Answer"]}",
+                                  "${listData![index]["Answer"]}",
                                   style: TextStyle(
                                     color: AppTheme().color_red,
                                     //letterSpacing: 3,
@@ -259,11 +259,11 @@ class FaqScreen1 extends State<FaqScreen>{
         .get(APIS.faq);
     data = json.decode(response.body);
     setState(() {
-      listData = data["data"];
+      listData = data!["data"];
       print(listData);
         _isProgressBarShown = false;
     });
-    for(int i=0;i<listData.length;i++){
+    for(int i=0;i<listData!.length;i++){
       setVisible.add(true);
       print(setVisible.length);
 
@@ -284,8 +284,8 @@ class FaqScreen1 extends State<FaqScreen>{
     return new Padding(
         padding: new EdgeInsets.only(top: 0.0),
         child: Shimmer.fromColors(
-            baseColor: Colors.grey[300],
-            highlightColor: Colors.grey[100],
+            baseColor: Colors.grey[300]!,
+            highlightColor: Colors.grey[100]!,
             child: new Column(
               children: [
                 new Row(

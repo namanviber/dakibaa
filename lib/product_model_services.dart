@@ -4,7 +4,7 @@ class ProductServicesModel{
 
   var prod_id;
   var total;
-  int qyt;
+  int? qyt;
 
   ProductServicesModel(this.prod_id, this.total,this.qyt);
 

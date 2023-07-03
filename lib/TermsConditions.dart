@@ -9,22 +9,21 @@ import 'package:http/http.dart' as http;
 import 'ApiList.dart';
 import 'TermsCon.dart';
 
-
 class TermsConditionAgree extends StatefulWidget {
   @override
   TermsAgreeSettingPage createState() => TermsAgreeSettingPage();
 }
 
 class TermsAgreeSettingPage extends State<TermsConditionAgree> {
-  AnimationController _controller;
-  double screenHeight;
-  double screenwidth;
-  File _image;
+  AnimationController? _controller;
+  double? screenHeight;
+  double? screenwidth;
+  File? _image;
   bool status = false;
-  Map<String, dynamic> value;
-  List<dynamic> listData;
-  Map data;
-  ProgressDialog pr;
+  Map<String, dynamic>? value;
+  List<dynamic>? listData;
+  Map? data;
+  ProgressDialog? pr;
   var head;
   var Tc1;
   var Tc2;
@@ -66,10 +65,8 @@ class TermsAgreeSettingPage extends State<TermsConditionAgree> {
     );
   }
 
-
   Widget profile_Page(BuildContext context) {
     return Container(
-
       alignment: Alignment.bottomCenter,
       child: ListView(
         children: <Widget>[
@@ -77,7 +74,6 @@ class TermsAgreeSettingPage extends State<TermsConditionAgree> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Container(
-
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -103,7 +99,6 @@ class TermsAgreeSettingPage extends State<TermsConditionAgree> {
                           fontWeight: FontWeight.w600,
                           letterSpacing: 2),
                     ),
-
                     Center(
                       child: Container(
                           padding: EdgeInsets.only(
@@ -131,15 +126,26 @@ class TermsAgreeSettingPage extends State<TermsConditionAgree> {
               Container(
                 margin: EdgeInsets.fromLTRB(15, 10, 0, 0),
                 child: Center(
-                  child: head==null||Tc1==null||Tc2==null||Tc3==null||Tc4==null||Tc5==null?Text(""
-                  ):Text(
-                    "$head "" $Tc1 "" $Tc2 "" $Tc2 "" $Tc3 "" $Tc4 "" $Tc5",
-                    style: TextStyle(
-                      fontSize: 26,
-                      color: Colors.white,
-
-                    ),
-                  ),
+                  child: head == null ||
+                          Tc1 == null ||
+                          Tc2 == null ||
+                          Tc3 == null ||
+                          Tc4 == null ||
+                          Tc5 == null
+                      ? Text("")
+                      : Text(
+                          "$head "
+                          " $Tc1 "
+                          " $Tc2 "
+                          " $Tc2 "
+                          " $Tc3 "
+                          " $Tc4 "
+                          " $Tc5",
+                          style: TextStyle(
+                            fontSize: 26,
+                            color: Colors.white,
+                          ),
+                        ),
                 ),
               ),
               SizedBox(
@@ -157,9 +163,7 @@ class TermsAgreeSettingPage extends State<TermsConditionAgree> {
                             style: TextStyle(
                                 fontSize: 24,
                                 color: Colors.white,
-                                fontWeight: FontWeight.w600
-
-                            ),
+                                fontWeight: FontWeight.w600),
                           ),
                         ),
                       ),
@@ -170,11 +174,8 @@ class TermsAgreeSettingPage extends State<TermsConditionAgree> {
                           style: TextStyle(
                               fontSize: 24,
                               color: Colors.white,
-                              fontWeight: FontWeight.w600
-
-                          ),
+                              fontWeight: FontWeight.w600),
                         ),
-
                       )
                     ],
                   ),
@@ -191,8 +192,6 @@ class TermsAgreeSettingPage extends State<TermsConditionAgree> {
                       },
                     ),
                   ),
-
-
                 ],
               ),
               SizedBox(
@@ -221,8 +220,9 @@ class TermsAgreeSettingPage extends State<TermsConditionAgree> {
                                 "CONTINUE",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: Colors.red, fontSize: 20, letterSpacing: 2.0
-                                ),
+                                    color: Colors.red,
+                                    fontSize: 20,
+                                    letterSpacing: 2.0),
                               ),
                             ),
                           ),
@@ -238,27 +238,26 @@ class TermsAgreeSettingPage extends State<TermsConditionAgree> {
                   ),
                 ),
               )
-
             ],
           )
         ],
       ),
     );
   }
+
   Future getData() async {
     // _isProgressBarShown = true;
-    http.Response response = await http
-        .get(APIS.termsCondition);
+    http.Response response = await http.get(APIS.termsCondition);
     var datatc = json.decode(response.body);
     setState(() {
       // listData = value["data"];
       print(datatc);
-      head=datatc['data']['Heading']??'';
-      Tc1=datatc['data']['Tc1']??'';
-      Tc2=datatc['data']['Tc2']??'';
-      Tc3=datatc['data']['Tc3']??'';
-      Tc4=datatc['data']['Tc4']??'';
-      Tc5=datatc['data']['Tc5']??'';
+      head = datatc['data']['Heading'] ?? '';
+      Tc1 = datatc['data']['Tc1'] ?? '';
+      Tc2 = datatc['data']['Tc2'] ?? '';
+      Tc3 = datatc['data']['Tc3'] ?? '';
+      Tc4 = datatc['data']['Tc4'] ?? '';
+      Tc5 = datatc['data']['Tc5'] ?? '';
 
       print(head);
       print(Tc1);

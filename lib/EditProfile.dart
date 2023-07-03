@@ -15,14 +15,14 @@ class EditProfilePage extends StatefulWidget {
 
 class ProfileScreenPage extends State<EditProfilePage>
     with TickerProviderStateMixin, ImagePickerListener {
-  ImagePickerHandler imagePicker;
-  AnimationController _controller;
-  double screenHeight;
-  double screenwidth;
-  File _image;
-  bool checkValue;
+  late ImagePickerHandler imagePicker;
+  AnimationController? _controller;
+  double? screenHeight;
+  double? screenwidth;
+  File? _image;
+  bool? checkValue;
   var name, id, gender, mobile, dob,email,password, profile_pic;
-  SharedPreferences sharedPreferences;
+  late SharedPreferences sharedPreferences;
 
   @override
   Widget build(BuildContext context) {
@@ -156,7 +156,7 @@ class ProfileScreenPage extends State<EditProfilePage>
                                   decoration: new BoxDecoration(
                                     // color: Colors.lightBlue,
                                     image: new DecorationImage(
-                                      image: new FileImage(_image),
+                                      image: new FileImage(_image!),
                                       fit: BoxFit.cover,
                                     ),
                                     border: Border.all(
@@ -394,7 +394,7 @@ class ProfileScreenPage extends State<EditProfilePage>
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller!.dispose();
     super.dispose();
   }
 
@@ -431,7 +431,7 @@ class ProfileScreenPage extends State<EditProfilePage>
     setState(() {
       checkValue = sharedPreferences.getBool("check");
       if (checkValue != null) {
-        if (checkValue) {
+        if (checkValue!) {
           id = sharedPreferences.getString("id");
          /* if(id=="")
           {

@@ -22,9 +22,9 @@ class MyApp extends StatefulWidget{
 
 class _myApp extends  State<MyApp>{
   // This widget is the root of your application.
-  var mail;
-  bool checkValue;
-  SharedPreferences sharedPreferences;
+  late var mail;
+  bool? checkValue;
+  late SharedPreferences sharedPreferences;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class _myApp extends  State<MyApp>{
       setState(() {
         checkValue = sharedPreferences.getBool("check");
         if (checkValue != null) {
-          if (checkValue) {
+          if (checkValue!) {
             mail = sharedPreferences.getString("email");
           }
           else {

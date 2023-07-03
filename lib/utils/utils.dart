@@ -10,8 +10,21 @@ class NetworkUtil {
 
   final JsonDecoder _decoder = new JsonDecoder();
 
-  Future<dynamic> get (String url, {Map headers}) {
-    return http.get(url, headers: headers).then((http.Response response) {
+  // Future<dynamic> get (String url, {required Map headers}) {
+  //   return http.get(url, headers: headers as Map<String, String>).then((http.Response response) {
+  //     final String res = response.body;
+  //     final int statusCode = response.statusCode;
+  //
+  //     if (statusCode < 200 || statusCode > 400 || json == null) {
+  //       throw new Exception("Error while fetching data");
+  //     }
+  //     return _decoder.convert(res);
+  //   });
+  // }
+
+
+  Future<dynamic> get (String url) {
+    return http.get(url).then((http.Response response) {
       final String res = response.body;
       final int statusCode = response.statusCode;
 
@@ -22,9 +35,9 @@ class NetworkUtil {
     });
   }
 
-  Future<dynamic> post(String url, {Map headers, body, encoding}) {
+  Future<dynamic> post(String url, {required Map headers, body, required encoding}) {
     return http
-        .post(url, body: body, headers: headers, encoding: encoding)
+        .post(url, body: body, headers: headers as Map<String, String>, encoding: encoding)
         .then((http.Response response) {
       final String  res = response.body;
       final int statusCode = response.statusCode;

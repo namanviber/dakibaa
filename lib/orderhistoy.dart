@@ -15,19 +15,19 @@ class OrderHistoryScreen extends StatefulWidget {
 }
 
 class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
-  List listData;
+  List? listData;
   bool _isProgressBarShown = true;
-  Map data;
-  Map<String, dynamic> value;
-  bool checkValue;
+  Map? data;
+  Map<String, dynamic>? value;
+  bool? checkValue;
   var id;
-  SharedPreferences sharedPreferences;
+  late SharedPreferences sharedPreferences;
   getCredential() async {
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
       checkValue = sharedPreferences.getBool("check");
       if (checkValue != null) {
-        if (checkValue) {
+        if (checkValue!) {
           id = sharedPreferences.getString("id");
           print(id);
           getData();
@@ -52,12 +52,12 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
     print(data.toString());
     if(mounted) {
       setState(() {
-        listData = data["data"];
+        listData = data!["data"];
         print("Response"+listData.toString());
         // getCount();
         _isProgressBarShown = false;
       });
-      Toast.show(""+data["message"], context,
+      Toast.show(""+data!["message"], context,
           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
     }
 
@@ -123,7 +123,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                 itemLoading()
               ],
             ),
-            ):data["status"]=="0"?
+            ):data!["status"]=="0"?
             Padding(
               padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/3.5),
               child: new Container(
@@ -138,7 +138,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
               ),
             ) :new Expanded(child:  new ListView.builder(
                shrinkWrap: true,
-               itemCount: listData.length==0?0:listData.length,
+               itemCount: listData!.length==0?0:listData!.length,
                itemBuilder: (context,index){
                  return new Container(
                      child: Padding(
@@ -174,7 +174,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                                      ),),),
                                      Expanded(
                                        flex: 3,
-                                       child:  new Text(listData[index]["Name"],style: TextStyle(
+                                       child:  new Text(listData![index]["Name"],style: TextStyle(
                                          color: AppTheme().color_black,
                                          fontSize: 17,
                                          fontFamily: "Montserrat-SemiBold"
@@ -206,7 +206,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                                          fontSize: 17,
                                          fontFamily: "Montserrat-SemiBold"
                                      ),),),
-                                     Expanded(flex: 3,child:  new Text(listData[index]["phone"],style: TextStyle(
+                                     Expanded(flex: 3,child:  new Text(listData![index]["phone"],style: TextStyle(
                                          color: AppTheme().color_black,
                                          fontSize: 17,
                                          fontFamily: "Montserrat-SemiBold"
@@ -222,7 +222,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                                    color: Colors.grey[300],
                                  ),
                                ),
-                               listData[index]["pincode"]==null?new Container(): Padding(
+                               listData![index]["pincode"]==null?new Container(): Padding(
                                  padding: const EdgeInsets.only(top: 5,left: 20),
                                  child: new Row(
                                    children: [
@@ -236,7 +236,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                                          fontSize: 17,
                                          fontFamily: "Montserrat-SemiBold"
                                      ),),),
-                                     Expanded(flex: 3,child:  new Text(listData[index]["pincode"],style: TextStyle(
+                                     Expanded(flex: 3,child:  new Text(listData![index]["pincode"],style: TextStyle(
                                          color: AppTheme().color_black,
                                          fontSize: 17,
                                          fontFamily: "Montserrat-SemiBold"
@@ -246,14 +246,14 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                                    ],
                                  ),
                                ),
-                               listData[index]["pincode"]==null?new Container(): Padding(
+                               listData![index]["pincode"]==null?new Container(): Padding(
                                  padding: const EdgeInsets.only(top: 5),
                                  child: Container(
                                    height: 1,
                                    color: Colors.grey[300],
                                  ),
                                ),
-                               listData[index]["city"]==null?new Container():Padding(
+                               listData![index]["city"]==null?new Container():Padding(
                                  padding: const EdgeInsets.only(top: 5,left: 20),
                                  child: new Row(
                                    children: [
@@ -267,7 +267,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                                          fontSize: 17,
                                          fontFamily: "Montserrat-SemiBold"
                                      ),),),
-                                      Expanded(flex: 3,child:  new Text(listData[index]["city"],style: TextStyle(
+                                      Expanded(flex: 3,child:  new Text(listData![index]["city"],style: TextStyle(
                                          color: AppTheme().color_black,
                                          fontSize: 17,
                                          fontFamily: "Montserrat-SemiBold"
@@ -277,7 +277,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                                    ],
                                  ),
                                ),
-                               listData[index]["pincode"]==null?new Container():Padding(
+                               listData![index]["pincode"]==null?new Container():Padding(
                                  padding: const EdgeInsets.only(top: 5),
                                  child: Container(
                                    height: 1,
@@ -298,7 +298,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                                          fontSize: 17,
                                          fontFamily: "Montserrat-SemiBold"
                                      ),),),
-                                     Expanded(flex: 3,child:  new Text(listData[index]["address"],style: TextStyle(
+                                     Expanded(flex: 3,child:  new Text(listData![index]["address"],style: TextStyle(
                                          color: AppTheme().color_black,
                                          fontSize: 17,
                                          fontFamily: "Montserrat-SemiBold"
@@ -329,7 +329,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                                          fontSize: 17,
                                          fontFamily: "Montserrat-SemiBold"
                                      ),),),
-                                     Expanded(flex: 3,child:  new Text(listData[index]["date"],style: TextStyle(
+                                     Expanded(flex: 3,child:  new Text(listData![index]["date"],style: TextStyle(
                                          color: AppTheme().color_black,
                                          fontSize: 17,
                                          fontFamily: "Montserrat-SemiBold"
@@ -360,7 +360,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                                          fontSize: 17,
                                          fontFamily: "Montserrat-SemiBold"
                                      ),),),
-                                     Expanded(flex: 3,child:  new Text(listData[index]["time"],style: TextStyle(
+                                     Expanded(flex: 3,child:  new Text(listData![index]["time"],style: TextStyle(
                                          color: AppTheme().color_black,
                                          fontSize: 17,
                                          fontFamily: "Montserrat-SemiBold"
@@ -391,7 +391,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                                          fontSize: 17,
                                          fontFamily: "Montserrat-SemiBold"
                                      ),),),
-                                     Expanded(flex: 3,child:  new Text(listData[index]["qty"],style: TextStyle(
+                                     Expanded(flex: 3,child:  new Text(listData![index]["qty"],style: TextStyle(
                                          color: AppTheme().color_black,
                                          fontSize: 17,
                                          fontFamily: "Montserrat-SemiBold"
@@ -422,7 +422,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                                          fontSize: 17,
                                          fontFamily: "Montserrat-SemiBold"
                                      ),),),
-                                     Expanded(flex: 3,child:  new Text(listData[index]["productname"],style: TextStyle(
+                                     Expanded(flex: 3,child:  new Text(listData![index]["productname"],style: TextStyle(
                                          color: AppTheme().color_black,
                                          fontSize: 17,
                                          fontFamily: "Montserrat-SemiBold"
@@ -453,7 +453,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                                          fontSize: 17,
                                          fontFamily: "Montserrat-SemiBold"
                                      ),),),
-                                     Expanded(flex: 3,child:  new Text(listData[index]["total"],style: TextStyle(
+                                     Expanded(flex: 3,child:  new Text(listData![index]["total"],style: TextStyle(
                                          color: AppTheme().color_black,
                                          fontSize: 17,
                                          fontFamily: "Montserrat-SemiBold"
@@ -478,8 +478,8 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
     return new Padding(
         padding: new EdgeInsets.only(top: 0.0),
         child: Shimmer.fromColors(
-            baseColor: Colors.grey[300],
-            highlightColor: Colors.grey[100],
+            baseColor: Colors.grey[300]!,
+            highlightColor: Colors.grey[100]!,
             child: new Column(
               children: [
                 new Row(

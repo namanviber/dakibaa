@@ -19,25 +19,25 @@ class Cart extends StatefulWidget {
 }
 
 class CartPage extends State<Cart> {
-  bool checkValue;
-  AnimationController _controller;
-  double screenHeight;
-  double screenwidth;
-  File _image;
-  ProgressDialog pr;
-  Map<String, dynamic> value,value1,value2;
+  bool? checkValue;
+  AnimationController? _controller;
+  double? screenHeight;
+  double? screenwidth;
+  File? _image;
+  late ProgressDialog pr;
+  Map<String, dynamic>? value,value1,value2;
   List listData=[];
-  var price;
+  late var price;
   var total=0;
   var p;
-  SharedPreferences sharedPreferences;
-  List <CartModel> cartModel= new List();
+  late SharedPreferences sharedPreferences;
+  List <CartModel> cartModel= [];
   var id,productId;
-  int count;
+  int? count;
   var sum = 0;
-  int sumP;
+  int? sumP;
   var given_list = [];
-  String id1;
+  String? id1;
   List<String> list=[] ;
   String id_list="";
 
@@ -60,11 +60,11 @@ class CartPage extends State<Cart> {
     value = json.decode(response.body);
 
     if (parsedJson['status'] == "1") {
-      message=value["message"];
+      message=value!["message"];
       // pr.dismiss();
       if(mounted) {
         setState(() {
-          for (int i = 0; i < value["data"].length; i++) {
+          for (int i = 0; i < value!["data"].length; i++) {
             CartModel _productModel = new CartModel(
                 "",
                 "",
@@ -75,32 +75,32 @@ class CartPage extends State<Cart> {
                 "",
                 0,
                 "");
-            print(value["data"][i]["Id"].toString());
-            id1 = value["data"][i]["cid"].toString();
+            print(value!["data"][i]["Id"].toString());
+            id1 = value!["data"][i]["cid"].toString();
             list.add(id1.toString());
-            _productModel.Id = value["data"][i]["productid"].toString();
-            _productModel.cid = value["data"][i]["cid"].toString();
+            _productModel.Id = value!["data"][i]["productid"].toString();
+            _productModel.cid = value!["data"][i]["cid"].toString();
             // _productModel.C_Id = value["data"][i]["C_Id"];
-            _productModel.Productname = value["data"][i]["Productname"];
-            if (value["data"][i].containsKey("productImages")) {
+            _productModel.Productname = value!["data"][i]["Productname"];
+            if (value!["data"][i].containsKey("productImages")) {
               _productModel.productImages =
-              value["data"][i]["productImages"][0]["Imagename"];
+              value!["data"][i]["productImages"][0]["Imagename"];
             }
-            _productModel.Description = value["data"][i]["Description"];
-            if (value["data"][i].containsKey("productPrice")) {
+            _productModel.Description = value!["data"][i]["Description"];
+            if (value!["data"][i].containsKey("productPrice")) {
               _productModel.productPrice =
-              value["data"][i]["productPrice"][0]["Price"];
+              value!["data"][i]["productPrice"][0]["Price"];
             }
-            _productModel.unitId = value["data"][i]["unitid"].toString();
+            _productModel.unitId = value!["data"][i]["unitid"].toString();
 
-            _productModel.count = value["data"][i]["quantity"];
-            _productModel.price = value["data"][i]["amount"].toString();
+            _productModel.count = value!["data"][i]["quantity"];
+            _productModel.price = value!["data"][i]["amount"].toString();
             cartModel.add(_productModel);
             print(_productModel);
             print(_productModel.Id);
             sumP = int.parse(cartModel[i].price);
             given_list.add(sumP);
-            sum = given_list.fold(0, (previous, current) => previous + current);
+            sum = given_list.fold(0, (previous, current) => previous + current as int);
             print("Sum wqww: ${sum}");
             print("Sumsdasda : ${given_list}");
           }
@@ -198,7 +198,7 @@ class CartPage extends State<Cart> {
     setState(() {
       checkValue = sharedPreferences.getBool("check");
       if (checkValue != null) {
-        if (checkValue) {
+        if (checkValue!) {
           id = sharedPreferences.getString("id");
           price = sharedPreferences.getString("price")??'0';
           getData(id);
@@ -211,10 +211,10 @@ class CartPage extends State<Cart> {
       }
     });
   }
-  _removeProduct(int count,var productId, int index) {
+  _removeProduct(int? count,var productId, int index) {
     setState(() {
-      if (cartModel[index].count > 0) {
-        cartModel[index].count--;
+      if (cartModel[index].count! > 0) {
+        cartModel[index].count! - 1;
         cartModel[index].price = int.parse(cartModel[index].price.toString()) - p;
         getCountData(productId.toString(), index, cartModel[index].price);
 
@@ -223,9 +223,9 @@ class CartPage extends State<Cart> {
 
   }
 
-  _addProduct(int count, var productId,int index) {
+  _addProduct(int? count, var productId,int index) {
     setState(() {
-      cartModel[index].count++;
+      cartModel[index].count! + 1;
       cartModel[index].price=(p*cartModel[index].count).toString();
       print(cartModel[index].price.toString());
       getCountData(productId.toString(),index, cartModel[index].price);
@@ -237,7 +237,7 @@ class CartPage extends State<Cart> {
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
       checkValue = value;
-      sharedPreferences.setBool("check", checkValue);
+      sharedPreferences.setBool("check", checkValue!);
       sharedPreferences.setString("price",price.toString());
       sharedPreferences.commit();
     });

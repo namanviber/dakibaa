@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //import 'package:party_app/forget_password.dart';
 
-
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:http/http.dart' as http;
 
@@ -21,14 +20,14 @@ class LoginPageGradient extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPageGradient> {
-  double screenHeight;
-  double screenwidth;
+  double? screenHeight;
+  double? screenwidth;
   bool checkValue = false;
   final TextEditingController usernameController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
-  ProgressDialog pr;
-  Map<String, dynamic> value;
-  SharedPreferences sharedPreferences;
+  late ProgressDialog pr;
+  Map<String, dynamic>? value;
+  late SharedPreferences sharedPreferences;
   bool passwordVisible1=true;
   final _formkey = GlobalKey<FormState>();
   @override
@@ -82,7 +81,7 @@ class _LoginPageState extends State<LoginPageGradient> {
                         margin: EdgeInsets.only(left: 20.0,top: 120.0,right: 20.0),
                         child: TextFormField(
                           validator: (value) {
-                            if (value.isEmpty) {
+                            if (value!.isEmpty) {
                               return 'Please enter name';
                             }
                             return null;
@@ -130,7 +129,7 @@ class _LoginPageState extends State<LoginPageGradient> {
                         margin: EdgeInsets.only(left: 20.0,top: 20.0,right: 20.0),
                         child: TextFormField(
                           validator: (value) {
-                            if (value.isEmpty) {
+                            if (value!.isEmpty) {
                               return 'Please enter password';
                             }
                             return null;
@@ -216,8 +215,8 @@ class _LoginPageState extends State<LoginPageGradient> {
                                 onPressed: () {
 
 
-                                  if (_formkey.currentState.validate()) {
-                                    _formkey.currentState.save();
+                                  if (_formkey.currentState!.validate()) {
+                                    _formkey.currentState!.save();
                                     setState(() {});
                                     getData();
                                   }
@@ -312,12 +311,12 @@ class _LoginPageState extends State<LoginPageGradient> {
     return parsedJson;
   }
 
-  _onChanged(bool value, Map<String, dynamic> response) async {
+  _onChanged(bool value, Map<String, dynamic>? response) async {
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
       checkValue = value;
       sharedPreferences.setBool("check", checkValue);
-      sharedPreferences.setString("name", response["Name"]);
+      sharedPreferences.setString("name", response!["Name"]);
       sharedPreferences.setString("id", response["Id"].toString());
       /* sharedPreferences.setString("gender", response["Gender"]);
       sharedPreferences.setString("dob", response["DOB"]);*/

@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_dialog/progress_dialog.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'ApiList.dart';
 
 class Privacy1 extends StatefulWidget {
@@ -13,16 +12,16 @@ class Privacy1 extends StatefulWidget {
 }
 
 class PrivacySettingPage extends State<Privacy1> {
-  AnimationController _controller;
-  double screenHeight;
-  double screenwidth;
-  File _image;
-  Map<String, dynamic> value;
-  List<dynamic> listData;
-  Map data;
-  ProgressDialog pr;
-  String head;
-  String head1;
+  AnimationController? _controller;
+  double? screenHeight;
+  double? screenwidth;
+  File? _image;
+  Map<String, dynamic>? value;
+  List<dynamic>? listData;
+  Map? data;
+  ProgressDialog? pr;
+  String? head;
+  String? head1;
   bool _isProgressBarShown = true;
   bool hasData=false;
 

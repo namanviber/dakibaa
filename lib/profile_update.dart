@@ -20,22 +20,22 @@ class ProfileUpdate extends StatefulWidget {
 
 class _ProfileUpdate extends State<ProfileUpdate>
     with TickerProviderStateMixin, ImagePickerListener {
-  ImagePickerHandler imagePicker;
-  AnimationController _controller;
-  double screenHeight;
-  double screenwidth;
-  File _image;
-  bool checkValue;
-  ProgressDialog pr;
-  Map<String, dynamic> value;
+  late ImagePickerHandler imagePicker;
+  AnimationController? _controller;
+  late double screenHeight;
+  double? screenwidth;
+  File? _image;
+  bool? checkValue;
+  late ProgressDialog pr;
+  Map<String, dynamic>? value;
   var name, id, gender, mobile, dob,email,password, profile_pic;
-  SharedPreferences sharedPreferences;
-  TextEditingController nameController;
-  TextEditingController phoneController;
-  TextEditingController mailController;
-  TextEditingController genderController;
-  TextEditingController dobController;
-  TextEditingController passwordController;
+  late SharedPreferences sharedPreferences;
+  TextEditingController? nameController;
+  TextEditingController? phoneController;
+  TextEditingController? mailController;
+  TextEditingController? genderController;
+  TextEditingController? dobController;
+  TextEditingController? passwordController;
   final _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -234,7 +234,7 @@ class _ProfileUpdate extends State<ProfileUpdate>
                                                 child: ClipRRect(
                                                   borderRadius: BorderRadius.circular(200),
 
-                                                  child: Image.file(_image,fit: BoxFit.cover,),
+                                                  child: Image.file(_image!,fit: BoxFit.cover,),
                                                 )
 
                                             ),
@@ -524,24 +524,24 @@ class _ProfileUpdate extends State<ProfileUpdate>
                                         child: Text("SAVE",
                                           style: TextStyle(color: Colors.white,fontWeight: FontWeight.normal,fontSize: 17),),
                                         onPressed: () {
-                                          if (_formkey.currentState.validate()) {
-                                            if(nameController.text.isEmpty){
+                                          if (_formkey.currentState!.validate()) {
+                                            if(nameController!.text.isEmpty){
                                               Toast.show("" + "Please enter name", context,
                                                   duration: Toast.LENGTH_LONG, gravity: Toast.TOP);
-                                            } else if (nameController.text.isEmpty&&phoneController.text.isEmpty) {
+                                            } else if (nameController!.text.isEmpty&&phoneController!.text.isEmpty) {
                                               Toast.show("" + "Please enter name and Phone number", context,
                                                   duration: Toast.LENGTH_LONG, gravity: Toast.TOP);
                                             }
-                                            else if (phoneController.text.isEmpty) {
+                                            else if (phoneController!.text.isEmpty) {
                                               Toast.show("" + "Please enter Phone number", context,
                                                   duration: Toast.LENGTH_LONG, gravity: Toast.TOP);
-                                            }else if(phoneController.text.length != 10){
+                                            }else if(phoneController!.text.length != 10){
                                               Toast.show("" + "contact must be of 10 digits", context,
                                                   duration: Toast.LENGTH_LONG, gravity: Toast.TOP);
                                             } else{
                                               updateProfile(
-                                                  nameController.text,
-                                                  phoneController.text,
+                                                  nameController!.text,
+                                                  phoneController!.text,
                                                   "Male",
                                                   "01/01/1990",
                                                   "abc@gmail.com",
@@ -588,7 +588,7 @@ class _ProfileUpdate extends State<ProfileUpdate>
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller!.dispose();
     super.dispose();
   }
 
@@ -603,7 +603,7 @@ class _ProfileUpdate extends State<ProfileUpdate>
     setState(() {
       checkValue = sharedPreferences.getBool("check");
       if (checkValue != null) {
-        if (checkValue) {
+        if (checkValue!) {
           name = sharedPreferences.getString("name");
           if(name==null){
             name="";
@@ -647,12 +647,12 @@ class _ProfileUpdate extends State<ProfileUpdate>
     });
   }
 
-  _onChanged(bool value, Map<String, dynamic> response) async {
+  _onChanged(bool value, Map<String, dynamic>? response) async {
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
       checkValue = value;
-      sharedPreferences.setBool("check", checkValue);
-      sharedPreferences.setString("name", response["Name"]);
+      sharedPreferences.setBool("check", checkValue!);
+      sharedPreferences.setString("name", response!["Name"]);
       sharedPreferences.setString("id", response["Id"].toString());
      /* sharedPreferences.setString("gender", response["Gender"]);
       sharedPreferences.setString("dob", response["DOB"]);*/
@@ -664,8 +664,9 @@ class _ProfileUpdate extends State<ProfileUpdate>
     });
   }
 
+  var returnData;
   Future<Map<String, dynamic>> updateProfile(String username, String phone,
-      String gender,String dob,String email,String dev,String id, File image) async {
+      String gender,String dob,String email,String dev,String? id, File? image) async {
     print("$username$phone$gender$dob$email$password$id");
     pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
     pr.show();
@@ -681,7 +682,7 @@ class _ProfileUpdate extends State<ProfileUpdate>
       imageUploadRequest.fields['dob'] = dob;
       imageUploadRequest.fields['email'] = email;
       imageUploadRequest.fields['deviceToken'] = dev;
-      imageUploadRequest.fields['id'] = id;
+      imageUploadRequest.fields['id'] = id!;
 
     }
     else{
@@ -697,7 +698,7 @@ class _ProfileUpdate extends State<ProfileUpdate>
       imageUploadRequest.fields['dob'] = dob;
       imageUploadRequest.fields['email'] = email;
       imageUploadRequest.fields['deviceToken'] = dev;
-      imageUploadRequest.fields['id'] = id;
+      imageUploadRequest.fields['id'] = id!;
       imageUploadRequest.files.add(file);
     }
 
@@ -729,5 +730,7 @@ class _ProfileUpdate extends State<ProfileUpdate>
     } catch (e) {
       print(e);
     }
+    return returnData;
+
   }
 }

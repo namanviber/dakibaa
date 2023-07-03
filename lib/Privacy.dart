@@ -15,14 +15,14 @@ class Privacy extends StatefulWidget {
 }
 
 class PrivacySettingPage extends State<Privacy> {
-  AnimationController _controller;
-  double screenHeight;
-  double screenwidth;
-  File _image;
-  Map<String, dynamic> value;
-  List<dynamic> listData;
-  Map data;
-  ProgressDialog pr;
+  AnimationController? _controller;
+  double? screenHeight;
+  double? screenwidth;
+  File? _image;
+  Map<String, dynamic>? value;
+  List<dynamic>? listData;
+  Map? data;
+  ProgressDialog? pr;
   var head;
   bool _isProgressBarShown = true;
   bool hasData=false;
@@ -208,8 +208,8 @@ class PrivacySettingPage extends State<Privacy> {
     return new Padding(
         padding: new EdgeInsets.only(top: 0.0),
         child: Shimmer.fromColors(
-            baseColor: Colors.grey[300],
-            highlightColor: Colors.grey[100],
+            baseColor: Colors.grey[300]!,
+            highlightColor: Colors.grey[100]!,
             child: new Column(
               children: [
                 new Row(

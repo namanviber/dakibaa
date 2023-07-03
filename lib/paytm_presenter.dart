@@ -14,7 +14,7 @@ class PaytmModelPresenter {
   PaytmModelContract _view;
   RestDataSource api = new RestDataSource();
   PaytmModelPresenter(this._view);
-  getpaytm(String orderid_paytm, Mode, txn_id, userid) {
+  getpaytm(String? orderid_paytm, Mode, txn_id, userid) {
     api.paytm_api_call(orderid_paytm, Mode, txn_id, userid).then((PaytmModel res) {
       _view.onPaytmModelSuccess(res);
     }).catchError((Object error) => _view.onPaytmModelError(error.toString()));

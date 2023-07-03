@@ -4,24 +4,24 @@ import 'image_picker_handler.dart';
 
 class ImagePickerDialog extends StatelessWidget {
   ImagePickerHandler _listener;
-  AnimationController _controller;
-  BuildContext context;
+  AnimationController? _controller;
+  late BuildContext context;
 
   ImagePickerDialog(this._listener, this._controller);
 
-  Animation<double> _drawerContentsOpacity;
-  Animation<Offset> _drawerDetailsPosition;
+  Animation<double>? _drawerContentsOpacity;
+  Animation<Offset>? _drawerDetailsPosition;
 
   void initState() {
     _drawerContentsOpacity = new CurvedAnimation(
-      parent: new ReverseAnimation(_controller),
+      parent: new ReverseAnimation(_controller!),
       curve: Curves.fastOutSlowIn,
     );
     _drawerDetailsPosition = new Tween<Offset>(
       begin: const Offset(0.0, 1.0),
       end: Offset.zero,
     ).animate(new CurvedAnimation(
-      parent: _controller,
+      parent: _controller!,
       curve: Curves.fastOutSlowIn,
     ));
   }
@@ -32,13 +32,13 @@ class ImagePickerDialog extends StatelessWidget {
         _drawerContentsOpacity == null) {
       return;
     }
-    _controller.forward();
+    _controller!.forward();
     showDialog(
       context: context,
       builder: (BuildContext context) => new SlideTransition(
-        position: _drawerDetailsPosition,
+        position: _drawerDetailsPosition!,
         child: new FadeTransition(
-          opacity: new ReverseAnimation(_drawerContentsOpacity),
+          opacity: new ReverseAnimation(_drawerContentsOpacity!),
           child: this,
         ),
       ),
@@ -46,7 +46,7 @@ class ImagePickerDialog extends StatelessWidget {
   }
 
   void dispose() {
-    _controller.dispose();
+    _controller!.dispose();
   }
 
   startTime() async {
@@ -59,7 +59,7 @@ class ImagePickerDialog extends StatelessWidget {
   }
 
   dismissDialog() {
-    _controller.reverse();
+    _controller!.reverse();
     startTime();
   }
 

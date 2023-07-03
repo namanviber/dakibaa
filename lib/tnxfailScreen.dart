@@ -12,6 +12,7 @@ class _FailScreenState extends State<FailScreen> {
   Future<bool> _onWillPop() async {
     /* Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
         Number_of_Person()), (Route<dynamic> route) => false);*/
+    return false;
   }
   @override
   Widget build(BuildContext context) {

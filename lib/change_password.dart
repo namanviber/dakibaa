@@ -24,32 +24,32 @@ class ChangePassword extends StatefulWidget {
 class _ChangePassword extends State<ChangePassword> {
   @override
   bool status = false;
-  String _oldPasswordError;
+  String? _oldPasswordError;
 
-  String _passwordError;
-  String _confirmPasswordError;
-  String oldPassword;
-  String password;
-  String confirmPassword;
+  String? _passwordError;
+  String? _confirmPasswordError;
+  String? oldPassword;
+  String? password;
+  String? confirmPassword;
   final _formkey = GlobalKey<FormState>();
   bool passwordVisible=true;
   bool passwordVisible1=true;
   bool passwordVisible2=true;
   bool passwordVisible3=true;
-  ProgressDialog pr;
-  Map<String, dynamic> value;
+  late ProgressDialog pr;
+  Map<String, dynamic>? value;
 
   final TextEditingController oldPasswordController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
   final TextEditingController confirmPasswordController = new TextEditingController();
 
-  SharedPreferences sharedPreferences;
-  var id;
-  bool checkValue;
+  late SharedPreferences sharedPreferences;
+  late var id;
+  bool? checkValue;
   @override
   Widget build(BuildContext context) {
     Pattern pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regex = new RegExp(pattern);
+    RegExp regex = new RegExp(pattern as String);
     return Form(
       key: _formkey,
       child: Scaffold(
@@ -128,7 +128,7 @@ class _ChangePassword extends State<ChangePassword> {
                                       child: new Row(
                                         children: [
                                           Text(
-                                            _oldPasswordError == null ? "" : _oldPasswordError,
+                                            _oldPasswordError == null ? "" : _oldPasswordError!,
                                             style: TextStyle(
                                                 color: AppTheme().color_white, fontSize: 15),
                                           ),
@@ -193,7 +193,7 @@ class _ChangePassword extends State<ChangePassword> {
                                       child: new Row(
                                         children: [
                                           Text(
-                                            _passwordError == null ? "" : _passwordError,
+                                            _passwordError == null ? "" : _passwordError!,
                                             style: TextStyle(
                                                 color: AppTheme().color_white, fontSize: 15),
                                           ),
@@ -255,7 +255,7 @@ class _ChangePassword extends State<ChangePassword> {
                                       child: new Row(
                                         children: [
                                           Text(
-                                            _confirmPasswordError == null ? "" : _confirmPasswordError,
+                                            _confirmPasswordError == null ? "" : _confirmPasswordError!,
                                             style: TextStyle(
                                                 color: AppTheme().color_white, fontSize: 15),
                                           ),
@@ -348,7 +348,7 @@ class _ChangePassword extends State<ChangePassword> {
     setState(() {
       checkValue = sharedPreferences.getBool("check");
       if (checkValue != null) {
-        if (checkValue) {
+        if (checkValue!) {
           id = sharedPreferences.getString("id");
         } else {
 
@@ -379,7 +379,7 @@ class _ChangePassword extends State<ChangePassword> {
         _passwordError = 'Enter New Password';
         status = false;
       });
-    }else if (password.length < 8) {
+    }else if (password!.length < 8) {
       setState(() {
         _passwordError = 'Enter minimum 8 characters';
         status = false;
@@ -393,6 +393,8 @@ class _ChangePassword extends State<ChangePassword> {
     }
     return status;
   }
+  var returnData;
+
   Future<Map<String, dynamic>> getData() async {
     print(id.toString());
     print(oldPasswordController.text);
@@ -424,6 +426,8 @@ class _ChangePassword extends State<ChangePassword> {
       }
       return parsedJson;
     }
+    return returnData;
+
   }
   @override
   void initState() {

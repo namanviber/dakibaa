@@ -19,19 +19,19 @@ class ContactUs extends StatefulWidget {
 }
 
 class ContactUsPage extends State<ContactUs> {
-  AnimationController _controller;
-  File _image;
+  AnimationController? _controller;
+  File? _image;
   bool status = false;
-  ProgressDialog pr;
-  Map<String, dynamic> value;
-  Map<String, dynamic> value1;
-  List<dynamic> listData;
+  late ProgressDialog pr;
+  Map<String, dynamic>? value;
+  Map<String, dynamic>? value1;
+  List<dynamic>? listData;
   bool mesg=false;
-  Map data;
+  Map? data;
   var name;
   var mail;
   var address;
-  var number;
+  late var number;
   final TextEditingController nameController = new TextEditingController();
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController messageController = new TextEditingController();
@@ -101,7 +101,7 @@ class ContactUsPage extends State<ContactUs> {
   Widget build(BuildContext context) {
     Pattern pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regex = new RegExp(pattern);
+    RegExp regex = new RegExp(pattern as String);
     // TODO: implement build
     return GestureDetector(
       onTap: () {
@@ -296,7 +296,7 @@ class ContactUsPage extends State<ContactUs> {
                                   margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
                                   child: TextFormField(
                                     validator: (value){
-                                      if(value.isEmpty){
+                                      if(value!.isEmpty){
                                         return "Please enter name";
                                       }
                                       else {
@@ -338,7 +338,7 @@ class ContactUsPage extends State<ContactUs> {
                                   margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
                                   child: TextFormField(
                                     validator: (value){
-                                      if(value.isEmpty){
+                                      if(value!.isEmpty){
                                         return "Please enter email";
                                       }else if(!regex.hasMatch(value)){
                                         return "Enter Valid Email";
@@ -385,7 +385,7 @@ class ContactUsPage extends State<ContactUs> {
                                     margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
                                     child: TextFormField(
                                       validator: (value){
-                                        if(value.isEmpty){
+                                        if(value!.isEmpty){
                                           return "Please enter message";
                                         }
                                         else {
@@ -421,8 +421,8 @@ class ContactUsPage extends State<ContactUs> {
                               height: 45,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  if (_formkey.currentState.validate()) {
-                                    _formkey.currentState.save();
+                                  if (_formkey.currentState!.validate()) {
+                                    _formkey.currentState!.save();
                                     setState(() {});
                                     getData();
 

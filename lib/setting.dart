@@ -20,11 +20,11 @@ class PartySetting extends StatefulWidget {
 }
 
 class PartySettingPage extends State<PartySetting> {
-  SharedPreferences sharedPreferences;
-  AnimationController _controller;
-  double screenHeight;
-  double screenwidth;
-  File _image;
+  late SharedPreferences sharedPreferences;
+  AnimationController? _controller;
+  double? screenHeight;
+  double? screenwidth;
+  File? _image;
   @override
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.of(context).size.height;

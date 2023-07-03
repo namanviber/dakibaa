@@ -16,16 +16,16 @@ class TermsCondition extends StatefulWidget {
 }
 
 class TermsSettingPage extends State<TermsCondition> {
-  AnimationController _controller;
-  double screenHeight;
-  double screenwidth;
+  AnimationController? _controller;
+  double? screenHeight;
+  double? screenwidth;
   bool _isProgressBarShown = true;
   bool hasData=false;
-  File _image;
-  Map<String, dynamic> value;
-  List<dynamic> listData;
-  Map data;
-  ProgressDialog pr;
+  File? _image;
+  Map<String, dynamic>? value;
+  List<dynamic>? listData;
+  Map? data;
+  ProgressDialog? pr;
   var head;
   var Tc1;
   var Tc2;
@@ -248,8 +248,8 @@ class TermsSettingPage extends State<TermsCondition> {
     return new Padding(
         padding: new EdgeInsets.only(top: 0.0),
         child: Shimmer.fromColors(
-            baseColor: Colors.grey[300],
-            highlightColor: Colors.grey[100],
+            baseColor: Colors.grey[300]!,
+            highlightColor: Colors.grey[100]!,
             child: new Column(
               children: [
                 new Row(
