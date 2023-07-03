@@ -1,0 +1,40 @@
+buildscript {
+    ext.kotlin_version = '1.4.0'
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+        maven {
+            url "https://artifactory.paytm.in/libs-release-local"
+        }
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.0.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.0"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+        maven {
+            url "https://artifactory.paytm.in/libs-release-local"
+        }
+    }
+}
+
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+//subprojects {
+//    project.evaluationDependsOn(':app')
+//}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
