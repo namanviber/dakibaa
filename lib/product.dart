@@ -3,14 +3,14 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:partyapp/ProductModel.dart';
+import 'package:partyapp/models/ProductModel.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 
-import 'ApiList.dart';
+import 'rest_api/ApiList.dart';
 import 'ProductDetail.dart';
-import 'login_pagenew.dart';
+import 'app_screens/authorization_screens/login_pagenew.dart';
 
 class ProductScreen extends StatefulWidget {
   Map? data;
@@ -121,7 +121,7 @@ class Product extends State<ProductScreen> {
 
 
       Toast.show("" + parsedJson['message'], context,
-          duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+          duration: Toast.lengthLong, gravity: Toast.bottom,);
       //_onChanged(value);
 
 
@@ -134,7 +134,7 @@ class Product extends State<ProductScreen> {
     } else {
       pr.hide();
       Toast.show("" + parsedJson['message'], context,
-          duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+          duration: Toast.lengthShort, gravity: Toast.bottom,);
 
     }
     return parsedJson;
@@ -484,7 +484,7 @@ class Product extends State<ProductScreen> {
     if (parsedJson['status'] == "1") {
       // pr.dismiss();
       Toast.show("" + parsedJson['message'], context,
-          duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+          duration: Toast.lengthShort, gravity: Toast.bottom,);
       /*//_onChanged(value);
       Navigator.push(
         context,
@@ -493,7 +493,7 @@ class Product extends State<ProductScreen> {
     } if(parsedJson['status'] == "0") {
       //pr.dismiss();
       Toast.show("" + parsedJson['message'], context,
-          duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+          duration: Toast.lengthShort, gravity: Toast.bottom,);
       _ackAlert(context);
       /*   Navigator.push(
         context,

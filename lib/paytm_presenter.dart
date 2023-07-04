@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:partyapp/paytm_model.dart';
+import 'package:partyapp/models/paytm_model.dart';
 import 'package:partyapp/rest_api/rest_api.dart';
-import 'package:partyapp/services_model/services_model.dart';
+import 'package:partyapp/models/services_model.dart';
 
 abstract class PaytmModelContract {
   void onPaytmModelSuccess(PaytmModel response);

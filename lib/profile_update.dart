@@ -7,7 +7,7 @@ import 'package:partyapp/Colors/colors.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
-import 'ApiList.dart';
+import 'rest_api/ApiList.dart';
 import 'home_page.dart';
 import 'image_picker_handler.dart';
 import 'package:http/http.dart' as http;
@@ -527,17 +527,17 @@ class _ProfileUpdate extends State<ProfileUpdate>
                                           if (_formkey.currentState!.validate()) {
                                             if(nameController!.text.isEmpty){
                                               Toast.show("" + "Please enter name", context,
-                                                  duration: Toast.LENGTH_LONG, gravity: Toast.TOP);
+                                                  duration: Toast.lengthLong, gravity: Toast.top,);
                                             } else if (nameController!.text.isEmpty&&phoneController!.text.isEmpty) {
                                               Toast.show("" + "Please enter name and Phone number", context,
-                                                  duration: Toast.LENGTH_LONG, gravity: Toast.TOP);
+                                                  duration: Toast.lengthLong, gravity: Toast.top,);
                                             }
                                             else if (phoneController!.text.isEmpty) {
                                               Toast.show("" + "Please enter Phone number", context,
-                                                  duration: Toast.LENGTH_LONG, gravity: Toast.TOP);
+                                                  duration: Toast.lengthLong, gravity: Toast.top,);
                                             }else if(phoneController!.text.length != 10){
                                               Toast.show("" + "contact must be of 10 digits", context,
-                                                  duration: Toast.LENGTH_LONG, gravity: Toast.TOP);
+                                                  duration: Toast.lengthLong, gravity: Toast.top,);
                                             } else{
                                               updateProfile(
                                                   nameController!.text,
@@ -712,7 +712,7 @@ class _ProfileUpdate extends State<ProfileUpdate>
       if (parsedJson['status'] == "1") {
         pr.hide();
         Toast.show("" + parsedJson['message'], context,
-            duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+            duration: Toast.lengthShort, gravity: Toast.bottom,);
         setState(() {
           _onChanged(true, value);
         });
@@ -723,7 +723,7 @@ class _ProfileUpdate extends State<ProfileUpdate>
       } else {
         pr.hide();
         Toast.show("" + parsedJson['message'], context,
-            duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+            duration: Toast.lengthShort, gravity: Toast.bottom,);
 
       }
       return parsedJson;

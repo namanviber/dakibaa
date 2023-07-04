@@ -3,14 +3,14 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:partyapp/CartModel.dart';
+import 'package:partyapp/models/CartModel.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'package:http/http.dart' as http;
-import 'ApiList.dart';
+import 'rest_api/ApiList.dart';
 import 'checkout_screen.dart';
-import 'login_pagenew.dart';
+import 'app_screens/authorization_screens/login_pagenew.dart';
 
 
 class Cart extends StatefulWidget {
@@ -107,12 +107,12 @@ class CartPage extends State<Cart> {
         });
       }
       Toast.show("" + parsedJson['message'], context,
-          duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+          duration: Toast.lengthShort, gravity: Toast.bottom,);
 
     } else {
       // pr.dismiss();
       Toast.show("" + parsedJson['message'], context,
-          duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+          duration: Toast.lengthShort, gravity: Toast.bottom,);
       _ackAlert(context);
     }
     return parsedJson;
@@ -151,12 +151,12 @@ class CartPage extends State<Cart> {
         getData(id);
       });
       Toast.show("" + parsedJson['message'], context,
-          duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+          duration: Toast.lengthShort, gravity: Toast.bottom,);
 
     } else {
       //  pr.dismiss();
       Toast.show("" + parsedJson['message'], context,
-          duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+          duration: Toast.lengthShort, gravity: Toast.bottom,);
 
     }
     return parsedJson;
@@ -183,12 +183,12 @@ class CartPage extends State<Cart> {
         });
 
         Toast.show("" + parsedJson['message'], context,
-          duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+          duration: Toast.lengthShort, gravity: Toast.bottom,);
 
     } else {
         pr.hide();
       Toast.show("" + parsedJson['message'], context,
-          duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+          duration: Toast.lengthShort, gravity: Toast.bottom,);
 
     }
     return parsedJson;
@@ -661,7 +661,7 @@ class CartPage extends State<Cart> {
                         onPressed: () {
                           if(message=="Cart is blank") {
                             Toast.show("" + "Please add some items in the cart", context,
-                                duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+                                duration: Toast.lengthShort, gravity: Toast.bottom,);
                           }
                           else{
                             for(int i=0;i<list.length;i++){

@@ -14,7 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'package:http/http.dart' as http;
 
-import 'login_pagenew.dart';
+import 'app_screens/authorization_screens/login_pagenew.dart';
 
 class OtpScreen extends StatefulWidget {
   String? type;
@@ -393,8 +393,8 @@ class Otp extends State<OtpScreen> {
                                 controller4.text);
                           } else {
                             Toast.show("" + "Please enter full otp", context,
-                                duration: Toast.LENGTH_LONG,
-                                gravity: Toast.TOP);
+                                duration: Toast.lengthLong,
+                                gravity: Toast.top,);
                           }
                         },
                        ),
@@ -442,7 +442,7 @@ class Otp extends State<OtpScreen> {
       value = parsedJson['data'];
 /*
       Toast.show("" + parsedJson['message'], context,
-          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);*/
+          duration: Toast.lengthLong, gravity: Toast.bottom,);*/
       _timer!.cancel();
       if (type == "forget") {
         Navigator.of(context).pushAndRemoveUntil(
@@ -465,7 +465,7 @@ class Otp extends State<OtpScreen> {
     } else {
       pr.hide();
       Toast.show("" + parsedJson['message'], context,
-          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+          duration: Toast.lengthLong, gravity: Toast.bottom,);
     }
     return parsedJson;
   }
@@ -487,13 +487,13 @@ class Otp extends State<OtpScreen> {
       pr.hide();
       // temp = 1;
       /* Toast.show("" + parsedJson['message'], context,
-          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);*/
+          duration: Toast.lengthLong, gravity: Toast.bottom,);*/
       resendotp = parsedJson['message'];
       otp1 = resendotp.split(' ')[3].split('').reversed.join();
     } else {
       pr.hide();
       Toast.show("" + parsedJson['message'], context,
-          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+          duration: Toast.lengthLong, gravity: Toast.bottom,);
     }
     return parsedJson;
   }
@@ -569,7 +569,7 @@ class Otp extends State<OtpScreen> {
     await new SmsQuery().querySms(address: '+919871949688');
     print(messages[0].body);
     List<String> data = messages[0].body.split(': ');
-//    Toast.show(data[1], context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+//    Toast.show(data[1], context, duration: Toast.lengthShort, gravity:  Toast.bottom,);
     var otpdata = data[1];
     List<String> o = otpdata.split('');
     print(o);

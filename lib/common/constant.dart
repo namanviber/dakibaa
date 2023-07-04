@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:partyapp/paytm_model.dart';
-import 'package:partyapp/product_model_services.dart';
-import 'package:partyapp/services_model/services_model.dart';
+import 'package:partyapp/models/paytm_model.dart';
+import 'package:partyapp/models/product_model_services.dart';
+import 'package:partyapp/models/services_model.dart';
 
 
 String loginstatus="";

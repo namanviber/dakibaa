@@ -1,0 +1,239 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.Party.partyapp"
+4    android:versionCode="4"
+5    android:versionName="4.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="31" />
+9-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:3:5-66
+11-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:3:22-64
+12    <uses-permission android:name="android.permissions.UPDATE_DEVICE_STATS" />
+12-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:4:5-78
+12-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:4:22-76
+13    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+13-->[:image_picker] C:\Users\lenovo\Documents\GitHub\dakibaa\build\image_picker\intermediates\library_manifest\release\AndroidManifest.xml:7:5-80
+13-->[:image_picker] C:\Users\lenovo\Documents\GitHub\dakibaa\build\image_picker\intermediates\library_manifest\release\AndroidManifest.xml:7:22-77
+14    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+14-->[:image_picker] C:\Users\lenovo\Documents\GitHub\dakibaa\build\image_picker\intermediates\library_manifest\release\AndroidManifest.xml:8:5-81
+14-->[:image_picker] C:\Users\lenovo\Documents\GitHub\dakibaa\build\image_picker\intermediates\library_manifest\release\AndroidManifest.xml:8:22-78
+15    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+15-->[:connectivity] C:\Users\lenovo\Documents\GitHub\dakibaa\build\connectivity\intermediates\library_manifest\release\AndroidManifest.xml:7:5-79
+15-->[:connectivity] C:\Users\lenovo\Documents\GitHub\dakibaa\build\connectivity\intermediates\library_manifest\release\AndroidManifest.xml:7:22-76
+16
+17    <queries>
+17-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:9:5-20:15
+18
+19        <!-- Specific apps you interact with, eg: -->
+20        <package android:name="com.paytm.pgsdk.TransactionManager.PAYTM_APP_PACKAGE" />
+20-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:12:9-88
+20-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:12:18-85
+21        <!--
+22             Specific intents you query for,
+23             eg: for a custom share UI
+24        -->
+25        <intent>
+25-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:17:9-19:18
+26            <action android:name="android.intent.action.MAIN" />
+26-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:36:17-68
+26-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:36:25-66
+27        </intent>
+28    </queries>
+29
+30    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+30-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:10:5-75
+30-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:10:22-72
+31    <uses-permission android:name="android.permission.WAKE_LOCK" />
+31-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:11:5-68
+31-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:11:22-65
+32
+33    <application
+34        android:name="android.app.Application"
+34-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:6:9-42
+35        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+35-->[androidx.core:core:1.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\5d79be4bc3832f38d82910dde6670d75\core-1.6.0\AndroidManifest.xml:24:18-86
+36        android:icon="@mipmap/ic_launcher"
+36-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:9:9-43
+37        android:label="DAKIBAA"
+37-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:7:9-32
+38        android:usesCleartextTraffic="true" >
+38-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:8:9-44
+39        <activity
+39-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:10:9-39:20
+40            android:name="com.Party.partyapp.MainActivity"
+40-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:11:13-41
+41            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+41-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:14:13-163
+42            android:exported="true"
+42-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:16:13-36
+43            android:hardwareAccelerated="true"
+43-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:15:13-47
+44            android:launchMode="singleTop"
+44-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:12:13-43
+45            android:theme="@style/LaunchTheme"
+45-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:13:13-47
+46            android:windowSoftInputMode="adjustResize" >
+46-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:17:13-55
+47
+48            <!--
+49                 Specifies an Android theme to apply to this Activity as soon as
+50                 the Android process has started. This theme is visible to the user
+51                 while the Flutter UI initializes. After that, this theme continues
+52                 to determine the Window background behind the Flutter UI.
+53            -->
+54            <meta-data
+54-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:22:13-25:17
+55                android:name="io.flutter.embedding.android.NormalTheme"
+55-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:23:15-70
+56                android:resource="@style/NormalTheme" />
+56-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:24:15-52
+57            <!--
+58                 Displays an Android View that continues showing the launch screen
+59                 Drawable until Flutter paints its first frame, then this splash
+60                 screen fades out. A splash screen is useful to avoid any visual
+61                 gap between the end of Android's launch screen and the painting of
+62                 Flutter's first frame.
+63            -->
+64            <meta-data
+64-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:31:13-34:17
+65                android:name="io.flutter.embedding.android.SplashScreenDrawable"
+65-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:32:15-79
+66                android:resource="@drawable/launch_background" />
+66-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:33:15-61
+67
+68            <intent-filter>
+68-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:35:13-38:29
+69                <action android:name="android.intent.action.MAIN" />
+69-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:36:17-68
+69-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:36:25-66
+70
+71                <category android:name="android.intent.category.LAUNCHER" />
+71-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:37:17-76
+71-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:37:27-74
+72            </intent-filter>
+73        </activity>
+74        <!--
+75             Don't delete the meta-data below.
+76             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+77        -->
+78        <meta-data
+78-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:42:9-44:33
+79            android:name="flutterEmbedding"
+79-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:43:13-44
+80            android:value="2" />
+80-->C:\Users\lenovo\Documents\GitHub\dakibaa\android\app\src\main\AndroidManifest.xml:44:13-30
+81
+82        <provider
+82-->[:image_picker] C:\Users\lenovo\Documents\GitHub\dakibaa\build\image_picker\intermediates\library_manifest\release\AndroidManifest.xml:11:9-19:20
+83            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+83-->[:image_picker] C:\Users\lenovo\Documents\GitHub\dakibaa\build\image_picker\intermediates\library_manifest\release\AndroidManifest.xml:12:13-82
+84            android:authorities="com.Party.partyapp.flutter.image_provider"
+84-->[:image_picker] C:\Users\lenovo\Documents\GitHub\dakibaa\build\image_picker\intermediates\library_manifest\release\AndroidManifest.xml:13:13-74
+85            android:exported="false"
+85-->[:image_picker] C:\Users\lenovo\Documents\GitHub\dakibaa\build\image_picker\intermediates\library_manifest\release\AndroidManifest.xml:14:13-37
+86            android:grantUriPermissions="true" >
+86-->[:image_picker] C:\Users\lenovo\Documents\GitHub\dakibaa\build\image_picker\intermediates\library_manifest\release\AndroidManifest.xml:15:13-47
+87            <meta-data
+87-->[:image_picker] C:\Users\lenovo\Documents\GitHub\dakibaa\build\image_picker\intermediates\library_manifest\release\AndroidManifest.xml:16:13-18:75
+88                android:name="android.support.FILE_PROVIDER_PATHS"
+88-->[:image_picker] C:\Users\lenovo\Documents\GitHub\dakibaa\build\image_picker\intermediates\library_manifest\release\AndroidManifest.xml:17:17-67
+89                android:resource="@xml/flutter_image_picker_file_paths" />
+89-->[:image_picker] C:\Users\lenovo\Documents\GitHub\dakibaa\build\image_picker\intermediates\library_manifest\release\AndroidManifest.xml:18:17-72
+90        </provider>
+91
+92        <activity
+92-->[:url_launcher] C:\Users\lenovo\Documents\GitHub\dakibaa\build\url_launcher\intermediates\library_manifest\release\AndroidManifest.xml:8:9-11:74
+93            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+93-->[:url_launcher] C:\Users\lenovo\Documents\GitHub\dakibaa\build\url_launcher\intermediates\library_manifest\release\AndroidManifest.xml:9:13-74
+94            android:exported="false"
+94-->[:url_launcher] C:\Users\lenovo\Documents\GitHub\dakibaa\build\url_launcher\intermediates\library_manifest\release\AndroidManifest.xml:10:13-37
+95            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+95-->[:url_launcher] C:\Users\lenovo\Documents\GitHub\dakibaa\build\url_launcher\intermediates\library_manifest\release\AndroidManifest.xml:11:13-71
+96
+97        <uses-library
+97-->[androidx.window:window:1.0.0-beta04] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\e30e175c73a7067fc20795d0c0da9773\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+98            android:name="androidx.window.extensions"
+98-->[androidx.window:window:1.0.0-beta04] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\e30e175c73a7067fc20795d0c0da9773\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+99            android:required="false" />
+99-->[androidx.window:window:1.0.0-beta04] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\e30e175c73a7067fc20795d0c0da9773\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+100        <uses-library
+100-->[androidx.window:window:1.0.0-beta04] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\e30e175c73a7067fc20795d0c0da9773\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+101            android:name="androidx.window.sidecar"
+101-->[androidx.window:window:1.0.0-beta04] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\e30e175c73a7067fc20795d0c0da9773\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+102            android:required="false" />
+102-->[androidx.window:window:1.0.0-beta04] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\e30e175c73a7067fc20795d0c0da9773\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+103
+104        <activity
+104-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:23:9-26:66
+105            android:name="com.paytm.pgsdk.PaytmPGActivity"
+105-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:24:13-59
+106            android:screenOrientation="portrait"
+106-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:25:13-49
+107            android:theme="@style/Theme.AppCompat.NoActionBar" />
+107-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:26:13-63
+108        <activity
+108-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:27:9-29:63
+109            android:name="com.paytm.pgsdk.AioMatchUserActivity"
+109-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:28:13-64
+110            android:theme="@style/TransparentActivityTheme" />
+110-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:29:13-60
+111
+112        <service
+112-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:31:9-33:40
+113            android:name="com.paytm.pgsdk.IntentServicePostNotification"
+113-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:32:13-73
+114            android:exported="false" />
+114-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:33:13-37
+115        <service
+115-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:34:9-36:40
+116            android:name="com.paytm.pgsdk.IntentServicePreNotification"
+116-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:35:13-72
+117            android:exported="false" />
+117-->[com.paytm.appinvokesdk:appinvokesdk:1.6.4] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\64c771c9b1331c16607940d505842455\jetified-appinvokesdk-1.6.4\AndroidManifest.xml:36:13-37
+118
+119        <activity
+119-->[com.google.android.gms:play-services-base:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\6b9f7476acf1e759bbd812f0db142d4e\jetified-play-services-base-17.6.0\AndroidManifest.xml:23:9-26:75
+120            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+120-->[com.google.android.gms:play-services-base:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\6b9f7476acf1e759bbd812f0db142d4e\jetified-play-services-base-17.6.0\AndroidManifest.xml:24:13-79
+121            android:exported="false"
+121-->[com.google.android.gms:play-services-base:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\6b9f7476acf1e759bbd812f0db142d4e\jetified-play-services-base-17.6.0\AndroidManifest.xml:25:13-37
+122            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+122-->[com.google.android.gms:play-services-base:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\6b9f7476acf1e759bbd812f0db142d4e\jetified-play-services-base-17.6.0\AndroidManifest.xml:26:13-72
+123
+124        <service
+124-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:14:9-17:72
+125            android:name="easypay.appinvoke.utils.EasyPayConfigDownloader"
+125-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:15:13-75
+126            android:exported="false"
+126-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:16:13-37
+127            android:permission="android.permission.BIND_JOB_SERVICE" />
+127-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:17:13-69
+128        <service
+128-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:18:9-22:72
+129            android:name="easypay.appinvoke.utils.AnalyticsService"
+129-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:19:13-68
+130            android:enabled="true"
+130-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:20:13-35
+131            android:exported="false"
+131-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:21:13-37
+132            android:permission="android.permission.BIND_JOB_SERVICE" />
+132-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:22:13-69
+133
+134        <activity android:name="easypay.appinvoke.AnalyticsManagerInfoDisplayActivity" />
+134-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:24:9-90
+134-->[com.paytm.easypay:easypay-appinvoke:1.7.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2e1faf92affae46f6be967853a084d7b\jetified-easypay-appinvoke-1.7.3\AndroidManifest.xml:24:19-87
+135
+136        <meta-data
+136-->[com.google.android.gms:play-services-basement:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\33122cc9946f28b4285de715133f5f52\jetified-play-services-basement-17.6.0\AndroidManifest.xml:23:9-25:69
+137            android:name="com.google.android.gms.version"
+137-->[com.google.android.gms:play-services-basement:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\33122cc9946f28b4285de715133f5f52\jetified-play-services-basement-17.6.0\AndroidManifest.xml:24:13-58
+138            android:value="@integer/google_play_services_version" />
+138-->[com.google.android.gms:play-services-basement:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\33122cc9946f28b4285de715133f5f52\jetified-play-services-basement-17.6.0\AndroidManifest.xml:25:13-66
+139    </application>
+140
+141</manifest>

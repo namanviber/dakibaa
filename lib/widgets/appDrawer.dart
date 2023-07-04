@@ -1,33 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:partyapp/Colors/colors.dart';
-import 'package:partyapp/ContactUs.dart';
-import 'package:partyapp/Privacy.dart';
-import 'package:partyapp/TermsCon.dart';
+import 'package:partyapp/app_screens/drawer_navigation_screens/ContactUs.dart';
+import 'package:partyapp/app_screens/drawer_navigation_screens/Privacy.dart';
+import 'package:partyapp/app_screens/drawer_navigation_screens/TermsCon.dart';
 import 'package:partyapp/about_dakibaa.dart';
-import 'package:partyapp/about_us.dart';
+import 'package:partyapp/app_screens/drawer_navigation_screens/about_us.dart';
 import 'package:partyapp/change_password.dart';
-import 'package:partyapp/dakibaa_services.dart';
-import 'package:partyapp/faq_screen.dart';
+import 'package:partyapp/app_screens/drawer_navigation_screens/dakibaa_services.dart';
+import 'package:partyapp/app_screens/drawer_navigation_screens/faq_screen.dart';
 import 'package:partyapp/orderhistoy.dart';
 import 'package:partyapp/profile_update.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../common/constant.dart';
-import '../gallery.dart';
+import '../app_screens/drawer_navigation_screens/gallery.dart';
 
 class AppDrawer extends StatefulWidget {
-  bool isLogin;
-  AppDrawer({this.isLogin = false, super.key});
+  AppDrawer({super.key});
 
   @override
   State<AppDrawer> createState() => _AppDrawerState();
 }
 
 class _AppDrawerState extends State<AppDrawer> {
+  bool? checkValue;
+  var name, email, id, gender, mobile, noperson, phone, dob;
+
   TextStyle listText = TextStyle(
       color: AppTheme().color_white,
       fontSize: 20,
       fontWeight: FontWeight.bold,
       fontFamily: "MontBlancDemo-Bold-Medium");
+
+  getCredential() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      checkValue = sharedPreferences.getBool("check");
+
+      if (checkValue == null || checkValue == false) {
+        sharedPreferences.clear();
+        sharedPreferences.setBool("check", false);
+        checkValue = false;
+      } else {
+        name = sharedPreferences.getString("name");
+        id = sharedPreferences.getString("id");
+        gender = sharedPreferences.getString("gender");
+        mobile = sharedPreferences.getString("mobile");
+        dob = sharedPreferences.getString("dob");
+        email = sharedPreferences.getString("email");
+        profile_pic = sharedPreferences.getString("profile_pic");
+      }
+    });
+  }
+
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getCredential();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +68,7 @@ class _AppDrawerState extends State<AppDrawer> {
               height: 150,
               child: Padding(
                 padding: const EdgeInsets.only(top: 20),
-                child: (widget.isLogin)
+                child: (checkValue!)
                     ? Row(
                         children: [
                           Column(
@@ -78,7 +107,7 @@ class _AppDrawerState extends State<AppDrawer> {
                               children: [
                                 Padding(
                                   padding: EdgeInsets.only(
-                                      top: "name" == null
+                                      top: name == null
                                           ? MediaQuery.of(context).size.height /
                                               10.5
                                           : MediaQuery.of(context).size.height /
@@ -87,9 +116,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                     child: Center(
                                       child: new Container(
                                         child: new Text(
-                                          "name" == null
-                                              ? "Guest Login"
-                                              : "name",
+                                          name == null ? "Guest Login" : "name",
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                               color: AppTheme().color_white,
@@ -106,7 +133,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                     child: Center(
                                       child: new Container(
                                         child: new Text(
-                                          "email" == null ? "" : "email",
+                                          email == null ? "" : email,
                                           style: TextStyle(
                                               color: AppTheme().color_white,
                                               fontSize: 12,
@@ -123,19 +150,14 @@ class _AppDrawerState extends State<AppDrawer> {
                       )
                     : Center(
                         child: Container(
-                            height: 100,
-                            child: Center(
-                              child: Image.asset(
-                                "images/dakiba_logo.png",
-                                fit: BoxFit.cover,
-                              ),
-                            ) /* ClipRRect(
-                            borderRadius: BorderRadius.circular(200),
-                            child: profile_pic==null?
-                            Image.asset("images/categorys_image.jpg",fit: BoxFit.cover,)
-                                :Image.network("http://partyapp.v2infotech.net/resources/"+profile_pic,fit: BoxFit.cover)
-                        )*/
+                          height: 100,
+                          child: Center(
+                            child: Image.asset(
+                              "images/dakiba_logo.png",
+                              fit: BoxFit.cover,
                             ),
+                          ),
+                        ),
                       ),
               )),
           Padding(
@@ -155,11 +177,11 @@ class _AppDrawerState extends State<AppDrawer> {
                   height: 30,
                 )),
             onTap: () {
-              Navigator.pushReplacement(context,
+              Navigator.push(context,
                   MaterialPageRoute(builder: (context) => AboutDakibaa()));
             },
           ),
-          (widget.isLogin)
+          (checkValue!)
               ? ListTile(
                   title: Text("Profile", style: listText),
                   leading: Padding(
@@ -170,14 +192,14 @@ class _AppDrawerState extends State<AppDrawer> {
                         size: 30,
                       )),
                   onTap: () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => ProfileUpdate()));
                   },
                 )
               : SizedBox(),
-          (widget.isLogin)
+          (checkValue!)
               ? ListTile(
                   title: Text("Change Password", style: listText),
                   leading: Padding(
@@ -188,7 +210,7 @@ class _AppDrawerState extends State<AppDrawer> {
                         height: 30,
                       )),
                   onTap: () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => ChangePassword()));
@@ -205,7 +227,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   height: 30,
                 )),
             onTap: () {
-              Navigator.pushReplacement(
+              Navigator.push(
                   context, MaterialPageRoute(builder: (context) => Privacy()));
             },
           ),
@@ -219,7 +241,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   height: 30,
                 )),
             onTap: () {
-              Navigator.pushReplacement(context,
+              Navigator.push(context,
                   MaterialPageRoute(builder: (context) => FaqScreen()));
             },
           ),
@@ -233,7 +255,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   height: 30,
                 )),
             onTap: () {
-              Navigator.pushReplacement(context,
+              Navigator.push(context,
                   MaterialPageRoute(builder: (context) => TermsCondition()));
             },
           ),
@@ -248,11 +270,11 @@ class _AppDrawerState extends State<AppDrawer> {
                   color: Colors.white,
                 )),
             onTap: () {
-              Navigator.pushReplacement(
+              Navigator.push(
                   context, MaterialPageRoute(builder: (context) => Gallery()));
             },
           ),
-          (widget.isLogin)
+          (checkValue!)
               ? ListTile(
                   title: Text("Order History",
                       style: TextStyle(
@@ -269,7 +291,7 @@ class _AppDrawerState extends State<AppDrawer> {
                         color: AppTheme().color_white,
                       )),
                   onTap: () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => OrderHistoryScreen()));
@@ -287,7 +309,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   color: AppTheme().color_white,
                 )),
             onTap: () {
-              Navigator.pushReplacement(context,
+              Navigator.push(context,
                   MaterialPageRoute(builder: (context) => DakibaaServices()));
             },
           ),
@@ -301,7 +323,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   height: 30,
                 )),
             onTap: () {
-              Navigator.pushReplacement(context,
+              Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ContactUs()));
             },
           ),
@@ -316,11 +338,11 @@ class _AppDrawerState extends State<AppDrawer> {
                   color: AppTheme().color_white,
                 )),
             onTap: () {
-              Navigator.pushReplacement(
+              Navigator.push(
                   context, MaterialPageRoute(builder: (context) => AboutUs()));
             },
           ),
-          (widget.isLogin)
+          (checkValue!)
               ? ListTile(
                   title: Text("Logout",
                       style: TextStyle(
@@ -336,13 +358,116 @@ class _AppDrawerState extends State<AppDrawer> {
                         height: 30,
                       )),
                   onTap: () {
-                    Navigator.pop(context);
-                    // dialogs("Confirm Exit");
+                    dialogs("Confirm Exit");
                   },
                 )
               : SizedBox(),
         ],
       ),
     );
+  }
+
+  void dialogs(String mesg) {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return Padding(
+          padding: new EdgeInsets.only(
+              top: MediaQuery.of(context).size.height / 3,
+              bottom: MediaQuery.of(context).size.height / 3),
+          child: AlertDialog(
+            backgroundColor: AppTheme().color_red,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            content: new Container(
+                child: new Center(
+                    child: new Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Container(
+                        padding: EdgeInsets.only(top: 0),
+                        width: 200,
+                        child: new Center(
+                          child: new Text(
+                            mesg,
+                            style: new TextStyle(
+                                color: new AppTheme().color_white,
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "Montserrat-SemiBold"),
+                          ),
+                        ))
+                  ],
+                ),
+                new Padding(padding: EdgeInsets.only(top: 20)),
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new InkWell(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: new Container(
+                        width: 100,
+                        height: 30,
+                        decoration: BoxDecoration(
+                            color: AppTheme().color_white,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        child: Center(
+                          child: Text("Cancel",
+                              style: TextStyle(
+                                  color: AppTheme().color_red,
+                                  fontSize: 15,
+                                  fontFamily: "Montserrat-SemiBold")),
+                        ),
+                      ),
+                    ),
+                    new Padding(padding: EdgeInsets.only(left: 10)),
+                    new InkWell(
+                      onTap: () {
+                        logOut();
+                      },
+                      child: new Container(
+                        width: 100,
+                        height: 30,
+                        decoration: BoxDecoration(
+                            color: AppTheme().color_white,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        child: Center(
+                          child: Text(
+                            "OK",
+                            style: TextStyle(
+                                color: AppTheme().color_red,
+                                fontSize: 15,
+                                fontFamily: "Montserrat-SemiBold"),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ))),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> logOut() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      sharedPreferences.clear();
+      sharedPreferences.setBool("check", false);
+    });
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => AboutDakibaa()),
+        (Route<dynamic> route) => false);
   }
 }

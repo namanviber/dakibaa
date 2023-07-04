@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:partyapp/ApiList.dart';
+import 'package:partyapp/rest_api/ApiList.dart';
 import 'package:http/http.dart' as http;
 import 'package:partyapp/Colors/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -58,12 +58,12 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
         _isProgressBarShown = false;
       });
       Toast.show(""+data!["message"], context,
-          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+          duration: Toast.lengthLong, gravity: Toast.bottom,);
     }
 
    // hasData = true;
     /*Toast.show(""+listData.toString(), context,
-          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);*/
+          duration: Toast.lengthLong, gravity: Toast.bottom,);*/
   }
   @override
   void initState() {

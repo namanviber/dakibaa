@@ -14,7 +14,7 @@ import 'package:progress_dialog/progress_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'package:http/http.dart' as http;
-import 'ApiList.dart';
+import 'rest_api/ApiList.dart';
 import 'home_page.dart';
 
 
@@ -564,7 +564,7 @@ class _CheckOutScreen extends State<CheckOutScreen> {
        // _onChanged(true, value);
       });
       Toast.show("" + parsedJson['message'], context,
-          duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+          duration: Toast.lengthShort, gravity: Toast.bottom,);
      /* sharedPreferences = await SharedPreferences.getInstance();
       sharedPreferences.remove("price");*/
       //_onChanged(value);
@@ -573,7 +573,7 @@ class _CheckOutScreen extends State<CheckOutScreen> {
     } else {
       pr.hide();
       Toast.show("" + parsedJson['message'], context,
-          duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+          duration: Toast.lengthShort, gravity: Toast.bottom,);
 
     }
     return parsedJson;

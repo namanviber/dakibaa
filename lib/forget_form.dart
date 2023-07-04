@@ -1,4 +1,4 @@
-import 'dart:convert';
+ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +7,8 @@ import 'package:progress_dialog/progress_dialog.dart';
 import 'package:toast/toast.dart';
 import 'package:http/http.dart' as http;
 
-import 'ApiList.dart';
-import 'login_pagenew.dart';
+import 'rest_api/ApiList.dart';
+import 'app_screens/authorization_screens/login_pagenew.dart';
 import 'otp_screen.dart';
 
 class ForgetForm extends StatefulWidget {
@@ -304,7 +304,7 @@ bool passwordVisible1=true;
     if (parsedJson['status'] == "1") {
       pr.hide();
    /*   Toast.show("" + parsedJson['message'], context,
-          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);*/
+          duration: Toast.lengthLong, gravity: Toast.bottom,);*/
       //_onChanged(value);
       Navigator.push(
         context,
@@ -313,7 +313,7 @@ bool passwordVisible1=true;
     } else {
       pr.hide();
       Toast.show("" + parsedJson['message'], context,
-          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+          duration: Toast.lengthLong, gravity: Toast.bottom,);
 
     }
     return parsedJson;

@@ -2,16 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:partyapp/login_pagenew.dart';
+import 'package:partyapp/app_screens/authorization_screens/login_pagenew.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'ContactUs.dart';
-import 'Privacy.dart';
-import 'Privacy1.dart';
-import 'TermsCon.dart';
-import 'TermsConditions.dart';
+import 'app_screens/drawer_navigation_screens/ContactUs.dart';
+import 'app_screens/drawer_navigation_screens/Privacy.dart';
+import 'app_screens/drawer_navigation_screens/TermsCon.dart';
 import 'change_password.dart';
-import 'faq_screen.dart';
+import 'app_screens/drawer_navigation_screens/faq_screen.dart';
 
 
 class PartySetting extends StatefulWidget {

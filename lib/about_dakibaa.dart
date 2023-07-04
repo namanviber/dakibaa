@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:partyapp/Colors/colors.dart';
-import 'package:partyapp/login_pagenew.dart';
+import 'package:partyapp/app_screens/authorization_screens/login_pagenew.dart';
 import 'package:partyapp/number_of_person.dart';
 import 'package:partyapp/widgets/appDrawer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,6 +14,7 @@ class AboutDakibaa extends StatefulWidget {
 
 class _AboutDakibaaState extends State<AboutDakibaa> {
   var name, email, id, gender, mobile, noperson, phone, dob;
+  late SharedPreferences sharedPreferences;
   bool? checkValue;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
@@ -26,29 +27,21 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
       checkValue = sharedPreferences.getBool("check");
-
       if (checkValue == null || checkValue == false) {
         sharedPreferences.clear();
         sharedPreferences.setBool("check", false);
         checkValue = false;
-      } else {
-        name = sharedPreferences.getString("name");
-        id = sharedPreferences.getString("id");
-        gender = sharedPreferences.getString("gender");
-        mobile = sharedPreferences.getString("mobile");
-        dob = sharedPreferences.getString("dob");
-        email = sharedPreferences.getString("email");
-        profile_pic = sharedPreferences.getString("profile_pic");
       }
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       drawer: AppDrawer(
-        isLogin: checkValue ?? false,
       ),
       extendBodyBehindAppBar: true,
       appBar: AppBar(

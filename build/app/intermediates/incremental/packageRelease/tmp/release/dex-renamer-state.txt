@@ -1,0 +1,4 @@
+#Tue Jul 04 17:36:59 IST 2023
+base.0=C\:\\Users\\lenovo\\Documents\\GitHub\\dakibaa\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

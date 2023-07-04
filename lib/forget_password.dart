@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:partyapp/Colors/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:progress_dialog/progress_dialog.dart';
-import 'ApiList.dart';
+import 'rest_api/ApiList.dart';
 import 'forget_form.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -287,11 +287,11 @@ class _ForgotPass extends State<ForgotPass> {
         MaterialPageRoute(builder: (context) => ForgetForm(number: user_NameController.text)),
       );*/
      /* Toast.show("" + parsedJson['message'], context,
-          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);*/
+          duration: Toast.lengthLong, gravity: Toast.bottom,);*/
     } else if(parsedJson['status'] == "0"){
       pr.hide();
       Toast.show("" + parsedJson['message'], context,
-          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+          duration: Toast.lengthLong, gravity: Toast.bottom,);
     }
     return parsedJson;
   }

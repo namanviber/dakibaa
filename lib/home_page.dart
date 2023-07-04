@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:partyapp/setting.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'ApiList.dart';
+import 'rest_api/ApiList.dart';
 import 'Cart.dart';
 import 'dart:convert';
 import 'dart:io';
@@ -86,12 +86,12 @@ class _State extends State<HomePage> {
       counter=parsedJson['data'];
       // pr.dismiss();
       /* Toast.show("" + parsedJson['message'], context,
-          duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);*/
+          duration: Toast.lengthShort, gravity: Toast.bottom,);*/
 
     } if(parsedJson['status'] == "0") {
       //pr.dismiss();
       /*  Toast.show("" + parsedJson['message'], context,
-          duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+          duration: Toast.lengthShort, gravity: Toast.bottom,);
       _ackAlert(context);*/
 
     }

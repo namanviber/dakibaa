@@ -7,8 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 import 'home_page.dart';
-import 'lo.dart';
-import 'login_pagenew.dart';
 
 Future<void> main() async {
  // GestureBinding.instance?.resamplingEnabled = true;

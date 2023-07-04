@@ -7,10 +7,10 @@ import 'package:progress_dialog/progress_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'package:http/http.dart' as http;
-import 'ApiList.dart';
-import 'faq_screen.dart';
+import 'rest_api/ApiList.dart';
+import 'app_screens/drawer_navigation_screens/faq_screen.dart';
 import 'home_page.dart';
-import 'login_pagenew.dart';
+import 'app_screens/authorization_screens/login_pagenew.dart';
 
 
 class ChangePassword extends StatefulWidget {
@@ -414,14 +414,14 @@ class _ChangePassword extends State<ChangePassword> {
       if (parsedJson['status'] == "1") {
         pr.hide();
         Toast.show("" + parsedJson['message'], context,
-            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+            duration: Toast.lengthLong, gravity: Toast.bottom,);
         //_onChanged(value);
         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
             LoginPage()), (Route<dynamic> route) => false);
       } else {
         pr.hide();
         Toast.show("" + parsedJson['message'], context,
-            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+            duration: Toast.lengthLong, gravity: Toast.bottom,);
 
       }
       return parsedJson;

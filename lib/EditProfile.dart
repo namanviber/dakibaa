@@ -5,7 +5,7 @@ import 'package:partyapp/profile_update.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'image_picker_handler.dart';
-import 'login_pagenew.dart';
+import 'app_screens/authorization_screens/login_pagenew.dart';
 
 
 class EditProfilePage extends StatefulWidget {
@@ -436,7 +436,7 @@ class ProfileScreenPage extends State<EditProfilePage>
          /* if(id=="")
           {
             Toast.show("" +"Please Login First", context,
-                duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+                duration: Toast.lengthShort, gravity: Toast.bottom,);
             _ackAlert(context);
           }*/
           name = sharedPreferences.getString("name");
