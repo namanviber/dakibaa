@@ -159,7 +159,7 @@ class TermsSettingPage extends State<TermsCondition> {
 
   Future getData() async {
     _isProgressBarShown = true;
-    http.Response response = await http.get(APIS.getTC);
+    http.Response response = await http.get(Uri.parse(APIS.getTC));
     var datatc = json.decode(response.body);
     setState(() {
       // listData = value["data"];

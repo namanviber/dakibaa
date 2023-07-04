@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_page_transition/flutter_page_transition.dart';
-import 'package:flutter_page_transition/page_transition_type.dart';
 import 'package:partyapp/Colors/colors.dart';
 import 'package:partyapp/app_screens/drawer_navigation_screens/ContactUs.dart';
 import 'package:partyapp/app_screens/drawer_navigation_screens/Privacy.dart';

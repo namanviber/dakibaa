@@ -24,7 +24,7 @@ class NetworkUtil {
 
 
   Future<dynamic> get (String url) {
-    return http.get(url).then((http.Response response) {
+    return http.get(Uri.parse(url)).then((http.Response response) {
       final String res = response.body;
       final int statusCode = response.statusCode;
 
@@ -37,7 +37,7 @@ class NetworkUtil {
 
   Future<dynamic> post(String url, {required Map headers, body, required encoding}) {
     return http
-        .post(url, body: body, headers: headers as Map<String, String>, encoding: encoding)
+        .post(Uri.parse(url), body: body, headers: headers as Map<String, String>, encoding: encoding)
         .then((http.Response response) {
       final String  res = response.body;
       final int statusCode = response.statusCode;

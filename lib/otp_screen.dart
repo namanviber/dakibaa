@@ -392,7 +392,7 @@ class Otp extends State<OtpScreen> {
                                 controller3.text +
                                 controller4.text);
                           } else {
-                            Toast.show("" + "Please enter full otp", context,
+                            Toast.show("" + "Please enter full otp",
                                 duration: Toast.lengthLong,
                                 gravity: Toast.top,);
                           }
@@ -425,7 +425,7 @@ class Otp extends State<OtpScreen> {
     pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
     pr.show();
     String myUrl = "$baseUrl/party/User/otpAuth";
-    final response = await http.post(myUrl, headers: {
+    final response = await http.post(Uri.parse(myUrl), headers: {
       'Accept': 'application/json'
     }, body: {
       "type": type.toString(),
@@ -464,7 +464,7 @@ class Otp extends State<OtpScreen> {
       );*/
     } else {
       pr.hide();
-      Toast.show("" + parsedJson['message'], context,
+      Toast.show("" + parsedJson['message'],
           duration: Toast.lengthLong, gravity: Toast.bottom,);
     }
     return parsedJson;
@@ -477,7 +477,7 @@ class Otp extends State<OtpScreen> {
     pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
     pr.show();
     String myUrl = "$baseUrl/party/User/resendOtp";
-    final response = await http.post(myUrl,
+    final response = await http.post(Uri.parse(myUrl),
         headers: {'Accept': 'application/json'}, body: {"number": num});
 
     var parsedJson = json.decode(response.body);
@@ -492,7 +492,7 @@ class Otp extends State<OtpScreen> {
       otp1 = resendotp.split(' ')[3].split('').reversed.join();
     } else {
       pr.hide();
-      Toast.show("" + parsedJson['message'], context,
+      Toast.show("" + parsedJson['message'],
           duration: Toast.lengthLong, gravity: Toast.bottom,);
     }
     return parsedJson;
@@ -581,7 +581,7 @@ class Otp extends State<OtpScreen> {
   getCredential() async {
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
-      checkValue = sharedPreferences.getBool("check");
+      checkValue = sharedPreferences.getBool("check")!;
       if (checkValue != null) {
         if (checkValue) {
 //          name = sharedPreferences.getString("name");

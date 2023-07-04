@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter_page_transition/flutter_page_transition.dart';
 import 'package:partyapp/Colors/colors.dart';
 import 'package:partyapp/common/shared_preferences.dart';
 import 'package:partyapp/network/network.dart';
@@ -252,10 +251,8 @@ class _LoginPageState extends State<LoginPage> {
                               MaterialPageRoute(builder: (context) => Number_of_Person()));
                         } else {
                           pr.hide();
-                          Navigator.of(context).push(PageTransition(
-                              type: PageTransitionType.custom,
-                              child: InternetConnection(),
-                              duration: Duration(milliseconds: 0)));
+                          Navigator.push(
+                              context, MaterialPageRoute(builder: (context) => InternetConnection()));
                         }
                       });
                     },
@@ -305,7 +302,7 @@ class _LoginPageState extends State<LoginPage> {
       NetworkConnection.check().then((intenet) async {
         if (intenet != null && intenet) {
           pr.show();
-          final response = await http.post(APIS.usersLogin, headers: {
+          final response = await http.post(Uri.parse(APIS.usersLogin), headers: {
             'Accept': 'application/json'
           }, body: {
             "username": usernameController.text,
@@ -325,7 +322,7 @@ class _LoginPageState extends State<LoginPage> {
                 sharedPreferences.setString("email", value!["Mobile"]);
               });
             }
-            Toast.show("" + parsedJson['message'], context,
+            Toast.show("" + parsedJson['message'],
                 duration: Toast.lengthShort, gravity: Toast.bottom,);
             //_onChanged(value);
             loginstatus = "signin";
@@ -334,15 +331,14 @@ class _LoginPageState extends State<LoginPage> {
                 (Route<dynamic> route) => false);
           } else {
             pr.hide();
-            Toast.show("" + parsedJson['message'], context,
+            Toast.show("" + parsedJson['message'],
                 duration: Toast.lengthShort, gravity: Toast.bottom,);
           }
           return parsedJson;
         } else {
-          Navigator.of(context).push(PageTransition(
-              type: PageTransitionType.custom,
-              child: InternetConnection(),
-              duration: Duration(milliseconds: 0)));
+
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => InternetConnection()));
         }
       });
     }

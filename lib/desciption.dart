@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_page_transition/flutter_page_transition.dart';
 import 'package:partyapp/Colors/colors.dart';
 import 'package:partyapp/common/constant.dart';
 

@@ -151,7 +151,7 @@ class PrivacySettingPage extends State<Privacy> {
   Future getData() async {
      _isProgressBarShown = true;
     http.Response response = await http
-        .get(APIS.privacy);
+        .get(Uri.parse(APIS.privacy));
     var datatc = json.decode(response.body);
     setState(() {
       head=datatc['data']['Heading']??'';

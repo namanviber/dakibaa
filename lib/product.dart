@@ -55,7 +55,7 @@ class Product extends State<ProductScreen> {
     pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
     pr.show();
     // print(token);
-    final response = await http.post(APIS.getProduct,
+    final response = await http.post(Uri.parse(APIS.getProduct),
         headers: {'Accept': 'application/json'},
         body: {
       "brandid": data!['Id'].toString(),
@@ -120,7 +120,7 @@ class Product extends State<ProductScreen> {
       }
 
 
-      Toast.show("" + parsedJson['message'], context,
+      Toast.show("" + parsedJson['message'],
           duration: Toast.lengthLong, gravity: Toast.bottom,);
       //_onChanged(value);
 
@@ -133,7 +133,7 @@ class Product extends State<ProductScreen> {
 
     } else {
       pr.hide();
-      Toast.show("" + parsedJson['message'], context,
+      Toast.show("" + parsedJson['message'],
           duration: Toast.lengthShort, gravity: Toast.bottom,);
 
     }
@@ -466,7 +466,7 @@ class Product extends State<ProductScreen> {
     // pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
     // pr.show();
     // print(token);
-    final response = await http.post(APIS.addPackageCount,
+    final response = await http.post(Uri.parse(APIS.addPackageCount),
         headers: {'Accept': 'application/json'},
         body: {"productid": productId.toString(),
           "unitid":productModel[index].unitId.toString(),
@@ -483,7 +483,7 @@ class Product extends State<ProductScreen> {
     print("Status = " + parsedJson['status']);
     if (parsedJson['status'] == "1") {
       // pr.dismiss();
-      Toast.show("" + parsedJson['message'], context,
+      Toast.show("" + parsedJson['message'],
           duration: Toast.lengthShort, gravity: Toast.bottom,);
       /*//_onChanged(value);
       Navigator.push(
@@ -492,7 +492,7 @@ class Product extends State<ProductScreen> {
       );*/
     } if(parsedJson['status'] == "0") {
       //pr.dismiss();
-      Toast.show("" + parsedJson['message'], context,
+      Toast.show("" + parsedJson['message'],
           duration: Toast.lengthShort, gravity: Toast.bottom,);
       _ackAlert(context);
       /*   Navigator.push(
@@ -553,7 +553,7 @@ class Product extends State<ProductScreen> {
   getCredential() async {
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
-      checkValue = sharedPreferences.getBool("check");
+      checkValue = sharedPreferences.getBool("check")!;
       if (checkValue != null) {
         if (checkValue) {
           id = sharedPreferences.getString("id");

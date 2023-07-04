@@ -402,7 +402,7 @@ class _ChangePassword extends State<ChangePassword> {
     pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
     if(ChangePasswordValidation()){
       pr.show();
-      final response = await http.post(APIS.changePassword,
+      final response = await http.post(Uri.parse(APIS.changePassword),
           headers: {'Accept': 'application/json'},
           body: {"id":id.toString(),
             "oldpassword": oldPasswordController.text,
@@ -413,14 +413,14 @@ class _ChangePassword extends State<ChangePassword> {
       print("Status = " + parsedJson['status']);
       if (parsedJson['status'] == "1") {
         pr.hide();
-        Toast.show("" + parsedJson['message'], context,
+        Toast.show("" + parsedJson['message'],
             duration: Toast.lengthLong, gravity: Toast.bottom,);
         //_onChanged(value);
         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
             LoginPage()), (Route<dynamic> route) => false);
       } else {
         pr.hide();
-        Toast.show("" + parsedJson['message'], context,
+        Toast.show("" + parsedJson['message'],
             duration: Toast.lengthLong, gravity: Toast.bottom,);
 
       }

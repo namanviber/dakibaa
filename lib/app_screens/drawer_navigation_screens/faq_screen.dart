@@ -179,7 +179,7 @@ class FaqScreen1 extends State<FaqScreen> {
 
   Future getData() async {
     _isProgressBarShown = true;
-    http.Response response = await http.get(APIS.faq);
+    http.Response response = await http.get(Uri.parse(APIS.faq));
     data = json.decode(response.body);
     setState(() {
       listData = data!["data"];

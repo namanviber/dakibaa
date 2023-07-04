@@ -509,7 +509,7 @@ class _SignupPageState extends State<SignupPage>
                                 "ljhasfdnnlzs568794544",
                                 _image);
                           } else {
-                            Toast.show("" + "Please select image", context,
+                            Toast.show("" + "Please select image",
                                 duration: Toast.lengthLong,
                                 gravity: Toast.top,);
                           }
@@ -563,9 +563,9 @@ class _SignupPageState extends State<SignupPage>
 
     if (image != null) {
       final mimeTypeData =
-          lookupMimeType(image.path, headerBytes: [0xFF, 0xD8]).split('/');
+          lookupMimeType(image.path, headerBytes: [0xFF, 0xD8])?.split('/');
       final file = await http.MultipartFile.fromPath('file', image.path,
-          contentType: MediaType(mimeTypeData[0], mimeTypeData[1]));
+          contentType: MediaType(mimeTypeData![0], mimeTypeData[1]));
       imageUploadRequest.files.add(file);
     }
     try {
@@ -584,7 +584,7 @@ class _SignupPageState extends State<SignupPage>
         );
       } else {
         pr.hide();
-        Toast.show("" + parsedJson['message'], context,
+        Toast.show("" + parsedJson['message'],
             duration: Toast.lengthLong, gravity: Toast.bottom,);
         /*Navigator.push(
           context,

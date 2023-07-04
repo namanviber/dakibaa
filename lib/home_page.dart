@@ -58,7 +58,7 @@ class _State extends State<HomePage> {
   getCredential() async {
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
-      checkValue = sharedPreferences.getBool("check");
+      checkValue = sharedPreferences.getBool("check")!;
       if (checkValue != null) {
         if (checkValue) {
           id = sharedPreferences.getString("id");
@@ -75,7 +75,7 @@ class _State extends State<HomePage> {
     });
   }
   Future<Map<String, dynamic>> getCount() async {
-    final response = await http.post(APIS.getCartCount,
+    final response = await http.post(Uri.parse(APIS.getCartCount),
         headers: {'Accept': 'application/json'},
         body: {"userid": id.toString()});
     var parsedJson = json.decode(response.body);

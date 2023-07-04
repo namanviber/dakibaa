@@ -526,17 +526,17 @@ class _ProfileUpdate extends State<ProfileUpdate>
                                         onPressed: () {
                                           if (_formkey.currentState!.validate()) {
                                             if(nameController!.text.isEmpty){
-                                              Toast.show("" + "Please enter name", context,
+                                              Toast.show("" + "Please enter name",
                                                   duration: Toast.lengthLong, gravity: Toast.top,);
                                             } else if (nameController!.text.isEmpty&&phoneController!.text.isEmpty) {
-                                              Toast.show("" + "Please enter name and Phone number", context,
+                                              Toast.show("" + "Please enter name and Phone number",
                                                   duration: Toast.lengthLong, gravity: Toast.top,);
                                             }
                                             else if (phoneController!.text.isEmpty) {
-                                              Toast.show("" + "Please enter Phone number", context,
+                                              Toast.show("" + "Please enter Phone number",
                                                   duration: Toast.lengthLong, gravity: Toast.top,);
                                             }else if(phoneController!.text.length != 10){
-                                              Toast.show("" + "contact must be of 10 digits", context,
+                                              Toast.show("" + "contact must be of 10 digits",
                                                   duration: Toast.lengthLong, gravity: Toast.top,);
                                             } else{
                                               updateProfile(
@@ -687,7 +687,7 @@ class _ProfileUpdate extends State<ProfileUpdate>
     }
     else{
       final mimeTypeData =
-      lookupMimeType(image.path, headerBytes: [0xFF, 0xD8]).split('/');
+      lookupMimeType(image.path, headerBytes: [0xFF, 0xD8])!.split('/');
       final file = await http.MultipartFile.fromPath('file', image.path,
           contentType: MediaType(mimeTypeData[0], mimeTypeData[1]));
 
@@ -711,7 +711,7 @@ class _ProfileUpdate extends State<ProfileUpdate>
       print("Status = " + parsedJson['status']);
       if (parsedJson['status'] == "1") {
         pr.hide();
-        Toast.show("" + parsedJson['message'], context,
+        Toast.show("" + parsedJson['message'],
             duration: Toast.lengthShort, gravity: Toast.bottom,);
         setState(() {
           _onChanged(true, value);
@@ -722,7 +722,7 @@ class _ProfileUpdate extends State<ProfileUpdate>
         );
       } else {
         pr.hide();
-        Toast.show("" + parsedJson['message'], context,
+        Toast.show("" + parsedJson['message'],
             duration: Toast.lengthShort, gravity: Toast.bottom,);
 
       }

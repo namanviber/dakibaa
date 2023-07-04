@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter_page_transition/flutter_page_transition.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +57,7 @@ class ServicesPage extends State<Services> {
 
   Future getData() async {
     _isProgressBarShown = true;
-    http.Response response = await http.get(APIS.ProductDetails);
+    http.Response response = await http.get(Uri.parse(APIS.ProductDetails));
     var parsedJson = json.decode(response.body);
     data = json.decode(response.body);
     print("Product List  :  " + data.toString());
@@ -176,16 +175,12 @@ class ServicesPage extends State<Services> {
                             onTap: () {
                               if (totalamount == 0) {
                                 Toast.show(
-                                    "Please select any one product", context,
+                                    "Please select any one product",
                                     duration: Toast.lengthShort,
                                     gravity: Toast.bottom,);
                               } else {
                                 Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        type: PageTransitionType.custom,
-                                        duration: Duration(milliseconds: 0),
-                                        child: CheckOutScreen()));
+                                    context, MaterialPageRoute(builder: (context) => CheckOutScreen()));
                               }
                             },
                             child: new Container(
@@ -400,16 +395,12 @@ class ServicesPage extends State<Services> {
                       child: InkWell(
                         onTap: () {
                           if (totalamount == 0) {
-                            Toast.show("Please select any one product", context,
+                            Toast.show("Please select any one product",
                                 duration: Toast.lengthShort,
                                 gravity: Toast.bottom,);
                           } else {
                             Navigator.push(
-                                context,
-                                PageTransition(
-                                    type: PageTransitionType.custom,
-                                    duration: Duration(milliseconds: 0),
-                                    child: CheckOutScreen()));
+                                context, MaterialPageRoute(builder: (context) => CheckOutScreen()));
                           }
                         },
                         child: new Container(

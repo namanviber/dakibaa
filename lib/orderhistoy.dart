@@ -42,7 +42,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
   }
   Future getData() async {
     _isProgressBarShown = true;
-    http.Response response = await http.post(APIS.OrderHistory,
+    http.Response response = await http.post(Uri.parse(APIS.OrderHistory),
         headers: {'Accept': 'application/json'},
         body: {"userid": id.toString(),});
     print(response.body);
@@ -57,7 +57,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
         // getCount();
         _isProgressBarShown = false;
       });
-      Toast.show(""+data!["message"], context,
+      Toast.show(""+data!["message"],
           duration: Toast.lengthLong, gravity: Toast.bottom,);
     }
 

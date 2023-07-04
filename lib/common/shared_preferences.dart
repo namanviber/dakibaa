@@ -9,7 +9,7 @@ class SharedPreferencesClass{
   }
   Future<bool>getloginstatus() async {
     SharedPreferences getloginprefs = await SharedPreferences.getInstance();
-    return getloginprefs.getBool('login_status');
+    return getloginprefs.getBool('login_status')!;
   }
 
   Future<void> setEmail(String email) async {
@@ -18,7 +18,7 @@ class SharedPreferencesClass{
   }
   Future<String>getEmail() async {
     SharedPreferences getloginprefs = await SharedPreferences.getInstance();
-    return getloginprefs.getString('email');
+    return getloginprefs.getString('email')!;
   }
 
   Future<void> setName(String name) async {
@@ -27,7 +27,7 @@ class SharedPreferencesClass{
   }
   Future<String>getName() async {
     SharedPreferences getnameprefs = await SharedPreferences.getInstance();
-    return getnameprefs.getString('name');
+    return getnameprefs.getString('name')!;
   }
   Future<void> setlogininid(String signinid) async {
     SharedPreferences logininid = await SharedPreferences.getInstance();
@@ -35,7 +35,7 @@ class SharedPreferencesClass{
   }
   Future<String>getlogininid() async {
     SharedPreferences logininid = await SharedPreferences.getInstance();
-    return logininid.getString('signinid');
+    return logininid.getString('signinid')!;
   }
   Future<void> setphoneno(String mobileno) async {
     SharedPreferences phoneno = await SharedPreferences.getInstance();
@@ -43,7 +43,7 @@ class SharedPreferencesClass{
   }
   Future<String>getphoneno() async {
     SharedPreferences phoneno = await SharedPreferences.getInstance();
-    return phoneno.getString('mobileno');
+    return phoneno.getString('mobileno')!;
   }
 
   Future<void> settoken(String token) async {
@@ -52,7 +52,7 @@ class SharedPreferencesClass{
   }
   Future<String>gettoken() async {
     SharedPreferences gettokenprefs = await SharedPreferences.getInstance();
-    return gettokenprefs.getString('token');
+    return gettokenprefs.getString('token')!;
   }
 
 

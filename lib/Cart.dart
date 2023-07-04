@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:partyapp/models/CartModel.dart';
 import 'package:progress_dialog/progress_dialog.dart';
@@ -52,7 +50,7 @@ class CartPage extends State<Cart> {
     /*  pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
     pr.show();*/
     // print(token);
-    final response = await http.post(APIS.getCartList,
+    final response = await http.post(Uri.parse(APIS.getCartList),
         headers: {'Accept': 'application/json'},
         body: {"userid": uid.toString()});
     var parsedJson = json.decode(response.body);
@@ -106,12 +104,12 @@ class CartPage extends State<Cart> {
           }
         });
       }
-      Toast.show("" + parsedJson['message'], context,
+      Toast.show("" + parsedJson['message'],
           duration: Toast.lengthShort, gravity: Toast.bottom,);
 
     } else {
       // pr.dismiss();
-      Toast.show("" + parsedJson['message'], context,
+      Toast.show("" + parsedJson['message'],
           duration: Toast.lengthShort, gravity: Toast.bottom,);
       _ackAlert(context);
     }
@@ -125,7 +123,7 @@ class CartPage extends State<Cart> {
     /*   pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
     pr.show();*/
 
-    final response = await http.post(APIS.addPackageCount,
+    final response = await http.post(Uri.parse(APIS.addPackageCount),
         headers: {'Accept': 'application/json'},
         body: {
           "productid": productId.toString(),
@@ -150,12 +148,12 @@ class CartPage extends State<Cart> {
         cartModel.clear();
         getData(id);
       });
-      Toast.show("" + parsedJson['message'], context,
+      Toast.show("" + parsedJson['message'],
           duration: Toast.lengthShort, gravity: Toast.bottom,);
 
     } else {
       //  pr.dismiss();
-      Toast.show("" + parsedJson['message'], context,
+      Toast.show("" + parsedJson['message'],
           duration: Toast.lengthShort, gravity: Toast.bottom,);
 
     }
@@ -167,7 +165,7 @@ class CartPage extends State<Cart> {
        pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
     pr.show();
 
-    final response = await http.post(APIS.removeProductCart,
+    final response = await http.post(Uri.parse(APIS.removeProductCart),
         headers: {'Accept': 'application/json'},
         body: {"ID": cid.toString()});
     var parsedJson = json.decode(response.body);
@@ -182,12 +180,12 @@ class CartPage extends State<Cart> {
           getData(id);
         });
 
-        Toast.show("" + parsedJson['message'], context,
+        Toast.show("" + parsedJson['message'],
           duration: Toast.lengthShort, gravity: Toast.bottom,);
 
     } else {
         pr.hide();
-      Toast.show("" + parsedJson['message'], context,
+      Toast.show("" + parsedJson['message'],
           duration: Toast.lengthShort, gravity: Toast.bottom,);
 
     }
@@ -660,7 +658,7 @@ class CartPage extends State<Cart> {
                       child: ElevatedButton(
                         onPressed: () {
                           if(message=="Cart is blank") {
-                            Toast.show("" + "Please add some items in the cart", context,
+                            Toast.show("" + "Please add some items in the cart",
                                 duration: Toast.lengthShort, gravity: Toast.bottom,);
                           }
                           else{

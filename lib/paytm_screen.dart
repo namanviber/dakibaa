@@ -270,7 +270,7 @@ class _PaytmscreenState extends State<Paytmscreen>implements PaytmModelContract 
 
     try {
       final response = await http.post(
-        url,
+        Uri.parse(url),
         body: body,
         headers: {'Content-type': "application/json"},
       );

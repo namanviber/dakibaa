@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_page_transition/flutter_page_transition.dart';
 import 'package:partyapp/Colors/colors.dart';
 
 Widget getErrorWidget(BuildContext context, FlutterErrorDetails error) {
@@ -54,8 +53,7 @@ Widget getErrorWidget(BuildContext context, FlutterErrorDetails error) {
                     ),
                   ),
                   onPressed: (){
-//                    Navigator.pop(context);
-                    Navigator.pop(context, PageTransition(type:PageTransitionType.custom, duration: Duration(seconds: 0)));
+                   Navigator.pop(context);
                   })
           ),
           new Padding(padding: EdgeInsets.only(top: 20)),

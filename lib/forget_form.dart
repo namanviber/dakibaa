@@ -293,7 +293,7 @@ bool passwordVisible1=true;
     pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
     pr.show();
     // print(token);
-    final response = await http.post(APIS.forgetPassword,
+    final response = await http.post(Uri.parse(APIS.forgetPassword),
         headers: {'Accept': 'application/json'},
         body: {"number": number.toString(),
           "password": new_PasswordController.text});
@@ -312,7 +312,7 @@ bool passwordVisible1=true;
       );
     } else {
       pr.hide();
-      Toast.show("" + parsedJson['message'], context,
+      Toast.show("" + parsedJson['message'],
           duration: Toast.lengthLong, gravity: Toast.bottom,);
 
     }

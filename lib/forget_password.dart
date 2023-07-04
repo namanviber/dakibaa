@@ -267,7 +267,7 @@ class _ForgotPass extends State<ForgotPass> {
     pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
     pr.show();
     // print(token);
-    final response = await http.post(APIS.checkRegistration,
+    final response = await http.post(Uri.parse(APIS.checkRegistration),
         headers: {'Accept': 'application/json'},
         body:
         {
@@ -290,7 +290,7 @@ class _ForgotPass extends State<ForgotPass> {
           duration: Toast.lengthLong, gravity: Toast.bottom,);*/
     } else if(parsedJson['status'] == "0"){
       pr.hide();
-      Toast.show("" + parsedJson['message'], context,
+      Toast.show("" + parsedJson['message'],
           duration: Toast.lengthLong, gravity: Toast.bottom,);
     }
     return parsedJson;

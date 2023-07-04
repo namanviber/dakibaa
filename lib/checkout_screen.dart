@@ -539,7 +539,7 @@ class _CheckOutScreen extends State<CheckOutScreen> {
       "userid": id.toString(),
       "person": person.toString()
     };*/
-    final response = await http.post(APIS.orderDetails,
+    final response = await http.post(Uri.parse(APIS.orderDetails),
         headers: {'Accept': 'application/json'},
         body:{
           "Name": nameController.text.toString(),
@@ -563,7 +563,7 @@ class _CheckOutScreen extends State<CheckOutScreen> {
         id_com= id.toString();
        // _onChanged(true, value);
       });
-      Toast.show("" + parsedJson['message'], context,
+      Toast.show("" + parsedJson['message'],
           duration: Toast.lengthShort, gravity: Toast.bottom,);
      /* sharedPreferences = await SharedPreferences.getInstance();
       sharedPreferences.remove("price");*/
@@ -572,7 +572,7 @@ class _CheckOutScreen extends State<CheckOutScreen> {
           Paytmscreen()));
     } else {
       pr.hide();
-      Toast.show("" + parsedJson['message'], context,
+      Toast.show("" + parsedJson['message'],
           duration: Toast.lengthShort, gravity: Toast.bottom,);
 
     }

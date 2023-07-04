@@ -42,7 +42,7 @@ class ContactUsPage extends State<ContactUs> {
     pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
     pr.show();
     // print(token);
-    final response = await http.post(APIS.addMessage,
+    final response = await http.post(Uri.parse(APIS.addMessage),
         headers: {'Accept': 'application/json'},
         body: {"name": nameController.text,
           "email": emailController.text,
@@ -53,7 +53,7 @@ class ContactUsPage extends State<ContactUs> {
     print("Status = " + parsedJson['status']);
     if (parsedJson['status'] == "1") {
       pr.hide();
-      Toast.show("" + parsedJson['message'], context,
+      Toast.show("" + parsedJson['message'],
           duration: Toast.lengthShort, gravity: Toast.bottom,);
       //_onChanged(value);
       Navigator.push(
@@ -62,7 +62,7 @@ class ContactUsPage extends State<ContactUs> {
       );
     } else {
       pr.hide();
-      Toast.show("" + parsedJson['message'], context,
+      Toast.show("" + parsedJson['message'],
           duration: Toast.lengthShort, gravity: Toast.bottom,);
 
     }
@@ -72,7 +72,7 @@ class ContactUsPage extends State<ContactUs> {
   Future getContact() async   {
     // _isProgressBarShown = true;
     http.Response response = await http
-        .get(APIS.ownerDetail);
+        .get(Uri.parse(APIS.ownerDetail));
     var datatc = json.decode(response.body);
     setState(() {
       name=datatc['data']['Name']??'';
