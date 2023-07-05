@@ -182,7 +182,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   MaterialPageRoute(builder: (context) => AboutDakibaa()));
             },
           ),
-          (checkValue && isguest)
+          (checkValue && !isguest)
               ? ListTile(
                   title: Text("Profile", style: listText),
                   leading: Padding(
@@ -200,7 +200,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   },
                 )
               : SizedBox(),
-          (checkValue&& isguest)
+          (checkValue&& !isguest)
               ? ListTile(
                   title: Text("Change Password", style: listText),
                   leading: Padding(
@@ -275,7 +275,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   context, MaterialPageRoute(builder: (context) => Gallery()));
             },
           ),
-          (checkValue)
+          (checkValue  && !isguest)
               ? ListTile(
                   title: Text("Order History",
                       style: TextStyle(

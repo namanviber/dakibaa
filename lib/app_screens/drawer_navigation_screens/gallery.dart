@@ -69,26 +69,26 @@ class _GalleryState extends State<Gallery> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: InkWell(
-        onTap: () {
-          openCamera();
-        },
-        child: new Container(
-          height: 50,
-          color: AppTheme().color_red,
-          child: new Center(
-            child: Text(
-              "Take a Picture",
-              style: TextStyle(
-                  color: AppTheme().color_white,
-                  fontSize: 17,
-                  fontFamily: 'Montserrat-SemiBold'),
-            ),
-          ),
-        ),
-      ),
-      body: new ListView(
-        physics: NeverScrollableScrollPhysics(),
+      // bottomNavigationBar: InkWell(
+      //   onTap: () {
+      //     openCamera();
+      //   },
+      //   child: new Container(
+      //     height: 50,
+      //     color: AppTheme().color_red,
+      //     child: new Center(
+      //       child: Text(
+      //         "Take a Picture",
+      //         style: TextStyle(
+      //             color: AppTheme().color_white,
+      //             fontSize: 17,
+      //             fontFamily: 'Montserrat-SemiBold'),
+      //       ),
+      //     ),
+      //   ),
+      // ),
+      body: ListView(
+        physics: const NeverScrollableScrollPhysics(),
         children: [
           Column(
             children: [
