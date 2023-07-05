@@ -4,9 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:mime/mime.dart';
-import 'package:partyapp/Colors/colors.dart';
-import 'package:progress_dialog/progress_dialog.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dakibaa/Colors/colors.dart';
+import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import '../../rest_api/ApiList.dart';
 import '../../image_picker_handler.dart';
@@ -546,7 +545,7 @@ class _SignupPageState extends State<SignupPage>
       String deviceToken,
       File? image) async {
     print("$username$phone$gender$dob$email$password$deviceToken");
-    pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
+    pr = new ProgressDialog(context: context, );
     pr.show();
 
     final imageUploadRequest =
@@ -574,7 +573,7 @@ class _SignupPageState extends State<SignupPage>
       var parsedJson = json.decode(response.body);
       print("Status = " + parsedJson['status']);
       if (parsedJson['status'] == "1") {
-        pr.hide();
+        pr.close();
         /* Toast.show("" + parsedJson['message'], context,
             duration: Toast.lengthLong, gravity: Toast.bottom,);*/
         _onChanged(parsedJson['message'], phone);
@@ -583,7 +582,7 @@ class _SignupPageState extends State<SignupPage>
           MaterialPageRoute(builder: (context) => OtpScreen(type: 'register')),
         );
       } else {
-        pr.hide();
+        pr.close();
         Toast.show("" + parsedJson['message'],
             duration: Toast.lengthLong, gravity: Toast.bottom,);
         /*Navigator.push(

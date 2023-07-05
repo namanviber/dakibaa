@@ -2,15 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:partyapp/Colors/colors.dart';
-import 'package:partyapp/app_screens/payment_screens/Thankyou_screen.dart';
-import 'package:partyapp/number_of_person.dart';
-import 'package:partyapp/models/paytm_model.dart';
-import 'package:partyapp/paytm_presenter.dart';
-import 'package:partyapp/app_screens/payment_screens/tnxfailScreen.dart';
+import 'package:dakibaa/Colors/colors.dart';
+import 'package:dakibaa/app_screens/payment_screens/Thankyou_screen.dart';
+import 'package:dakibaa/number_of_person.dart';
+import 'package:dakibaa/models/paytm_model.dart';
+import 'package:dakibaa/paytm_presenter.dart';
+import 'package:dakibaa/app_screens/payment_screens/tnxfailScreen.dart';
 import 'package:paytm/paytm.dart';
-import 'package:progress_dialog/progress_dialog.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:shared_preferences/shared_preferences.dart';
 import 'common/constant.dart';
 class Paytmscreen extends StatefulWidget {
   @override
@@ -239,7 +238,7 @@ class _PaytmscreenState extends State<Paytmscreen>implements PaytmModelContract 
   }
 
   void generateTxnToken(int mode) async {
-    pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
+    pr = new ProgressDialog(context: context, );
     pr.show();
     setState(() {
       loading = true;
@@ -287,17 +286,17 @@ class _PaytmscreenState extends State<Paytmscreen>implements PaytmModelContract 
           print("Value is ");
           print(value);
           if(value['error']){
-            pr.hide();
+            pr.close();
             payment_mesg = value['errorMessage'];
           }else{
             if(value['response']!=null){
               if(value['response']['RESPMSG']=='Txn Success'){
-                pr.hide();
+                pr.close();
                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) =>
                     ThankyouScreen()));
                 _presenter.getpaytm(value['response']['ORDERID'], value['response']['BANKNAME'], value['response']['TXNID'], id);
               }else{
-                pr.hide();
+                pr.close();
                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) =>
                     FailScreen()));
               }
@@ -313,7 +312,7 @@ class _PaytmscreenState extends State<Paytmscreen>implements PaytmModelContract 
         });
       });
     } catch (e) {
-      pr.hide();
+      pr.close();
       print(e);
     }
   }

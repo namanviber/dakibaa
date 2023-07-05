@@ -2,9 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:partyapp/Colors/colors.dart';
-import 'package:progress_dialog/progress_dialog.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dakibaa/Colors/colors.dart';
+import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'package:http/http.dart' as http;
 import 'rest_api/ApiList.dart';
@@ -58,7 +57,7 @@ class _ChangePassword extends State<ChangePassword> {
               FocusScope.of(context).requestFocus(new FocusNode());
             },
             child:Container(
-              height: MediaQuery.of(context).size.height/1.04,
+              height: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
                   gradient: RadialGradient(
 
@@ -399,7 +398,7 @@ class _ChangePassword extends State<ChangePassword> {
     print(id.toString());
     print(oldPasswordController.text);
     print(passwordController.text);
-    pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
+    pr = new ProgressDialog(context: context, );
     if(ChangePasswordValidation()){
       pr.show();
       final response = await http.post(Uri.parse(APIS.changePassword),
@@ -412,14 +411,14 @@ class _ChangePassword extends State<ChangePassword> {
       value = parsedJson['data'];
       print("Status = " + parsedJson['status']);
       if (parsedJson['status'] == "1") {
-        pr.hide();
+        pr.close();
         Toast.show("" + parsedJson['message'],
             duration: Toast.lengthLong, gravity: Toast.bottom,);
         //_onChanged(value);
         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
             LoginPage()), (Route<dynamic> route) => false);
       } else {
-        pr.hide();
+        pr.close();
         Toast.show("" + parsedJson['message'],
             duration: Toast.lengthLong, gravity: Toast.bottom,);
 

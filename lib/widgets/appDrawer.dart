@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:partyapp/Colors/colors.dart';
-import 'package:partyapp/app_screens/drawer_navigation_screens/ContactUs.dart';
-import 'package:partyapp/app_screens/drawer_navigation_screens/Privacy.dart';
-import 'package:partyapp/app_screens/drawer_navigation_screens/TermsCon.dart';
-import 'package:partyapp/about_dakibaa.dart';
-import 'package:partyapp/app_screens/drawer_navigation_screens/about_us.dart';
-import 'package:partyapp/change_password.dart';
-import 'package:partyapp/app_screens/drawer_navigation_screens/dakibaa_services.dart';
-import 'package:partyapp/app_screens/drawer_navigation_screens/faq_screen.dart';
-import 'package:partyapp/orderhistoy.dart';
-import 'package:partyapp/profile_update.dart';
+import 'package:dakibaa/Colors/colors.dart';
+import 'package:dakibaa/app_screens/drawer_navigation_screens/ContactUs.dart';
+import 'package:dakibaa/app_screens/drawer_navigation_screens/Privacy.dart';
+import 'package:dakibaa/app_screens/drawer_navigation_screens/TermsCon.dart';
+import 'package:dakibaa/about_dakibaa.dart';
+import 'package:dakibaa/app_screens/drawer_navigation_screens/about_us.dart';
+import 'package:dakibaa/change_password.dart';
+import 'package:dakibaa/app_screens/drawer_navigation_screens/dakibaa_services.dart';
+import 'package:dakibaa/app_screens/drawer_navigation_screens/faq_screen.dart';
+import 'package:dakibaa/orderhistoy.dart';
+import 'package:dakibaa/profile_update.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../common/constant.dart';
 import '../app_screens/drawer_navigation_screens/gallery.dart';
@@ -22,7 +22,8 @@ class AppDrawer extends StatefulWidget {
 }
 
 class _AppDrawerState extends State<AppDrawer> {
-  bool? checkValue;
+  bool checkValue = false;
+  bool isguest = false;
   var name, email, id, gender, mobile, noperson, phone, dob;
 
   TextStyle listText = TextStyle(
@@ -34,13 +35,14 @@ class _AppDrawerState extends State<AppDrawer> {
   getCredential() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
-      checkValue = sharedPreferences.getBool("check");
+      checkValue = sharedPreferences.getBool("check") ?? false;
 
       if (checkValue == null || checkValue == false) {
         sharedPreferences.clear();
         sharedPreferences.setBool("check", false);
         checkValue = false;
       } else {
+        isguest = sharedPreferences.getBool("isguest") ?? false;
         name = sharedPreferences.getString("name");
         id = sharedPreferences.getString("id");
         gender = sharedPreferences.getString("gender");
@@ -68,14 +70,14 @@ class _AppDrawerState extends State<AppDrawer> {
               height: 150,
               child: Padding(
                 padding: const EdgeInsets.only(top: 20),
-                child: (checkValue!)
+                child: (checkValue)
                     ? Row(
                         children: [
                           Column(
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(top: 20),
-                                child: new Container(
+                                child: Container(
                                     width: 100,
                                     height: 100,
                                     decoration: BoxDecoration(
@@ -94,8 +96,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                                 fit: BoxFit.cover,
                                               )
                                             : Image.network(
-                                                "http://partyapp.v2infotech.net/resources/" +
-                                                    profile_pic!,
+                                                "http://partyapp.v2infotech.net/resources/${profile_pic!}",
                                                 fit: BoxFit.cover))),
                               ),
                             ],
@@ -112,10 +113,10 @@ class _AppDrawerState extends State<AppDrawer> {
                                               10.5
                                           : MediaQuery.of(context).size.height /
                                               13),
-                                  child: new Container(
+                                  child: Container(
                                     child: Center(
-                                      child: new Container(
-                                        child: new Text(
+                                      child: Container(
+                                        child: Text(
                                           name == null ? "Guest Login" : "name",
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
@@ -129,10 +130,10 @@ class _AppDrawerState extends State<AppDrawer> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 5),
-                                  child: new Container(
+                                  child: Container(
                                     child: Center(
-                                      child: new Container(
-                                        child: new Text(
+                                      child: Container(
+                                        child: Text(
                                           email == null ? "" : email,
                                           style: TextStyle(
                                               color: AppTheme().color_white,
@@ -181,7 +182,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   MaterialPageRoute(builder: (context) => AboutDakibaa()));
             },
           ),
-          (checkValue!)
+          (checkValue && isguest)
               ? ListTile(
                   title: Text("Profile", style: listText),
                   leading: Padding(
@@ -199,7 +200,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   },
                 )
               : SizedBox(),
-          (checkValue!)
+          (checkValue&& isguest)
               ? ListTile(
                   title: Text("Change Password", style: listText),
                   leading: Padding(
@@ -274,7 +275,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   context, MaterialPageRoute(builder: (context) => Gallery()));
             },
           ),
-          (checkValue!)
+          (checkValue)
               ? ListTile(
                   title: Text("Order History",
                       style: TextStyle(
@@ -342,7 +343,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   context, MaterialPageRoute(builder: (context) => AboutUs()));
             },
           ),
-          (checkValue!)
+          (checkValue)
               ? ListTile(
                   title: Text("Logout",
                       style: TextStyle(
@@ -373,29 +374,29 @@ class _AppDrawerState extends State<AppDrawer> {
       context: context,
       builder: (BuildContext context) {
         return Padding(
-          padding: new EdgeInsets.only(
+          padding: EdgeInsets.only(
               top: MediaQuery.of(context).size.height / 3,
               bottom: MediaQuery.of(context).size.height / 3),
           child: AlertDialog(
             backgroundColor: AppTheme().color_red,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10))),
-            content: new Container(
-                child: new Center(
-                    child: new Column(
+            content: Container(
+                child: Center(
+                    child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                new Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    new Container(
+                    Container(
                         padding: EdgeInsets.only(top: 0),
                         width: 200,
-                        child: new Center(
-                          child: new Text(
+                        child: Center(
+                          child: Text(
                             mesg,
-                            style: new TextStyle(
-                                color: new AppTheme().color_white,
+                            style: TextStyle(
+                                color: AppTheme().color_white,
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "Montserrat-SemiBold"),
@@ -403,15 +404,15 @@ class _AppDrawerState extends State<AppDrawer> {
                         ))
                   ],
                 ),
-                new Padding(padding: EdgeInsets.only(top: 20)),
-                new Row(
+                Padding(padding: EdgeInsets.only(top: 20)),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    new InkWell(
+                    InkWell(
                       onTap: () {
                         Navigator.of(context).pop();
                       },
-                      child: new Container(
+                      child: Container(
                         width: 100,
                         height: 30,
                         decoration: BoxDecoration(
@@ -427,12 +428,12 @@ class _AppDrawerState extends State<AppDrawer> {
                         ),
                       ),
                     ),
-                    new Padding(padding: EdgeInsets.only(left: 10)),
-                    new InkWell(
+                    Padding(padding: EdgeInsets.only(left: 10)),
+                    InkWell(
                       onTap: () {
                         logOut();
                       },
-                      child: new Container(
+                      child: Container(
                         width: 100,
                         height: 30,
                         decoration: BoxDecoration(

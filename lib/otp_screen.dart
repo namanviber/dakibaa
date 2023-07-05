@@ -5,11 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:partyapp/Colors/colors.dart';
-import 'package:partyapp/home_page.dart';
-import 'package:partyapp/number_of_person.dart';
-import 'package:progress_dialog/progress_dialog.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dakibaa/Colors/colors.dart';
+import 'package:dakibaa/home_page.dart';
+import 'package:dakibaa/number_of_person.dart';
+import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:sms/sms.dart';
 import 'package:toast/toast.dart';
 import 'package:http/http.dart' as http;
@@ -422,7 +421,7 @@ class Otp extends State<OtpScreen> {
 
   Future<Map<String, dynamic>> sendOtp(String otp) async {
     print(otp);
-    pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
+    pr = new ProgressDialog(context: context, );
     pr.show();
     String myUrl = "$baseUrl/party/User/otpAuth";
     final response = await http.post(Uri.parse(myUrl), headers: {
@@ -438,7 +437,7 @@ class Otp extends State<OtpScreen> {
 
     print("status = " + parsedJson['status']);
     if (parsedJson['status'] == "1") {
-      pr.hide();
+      pr.close();
       value = parsedJson['data'];
 /*
       Toast.show("" + parsedJson['message'], context,
@@ -463,7 +462,7 @@ class Otp extends State<OtpScreen> {
         MaterialPageRoute(builder: (context) => HomePage()),
       );*/
     } else {
-      pr.hide();
+      pr.close();
       Toast.show("" + parsedJson['message'],
           duration: Toast.lengthLong, gravity: Toast.bottom,);
     }
@@ -474,7 +473,7 @@ class Otp extends State<OtpScreen> {
     sharedPreferences = await SharedPreferences.getInstance();
     num = sharedPreferences.getString("number");
     print(num);
-    pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
+    pr = new ProgressDialog(context: context, );
     pr.show();
     String myUrl = "$baseUrl/party/User/resendOtp";
     final response = await http.post(Uri.parse(myUrl),
@@ -484,14 +483,14 @@ class Otp extends State<OtpScreen> {
     value = parsedJson['data'];
     print("status = " + parsedJson['status']);
     if (parsedJson['status'] == "1") {
-      pr.hide();
+      pr.close();
       // temp = 1;
       /* Toast.show("" + parsedJson['message'], context,
           duration: Toast.lengthLong, gravity: Toast.bottom,);*/
       resendotp = parsedJson['message'];
       otp1 = resendotp.split(' ')[3].split('').reversed.join();
     } else {
-      pr.hide();
+      pr.close();
       Toast.show("" + parsedJson['message'],
           duration: Toast.lengthLong, gravity: Toast.bottom,);
     }

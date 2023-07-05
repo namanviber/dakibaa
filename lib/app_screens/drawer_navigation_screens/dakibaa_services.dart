@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:partyapp/Colors/colors.dart';
+import 'package:dakibaa/Colors/colors.dart';
 
 class DakibaaServices extends StatefulWidget {
   const DakibaaServices({super.key});

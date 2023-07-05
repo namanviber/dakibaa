@@ -1,5 +1,5 @@
-import 'package:partyapp/rest_api/rest_api.dart';
-import 'package:partyapp/models/services_model.dart';
+import 'package:dakibaa/rest_api/rest_api.dart';
+import 'package:dakibaa/models/services_model.dart';
 
 abstract class ServicesModelContract {
   void onServicesModelSuccess(ServicesModel response);

@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/dakibaa.iml" filepath="$PROJECT_DIR$/.idea/dakibaa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dakibaa.iml" filepath="$PROJECT_DIR$/dakibaa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/dakibaa_android.iml" filepath="$PROJECT_DIR$/android/dakibaa_android.iml" />
     </modules>
   </component>
 </project>

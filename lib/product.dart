@@ -3,9 +3,8 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:partyapp/models/ProductModel.dart';
-import 'package:progress_dialog/progress_dialog.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dakibaa/models/ProductModel.dart';
+import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 
 import 'rest_api/ApiList.dart';
@@ -52,7 +51,7 @@ class Product extends State<ProductScreen> {
       //print(data['Id'].toString());
     sharedPreferences = await SharedPreferences.getInstance();
     id = sharedPreferences.getString("id");
-    pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
+    pr = new ProgressDialog(context: context, );
     pr.show();
     // print(token);
     final response = await http.post(Uri.parse(APIS.getProduct),
@@ -66,7 +65,7 @@ class Product extends State<ProductScreen> {
 
   /*  print("Status = " + parsedJson['status']);*/
     if (parsedJson['status'] == "1") {
-      pr.hide();
+      pr.close();
       if(mounted) {
         setState(() {
           for (int i = 0; i < value!["data"].length; i++) {
@@ -132,7 +131,7 @@ class Product extends State<ProductScreen> {
 
 
     } else {
-      pr.hide();
+      pr.close();
       Toast.show("" + parsedJson['message'],
           duration: Toast.lengthShort, gravity: Toast.bottom,);
 
@@ -463,7 +462,7 @@ class Product extends State<ProductScreen> {
     /* print(productId.toString());
   print(id);
   print(counter);*/
-    // pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
+    // pr = new ProgressDialog(context, );
     // pr.show();
     // print(token);
     final response = await http.post(Uri.parse(APIS.addPackageCount),

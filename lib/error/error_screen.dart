@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:partyapp/Colors/colors.dart';
 
 Widget getErrorWidget(BuildContext context, FlutterErrorDetails error) {
   return Center(

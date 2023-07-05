@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:partyapp/Colors/colors.dart';
-import 'package:partyapp/app_screens/authorization_screens/login_pagenew.dart';
-import 'package:partyapp/number_of_person.dart';
-import 'package:partyapp/widgets/appDrawer.dart';
+import 'package:dakibaa/Colors/colors.dart';
+import 'package:dakibaa/app_screens/authorization_screens/login_pagenew.dart';
+import 'package:dakibaa/number_of_person.dart';
+import 'package:dakibaa/widgets/appDrawer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'common/constant.dart';
 
@@ -26,7 +26,7 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
   getCredential() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
-      checkValue = sharedPreferences.getBool("check");
+      checkValue = sharedPreferences.getBool("check") ?? false;
       if (checkValue == null || checkValue == false) {
         sharedPreferences.clear();
         sharedPreferences.setBool("check", false);

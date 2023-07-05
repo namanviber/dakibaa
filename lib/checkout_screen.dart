@@ -6,12 +6,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:partyapp/Colors/colors.dart';
-import 'package:partyapp/common/constant.dart';
-import 'package:partyapp/number_of_person.dart';
-import 'package:partyapp/paytm_screen.dart';
-import 'package:progress_dialog/progress_dialog.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dakibaa/Colors/colors.dart';
+import 'package:dakibaa/common/constant.dart';
+import 'package:dakibaa/number_of_person.dart';
+import 'package:dakibaa/paytm_screen.dart';
+import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'package:http/http.dart' as http;
 import 'rest_api/ApiList.dart';
@@ -526,7 +525,7 @@ class _CheckOutScreen extends State<CheckOutScreen> {
   }
   Future<Map<String, dynamic>> getData() async {
     //  print(myController1.text);
-    pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
+    pr = new ProgressDialog(context: context, );
     pr.show();
     // print(token);
   /*  Map<String, dynamic> body = {
@@ -558,7 +557,7 @@ class _CheckOutScreen extends State<CheckOutScreen> {
     value = parsedJson['data'];
     print("Status = " + parsedJson['status']);
     if (parsedJson['status'] == "1") {
-      pr.hide();
+      pr.close();
       setState(() {
         id_com= id.toString();
        // _onChanged(true, value);
@@ -571,7 +570,7 @@ class _CheckOutScreen extends State<CheckOutScreen> {
       Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
           Paytmscreen()));
     } else {
-      pr.hide();
+      pr.close();
       Toast.show("" + parsedJson['message'],
           duration: Toast.lengthShort, gravity: Toast.bottom,);
 

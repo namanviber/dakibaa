@@ -14,16 +14,25 @@ class ImagePickerHandler {
 
   ImagePickerHandler(this._listener, this._controller);
 
- /* openCamera() async {
+  /* openCamera() async {
     imagePicker.dismissDialog();
     var image = await ImagePicker.pickImage(source: ImageSource.camera);
     _listener.userImage(image);
   }*/
 
+  // openGallery() async {
+  //   imagePicker.dismissDialog();
+  //   var image = await ImagePicker.platform.pickImage(source: ImageSource.gallery);
+  //   if (image != null ){
+  //     _listener.userImage(File(image.path));
+  //   }
+  // }
   openGallery() async {
-    imagePicker.dismissDialog();
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-    _listener.userImage(image);
+    await ImagePicker().pickImage(source: ImageSource.gallery).then((value) {
+      if (value != null) {
+        _listener.userImage(File(value.path));
+      }
+    });
   }
 
   void init() {

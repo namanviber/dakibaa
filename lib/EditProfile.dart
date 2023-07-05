@@ -1,9 +1,8 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:partyapp/profile_update.dart';
+import 'profile_update.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:toast/toast.dart';
 import 'image_picker_handler.dart';
 import 'app_screens/authorization_screens/login_pagenew.dart';
 

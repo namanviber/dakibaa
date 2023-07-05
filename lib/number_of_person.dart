@@ -1,24 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:partyapp/Colors/colors.dart';
-import 'package:partyapp/app_screens/drawer_navigation_screens/ContactUs.dart';
-import 'package:partyapp/app_screens/drawer_navigation_screens/Privacy.dart';
-import 'package:partyapp/Services.dart';
-import 'package:partyapp/app_screens/drawer_navigation_screens/TermsCon.dart';
-import 'package:partyapp/about_dakibaa.dart';
-import 'package:partyapp/app_screens/drawer_navigation_screens/about_us.dart';
-import 'package:partyapp/common/constant.dart';
-import 'package:partyapp/app_screens/drawer_navigation_screens/dakibaa_services.dart';
-import 'package:partyapp/app_screens/drawer_navigation_screens/faq_screen.dart';
-import 'package:partyapp/app_screens/drawer_navigation_screens/gallery.dart';
-import 'package:partyapp/app_screens/authorization_screens/login_pagenew.dart';
-import 'package:partyapp/orderhistoy.dart';
-import 'package:partyapp/profile_update.dart';
-import 'package:partyapp/models/services_model.dart';
-import 'package:partyapp/utils/services_presenter.dart';
-import 'package:partyapp/widgets/appDrawer.dart';
-import 'package:progress_dialog/progress_dialog.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'change_password.dart';
+import 'package:dakibaa/Colors/colors.dart';
+import 'package:dakibaa/Services.dart';
+import 'package:dakibaa/common/constant.dart';
+import 'package:dakibaa/models/services_model.dart';
+import 'package:dakibaa/utils/services_presenter.dart';
+import 'package:dakibaa/widgets/appDrawer.dart';
 
 class Number_of_Person extends StatefulWidget {
   @override
@@ -257,7 +243,7 @@ class _Number_of_PersonState extends State<Number_of_Person>
   @override
   void onServicesModelError(String errorTxt) {
     // TODO: implement onServicesModelError
-    pr.hide();
+    pr.close();
     print("services error :  " + errorTxt);
   }
 
@@ -265,7 +251,7 @@ class _Number_of_PersonState extends State<Number_of_Person>
   void onServicesModelSuccess(ServicesModel response) {
     // TODO: implement onServicesModelSuccess
     if (response != null) {
-      pr.hide();
+      pr.close();
       setState(() {
         SERVICESRESPONSE = response;
         SERVICES_LIST = SERVICESRESPONSE.servicesModel_list;

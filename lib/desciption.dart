@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:partyapp/Colors/colors.dart';
-import 'package:partyapp/common/constant.dart';
+import 'package:dakibaa/Colors/colors.dart';
+import 'package:dakibaa/common/constant.dart';
 
 class ItemDescription extends StatefulWidget {
   @override

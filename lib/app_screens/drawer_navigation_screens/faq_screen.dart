@@ -2,9 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:partyapp/Colors/colors.dart';
-import 'package:progress_dialog/progress_dialog.dart';
-import 'package:http/http.dart' as http;
+import 'package:dakibaa/Colors/colors.dart';
+import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:http/http.dart' as http;
 import 'package:shimmer/shimmer.dart';
 import 'package:toast/toast.dart';
 

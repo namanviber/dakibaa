@@ -2,9 +2,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:partyapp/Colors/colors.dart';
-import 'package:progress_dialog/progress_dialog.dart';
-import 'package:toast/toast.dart';
+import 'package:dakibaa/Colors/colors.dart';
+import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:toast/toast.dart';
 import 'package:http/http.dart' as http;
 
 import 'rest_api/ApiList.dart';
@@ -290,7 +289,7 @@ bool passwordVisible1=true;
   Future<Map<String, dynamic>> getData() async {
       print(new_PasswordController.text);
       print(number);
-    pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
+    pr = new ProgressDialog(context: context, );
     pr.show();
     // print(token);
     final response = await http.post(Uri.parse(APIS.forgetPassword),
@@ -302,7 +301,7 @@ bool passwordVisible1=true;
     value = parsedJson['data'];
     print("Status = " + parsedJson['status']);
     if (parsedJson['status'] == "1") {
-      pr.hide();
+      pr.close();
    /*   Toast.show("" + parsedJson['message'], context,
           duration: Toast.lengthLong, gravity: Toast.bottom,);*/
       //_onChanged(value);
@@ -311,7 +310,7 @@ bool passwordVisible1=true;
         MaterialPageRoute(builder: (context) => OtpScreen(type:'forget')),
       );
     } else {
-      pr.hide();
+      pr.close();
       Toast.show("" + parsedJson['message'],
           duration: Toast.lengthLong, gravity: Toast.bottom,);
 

@@ -1,19 +1,18 @@
 import 'dart:convert';
-import 'package:partyapp/Colors/colors.dart';
-import 'package:partyapp/common/shared_preferences.dart';
-import 'package:partyapp/network/network.dart';
-import 'package:partyapp/number_of_person.dart';
-import 'package:partyapp/app_screens/authorization_screens/signup_pagenew.dart';
+import 'package:dakibaa/Colors/colors.dart';
+import 'package:dakibaa/common/shared_preferences.dart';
+import 'package:dakibaa/network/network.dart';
+import 'package:dakibaa/number_of_person.dart';
+import 'package:dakibaa/app_screens/authorization_screens/signup_pagenew.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:progress_dialog/progress_dialog.dart';
-import 'package:http/http.dart' as http;
+import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:http/http.dart' as http;
 import '../../rest_api/ApiList.dart';
 import '../../Services.dart';
 import '../../common/constant.dart';
-import '../../forget_password.dart';
+import 'forget_password.dart';
 import '../../home_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -241,16 +240,16 @@ class _LoginPageState extends State<LoginPage> {
                   child: GestureDetector(
                     onTap: () {
                       setGuest();
-                      pr = new ProgressDialog(context,
-                          type: ProgressDialogType.Normal);
-                      pr.show();
+                      pr = new ProgressDialog(context: context,);
+                      pr.show(msg: "Singing in...");
                       NetworkConnection.check().then((intenet) async {
+                        print(intenet);
                         if (intenet != null && intenet) {
-                          pr.hide();
+                          pr.close();
                           Navigator.of(context).push(
                               MaterialPageRoute(builder: (context) => Number_of_Person()));
                         } else {
-                          pr.hide();
+                          pr.close();
                           Navigator.push(
                               context, MaterialPageRoute(builder: (context) => InternetConnection()));
                         }
@@ -297,7 +296,7 @@ class _LoginPageState extends State<LoginPage> {
   var returnData;
 
   Future<Map<String, dynamic>> getData() async {
-    pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
+    pr = new ProgressDialog(context: context, );
     if (SignupValidation()) {
       NetworkConnection.check().then((intenet) async {
         if (intenet != null && intenet) {
@@ -313,13 +312,14 @@ class _LoginPageState extends State<LoginPage> {
           value = parsedJson['data'];
           print("Status = " + parsedJson['status']);
           if (parsedJson['status'] == "1") {
-            pr.hide();
+            pr.close();
             new SharedPreferencesClass().setloginstatus(true);
             sharedPreferences = await SharedPreferences.getInstance();
             if (mounted) {
               setState(() {
                 _onChanged(true, value);
                 sharedPreferences.setString("email", value!["Mobile"]);
+                sharedPreferences.setBool("isguest", false);
               });
             }
             Toast.show("" + parsedJson['message'],
@@ -330,7 +330,7 @@ class _LoginPageState extends State<LoginPage> {
                 MaterialPageRoute(builder: (context) => Number_of_Person()),
                 (Route<dynamic> route) => false);
           } else {
-            pr.hide();
+            pr.close();
             Toast.show("" + parsedJson['message'],
                 duration: Toast.lengthShort, gravity: Toast.bottom,);
           }
@@ -368,6 +368,7 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
       sharedPreferences.clear();
       sharedPreferences.setBool("check", true);
+      sharedPreferences.setBool("isguest", true);
       sharedPreferences.setString("id", "");
       loginstatus = "guest";
     });

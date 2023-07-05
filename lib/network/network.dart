@@ -1,6 +1,6 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
-import 'package:partyapp/Colors/colors.dart';
+import 'package:dakibaa/Colors/colors.dart';
 class NetworkConnection{
 
   static Future<bool> check()async{

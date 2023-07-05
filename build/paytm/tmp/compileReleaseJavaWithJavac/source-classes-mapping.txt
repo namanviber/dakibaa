@@ -1,5 +1,0 @@
-in/appyflow/paytm/PaytmPlugin.java
- in.appyflow.paytm.PaytmPlugin
- in.appyflow.paytm.PaytmPlugin$1
-in/appyflow/paytm/BuildConfig.java
- in.appyflow.paytm.BuildConfig

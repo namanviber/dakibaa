@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:partyapp/number_of_person.dart';
+import 'package:dakibaa/number_of_person.dart';
 
 import '../../Colors/colors.dart';
 import '../../common/constant.dart';

@@ -3,9 +3,8 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
-import 'package:partyapp/Colors/colors.dart';
-import 'package:progress_dialog/progress_dialog.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dakibaa/Colors/colors.dart';
+import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'rest_api/ApiList.dart';
 import 'home_page.dart';
@@ -668,7 +667,7 @@ class _ProfileUpdate extends State<ProfileUpdate>
   Future<Map<String, dynamic>> updateProfile(String username, String phone,
       String gender,String dob,String email,String dev,String? id, File? image) async {
     print("$username$phone$gender$dob$email$password$id");
-    pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
+    pr = new ProgressDialog(context: context, );
     pr.show();
     final imageUploadRequest =
     http.MultipartRequest('POST', Uri.parse(APIS.updateProfile));
@@ -710,7 +709,7 @@ class _ProfileUpdate extends State<ProfileUpdate>
       value = parsedJson['data'];
       print("Status = " + parsedJson['status']);
       if (parsedJson['status'] == "1") {
-        pr.hide();
+        pr.close();
         Toast.show("" + parsedJson['message'],
             duration: Toast.lengthShort, gravity: Toast.bottom,);
         setState(() {
@@ -721,7 +720,7 @@ class _ProfileUpdate extends State<ProfileUpdate>
           MaterialPageRoute(builder: (context) => HomePage()),
         );
       } else {
-        pr.hide();
+        pr.close();
         Toast.show("" + parsedJson['message'],
             duration: Toast.lengthShort, gravity: Toast.bottom,);
 

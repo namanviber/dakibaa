@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:partyapp/rest_api/ApiList.dart';
-import 'package:partyapp/models/paytm_model.dart';
-import 'package:partyapp/models/serviceModel.dart';
-import 'package:partyapp/models/services_model.dart';
-import 'package:partyapp/utils/utils.dart';
+import 'package:dakibaa/rest_api/ApiList.dart';
+import 'package:dakibaa/models/paytm_model.dart';
+import 'package:dakibaa/models/serviceModel.dart';
+import 'package:dakibaa/models/services_model.dart';
+import 'package:dakibaa/utils/utils.dart';
 import 'package:http/http.dart' as http;
 
 class RestDataSource {

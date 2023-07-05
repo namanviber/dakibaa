@@ -1,12 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/services.dart';
-import 'package:partyapp/Colors/colors.dart';
+import 'package:dakibaa/Colors/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:progress_dialog/progress_dialog.dart';
-import 'package:http/http.dart' as http;
+import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:http/http.dart' as http;
 import 'package:toast/toast.dart';
 import '../../rest_api/ApiList.dart';
 import '../../home_page.dart';
@@ -39,7 +38,7 @@ class ContactUsPage extends State<ContactUs> {
 
   Future<Map<String, dynamic>> getData() async {
     //  print(myController1.text);
-    pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
+    pr = new ProgressDialog(context: context, );
     pr.show();
     // print(token);
     final response = await http.post(Uri.parse(APIS.addMessage),
@@ -52,7 +51,7 @@ class ContactUsPage extends State<ContactUs> {
     value = parsedJson['data'];
     print("Status = " + parsedJson['status']);
     if (parsedJson['status'] == "1") {
-      pr.hide();
+      pr.close();
       Toast.show("" + parsedJson['message'],
           duration: Toast.lengthShort, gravity: Toast.bottom,);
       //_onChanged(value);
@@ -61,7 +60,7 @@ class ContactUsPage extends State<ContactUs> {
         MaterialPageRoute(builder: (context) => HomePage()),
       );
     } else {
-      pr.hide();
+      pr.close();
       Toast.show("" + parsedJson['message'],
           duration: Toast.lengthShort, gravity: Toast.bottom,);
 

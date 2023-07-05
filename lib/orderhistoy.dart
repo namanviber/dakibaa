@@ -3,9 +3,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:partyapp/rest_api/ApiList.dart';
+import 'package:dakibaa/rest_api/ApiList.dart';
 import 'package:http/http.dart' as http;
-import 'package:partyapp/Colors/colors.dart';
+import 'package:dakibaa/Colors/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:toast/toast.dart';

@@ -1,4 +1,0 @@
-io/flutter/plugins/GeneratedPluginRegistrant.java
- io.flutter.plugins.GeneratedPluginRegistrant
-com/Party/partyapp/BuildConfig.java
- com.Party.partyapp.BuildConfig

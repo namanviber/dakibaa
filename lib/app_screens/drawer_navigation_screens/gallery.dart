@@ -55,13 +55,13 @@ class _GalleryState extends State<Gallery> {
   }
 
   void openCamera() async {
-    picture = await ImagePicker.pickImage(
+    picture = await ImagePicker.platform.pickImage(
       source: ImageSource.camera,
     );
   }
 
   void openGallery() async {
-    picture = await ImagePicker.pickImage(
+    picture = await ImagePicker.platform.pickImage(
       source: ImageSource.gallery,
     );
   }

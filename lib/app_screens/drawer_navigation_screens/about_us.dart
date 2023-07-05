@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:partyapp/Colors/colors.dart';
+import 'package:dakibaa/Colors/colors.dart';
 
 class AboutUs extends StatefulWidget {
   const AboutUs({super.key});
