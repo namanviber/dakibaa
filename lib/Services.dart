@@ -1,30 +1,16 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Colors/colors.dart';
-import 'app_screens/drawer_navigation_screens/ContactUs.dart';
-import 'EditProfile.dart';
-import 'app_screens/drawer_navigation_screens/Privacy.dart';
-import 'app_screens/drawer_navigation_screens/TermsCon.dart';
 import 'checkout_screen.dart';
 import 'package:dakibaa/desciption.dart';
-import 'package:dakibaa/app_screens/drawer_navigation_screens/faq_screen.dart';
-import 'package:dakibaa/app_screens/authorization_screens/login_pagenew.dart';
-import 'package:dakibaa/product.dart';
-import 'package:dakibaa/orderhistoy.dart';
 import 'package:dakibaa/models/product_model_services.dart';
-import 'package:dakibaa/profile_update.dart';
-import 'package:dakibaa/models/services_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:toast/toast.dart';
 import 'models/serviceModel.dart';
-import 'number_of_person.dart';
-
 import 'rest_api/ApiList.dart';
-import 'change_password.dart';
 import 'common/constant.dart';
 import 'widgets/appDrawer.dart';
 
@@ -59,20 +45,17 @@ class ServicesPage extends State<Services> {
     http.Response response = await http.get(Uri.parse(APIS.ProductDetails));
     var parsedJson = json.decode(response.body);
     data = json.decode(response.body);
-    print("Product List  :  " + data.toString());
     if (parsedJson["status"] == "1") {
       if (mounted) {
         setState(() {
           listData = data!["data"];
-          SERVICES_LIST = listData!.map((e) => ServiceModelNew.fromJson(e)).toList();
-          print(listData);
-          print(SERVICES_LIST);
+          SERVICES_LIST =
+              listData!.map((e) => ServiceModelNew.fromJson(e)).toList();
           _isProgressBarShown = false;
         });
       }
       hasData = true;
     }
-
   }
 
   @override
@@ -118,9 +101,9 @@ class ServicesPage extends State<Services> {
                 ],
               ),
               image: DecorationImage(
-                image: AssetImage("images/services_background.jpg"),
+                image: const AssetImage("images/services_background.jpg"),
                 fit: BoxFit.cover,
-                colorFilter: new ColorFilter.mode(
+                colorFilter: ColorFilter.mode(
                     Colors.black.withOpacity(0.3), BlendMode.dstATop),
               )),
           child: Column(
@@ -128,30 +111,30 @@ class ServicesPage extends State<Services> {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(top: 50),
-                child: new Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    new Expanded(
+                    Expanded(
                         flex: 1,
-                        child: new InkWell(
+                        child: InkWell(
                           onTap: () {
                             // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
                             //     Number_of_Person()), (Route<dynamic> route) => false);
                             Navigator.of(context).pop();
                             //_scaffoldKey.currentState.openDrawer();
                           },
-                          child: new Container(
+                          child: SizedBox(
                             height: 18,
-                            child: new Image.asset(
+                            child: Image.asset(
                               "images/back_button.png",
                             ),
                           ),
                         )),
                     //
 
-                    new Expanded(
+                    Expanded(
                       flex: 4,
-                      child: new Container(
+                      child: SizedBox(
                         height: 45,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 15, top: 10),
@@ -166,23 +149,27 @@ class ServicesPage extends State<Services> {
                         ),
                       ),
                     ),
-                    new Expanded(
+                    Expanded(
                       flex: 3,
                       child: Padding(
                           padding: const EdgeInsets.only(left: 20, right: 20),
-                          child: new InkWell(
+                          child: InkWell(
                             onTap: () {
                               if (totalamount == 0) {
                                 Toast.show(
-                                    "Please select any one product",
-                                    duration: Toast.lengthShort,
-                                    gravity: Toast.bottom,);
+                                  "Please select any one product",
+                                  duration: Toast.lengthShort,
+                                  gravity: Toast.bottom,
+                                );
                               } else {
                                 Navigator.push(
-                                    context, MaterialPageRoute(builder: (context) => CheckOutScreen()));
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            CheckOutScreen()));
                               }
                             },
-                            child: new Container(
+                            child: Container(
                                 decoration: BoxDecoration(
                                     color: AppTheme().color_red,
                                     borderRadius: BorderRadius.circular(50)),
@@ -199,134 +186,18 @@ class ServicesPage extends State<Services> {
                                 )),
                           )),
                     ),
-                    /*new Expanded(
-                        child:Padding(
-                          padding: const EdgeInsets.only(left:0,right: 0),
-                          child: new Container(
-                            margin: EdgeInsets.all(5),
-                            height: 45 ,
-                            decoration: BoxDecoration(
-                                color: AppTheme().color_white,
-                                borderRadius: BorderRadius.circular(5)
-                            ),
-                            child: new Image.asset("images/profile.png",),
-                          ),
-                        ))*/
                   ],
                 ),
               ),
-              /*   Padding(
-                  padding: const EdgeInsets.only(top: 20,left: 15,right: 30),
-                  child: new Row(
-                    children: [
-                      new Expanded(
-                        flex: 9,
-                        child: new Container(
-                          height: 45,
-                          decoration: BoxDecoration(
-                              color: AppTheme().color_white,
-                              borderRadius: BorderRadius.circular(7)
-                          ),
-                          child:  new Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: new Icon(Icons.search,size: 30,),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: new Text("Search",style: TextStyle(
-                                    color: Colors.grey[300],
-                                    fontSize: 18,
-                                    fontFamily: "Montserrat-SemiBold"
-                                ),),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(padding: EdgeInsets.only(left: 30)),
-                      new Expanded(
-                        child: new Container(
-                            height: 45,
-
-                            child:Icon(Icons.add_shopping_cart,color: AppTheme().color_white,size: 30,)
-                        ),
-                      ),
-                    ],
-                  )
-              ),*/
-
-              /* Container(
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15),
-                      child: Text(
-                        "SERVICES",
-                        style: TextStyle(
-                            fontSize: 25,
-                            color: AppTheme().color_white,
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 2),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                  ],
-                ),
-              ),*/
               SERVICES_LIST == null
-                  ? new Expanded(
-                      child: new ListView(
+                  ? Expanded(
+                      child: ListView(
                       shrinkWrap: true,
                       children: [itemLoading()],
                     ))
-                  /*Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Center(
-                        child: Container(
-                          margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: new Center(
-                              child: new Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 16.0, right: 16.0),
-                                  child: Center(
-                                    child: Container(
-                                      height: 80,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 16.0, right: 16.0),
-                                        child: Row(
-                                          children: <Widget>[
-                                            new CircularProgressIndicator(
-                                              backgroundColor: Colors.white,
-                                            ),
-                                            Text(
-                                              "    Loading...",
-                                              style: TextStyle(
-                                                  fontSize: 25,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.black),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ))),
-                        ),
-                      ),
-                    )*/
                   : Expanded(
                       child: GridView.builder(
                           shrinkWrap: true,
-                          //physics: NeverScrollableScrollPhysics(),
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
@@ -336,12 +207,11 @@ class ServicesPage extends State<Services> {
                                               780
                                           : MediaQuery.of(context).size.height /
                                               1000,
-                                  // childAspectRatio: (itemWidth / itemHeight/1.3),
                                   mainAxisSpacing: 22),
                           itemCount:
                               SERVICES_LIST == null ? 0 : SERVICES_LIST!.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return new InkWell(
+                            return InkWell(
                                 onTap: () {
                                   setState(() {
                                     titlename =
@@ -370,7 +240,6 @@ class ServicesPage extends State<Services> {
                                           .toString();
                                     }
 
-                                    print("Title Name " + titlename!);
                                   });
                                   Navigator.push(
                                     context,
@@ -384,7 +253,7 @@ class ServicesPage extends State<Services> {
                                   listData: SERVICES_LIST,
                                 ));
                           })),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               SERVICES_LIST == null
@@ -394,43 +263,47 @@ class ServicesPage extends State<Services> {
                       child: InkWell(
                         onTap: () {
                           if (totalamount == 0) {
-                            Toast.show("Please select any one product",
-                                duration: Toast.lengthShort,
-                                gravity: Toast.bottom,);
+                            Toast.show(
+                              "Please select any one product",
+                              duration: Toast.lengthShort,
+                              gravity: Toast.bottom,
+                            );
                           } else {
                             Navigator.push(
-                                context, MaterialPageRoute(builder: (context) => CheckOutScreen()));
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CheckOutScreen()));
                           }
                         },
-                        child: new Container(
+                        child: Container(
                           height: 45,
                           decoration: BoxDecoration(
                               color: AppTheme().color_red,
                               borderRadius: BorderRadius.circular(10)),
-                          child: new Row(
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              new Text(
+                              Text(
                                 "Total Amount",
                                 style: TextStyle(
                                     color: AppTheme().color_white,
                                     fontSize: 18,
                                     fontFamily: "Montserrat"),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 20,
                               ),
-                              new Text(
+                              Text(
                                 ":",
                                 style: TextStyle(
                                     color: AppTheme().color_white,
                                     fontSize: 18,
                                     fontFamily: "Montserrat"),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 20,
                               ),
-                              new Text(
+                              Text(
                                 totalamount.toString(),
                                 style: TextStyle(
                                     color: AppTheme().color_white,
@@ -445,7 +318,7 @@ class ServicesPage extends State<Services> {
                         ),
                       ),
                     ),
-              Padding(padding: EdgeInsets.only(top: 20))
+              const Padding(padding: EdgeInsets.only(top: 20))
             ],
           ),
         ),
@@ -454,33 +327,33 @@ class ServicesPage extends State<Services> {
   }
 
   Widget itemLoading() {
-    return new Padding(
-        padding: new EdgeInsets.only(top: 0.0),
+    return Padding(
+        padding: const EdgeInsets.only(top: 0.0),
         child: Shimmer.fromColors(
             baseColor: Colors.grey[300]!,
             highlightColor: Colors.grey[100]!,
-            child: new Column(
+            child: Column(
               children: [
-                new Row(
+                Row(
                   children: [
-                    new Expanded(
-                      child: new Padding(
-                        padding: new EdgeInsets.all(10.0),
-                        child: new Container(
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
                           height: 250.0,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                             color: Colors.white,
                           ),
                         ),
                       ),
                     ),
-                    new Expanded(
-                      child: new Padding(
-                        padding: new EdgeInsets.all(10.0),
-                        child: new Container(
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
                           height: 250.0,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                             color: Colors.white,
                           ),
@@ -489,26 +362,26 @@ class ServicesPage extends State<Services> {
                     ),
                   ],
                 ),
-                new Row(
+                Row(
                   children: [
-                    new Expanded(
-                      child: new Padding(
-                        padding: new EdgeInsets.all(10.0),
-                        child: new Container(
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
                           height: 250.0,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                             color: Colors.white,
                           ),
                         ),
                       ),
                     ),
-                    new Expanded(
-                      child: new Padding(
-                        padding: new EdgeInsets.all(10.0),
-                        child: new Container(
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
                           height: 250.0,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                             color: Colors.white,
                           ),
@@ -517,110 +390,26 @@ class ServicesPage extends State<Services> {
                     ),
                   ],
                 ),
-                new Row(
-                  children: [
-                    new Expanded(
-                      child: new Padding(
-                        padding: new EdgeInsets.all(10.0),
-                        child: new Container(
-                          height: 250.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                    new Expanded(
-                      child: new Padding(
-                        padding: new EdgeInsets.all(10.0),
-                        child: new Container(
-                          height: 250.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                new Row(
-                  children: [
-                    new Expanded(
-                      child: new Padding(
-                        padding: new EdgeInsets.all(10.0),
-                        child: new Container(
-                          height: 250.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                    new Expanded(
-                      child: new Padding(
-                        padding: new EdgeInsets.all(10.0),
-                        child: new Container(
-                          height: 250.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                new Row(
-                  children: [
-                    new Expanded(
-                      child: new Padding(
-                        padding: new EdgeInsets.all(10.0),
-                        child: new Container(
-                          height: 250.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                    new Expanded(
-                      child: new Padding(
-                        padding: new EdgeInsets.all(10.0),
-                        child: new Container(
-                          height: 250.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                )
               ],
             )));
   }
 
   Widget itemtotalLoading() {
-    return new Padding(
-        padding: new EdgeInsets.only(top: 0.0),
+    return Padding(
+        padding: const EdgeInsets.only(top: 0.0),
         child: Shimmer.fromColors(
             baseColor: Colors.grey[300]!,
             highlightColor: Colors.grey[100]!,
-            child: new Column(
+            child: Column(
               children: [
-                new Row(
+                Row(
                   children: [
-                    new Expanded(
-                      child: new Padding(
-                        padding: new EdgeInsets.all(10.0),
-                        child: new Container(
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
                           height: 45.0,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                             color: Colors.white,
                           ),
@@ -682,15 +471,13 @@ class _CounterState extends State<Counter> {
       totalamount = producttotal;
       if (widget.listData![widget.index!].id == 3) {
         totalamount_bev = totalamount + person_mult_price;
-        print("totalamount_bev :  " + totalamount_bev.toString());
       }
       if (widget.listData![widget.index!].id == 4) {
         totalamount_bev = totalamount_bev + person_mult_price;
         totalamount = totalamount_bev;
-        print("totalamountglas :  " + totalamount_bev.toString());
       }
       for (int i = 0; i < widget.listData!.length; i++) {
-        productModel = new ProductServicesModel(
+        productModel = ProductServicesModel(
           "",
           "",
           0,
@@ -707,7 +494,6 @@ class _CounterState extends State<Counter> {
         product.add(productModel);
       }
       jsons = jsonEncode(product.map((e) => e!.toJson()).toList());
-      print(jsons);
     } else if (person! <= 30) {
       for (int i = 0; i < widget.listData!.length; i++) {
         if (widget.listData![i].id == 1) {
@@ -720,15 +506,13 @@ class _CounterState extends State<Counter> {
       totalamount = producttotal;
       if (widget.listData![widget.index!].id == 3) {
         totalamount_bev = totalamount + person_mult_price;
-        print("totalamount_bev :  " + totalamount_bev.toString());
       }
       if (widget.listData![widget.index!].id == 4) {
         totalamount_bev = totalamount_bev + person_mult_price;
         totalamount = totalamount_bev;
-        print("totalamountglas :  " + totalamount_bev.toString());
       }
       for (int i = 0; i < widget.listData!.length; i++) {
-        productModel = new ProductServicesModel(
+        productModel = ProductServicesModel(
           "",
           "",
           0,
@@ -744,8 +528,7 @@ class _CounterState extends State<Counter> {
         product.add(productModel);
       }
       jsons = jsonEncode(product.map((e) => e!.toJson()).toList());
-      print(jsons);
-    } else if (person! <= 50) {
+     } else if (person! <= 50) {
       for (int i = 0; i < widget.listData!.length; i++) {
         if (widget.listData![i].id == 1) {
           producttotal += widget.listData![i].rate50!;
@@ -757,15 +540,13 @@ class _CounterState extends State<Counter> {
       totalamount = producttotal;
       if (widget.listData![widget.index!].id == 3) {
         totalamount_bev = totalamount + person_mult_price;
-        print("totalamount_bev :  " + totalamount_bev.toString());
       }
       if (widget.listData![widget.index!].id == 4) {
         totalamount_bev = totalamount_bev + person_mult_price;
         totalamount = totalamount_bev;
-        print("totalamountglas :  " + totalamount_bev.toString());
       }
       for (int i = 0; i < widget.listData!.length; i++) {
-        productModel = new ProductServicesModel(
+        productModel = ProductServicesModel(
           "",
           "",
           0,
@@ -781,7 +562,6 @@ class _CounterState extends State<Counter> {
         product.add(productModel);
       }
       jsons = jsonEncode(product.map((e) => e!.toJson()).toList());
-      print(jsons);
     } else if (person! <= 75) {
       for (int i = 0; i < widget.listData!.length; i++) {
         if (widget.listData![i].id == 1) {
@@ -794,15 +574,13 @@ class _CounterState extends State<Counter> {
       totalamount = producttotal;
       if (widget.listData![widget.index!].id == 3) {
         totalamount_bev = totalamount + person_mult_price;
-        print("totalamount_bev :  " + totalamount_bev.toString());
       }
       if (widget.listData![widget.index!].id == 4) {
         totalamount_bev = totalamount_bev + person_mult_price;
         totalamount = totalamount_bev;
-        print("totalamountglas :  " + totalamount_bev.toString());
       }
       for (int i = 0; i < widget.listData!.length; i++) {
-        productModel = new ProductServicesModel(
+        productModel = ProductServicesModel(
           "",
           "",
           0,
@@ -818,7 +596,6 @@ class _CounterState extends State<Counter> {
         product.add(productModel);
       }
       jsons = jsonEncode(product.map((e) => e!.toJson()).toList());
-      print(jsons);
     } else if (person! <= 1000) {
       for (int i = 0; i < widget.listData!.length; i++) {
         if (widget.listData![i].id == 1) {
@@ -831,15 +608,13 @@ class _CounterState extends State<Counter> {
       totalamount = producttotal;
       if (widget.listData![widget.index!].id == 3) {
         totalamount_bev = totalamount + person_mult_price;
-        print("totalamount_bev :  " + totalamount_bev.toString());
       }
       if (widget.listData![widget.index!].id == 4) {
         totalamount_bev = totalamount_bev + person_mult_price;
         totalamount = totalamount_bev;
-        print("totalamountglas :  " + totalamount_bev.toString());
       }
       for (int i = 0; i < widget.listData!.length; i++) {
-        productModel = new ProductServicesModel(
+        productModel = ProductServicesModel(
           "",
           "",
           0,
@@ -855,14 +630,13 @@ class _CounterState extends State<Counter> {
         product.add(productModel);
       }
       jsons = jsonEncode(product.map((e) => e!.toJson()).toList());
-      print(jsons);
     }
   }
 
   void addItemToList() {
     setState(() {
       if (product.isEmpty) {
-        productModel = new ProductServicesModel(
+        productModel = ProductServicesModel(
           "",
           "",
           0,
@@ -915,31 +689,7 @@ class _CounterState extends State<Counter> {
           }
           product[widget.index!]!.qyt = productModel!.qyt;
         }
-        /*else{
-          productModel = new ProductServicesModel(
-            "",
-            "",
-
-            0,
-          );
-          productModel.prod_id=widget.listData[widget.index]["id"].toString();
-          if(person<=15){
-            productModel.total=price;
-          }else if(person<=30){
-            productModel.total=price;
-          }else if(person<=50){
-            productModel.total=price;
-          }else if(person<=75){
-            productModel.total=price;
-          }else if(person<=1000){
-            productModel.total=price;
-          }
-          productModel.qyt=services;
-          product[widget.index].total=totalamount;
-          product[widget.index].qyt=productModel.qyt;
-        }*/
         jsons = jsonEncode(product.map((e) => e!.toJson()).toList());
-        print(jsons);
       }
     });
   }
@@ -949,84 +699,65 @@ class _CounterState extends State<Counter> {
       if (person! <= 15) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     " + totalamount.toString());
+
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         }
       } else if (person! <= 30) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         }
       } else if (person! <= 50) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         }
       } else if (person! <= 75) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         }
       } else if (person! <= 1000) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         }
       }
     } else if (checkedValue_2 == false) {
       if (person! <= 15) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     " + totalamount.toString());
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         }
       } else if (person! <= 30) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         }
       } else if (person! <= 50) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         }
       } else if (person! <= 75) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         }
       } else if (person! <= 1000) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         }
       }
     }
@@ -1037,84 +768,65 @@ class _CounterState extends State<Counter> {
       if (person! <= 15) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     " + totalamount.toString());
+
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         }
       } else if (person! <= 30) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         }
       } else if (person! <= 50) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         }
       } else if (person! <= 75) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         }
       } else if (person! <= 1000) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount - person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         }
       }
     } else if (checkedValue_1 == false) {
       if (person! <= 15) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     " + totalamount.toString());
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         }
       } else if (person! <= 30) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         }
       } else if (person! <= 50) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         }
       } else if (person! <= 75) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         }
       } else if (person! <= 1000) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount + person_mult_price;
-          print("person_mult_price:     " + person_mult_price.toString());
         }
       }
     }
@@ -1124,46 +836,46 @@ class _CounterState extends State<Counter> {
     if (person! <= 15) {
       if (widget.listData![widget.index!].id == 3) {
         person_mult_price = person! * widget.listData![widget.index!].rate15!;
-        print("person_mult_price:     " + totalamount.toString());
+
       } else if (widget.listData![widget.index!].id == 4) {
         person_mult_price = person! * widget.listData![widget.index!].rate15!;
-        print("person_mult_price:     " + person_mult_price.toString());
+        
       }
     }
     if (person! <= 30) {
       if (widget.listData![widget.index!].id == 3) {
         person_mult_price = person! * widget.listData![widget.index!].rate30!;
-        print("person_mult_price:     " + person_mult_price.toString());
+        
       } else if (widget.listData![widget.index!].id == 4) {
         person_mult_price = person! * widget.listData![widget.index!].rate30!;
-        print("person_mult_price:     " + person_mult_price.toString());
+        
       }
     }
     if (person! <= 50) {
       if (widget.listData![widget.index!].id == 3) {
         person_mult_price = person! * widget.listData![widget.index!].rate50!;
-        print("person_mult_price:     " + person_mult_price.toString());
+        
       } else if (widget.listData![widget.index!].id == 4) {
         person_mult_price = person! * widget.listData![widget.index!].rate50!;
-        print("person_mult_price:     " + person_mult_price.toString());
+        
       }
     }
     if (person! <= 75) {
       if (widget.listData![widget.index!].id == 3) {
         person_mult_price = person! * widget.listData![widget.index!].rate75!;
-        print("person_mult_price:     " + person_mult_price.toString());
+        
       } else if (widget.listData![widget.index!].id == 4) {
         person_mult_price = person! * widget.listData![widget.index!].rate75!;
-        print("person_mult_price:     " + person_mult_price.toString());
+        
       }
     }
     if (person! <= 1000) {
       if (widget.listData![widget.index!].id == 3) {
         person_mult_price = person! * widget.listData![widget.index!].rate100!;
-        print("person_mult_price:     " + person_mult_price.toString());
+        
       } else if (widget.listData![widget.index!].id == 4) {
         person_mult_price = person! * widget.listData![widget.index!].rate100!;
-        print("person_mult_price:     " + person_mult_price.toString());
+        
       }
     }
   }
@@ -1175,31 +887,31 @@ class _CounterState extends State<Counter> {
         price = services * widget.listData![widget.index!].rate15!;
         totalamount = totalamount + widget.listData![widget.index!].rate15!;
         producttotal = totalamount;
-        print("total  add : " + totalamount.toString());
+        
         addItemToList();
       } else if (person! <= 30) {
         price = services * widget.listData![widget.index!].rate30!;
         totalamount = totalamount + widget.listData![widget.index!].rate30!;
         producttotal = totalamount;
-        print("total  add : " + totalamount.toString());
+        
         addItemToList();
       } else if (person! <= 50) {
         price = services * widget.listData![widget.index!].rate50!;
         totalamount = totalamount + widget.listData![widget.index!].rate50!;
         producttotal = totalamount;
-        print("total  add : " + totalamount.toString());
+        
         addItemToList();
       } else if (person! <= 75) {
         price = services * widget.listData![widget.index!].rate75!;
         totalamount = totalamount + widget.listData![widget.index!].rate75!;
         producttotal = totalamount;
-        print("total  add : " + totalamount.toString());
+        
         addItemToList();
       } else if (person! <= 1000) {
         price = services * widget.listData![widget.index!].rate100!;
         totalamount = totalamount + widget.listData![widget.index!].rate100!;
         producttotal = totalamount;
-        print("total  add : " + totalamount.toString());
+        
         addItemToList();
       }
     });
@@ -1212,31 +924,31 @@ class _CounterState extends State<Counter> {
         price = services * widget.listData![widget.index!].rate15!;
         totalamount = totalamount - widget.listData![widget.index!].rate15!;
         producttotal = totalamount;
-        print("total minus : " + totalamount.toString());
+        
         addItemToList();
       } else if (person! <= 30) {
         price = services * widget.listData![widget.index!].rate30!;
         totalamount = totalamount - widget.listData![widget.index!].rate30!;
         producttotal = totalamount;
-        print("total minus : " + totalamount.toString());
+        
         addItemToList();
       } else if (person! <= 50) {
         price = services * widget.listData![widget.index!].rate50!;
         totalamount = totalamount - widget.listData![widget.index!].rate50!;
         producttotal = totalamount;
-        print("total minus : " + totalamount.toString());
+        
         addItemToList();
       } else if (person! <= 75) {
         price = services * widget.listData![widget.index!].rate75!;
         totalamount = totalamount - widget.listData![widget.index!].rate75!;
         producttotal = totalamount;
-        print("total minus : " + totalamount.toString());
+        
         addItemToList();
       } else if (person! <= 1000) {
         price = services * widget.listData![widget.index!].rate100!;
         totalamount = totalamount - widget.listData![widget.index!].rate100!;
         producttotal = totalamount;
-        print("total minus : " + totalamount.toString());
+
         addItemToList();
       }
     });
@@ -1245,62 +957,51 @@ class _CounterState extends State<Counter> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
-        left: 11,
-        right: 11,
-      ),
-      child: new Container(
-        decoration: new BoxDecoration(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Container(
+        decoration: const BoxDecoration(
             color: Colors.white,
-            borderRadius: new BorderRadius.only(
-              bottomRight: const Radius.circular(10.0),
-              topRight: const Radius.circular(10.0),
-              bottomLeft: const Radius.circular(10.0),
-              topLeft: const Radius.circular(10.0),
+            borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(10.0),
+              topRight: Radius.circular(10.0),
+              bottomLeft: Radius.circular(10.0),
+              topLeft: Radius.circular(10.0),
             ),
             boxShadow: [
               BoxShadow(
                   color: Colors.black, blurRadius: 3, offset: Offset(0, 5))
             ]),
-        child: new Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
+              padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10.0),
-                /*child: Image.network("http://partyapp.v2infotech.net/resources/" +
-                                              listData[index]["C_Pic"],fit: BoxFit.cover,
-                                          ),*/
                 child: Image.asset(
                   pic_list[widget.index!],
                   fit: BoxFit.cover,
                 ),
               ),
             ),
-            new Row(
+            Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 10, left: 10),
-                  child: new Container(
-                    child: Text(
-                      '${widget.listData![widget.index!].productname!.toUpperCase()}',
-                      /*"${listData[0][index]["C_Name"]}".toUpperCase(),*/
-                      textAlign: TextAlign.left,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: AppTheme().color_black,
-                          fontFamily: 'Montserrat',
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold),
-                    ),
+                  padding: const EdgeInsets.all(8),
+                  child: Text(
+                    widget.listData![widget.index!].productname!.toUpperCase(),
+                    textAlign: TextAlign.left,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        color: AppTheme().color_black,
+                        fontFamily: 'Montserrat',
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
                 widget.listData![widget.index!].productname == "Beverage"
                     ? Padding(
-                        padding: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width / 9,
-                            top: 5),
+                        padding: const EdgeInsets.all(8),
                         child: SizedBox(
                           height: 20.0,
                           width: 20.0,
@@ -1313,15 +1014,11 @@ class _CounterState extends State<Counter> {
                                 setState(() {
                                   checkedValue_1 = value;
                                 });
-                                print("checkedValue_1:     " +
-                                    checkedValue_1.toString());
                               }),
                         ))
                     : widget.listData![widget.index!].productname == "Glassware"
                         ? Padding(
-                            padding: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width / 13,
-                                top: 5),
+                            padding: const EdgeInsets.all(4),
                             child: SizedBox(
                                 height: 20.0,
                                 width: 20.0,
@@ -1336,167 +1033,132 @@ class _CounterState extends State<Counter> {
                                       });
                                     })),
                           )
-                        : new Container()
+                        : Container()
               ],
             ),
             Padding(
-              padding: EdgeInsets.only(top: 10, left: 10),
-              child: new Row(
-                // alignment: WrapAlignment.end,
-                // crossAxisAlignment: WrapCrossAlignment.end,
+              padding: const EdgeInsets.all(8),
+              child: Row(
                 children: [
                   Expanded(
-                    child: new Container(
-                      child: new Wrap(
-                        children: [
-                          person! <= 15
-                              ? new Text(
-                                  'Price ' +
-                                      '₹ ' +
-                                      (widget.listData![widget.index!].rate15)
-                                          .toString(),
-                                  textAlign: TextAlign.left,
-                                  //overflow:TextOverflow.ellipsis ,
-                                  style: TextStyle(
+                    child: Wrap(
+                      children: [
+                        person! <= 15
+                            ? Text(
+                                'Price ₹ ${widget.listData![widget.index!].rate15}',
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                    color: AppTheme().color_black,
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold),
+                              )
+                            : person! <= 30
+                                ? Text(
+                                    'Price ₹${widget.listData![widget.index!].rate30}',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
                                       color: AppTheme().color_black,
                                       fontFamily: 'Montserrat-SemiBold',
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold),
-                                )
-                              : person! <= 30
-                                  ? new Text(
-                                      'Price ' +
-                                          '₹' +
-                                          (widget.listData![widget.index!]
-                                                  .rate30)
-                                              .toString(),
-                                      textAlign: TextAlign.left,
-                                      //overflow:TextOverflow.ellipsis ,
-                                      style: TextStyle(
-                                        color: AppTheme().color_black,
-                                        fontFamily: 'Montserrat-SemiBold',
-                                        fontSize: 12,
-                                      ),
-                                    )
-                                  : person! <= 50
-                                      ? new Text(
-                                          'Price ' +
-                                              '₹' +
-                                              (widget.listData![widget.index!]
-                                                      .rate50)
-                                                  .toString(),
-                                          textAlign: TextAlign.left,
-                                          //overflow:TextOverflow.ellipsis ,
-                                          style: TextStyle(
-                                            color: AppTheme().color_black,
-                                            fontFamily: 'Montserrat-SemiBold',
-                                            fontSize: 12,
-                                          ),
-                                        )
-                                      : person! <= 75
-                                          ? new Text(
-                                              'Price ' +
-                                                  '₹' +
-                                                  (widget
-                                                              .listData![
-                                                                  widget.index!]
-                                                              .rate75! *
-                                                          services)
-                                                      .toString(),
-                                              textAlign: TextAlign.left,
-                                              //overflow:TextOverflow.ellipsis ,
-                                              style: TextStyle(
-                                                color: AppTheme().color_black,
-                                                fontFamily:
-                                                    'Montserrat-SemiBold',
-                                                fontSize: 12,
-                                              ),
-                                            )
-                                          : person! <= 1000
-                                              ? new Text(
-                                                  'Price ' +
-                                                      '₹' +
-                                                      (widget
-                                                                  .listData![
-                                                                      widget
-                                                                          .index!]
-                                                                  .rate100! *
-                                                              services)
-                                                          .toString(),
-                                                  textAlign: TextAlign.left,
-                                                  //overflow:TextOverflow.ellipsis ,
-                                                  style: TextStyle(
-                                                    color:
-                                                        AppTheme().color_black,
-                                                    fontFamily:
-                                                        'Montserrat-SemiBold',
-                                                    fontSize: 12,
-                                                  ),
-                                                )
-                                              : "" as Widget,
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                      child: new Container(
-                          child: widget.listData![widget.index!].productname ==
-                                  "Beverage"
-                              ? new Row(
-                                  children: [
-                                    services == 0
-                                        ? new Icon(Icons.remove_circle,
-                                            color: AppTheme().color_black)
-                                        : new InkWell(
-                                            onTap: () {
-                                              // miuns_services();
-                                            },
-                                            child: new Icon(Icons.remove_circle,
-                                                color: AppTheme().color_white),
-                                          ),
-                                    person! <= 15
-                                        ? new Text(
-                                            person.toString() +
-                                                'x' +
-                                                (widget.listData![widget.index!]
-                                                        .rate15)
-                                                    .toString(),
+                                      fontSize: 10,
+                                    ),
+                                  )
+                                : person! <= 50
+                                    ? Text(
+                                        'Price ₹${widget.listData![widget.index!]
+                                                    .rate50}',
+                                        textAlign: TextAlign.left,
+                                        //overflow:TextOverflow.ellipsis ,
+                                        style: TextStyle(
+                                          color: AppTheme().color_black,
+                                          fontFamily: 'Montserrat-SemiBold',
+                                          fontSize: 10,
+                                        ),
+                                      )
+                                    : person! <= 75
+                                        ? Text(
+                                            'Price ₹${widget.listData![widget.index!]
+                                                            .rate75! *
+                                                        services}',
                                             textAlign: TextAlign.left,
                                             //overflow:TextOverflow.ellipsis ,
                                             style: TextStyle(
                                               color: AppTheme().color_black,
                                               fontFamily: 'Montserrat-SemiBold',
-                                              fontSize: 15,
+                                              fontSize: 10,
                                             ),
                                           )
-                                        : person! <= 30
-                                            ? new Text(
-                                                person.toString() +
-                                                    'x' +
-                                                    (widget
-                                                            .listData![
-                                                                widget.index!]
-                                                            .rate30)
-                                                        .toString(),
+                                        : person! <= 1000
+                                            ? Text(
+                                                'Price ₹${widget
+                                                                .listData![
+                                                                    widget
+                                                                        .index!]
+                                                                .rate100! *
+                                                            services}',
                                                 textAlign: TextAlign.left,
                                                 //overflow:TextOverflow.ellipsis ,
                                                 style: TextStyle(
                                                   color: AppTheme().color_black,
                                                   fontFamily:
                                                       'Montserrat-SemiBold',
-                                                  fontSize: 15,
+                                                  fontSize: 10,
+                                                ),
+                                              )
+                                            : "" as Widget,
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                      child: Container(
+                          child: widget.listData![widget.index!].productname ==
+                                  "Beverage"
+                              ? Row(
+                                  children: [
+                                    services == 0
+                                        ? Icon(Icons.remove_circle,
+                                            color: AppTheme().color_black)
+                                        : InkWell(
+                                            onTap: () {
+                                              // miuns_services();
+                                            },
+                                            child: Icon(Icons.remove_circle,
+                                                color: AppTheme().color_white),
+                                          ),
+                                    person! <= 15
+                                        ? Text(
+                                            '${person}x${widget.listData![widget.index!]
+                                                        .rate15}',
+                                            textAlign: TextAlign.left,
+                                            //overflow:TextOverflow.ellipsis ,
+                                            style: TextStyle(
+                                              color: AppTheme().color_black,
+                                              fontFamily: 'Montserrat-SemiBold',
+                                              fontSize: 12,
+                                            ),
+                                          )
+                                        : person! <= 30
+                                            ? Text(
+                                                '${person}x${widget
+                                                            .listData![
+                                                                widget.index!]
+                                                            .rate30}',
+                                                textAlign: TextAlign.left,
+                                                //overflow:TextOverflow.ellipsis ,
+                                                style: TextStyle(
+                                                  color: AppTheme().color_black,
+                                                  fontFamily:
+                                                      'Montserrat-SemiBold',
+                                                  fontSize: 12,
                                                 ),
                                               )
                                             : person! <= 50
-                                                ? new Text(
-                                                    person.toString() +
-                                                        'x' +
-                                                        (widget
+                                                ? Text(
+                                                    '${person}x${widget
                                                                 .listData![
                                                                     widget
                                                                         .index!]
-                                                                .rate50)
-                                                            .toString(),
+                                                                .rate50}',
                                                     textAlign: TextAlign.left,
                                                     //overflow:TextOverflow.ellipsis ,
                                                     style: TextStyle(
@@ -1504,19 +1166,16 @@ class _CounterState extends State<Counter> {
                                                           .color_black,
                                                       fontFamily:
                                                           'Montserrat-SemiBold',
-                                                      fontSize: 15,
+                                                      fontSize: 12,
                                                     ),
                                                   )
                                                 : person! <= 75
-                                                    ? new Text(
-                                                        person.toString() +
-                                                            'x' +
-                                                            (widget
+                                                    ? Text(
+                                                        '${person}x${widget
                                                                     .listData![
                                                                         widget
                                                                             .index!]
-                                                                    .rate75)
-                                                                .toString(),
+                                                                    .rate75}',
                                                         textAlign:
                                                             TextAlign.left,
                                                         //overflow:TextOverflow.ellipsis ,
@@ -1525,18 +1184,15 @@ class _CounterState extends State<Counter> {
                                                               .color_black,
                                                           fontFamily:
                                                               'Montserrat-SemiBold',
-                                                          fontSize: 15,
+                                                          fontSize: 12,
                                                         ),
                                                       )
                                                     : person! <= 1000
-                                                        ? new Text(
-                                                            person.toString() +
-                                                                'x' +
-                                                                (widget
+                                                        ? Text(
+                                                            '${person}x${widget
                                                                         .listData![
                                                                             widget.index!]
-                                                                        .rate100)
-                                                                    .toString(),
+                                                                        .rate100}',
                                                             textAlign:
                                                                 TextAlign.left,
                                                             //overflow:TextOverflow.ellipsis ,
@@ -1545,66 +1201,50 @@ class _CounterState extends State<Counter> {
                                                                   .color_black,
                                                               fontFamily:
                                                                   'Montserrat-SemiBold',
-                                                              fontSize: 15,
+                                                              fontSize: 12,
                                                             ),
                                                           )
                                                         : "" as Widget,
-                                    Padding(padding: EdgeInsets.only(left: 2)),
-                                    /*new InkWell(
-                                onTap: () {
-                                  add_services();
-                                },
-                                child: new Icon(Icons.add_circle_sharp,
-                                    color: AppTheme().color_black),
-                              )*/
+                                    const Padding(
+                                        padding: EdgeInsets.only(left: 2)),
                                   ],
                                 )
                               : widget.listData![widget.index!].productname ==
                                       "Glassware"
-                                  ? new Row(
+                                  ? Row(
                                       children: [
                                         services == 0
-                                            ? new Icon(Icons.remove_circle,
+                                            ? Icon(Icons.remove_circle,
                                                 color: AppTheme().color_black)
-                                            : new InkWell(
+                                            : InkWell(
                                                 onTap: () {
                                                   //miuns_services();
                                                 },
-                                                child: new Icon(
-                                                    Icons.remove_circle,
+                                                child: Icon(Icons.remove_circle,
                                                     color:
                                                         AppTheme().color_white),
                                               ),
-                                        Padding(
+                                        const Padding(
                                             padding: EdgeInsets.only(left: 2)),
                                         person! <= 15
-                                            ? new Text(
-                                                person.toString() +
-                                                    'x' +
-                                                    (widget
-                                                            .listData![
-                                                                widget.index!]
-                                                            .rate15)
-                                                        .toString(),
+                                            ? Text(
+                                                '${person}x${widget.listData![widget.index!].rate15}',
                                                 textAlign: TextAlign.left,
                                                 //overflow:TextOverflow.ellipsis ,
                                                 style: TextStyle(
                                                   color: AppTheme().color_black,
                                                   fontFamily:
                                                       'Montserrat-SemiBold',
-                                                  fontSize: 15,
+                                                  fontSize: 12,
                                                 ),
                                               )
                                             : person! <= 30
-                                                ? new Text(
-                                                    person.toString() +
-                                                        'x' +
-                                                        (widget
+                                                ? Text(
+                                                    '${person}x${widget
                                                                 .listData![
                                                                     widget
                                                                         .index!]
-                                                                .rate30)
-                                                            .toString(),
+                                                                .rate30}',
                                                     textAlign: TextAlign.left,
                                                     //overflow:TextOverflow.ellipsis ,
                                                     style: TextStyle(
@@ -1612,19 +1252,16 @@ class _CounterState extends State<Counter> {
                                                           .color_black,
                                                       fontFamily:
                                                           'Montserrat-SemiBold',
-                                                      fontSize: 15,
+                                                      fontSize: 12,
                                                     ),
                                                   )
                                                 : person! <= 50
-                                                    ? new Text(
-                                                        person.toString() +
-                                                            'x' +
-                                                            (widget
+                                                    ? Text(
+                                                        '${person}x${widget
                                                                     .listData![
                                                                         widget
                                                                             .index!]
-                                                                    .rate50)
-                                                                .toString(),
+                                                                    .rate50}',
                                                         textAlign:
                                                             TextAlign.left,
                                                         //overflow:TextOverflow.ellipsis ,
@@ -1633,18 +1270,15 @@ class _CounterState extends State<Counter> {
                                                               .color_black,
                                                           fontFamily:
                                                               'Montserrat-SemiBold',
-                                                          fontSize: 15,
+                                                          fontSize: 12,
                                                         ),
                                                       )
                                                     : person! <= 75
-                                                        ? new Text(
-                                                            person.toString() +
-                                                                'x' +
-                                                                (widget
+                                                        ? Text(
+                                                            '${person}x${widget
                                                                         .listData![
                                                                             widget.index!]
-                                                                        .rate75)
-                                                                    .toString(),
+                                                                        .rate75}',
                                                             textAlign:
                                                                 TextAlign.left,
                                                             //overflow:TextOverflow.ellipsis ,
@@ -1653,16 +1287,13 @@ class _CounterState extends State<Counter> {
                                                                   .color_black,
                                                               fontFamily:
                                                                   'Montserrat-SemiBold',
-                                                              fontSize: 15,
+                                                              fontSize: 12,
                                                             ),
                                                           )
                                                         : person! <= 1000
-                                                            ? new Text(
-                                                                person.toString() +
-                                                                    'x' +
-                                                                    (widget.listData![widget.index!]
-                                                                            .rate100)
-                                                                        .toString(),
+                                                            ? Text(
+                                                                '${person}x${widget.listData![widget.index!]
+                                                                            .rate100}',
                                                                 textAlign:
                                                                     TextAlign
                                                                         .left,
@@ -1673,52 +1304,43 @@ class _CounterState extends State<Counter> {
                                                                       .color_black,
                                                                   fontFamily:
                                                                       'Montserrat-SemiBold',
-                                                                  fontSize: 15,
+                                                                  fontSize: 12,
                                                                 ),
                                                               )
                                                             : "" as Widget,
-                                        Padding(
+                                        const Padding(
                                             padding: EdgeInsets.only(left: 2)),
-                                        /*new InkWell(
-                                onTap: () {
-                                  add_services();
-                                },
-                                child: new Icon(Icons.add_circle_sharp,
-                                    color: AppTheme().color_black),
-                              )*/
                                       ],
                                     )
-                                  : new Row(
+                                  : Row(
                                       children: [
                                         services == 0
-                                            ? new Icon(Icons.remove_circle,
+                                            ? Icon(Icons.remove_circle,
                                                 color: AppTheme().color_black)
-                                            : new InkWell(
+                                            : InkWell(
                                                 onTap: () {
                                                   miuns_services();
                                                 },
-                                                child: new Icon(
-                                                    Icons.remove_circle,
+                                                child: Icon(Icons.remove_circle,
                                                     color:
                                                         AppTheme().color_black),
                                               ),
-                                        Padding(
+                                        const Padding(
                                             padding: EdgeInsets.only(left: 2)),
-                                        new Text(
+                                        Text(
                                           services == 1
                                               ? "1"
                                               : services.toString(),
                                           style: TextStyle(
                                               color: AppTheme().color_black),
                                         ),
-                                        Padding(
+                                        const Padding(
                                             padding: EdgeInsets.only(left: 2)),
-                                        new InkWell(
+                                        InkWell(
                                           onTap: () {
                                             add_services();
                                           },
-                                          child: new Icon(
-                                              Icons.add_circle_sharp,
+                                          child: Icon(Icons.add_circle_sharp,
                                               color: AppTheme().color_black),
                                         )
                                       ],
@@ -1727,126 +1349,108 @@ class _CounterState extends State<Counter> {
               ),
             ),
             Padding(
-                padding: EdgeInsets.only(top: 10, left: 10, right: 10),
-                child: new Container(
+                padding: const EdgeInsets.all(8),
+                child: Container(
                     height: 25,
                     decoration: BoxDecoration(
                         color: AppTheme().color_black,
                         borderRadius: BorderRadius.circular(10)),
                     child: Center(
                         child: person! <= 15
-                            ? new Text(
+                            ? Text(
                                 widget.listData![widget.index!].productname ==
                                         "Glassware"
-                                    ? '₹' + person_mult_price.toString()
+                                    ? '₹$person_mult_price'
                                     : widget.listData![widget.index!]
                                                 .productname ==
                                             "Beverage"
-                                        ? '₹' + person_mult_price.toString()
-                                        : '₹' +
-                                            (widget.listData![widget.index!]
+                                        ? '₹$person_mult_price'
+                                        : '₹${widget.listData![widget.index!]
                                                         .rate100! *
-                                                    services)
-                                                .toString(),
+                                                    services}',
                                 style: TextStyle(
                                     color: AppTheme().color_white,
                                     fontFamily: "Montserrat",
                                     fontSize: 15),
                               )
                             : person! <= 30
-                                ? new Text(
+                                ? Text(
                                     widget.listData![widget.index!]
                                                 .productname ==
                                             "Glassware"
-                                        ? '₹' + person_mult_price.toString()
+                                        ? '₹$person_mult_price'
                                         : widget.listData![widget.index!]
                                                     .productname ==
                                                 "Beverage"
-                                            ? '₹' + person_mult_price.toString()
-                                            : '₹' +
-                                                (widget.listData![widget.index!]
+                                            ? '₹$person_mult_price'
+                                            : '₹${widget.listData![widget.index!]
                                                             .rate100! *
-                                                        services)
-                                                    .toString(),
+                                                        services}',
                                     style: TextStyle(
                                         color: AppTheme().color_white,
                                         fontFamily: "Montserrat",
                                         fontSize: 15),
                                   )
                                 : person! <= 50
-                                    ? new Text(
+                                    ? Text(
                                         widget.listData![widget.index!]
                                                     .productname ==
                                                 "Glassware"
-                                            ? '₹' + person_mult_price.toString()
+                                            ? '₹$person_mult_price'
                                             : widget.listData![widget.index!]
                                                         .productname ==
                                                     "Beverage"
-                                                ? '₹' +
-                                                    person_mult_price.toString()
-                                                : '₹' +
-                                                    (widget
+                                                ? '₹$person_mult_price'
+                                                : '₹${widget
                                                                 .listData![
                                                                     widget
                                                                         .index!]
                                                                 .rate100! *
-                                                            services)
-                                                        .toString(),
+                                                            services}',
                                         style: TextStyle(
                                             color: AppTheme().color_white,
                                             fontFamily: "Montserrat",
                                             fontSize: 15),
                                       )
                                     : person! <= 75
-                                        ? new Text(
+                                        ? Text(
                                             widget.listData![widget.index!]
                                                         .productname ==
                                                     "Glassware"
-                                                ? '₹' +
-                                                    person_mult_price.toString()
+                                                ? '₹$person_mult_price'
                                                 : widget
                                                             .listData![
                                                                 widget.index!]
                                                             .productname ==
                                                         "Beverage"
-                                                    ? '₹' +
-                                                        person_mult_price
-                                                            .toString()
-                                                    : '₹' +
-                                                        (widget
+                                                    ? '₹$person_mult_price'
+                                                    : '₹${widget
                                                                     .listData![
                                                                         widget
                                                                             .index!]
                                                                     .rate100! *
-                                                                services)
-                                                            .toString(),
+                                                                services}',
                                             style: TextStyle(
                                                 color: AppTheme().color_white,
                                                 fontFamily: "Montserrat",
                                                 fontSize: 15),
                                           )
                                         : person! <= 1000
-                                            ? new Text(
+                                            ? Text(
                                                 widget.listData![widget.index!]
                                                             .productname ==
                                                         "Glassware"
-                                                    ? '₹' +
-                                                        person_mult_price
-                                                            .toString()
+                                                    ? '₹$person_mult_price'
                                                     : widget
                                                                 .listData![
                                                                     widget
                                                                         .index!]
                                                                 .productname ==
                                                             "Beverage"
-                                                        ? '₹' +
-                                                            person_mult_price
-                                                                .toString()
-                                                        : '₹' +
-                                                            (widget.listData![widget.index!]
+                                                        ? '₹$person_mult_price'
+                                                        : '₹${widget.listData![widget.index!]
                                                                         .rate100! *
-                                                                    services)
-                                                                .toString(),
+                                                                    services}',
                                                 style: TextStyle(
                                                     color:
                                                         AppTheme().color_white,

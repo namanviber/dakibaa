@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:dakibaa/setting.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,9 +9,11 @@ import 'Cart.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'EditProfile.dart';
+import 'app_screens/drawer_navigation_screens/EditProfile.dart';
 import 'Services.dart';
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _State createState() => _State();
 }
@@ -32,17 +34,17 @@ class _State extends State<HomePage> {
   Future<bool> _onWillPop() async {
     return (await (showDialog(
       context: context,
-      builder: (context) => new AlertDialog(
-        title: new Text('Are you sure?'),
-        content: new Text('Do you want to exit an App'),
+      builder: (context) => AlertDialog(
+        title: const Text('Are you sure?'),
+        content: const Text('Do you want to exit an App'),
         actions: <Widget>[
-          new TextButton(
+          TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: new Text('No'),
+            child: const Text('No'),
           ),
-          new TextButton(
+          TextButton(
             onPressed: () => exit(0),
-            child: new Text('Yes'),
+            child: const Text('Yes'),
           ),
         ],
       ),
@@ -80,17 +82,17 @@ class _State extends State<HomePage> {
         body: {"userid": id.toString()});
     var parsedJson = json.decode(response.body);
     // value = parsedJson['data'];
-    print("Status = " + parsedJson['status']);
+    
     if (parsedJson['status'] == "1") {
       print(parsedJson.toString());
       counter=parsedJson['data'];
       // pr.dismiss();
-      /* Toast.show("" + parsedJson['message'], context,
+      /* Toast.show(parsedJson['message'], context,
           duration: Toast.lengthShort, gravity: Toast.bottom,);*/
 
     } if(parsedJson['status'] == "0") {
       //pr.dismiss();
-      /*  Toast.show("" + parsedJson['message'], context,
+      /*  Toast.show(parsedJson['message'], context,
           duration: Toast.lengthShort, gravity: Toast.bottom,);
       _ackAlert(context);*/
 

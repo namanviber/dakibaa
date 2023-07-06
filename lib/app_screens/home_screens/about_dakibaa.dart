@@ -5,7 +5,6 @@ import 'package:dakibaa/app_screens/authorization_screens/login_pagenew.dart';
 import 'package:dakibaa/number_of_person.dart';
 import 'package:dakibaa/widgets/appDrawer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'common/constant.dart';
 
 class AboutDakibaa extends StatefulWidget {
   @override
@@ -16,7 +15,7 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
   var name, email, id, gender, mobile, noperson, phone, dob;
   late SharedPreferences sharedPreferences;
   bool? checkValue;
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   void initState() {
     super.initState();
@@ -70,20 +69,20 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
               ],
             ),
             image: DecorationImage(
-              image: AssetImage("images/services_background.jpg"),
+              image: const AssetImage("images/services_background.jpg"),
               fit: BoxFit.cover,
-              colorFilter: new ColorFilter.mode(
+              colorFilter: ColorFilter.mode(
                   Colors.black.withOpacity(0.3), BlendMode.dstATop),
             )),
         child: ListView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
-                  child: Container(
+                  child: SizedBox(
                     width: 300,
                     height: 100,
                     child: Center(
@@ -122,19 +121,18 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
                       top: MediaQuery.of(context).size.height / 30,
                       left: 15,
                       right: 15),
-                  child: Container(
-                      child: Padding(
+                  child: Padding(
                     padding: const EdgeInsets.only(
-                        top: 10, bottom: 10, left: 5, right: 5),
+                    top: 10, bottom: 10, left: 5, right: 5),
                     child: Text(
-                      "We are well-experienced in what it takes to arrange and execute a successful event whether it's large or small, casual or formal. Don't worry about the effort of arranging an ideal one. Whether you are planning a party for five or a corporate function for 5000, Dakibaa is here to help you make your next event a grand success. Dakibaa, your event party planner is ready to offer all party supplies from your beverage order to glassware, bartenders and butler services.",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 17,
-                          color: AppTheme().color_white,
-                          fontFamily: "Montserrat-SemiBold"),
+                  "We are well-experienced in what it takes to arrange and execute a successful event whether it's large or small, casual or formal. Don't worry about the effort of arranging an ideal one. Whether you are planning a party for five or a corporate function for 5000, Dakibaa is here to help you make your next event a grand success. Dakibaa, your event party planner is ready to offer all party supplies from your beverage order to glassware, bartenders and butler services.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 17,
+                      color: AppTheme().color_white,
+                      fontFamily: "Montserrat-SemiBold"),
                     ),
-                  )),
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(
@@ -153,7 +151,7 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
                       )),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 10),
+                  padding: const EdgeInsets.only(top: 10),
                   child: Container(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 10),
@@ -185,7 +183,7 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
                       )),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 10),
+                  padding: const EdgeInsets.only(top: 10),
                   child: Container(
                       child: Padding(
                     padding: const EdgeInsets.only(top: 10),
@@ -213,15 +211,15 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LoginPage()));
+                                  builder: (context) => const LoginPage()));
                         }
                       },
-                      child: new Container(
+                      child: Container(
                         height: 45,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderRadius: const BorderRadius.all(Radius.circular(10)),
                             color: AppTheme().color_red),
-                        child: new Center(
+                        child: Center(
                           child: Text(
                             "Book Now",
                             textAlign: TextAlign.center,

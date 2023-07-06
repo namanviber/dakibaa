@@ -33,19 +33,19 @@ class _GalleryState extends State<Gallery> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            content: new SingleChildScrollView(
-              child: new ListBody(
+            content: SingleChildScrollView(
+              child: ListBody(
                 children: <Widget>[
                   GestureDetector(
-                    child: new Text('Take a picture'),
                     onTap: openCamera,
+                    child: const Text('Take a picture'),
                   ),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.all(8.0),
                   ),
                   GestureDetector(
-                    child: new Text('Select from gallery'),
                     onTap: openGallery,
+                    child: const Text('Select from gallery'),
                   ),
                 ],
               ),
@@ -102,26 +102,26 @@ class _GalleryState extends State<Gallery> {
                       ],
                     ),
                     image: DecorationImage(
-                      image: AssetImage("images/services_background.jpg"),
+                      image: const AssetImage("images/services_background.jpg"),
                       fit: BoxFit.cover,
-                      colorFilter: new ColorFilter.mode(
+                      colorFilter: ColorFilter.mode(
                           Colors.black.withOpacity(0.3), BlendMode.dstATop),
                     )),
                 child: Column(
                   children: [
                     Container(
-                      margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                      margin: const EdgeInsets.fromLTRB(0, 30, 0, 0),
                       child: Column(
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.only(top: 10, left: 20),
-                            child: new Row(
+                            child: Row(
                               children: [
-                                new InkWell(
+                                InkWell(
                                   onTap: () {
                                     Navigator.pop(context);
                                   },
-                                  child: new Container(
+                                  child: SizedBox(
                                     width: 30,
                                     height: 20,
                                     child:
@@ -133,7 +133,7 @@ class _GalleryState extends State<Gallery> {
                           ),
                           Center(
                             child: Container(
-                                padding: EdgeInsets.only(
+                                padding: const EdgeInsets.only(
                                   left: 0.0,
                                   right: 0.0,
                                   top: 10.0,
@@ -160,7 +160,7 @@ class _GalleryState extends State<Gallery> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 30,
                           ),
                         ],
@@ -170,13 +170,13 @@ class _GalleryState extends State<Gallery> {
                       height: MediaQuery.of(context).size.height / 1.6,
                       child: GridView.builder(
                         itemCount: imageslist.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                         ),
                         itemBuilder: (BuildContext context, int index) {
-                          return new Card(
-                            child: new GridTile(
-                              child: new Image.asset(
+                          return Card(
+                            child: GridTile(
+                              child: Image.asset(
                                 imageslist[index],
                                 fit: BoxFit.cover,
                               ), //just for testing, will fill with image later

@@ -8,12 +8,12 @@ import 'package:dakibaa/utils/utils.dart';
 import 'package:http/http.dart' as http;
 
 class RestDataSource {
-  NetworkUtil _netUtil = new NetworkUtil();
-  static final BASE_URL = 'http://partyapp.v2infotech.net/api/party';
+  NetworkUtil _netUtil = NetworkUtil();
+  static const BASE_URL = 'http://partyapp.v2infotech.net/api/party';
 
   Future<ServicesModel> service() {
     return _netUtil.get(APIS.ProductDetails).then((dynamic res) {
-      return new ServicesModel.fromJson(res);
+      return ServicesModel.fromJson(res);
     });
   }
 
@@ -40,7 +40,7 @@ class RestDataSource {
       "userid":userid
     };
     return _netUtil.post(APIS.Save_ptmres, body: body, headers: {}, encoding: null).then((dynamic res) {
-      return new PaytmModel.fromJson(res);
+      return PaytmModel.fromJson(res);
     });
   }
 }

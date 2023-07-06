@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:mime/mime.dart';
@@ -10,7 +10,7 @@ import 'package:toast/toast.dart';
 import '../../rest_api/ApiList.dart';
 import '../../image_picker_handler.dart';
 import 'package:http_parser/http_parser.dart';
-import '../../otp_screen.dart';
+import 'otp_screen.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -29,11 +29,11 @@ class _SignupPageState extends State<SignupPage>
   bool passwordVisible1 = true;
   String? username, contact, password, conPassword;
   String? usernameError, contactError, passwordError, conPasswordError;
-  final TextEditingController usernameController = new TextEditingController();
-  final TextEditingController contactController = new TextEditingController();
-  final TextEditingController passwordController = new TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController contactController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   final TextEditingController conPasswordController =
-      new TextEditingController();
+      TextEditingController();
   File? _image;
   late var token;
   bool? checkValue;
@@ -51,11 +51,11 @@ class _SignupPageState extends State<SignupPage>
     _selectedCompany = _dropdownMenuItems[0].value;
     passwordVisible = true;
     passwordVisible1 = true;
-    _controller = new AnimationController(
+    _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 500),
     );
-    imagePicker = new ImagePickerHandler(this, _controller);
+    imagePicker = ImagePickerHandler(this, _controller);
     imagePicker.init();
     super.initState();
   }
@@ -128,10 +128,11 @@ class _SignupPageState extends State<SignupPage>
 
   @override
   Widget build(BuildContext context) {
+    ToastContext().init(context);//-> This part
     screenHeight = MediaQuery.of(context).size.height;
     screenwidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Color.fromRGBO(235, 235, 235, 1),
+      backgroundColor: const Color.fromRGBO(235, 235, 235, 1),
       appBar: AppBar(
         scrolledUnderElevation: 1,
         elevation: 0,
@@ -143,7 +144,7 @@ class _SignupPageState extends State<SignupPage>
               onTap: () {
                 Navigator.pop(context);
               },
-              child: new Container(
+              child: Container(
                 width: 30,
                 height: 20,
                 child: Image.asset("images/back_button.png"),
@@ -153,15 +154,15 @@ class _SignupPageState extends State<SignupPage>
         ),
       ),
       extendBodyBehindAppBar: true,
-      body: new Container(
+      body: Container(
         height: screenHeight,
         decoration: BoxDecoration(
             gradient: RadialGradient(
-                colors: [Colors.black.withOpacity(0.9)], stops: [0.0]),
+                colors: [Colors.black.withOpacity(0.9)], stops: const [0.0]),
             image: DecorationImage(
-              image: AssetImage("images/signup_background.jpg"),
+              image: const AssetImage("images/signup_background.jpg"),
               fit: BoxFit.cover,
-              colorFilter: new ColorFilter.mode(
+              colorFilter: ColorFilter.mode(
                   Colors.black.withOpacity(0.3), BlendMode.dstATop),
             )),
         child: SingleChildScrollView(
@@ -172,19 +173,19 @@ class _SignupPageState extends State<SignupPage>
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(
+                  const SizedBox(
                     height: 70,
                   ),
-                  new Stack(
+                  Stack(
                     children: [
                       Container(
                           height: 100.0,
                           width: 100.0,
-                          margin: EdgeInsets.only(top: 15.0),
+                          margin: const EdgeInsets.only(top: 15.0),
                           child: GestureDetector(
                             onTap: () => imagePicker.showDialog(context),
                             child: _image == null
-                                ? new Container(
+                                ? Container(
                                     decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(100),
@@ -197,7 +198,7 @@ class _SignupPageState extends State<SignupPage>
                                       size: 40,
                                       color: AppTheme().color_red,
                                     ))
-                                : new Container(
+                                : Container(
                                     decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(100),
@@ -217,7 +218,7 @@ class _SignupPageState extends State<SignupPage>
                           padding: const EdgeInsets.only(top: 100, left: 60),
                           child: InkWell(
                             onTap: () => imagePicker.showDialog(context),
-                            child: new Container(
+                            child: Container(
                               height: 30,
                               width: 30,
                               decoration: BoxDecoration(
@@ -245,7 +246,7 @@ class _SignupPageState extends State<SignupPage>
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 20.0, top: 50.0, right: 20.0),
+                    margin: const EdgeInsets.only(left: 20.0, top: 50.0, right: 20.0),
                     child: TextFormField(
                       textAlign: TextAlign.center,
                       validator: (value) {
@@ -255,41 +256,41 @@ class _SignupPageState extends State<SignupPage>
                         return null;
                       },
                       controller: usernameController,
-                      decoration: new InputDecoration(
-                          border: new OutlineInputBorder(
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 1, color: AppTheme().color_white),
                             borderRadius: const BorderRadius.all(
-                              const Radius.circular(50.0),
+                              Radius.circular(50.0),
                             ),
                           ),
-                          focusedBorder: OutlineInputBorder(
+                          focusedBorder: const OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(50.0)),
                           ),
-                          disabledBorder: OutlineInputBorder(
+                          disabledBorder: const OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(50.0)),
                           ),
-                          enabledBorder: OutlineInputBorder(
+                          enabledBorder: const OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(50.0)),
                           ),
-                          errorBorder: OutlineInputBorder(
+                          errorBorder: const OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(50.0)),
                           ),
-                          focusedErrorBorder: OutlineInputBorder(
+                          focusedErrorBorder: const OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(50.0)),
                           ),
                           filled: true,
-                          contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                           errorStyle: TextStyle(
                               fontSize: 15,
                               fontFamily: "Montserrat-SemiBold",
                               color: AppTheme().color_white),
-                          hintStyle: new TextStyle(
+                          hintStyle: TextStyle(
                               color: Colors.red[800],
                               fontWeight: FontWeight.bold,
                               fontFamily: "Montserrat-SemiBold"),
@@ -298,7 +299,7 @@ class _SignupPageState extends State<SignupPage>
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 20.0, top: 15.0, right: 20.0),
+                    margin: const EdgeInsets.only(left: 20.0, top: 15.0, right: 20.0),
                     child: TextFormField(
                       maxLength: 10,
                       validator: (value) {
@@ -313,39 +314,39 @@ class _SignupPageState extends State<SignupPage>
                       textAlign: TextAlign.center,
                       controller: contactController,
                       keyboardType: TextInputType.phone,
-                      decoration: new InputDecoration(
-                          border: new OutlineInputBorder(
-                            borderRadius: const BorderRadius.all(
-                              const Radius.circular(15.0),
+                      decoration: InputDecoration(
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(15.0),
                             ),
                           ),
-                          focusedBorder: OutlineInputBorder(
+                          focusedBorder: const OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(50.0)),
                           ),
-                          disabledBorder: OutlineInputBorder(
+                          disabledBorder: const OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(50.0)),
                           ),
-                          enabledBorder: OutlineInputBorder(
+                          enabledBorder: const OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(50.0)),
                           ),
-                          errorBorder: OutlineInputBorder(
+                          errorBorder: const OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(50.0)),
                           ),
-                          focusedErrorBorder: OutlineInputBorder(
+                          focusedErrorBorder: const OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(50.0)),
                           ),
                           filled: true,
-                          contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                           errorStyle: TextStyle(
                               fontSize: 15,
                               fontFamily: "Montserrat-SemiBold",
                               color: AppTheme().color_white),
-                          hintStyle: new TextStyle(
+                          hintStyle: TextStyle(
                               color: AppTheme().color_red,
                               fontFamily: "Montserrat-SemiBold"),
                           hintText: "Contact No.",
@@ -354,73 +355,80 @@ class _SignupPageState extends State<SignupPage>
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 20.0, top: 15.0, right: 20.0),
+                    margin: const EdgeInsets.only(
+                        left: 20.0, top: 15.0, right: 20.0),
                     child: TextFormField(
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Please enter password';
+                        } else if (value.length < 8) {
+                          return "Passwor must be of min 8 digits";
+                        } else {
+                          return null;
                         }
-                        return null;
                       },
                       textAlign: TextAlign.center,
                       controller: passwordController,
                       obscureText: passwordVisible1,
-                      decoration: new InputDecoration(
-                        suffixIcon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                passwordVisible1 = !passwordVisible1;
-                              });
-                            },
-                            icon: Icon(
-                              // Based on passwordVisible state choose the icon
-                              passwordVisible1
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              color: Colors.red,
-                            )),
-                        border: new OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(
-                            const Radius.circular(15.0),
+                      keyboardType: TextInputType.phone,
+                      decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  passwordVisible1 = !passwordVisible1;
+                                });
+                              },
+                              icon: Icon(
+                                // Based on passwordVisible state choose the icon
+                                passwordVisible1
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: Colors.red,
+                              )),
+
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(15.0),
+                            ),
                           ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(50.0)),
-                        ),
-                        disabledBorder: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(50.0)),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(50.0)),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(50.0)),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(50.0)),
-                        ),
-                        filled: true,
-                        contentPadding: EdgeInsets.fromLTRB(50, 0, 0, 0),
-                        errorStyle: TextStyle(
-                            fontSize: 15,
-                            fontFamily: "Montserrat-SemiBold",
-                            color: AppTheme().color_white),
-                        hintStyle: new TextStyle(
-                          color: AppTheme().color_red,
-                          fontFamily: "Montserrat-SemiBold",
-                        ),
-                        hintText: "Password",
-                        fillColor: AppTheme().color_white,
-                      ),
+                          focusedBorder: const OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(50.0)),
+                          ),
+                          disabledBorder: const OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(50.0)),
+                          ),
+                          enabledBorder: const OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(50.0)),
+                          ),
+                          errorBorder: const OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(50.0)),
+                          ),
+                          focusedErrorBorder: const OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(50.0)),
+                          ),
+                          filled: true,
+                          contentPadding:
+                          const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          errorStyle: TextStyle(
+                              fontSize: 15,
+                              fontFamily: "Montserrat-SemiBold",
+                              color: AppTheme().color_white),
+                          hintStyle: TextStyle(
+                              color: AppTheme().color_red,
+                              fontFamily: "Montserrat-SemiBold"),
+                          hintText: "Password",
+                          counterText: "",
+                          fillColor: AppTheme().color_white),
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 20.0, top: 15.0, right: 20.0),
+                    margin: const EdgeInsets.only(
+                        left: 20.0, top: 15.0, right: 20.0),
                     child: TextFormField(
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -434,8 +442,8 @@ class _SignupPageState extends State<SignupPage>
                       textAlign: TextAlign.center,
                       controller: conPasswordController,
                       obscureText: passwordVisible,
-                      decoration: new InputDecoration(
-                          contentPadding: EdgeInsets.fromLTRB(50, 0, 0, 0),
+                      keyboardType: TextInputType.phone,
+                      decoration: InputDecoration(
                           suffixIcon: IconButton(
                               onPressed: () {
                                 setState(() {
@@ -449,44 +457,48 @@ class _SignupPageState extends State<SignupPage>
                                     : Icons.visibility,
                                 color: Colors.red,
                               )),
+
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(15.0),
+                            ),
+                          ),
+                          focusedBorder: const OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(50.0)),
+                          ),
+                          disabledBorder: const OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(50.0)),
+                          ),
+                          enabledBorder: const OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(50.0)),
+                          ),
+                          errorBorder: const OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(50.0)),
+                          ),
+                          focusedErrorBorder: const OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(50.0)),
+                          ),
+                          filled: true,
+                          contentPadding:
+                          const EdgeInsets.fromLTRB(10, 0, 0, 0),
                           errorStyle: TextStyle(
                               fontSize: 15,
                               fontFamily: "Montserrat-SemiBold",
                               color: AppTheme().color_white),
-                          border: new OutlineInputBorder(
-                            borderRadius: const BorderRadius.all(
-                              const Radius.circular(50.0),
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(50.0)),
-                          ),
-                          disabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(50.0)),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(50.0)),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(50.0)),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(50.0)),
-                          ),
-                          filled: true,
-                          hintStyle: new TextStyle(
+                          hintStyle: TextStyle(
                               color: AppTheme().color_red,
                               fontFamily: "Montserrat-SemiBold"),
                           hintText: "Confirm Password",
+                          counterText: "",
                           fillColor: AppTheme().color_white),
                     ),
                   ),
-                  SizedBox(height: 40,),
+                  const SizedBox(height: 40,),
                   Container(
                     width: screenwidth! * 0.7,
                     height: 50,
@@ -508,7 +520,7 @@ class _SignupPageState extends State<SignupPage>
                                 "ljhasfdnnlzs568794544",
                                 _image);
                           } else {
-                            Toast.show("" + "Please select image",
+                            Toast.show("Please select image",
                                 duration: Toast.lengthLong,
                                 gravity: Toast.top,);
                           }
@@ -544,9 +556,8 @@ class _SignupPageState extends State<SignupPage>
       String password,
       String deviceToken,
       File? image) async {
-    print("$username$phone$gender$dob$email$password$deviceToken");
-    pr = new ProgressDialog(context: context, );
-    pr.show();
+    pr = ProgressDialog(context: context, );
+    pr.show(msg: "Loading..", barrierDismissible: true);
 
     final imageUploadRequest =
         http.MultipartRequest('POST', Uri.parse(APIS.usersSignUp));
@@ -571,19 +582,19 @@ class _SignupPageState extends State<SignupPage>
       final streamedResponse = await imageUploadRequest.send();
       final response = await http.Response.fromStream(streamedResponse);
       var parsedJson = json.decode(response.body);
-      print("Status = " + parsedJson['status']);
       if (parsedJson['status'] == "1") {
         pr.close();
-        /* Toast.show("" + parsedJson['message'], context,
+        /* Toast.show(parsedJson['message'], context,
             duration: Toast.lengthLong, gravity: Toast.bottom,);*/
         _onChanged(parsedJson['message'], phone);
+        String otp = parsedJson['message'].toString().replaceAll("Otp For registration send to your Mobile", "");
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => OtpScreen(type: 'register')),
+          MaterialPageRoute(builder: (context) => OtpScreen(type: 'register', otpphone: otp,)),
         );
       } else {
         pr.close();
-        Toast.show("" + parsedJson['message'],
+        Toast.show(parsedJson['message'],
             duration: Toast.lengthLong, gravity: Toast.bottom,);
         /*Navigator.push(
           context,
@@ -651,10 +662,3 @@ class Company {
     ];
   }
 }
-//validator: (value) {
-//if (value.isEmpty) {
-//return "contact must be filled";
-//}else if(value.length != 10){
-//return "Contact must be of 10 digits";
-//}
-//},

@@ -16,8 +16,9 @@ class _ThankyouScreenState extends State<ThankyouScreen> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
+        onWillPop: _onWillPop,
         child: Scaffold(
-      body: new Container(
+      body: Container(
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -29,27 +30,27 @@ class _ThankyouScreenState extends State<ThankyouScreen> {
             image: DecorationImage(
               image: AssetImage("images/services_background.jpg"),
               fit: BoxFit.cover,
-              colorFilter: new ColorFilter.mode(
+              colorFilter: ColorFilter.mode(
                   Colors.black.withOpacity(0.3), BlendMode.dstATop),
             )),
-        child: new ListView(
+        child: ListView(
           shrinkWrap: true,
           children: [
-            new Column(
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
                   padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/3.5),
-                  child: new Container(
+                  child: SizedBox(
                     height: 100,
-                    child: new Image.asset('images/thumsup.gif'),
+                    child: Image.asset('images/thumsup.gif'),
                   ),
                 ),
-                new Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    new Container(
+                    Container(
                       child: Text("Thank You",style: TextStyle(color: AppTheme().color_white,fontSize: 35,fontFamily: 'Montserrat'),),
                     ),
                   ],
@@ -60,7 +61,7 @@ class _ThankyouScreenState extends State<ThankyouScreen> {
                 Wrap(
                   alignment: WrapAlignment.center,
                   children: [
-                    new Container(
+                    Container(
                       child: Text(payment_mesg != null?"Your Order has been placed \nReference Number :  "+payment_OrderID!:""
                         ,textAlign: TextAlign.center,style: TextStyle(color: AppTheme().color_white,fontSize: 15,fontFamily: 'Montserrat-SemiBold'),),
                     ),
@@ -146,6 +147,6 @@ class _ThankyouScreenState extends State<ThankyouScreen> {
           ],
         ),
       ),
-    ), onWillPop: _onWillPop);
+    ));
   }
 }

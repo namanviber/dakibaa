@@ -23,9 +23,9 @@ class _AboutUsState extends State<AboutUs> {
               onTap: () {
                 Navigator.of(context).pop();
               },
-              child: new Container(
+              child: Container(
                 height: 18,
-                child: new Image.asset(
+                child: Image.asset(
                   "images/back_button.png",
                 ),
               ),
@@ -44,16 +44,16 @@ class _AboutUsState extends State<AboutUs> {
               ],
             ),
             image: DecorationImage(
-              image: AssetImage("images/services_background.jpg"),
+              image: const AssetImage("images/services_background.jpg"),
               fit: BoxFit.cover,
-              colorFilter: new ColorFilter.mode(
+              colorFilter: ColorFilter.mode(
                   Colors.black.withOpacity(0.3), BlendMode.dstATop),
             )),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              SizedBox(height: 70,),
+              const SizedBox(height: 70,),
               Container(
                 child: Center(
                   child: Text(
@@ -74,7 +74,7 @@ class _AboutUsState extends State<AboutUs> {
                 child: Container(
                     decoration: BoxDecoration(
                         color: AppTheme().color_white,
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                        borderRadius: const BorderRadius.all(Radius.circular(10))),
                     child: Padding(
                       padding: const EdgeInsets.only(
                           top: 10, bottom: 10, left: 5, right: 5),

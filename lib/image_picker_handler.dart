@@ -1,8 +1,6 @@
-import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 
-//import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'image_picker_dialog.dart';
@@ -36,7 +34,7 @@ class ImagePickerHandler {
   }
 
   void init() {
-    imagePicker = new ImagePickerDialog(this, _controller);
+    imagePicker = ImagePickerDialog(this, _controller);
     imagePicker.initState();
   }
 

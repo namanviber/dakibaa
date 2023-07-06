@@ -1,15 +1,15 @@
 import 'dart:io';
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 import 'package:dakibaa/Colors/colors.dart';
-import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sn_progress_dialog/sn_progress_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'rest_api/ApiList.dart';
-import 'home_page.dart';
 import 'image_picker_handler.dart';
 import 'package:http/http.dart' as http;
+import 'home_page.dart';
 import 'package:http_parser/http_parser.dart';
 
 class ProfileUpdate extends StatefulWidget {
@@ -27,7 +27,7 @@ class _ProfileUpdate extends State<ProfileUpdate>
   bool? checkValue;
   late ProgressDialog pr;
   Map<String, dynamic>? value;
-  var name, id, gender, mobile, dob,email,password, profile_pic;
+  var name, id, gender, mobile, dob, email, password, profile_pic;
   late SharedPreferences sharedPreferences;
   TextEditingController? nameController;
   TextEditingController? phoneController;
@@ -44,12 +44,11 @@ class _ProfileUpdate extends State<ProfileUpdate>
     // TODO: implement build
     return GestureDetector(
       onTap: () {
-
-        FocusScope.of(context).requestFocus(new FocusNode());
+        FocusScope.of(context).requestFocus(FocusNode());
       },
       child: Scaffold(
         // resizeToAvoidBottomPadding: false,
-        body:profile_Page(context),
+        body: profile_Page(context),
       ),
     );
   }
@@ -57,22 +56,24 @@ class _ProfileUpdate extends State<ProfileUpdate>
   Widget upperHalf(BuildContext context) {
     return Column(
       children: <Widget>[
-
         Container(
           child: Container(
             height: screenHeight / 2,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(colors: [
                 Color.fromRGBO(220, 84, 85, 1),
                 Color.fromRGBO(140, 53, 52, 1)
               ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
-            ) ,
-            child:  Container(
-              margin: EdgeInsets.only(bottom: 220.0),
-              child: Center(
-                child: Text('UPDATE PROFILE',
+            ),
+            child: Container(
+              margin: const EdgeInsets.only(bottom: 220.0),
+              child: const Center(
+                child: Text(
+                  'UPDATE PROFILE',
                   style: TextStyle(
-                      fontSize: 24, color: Colors.black, fontWeight: FontWeight.w600),
+                      fontSize: 24,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600),
                 ),
               ),
             ),
@@ -87,74 +88,75 @@ class _ProfileUpdate extends State<ProfileUpdate>
       alignment: Alignment.bottomCenter,
       child: Container(
         height: screenHeight / 2,
-        color: Color(0xFFECF0F3),
+        color: const Color(0xFFECF0F3),
       ),
-
-
     );
   }
 
   Widget profile_Page(BuildContext context) {
-    return new Container(
-      height: MediaQuery.of(context).size.height/1.00,
-      decoration: BoxDecoration(
-          gradient: RadialGradient(
-
-              colors: [Colors.black.withOpacity(0.9)],
-              stops: [0.0, ]
-          ),
-          image: DecorationImage(
-            image: AssetImage("images/signup_background.jpg"),
-            fit: BoxFit.cover,
-            colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.3), BlendMode.dstATop),
-          )
-      ),
-      child: ListView(
-        children: [
-          Form(
-            key: _formkey,
-            child: Column(
-              //mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/15),
-                  child: Container(
-
-                    alignment: AlignmentDirectional(0.0, 0.0),
-                    child:Padding(
-                      padding: const EdgeInsets.only(left:10.0,right:10.0,top:0.0),
-                      child: Container(
-                        child: Column(
-                         // crossAxisAlignment: CrossAxisAlignment.center,
-                         // mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(top: 0,left: 20),
-                              child: new Row(
-                                children: [
-                                  new InkWell(
-                                    onTap: (){
-                                      Navigator.pop(context);
-                                    },
-                                    child: new Container(
-                                      width: 30,
-                                      height: 20,
-                                      child: Image.asset("images/back_button.png"),
-                                    ),
-                                  )
-                                ],
+    return Container(
+        height: MediaQuery.of(context).size.height / 1.00,
+        decoration: BoxDecoration(
+            gradient: RadialGradient(colors: [
+              Colors.black.withOpacity(0.9)
+            ], stops: [
+              0.0,
+            ]),
+            image: DecorationImage(
+              image: const AssetImage("images/signup_background.jpg"),
+              fit: BoxFit.cover,
+              colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.3), BlendMode.dstATop),
+            )),
+        child: ListView(
+          children: [
+            Form(
+              key: _formkey,
+              child: Column(
+                //mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height / 15),
+                    child: Container(
+                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 10.0, right: 10.0, top: 0.0),
+                        child: Container(
+                          child: Column(
+                            // crossAxisAlignment: CrossAxisAlignment.center,
+                            // mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 0, left: 20),
+                                child: Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Container(
+                                        width: 30,
+                                        height: 20,
+                                        child: Image.asset(
+                                            "images/back_button.png"),
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(
-                                left: 10.0,
-                                right: 0.0,
-                                top: 0.0,
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  /* new GestureDetector(
+                              Container(
+                                padding: const EdgeInsets.only(
+                                  left: 10.0,
+                                  right: 0.0,
+                                  top: 0.0,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    /* new GestureDetector(
                                   onTap: () => imagePicker.showDialog(context),
                                   child: new Center(
                                     child: _image == null
@@ -199,175 +201,209 @@ class _ProfileUpdate extends State<ProfileUpdate>
                                     ),
                                   ),
                                 ),*/
-                                  new Stack(
-                                    children: [
-                                      Container(
-                                          height: 100.0,
-                                          width: 100.0,
-                                          margin: EdgeInsets.only(top: 15.0),
-                                          child: GestureDetector(
-                                            onTap: () => imagePicker.showDialog(context),
-                                            child: _image == null
-                                                ? new Container(
+                                    Stack(
+                                      children: [
+                                        Container(
+                                            height: 100.0,
+                                            width: 100.0,
+                                            margin: const EdgeInsets.only(top: 15.0),
+                                            child: GestureDetector(
+                                              onTap: () => imagePicker
+                                                  .showDialog(context),
+                                              child: _image == null
+                                                  ? Container(
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      100),
+                                                          color:
+                                                              AppTheme()
+                                                                  .color_white,
+                                                          border: Border.all(
+                                                              color: AppTheme()
+                                                                  .color_white,
+                                                              width: 5)),
+                                                      child: Icon(
+                                                        Icons.person,
+                                                        size: 40,
+                                                        color: AppTheme()
+                                                            .color_red,
+                                                      ))
+                                                  : Container(
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      100),
+                                                          color:
+                                                              AppTheme()
+                                                                  .color_white,
+                                                          border: Border.all(
+                                                              color: AppTheme()
+                                                                  .color_white,
+                                                              width: 5)),
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(200),
+                                                        child: Image.file(
+                                                          _image!,
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      )),
+                                            )),
+                                        Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 90, left: 60),
+                                            child: InkWell(
+                                              onTap: () => imagePicker
+                                                  .showDialog(context),
+                                              child: Container(
+                                                height: 30,
+                                                width: 30,
                                                 decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(100),
-                                                    color: AppTheme().color_white,
-                                                    border: Border.all(
-                                                        color: AppTheme().color_white,
-                                                        width: 5
-                                                    )
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          100),
+                                                  color: AppTheme().color_white,
                                                 ),
-                                                child:Icon(Icons.person,size: 40,
-                                                  color: AppTheme().color_red,)
-
-                                            )
-                                                : new Container(
-                                                decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(100),
-                                                    color: AppTheme().color_white,
-                                                    border: Border.all(
-                                                        color: AppTheme().color_white,
-                                                        width: 5
-                                                    )
+                                                child: Icon(
+                                                  Icons.add,
+                                                  color: AppTheme().color_red,
                                                 ),
-                                                child: ClipRRect(
-                                                  borderRadius: BorderRadius.circular(200),
-
-                                                  child: Image.file(_image!,fit: BoxFit.cover,),
-                                                )
-
-                                            ),
-                                          )
+                                              ),
+                                            ))
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 0.0, top: 30.0),
+                                child: Text(
+                                  "Edit Profile",
+                                  style: TextStyle(
+                                      color: AppTheme().color_white,
+                                      fontSize: 23.0,
+                                      fontFamily: "Montserrat-SemiBold"
+                                      // fontWeight: FontWeight.bold,
                                       ),
-                                      Padding(
-                                          padding: const EdgeInsets.only(top: 90,left: 60),
-                                          child: InkWell(
-                                            onTap: ()=> imagePicker.showDialog(context),
-                                            child: new Container(
-                                              height: 30,
-                                              width: 30,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 16,
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 30, left: 20, right: 20),
+                                    child: Container(
+                                      //margin: const EdgeInsets.only(left: 15.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: <Widget>[
+                                          Expanded(
+                                            flex: 1,
+                                            child: Container(
+                                              height: 45,
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(100),
-                                                color: AppTheme().color_white,
-
-                                              ),
-                                              child: Icon(Icons.add,color: AppTheme().color_red,),
-                                            ),
-                                          )
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 0.0, top: 30.0),
-                              child: Text(
-                                "Edit Profile",
-                                style: TextStyle(
-                                    color: AppTheme().color_white,
-                                    fontSize: 23.0,
-                                    fontFamily: "Montserrat-SemiBold"
-                                  // fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 16,
-                            ),
-
-
-                            Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 30,left: 20,right: 20),
-                                  child: Container(
-                                    //margin: const EdgeInsets.only(left: 15.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: <Widget>[
-                                        Expanded(
-                                          child: Container(
-                                            height: 45,
-                                            decoration: BoxDecoration(
-                                              color: AppTheme().color_white,
-                                              borderRadius: BorderRadius.circular(50)
-                                            ),
-                                            child: TextFormField(
-
-                                              textAlign: TextAlign.center,
-                                              decoration: InputDecoration(
-                                                border: InputBorder.none,
-                                                contentPadding: EdgeInsets.only(left:0.0,top: 0.0,bottom: 0.0),
-                                                //isDense: true,
-                                                hintStyle:TextStyle(
-                                                  color: AppTheme().color_red,
-                                                  fontFamily: "Montserrat-SemiBold",
-                                                  fontSize: 16,) ,
-                                                hintText: "Name"
-
-                                              ),
-                                              controller: nameController,
-                                              style: TextStyle(
-                                                  color: AppTheme().color_red,
-                                                  fontFamily: "Montserrat-SemiBold",
-                                                  fontSize: 16,)
-                                                  //fontWeight: FontWeight.w400),
-                                            ),
-                                          ),
-                                          flex: 1,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 18,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 20,left: 20,right: 20),
-                                  child: Container(
-                                    //margin: const EdgeInsets.only(left: 15.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: <Widget>[
-
-                                        Expanded(
-                                          child: Container(
-                                            height: 45,
-                                            decoration: BoxDecoration(
-                                                color: AppTheme().color_white,
-                                                borderRadius: BorderRadius.circular(50)
-                                            ),
-                                            child: TextField(
-                                              //maxLength: 10,
-                                              textAlign: TextAlign.center,
-                                              decoration: InputDecoration(
-                                                border: InputBorder.none,
-                                                contentPadding: EdgeInsets.only(left:0.0,top: 0.0,bottom: 0.0),
-                                                //isDense: true,
-                                                  hintStyle:TextStyle(
+                                                  color: AppTheme().color_white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          50)),
+                                              child: TextFormField(
+                                                  textAlign: TextAlign.center,
+                                                  decoration: InputDecoration(
+                                                      border: InputBorder.none,
+                                                      contentPadding:
+                                                          const EdgeInsets.only(
+                                                              left: 0.0,
+                                                              top: 0.0,
+                                                              bottom: 0.0),
+                                                      //isDense: true,
+                                                      hintStyle: TextStyle(
+                                                        color: AppTheme()
+                                                            .color_red,
+                                                        fontFamily:
+                                                            "Montserrat-SemiBold",
+                                                        fontSize: 16,
+                                                      ),
+                                                      hintText: "Name"),
+                                                  controller: nameController,
+                                                  style: TextStyle(
                                                     color: AppTheme().color_red,
-                                                    fontFamily: "Montserrat-SemiBold",
-                                                    fontSize: 16,) ,
-                                                  hintText: "Contact No."
-                                              ),
-                                              controller: phoneController,
-                                              keyboardType: TextInputType.phone,
-
-                                              style: TextStyle(
-                                                color: AppTheme().color_red,
-                                                fontFamily: "Montserrat-SemiBold",
-                                                fontSize: 16,)
+                                                    fontFamily:
+                                                        "Montserrat-SemiBold",
+                                                    fontSize: 16,
+                                                  )
+                                                  //fontWeight: FontWeight.w400),
+                                                  ),
                                             ),
                                           ),
-                                          flex: 1,
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                                /* SizedBox(
+                                  const SizedBox(
+                                    height: 18,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 20, left: 20, right: 20),
+                                    child: Container(
+                                      //margin: const EdgeInsets.only(left: 15.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: <Widget>[
+                                          Expanded(
+                                            flex: 1,
+                                            child: Container(
+                                              height: 45,
+                                              decoration: BoxDecoration(
+                                                  color: AppTheme().color_white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          50)),
+                                              child: TextField(
+                                                  //maxLength: 10,
+                                                  textAlign: TextAlign.center,
+                                                  decoration: InputDecoration(
+                                                      border: InputBorder.none,
+                                                      contentPadding:
+                                                          const EdgeInsets.only(
+                                                              left: 0.0,
+                                                              top: 0.0,
+                                                              bottom: 0.0),
+                                                      //isDense: true,
+                                                      hintStyle: TextStyle(
+                                                        color: AppTheme()
+                                                            .color_red,
+                                                        fontFamily:
+                                                            "Montserrat-SemiBold",
+                                                        fontSize: 16,
+                                                      ),
+                                                      hintText: "Contact No."),
+                                                  controller: phoneController,
+                                                  keyboardType:
+                                                      TextInputType.phone,
+                                                  style: TextStyle(
+                                                    color: AppTheme().color_red,
+                                                    fontFamily:
+                                                        "Montserrat-SemiBold",
+                                                    fontSize: 16,
+                                                  )),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  /* SizedBox(
                                 height: 14,
                               ),
                               Container(
@@ -469,119 +505,149 @@ class _ProfileUpdate extends State<ProfileUpdate>
                                   ],
                                 ),
                               ),*/
-                                SizedBox(
-                                  height: 18,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 20,left: 20,right: 20),
-                                  child: Container(
-                                    //margin: const EdgeInsets.only(left: 15.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: <Widget>[
-
-                                        Expanded(
-                                          child: Container(
-                                            height: 45,
-                                            decoration: BoxDecoration(
-                                                color: AppTheme().color_white,
-                                                borderRadius: BorderRadius.circular(50)
-                                            ),
-                                            child: TextFormField(
-                                              textAlign: TextAlign.center,
-                                              decoration: InputDecoration(
-                                                border: InputBorder.none,
-                                                contentPadding: EdgeInsets.only(left:0.0,top: 0.0,bottom: 0.0),
-                                                //isDense: true,
-                                                //enabled: false,
-                                                  hintStyle:TextStyle(
+                                  const SizedBox(
+                                    height: 18,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 20, left: 20, right: 20),
+                                    child: Container(
+                                      //margin: const EdgeInsets.only(left: 15.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: <Widget>[
+                                          Expanded(
+                                            flex: 1,
+                                            child: Container(
+                                              height: 45,
+                                              decoration: BoxDecoration(
+                                                  color: AppTheme().color_white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          50)),
+                                              child: TextFormField(
+                                                  textAlign: TextAlign.center,
+                                                  decoration: InputDecoration(
+                                                      border: InputBorder.none,
+                                                      contentPadding:
+                                                          const EdgeInsets.only(
+                                                              left: 0.0,
+                                                              top: 0.0,
+                                                              bottom: 0.0),
+                                                      //isDense: true,
+                                                      //enabled: false,
+                                                      hintStyle: TextStyle(
+                                                        color: AppTheme()
+                                                            .color_red,
+                                                        fontFamily:
+                                                            "Montserrat-SemiBold",
+                                                        fontSize: 16,
+                                                      ),
+                                                      hintText: "Password"),
+                                                  controller:
+                                                      passwordController,
+                                                  style: TextStyle(
                                                     color: AppTheme().color_red,
-                                                    fontFamily: "Montserrat-SemiBold",
-                                                    fontSize: 16,) ,
-                                                  hintText: "Password"
-
-                                              ),
-                                              controller: passwordController,
-                                              style: TextStyle(
-                                                color: AppTheme().color_red,
-                                                fontFamily: "Montserrat-SemiBold",
-                                                fontSize: 16,)
+                                                    fontFamily:
+                                                        "Montserrat-SemiBold",
+                                                    fontSize: 16,
+                                                  )),
                                             ),
                                           ),
-                                          flex: 1,
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 15.0),
-                                  child: ButtonTheme(
-
-                                    minWidth: 200.0,
-                                    child: ElevatedButton(
-                                        child: Text("SAVE",
-                                          style: TextStyle(color: Colors.white,fontWeight: FontWeight.normal,fontSize: 17),),
-                                        onPressed: () {
-                                          if (_formkey.currentState!.validate()) {
-                                            if(nameController!.text.isEmpty){
-                                              Toast.show("" + "Please enter name",
-                                                  duration: Toast.lengthLong, gravity: Toast.top,);
-                                            } else if (nameController!.text.isEmpty&&phoneController!.text.isEmpty) {
-                                              Toast.show("" + "Please enter name and Phone number",
-                                                  duration: Toast.lengthLong, gravity: Toast.top,);
+                                  Container(
+                                    margin: const EdgeInsets.only(top: 15.0),
+                                    child: ButtonTheme(
+                                      minWidth: 200.0,
+                                      child: ElevatedButton(
+                                          child: const Text(
+                                            "SAVE",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.normal,
+                                                fontSize: 17),
+                                          ),
+                                          onPressed: () {
+                                            if (_formkey.currentState!
+                                                .validate()) {
+                                              if (nameController!
+                                                  .text.isEmpty) {
+                                                Toast.show(
+                                                  "" + "Please enter name",
+                                                  duration: Toast.lengthLong,
+                                                  gravity: Toast.top,
+                                                );
+                                              } else if (nameController!
+                                                      .text.isEmpty &&
+                                                  phoneController!
+                                                      .text.isEmpty) {
+                                                Toast.show(
+                                                  "" +
+                                                      "Please enter name and Phone number",
+                                                  duration: Toast.lengthLong,
+                                                  gravity: Toast.top,
+                                                );
+                                              } else if (phoneController!
+                                                  .text.isEmpty) {
+                                                Toast.show(
+                                                  "" +
+                                                      "Please enter Phone number",
+                                                  duration: Toast.lengthLong,
+                                                  gravity: Toast.top,
+                                                );
+                                              } else if (phoneController!
+                                                      .text.length !=
+                                                  10) {
+                                                Toast.show(
+                                                  "" +
+                                                      "contact must be of 10 digits",
+                                                  duration: Toast.lengthLong,
+                                                  gravity: Toast.top,
+                                                );
+                                              } else {
+                                                updateProfile(
+                                                    nameController!.text,
+                                                    phoneController!.text,
+                                                    "Male",
+                                                    "01/01/1990",
+                                                    "abc@gmail.com",
+                                                    "ljhasfdnnlzs568794544",
+                                                    id,
+                                                    _image);
+                                              }
                                             }
-                                            else if (phoneController!.text.isEmpty) {
-                                              Toast.show("" + "Please enter Phone number",
-                                                  duration: Toast.lengthLong, gravity: Toast.top,);
-                                            }else if(phoneController!.text.length != 10){
-                                              Toast.show("" + "contact must be of 10 digits",
-                                                  duration: Toast.lengthLong, gravity: Toast.top,);
-                                            } else{
-                                              updateProfile(
-                                                  nameController!.text,
-                                                  phoneController!.text,
-                                                  "Male",
-                                                  "01/01/1990",
-                                                  "abc@gmail.com",
-                                                  "ljhasfdnnlzs568794544",
-                                                  id,
-                                                  _image);
-                                            }
-
-                                          }
-                                        }
+                                          }),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
-      )
-    );
+          ],
+        ));
   }
-
 
   @override
   void initState() {
     super.initState();
     getCredential();
 
-
-    _controller = new AnimationController(
+    _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 500),
     );
-    imagePicker = new ImagePickerHandler(this, _controller);
+    imagePicker = ImagePickerHandler(this, _controller);
     imagePicker.init();
   }
 
@@ -597,6 +663,7 @@ class _ProfileUpdate extends State<ProfileUpdate>
       this._image = _image;
     });
   }
+
   getCredential() async {
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
@@ -604,31 +671,24 @@ class _ProfileUpdate extends State<ProfileUpdate>
       if (checkValue != null) {
         if (checkValue!) {
           name = sharedPreferences.getString("name");
-          if(name==null){
-            name="";
-          }
-          nameController =new TextEditingController(text: "$name");
+          name ??= "";
+          nameController = TextEditingController(text: "$name");
           print("$name");
           id = sharedPreferences.getString("id");
           gender = sharedPreferences.getString("gender");
-          genderController =new TextEditingController(text: "$gender");
+          genderController = TextEditingController(text: "$gender");
           mobile = sharedPreferences.getString("mobile");
-          if(mobile==null){
-            mobile="";
-          }
-          phoneController =new TextEditingController(text: "$mobile");
+          mobile ??= "";
+          phoneController = TextEditingController(text: "$mobile");
 
           dob = sharedPreferences.getString("dob");
-          dobController =new TextEditingController(text: "$dob");
+          dobController = TextEditingController(text: "$dob");
           email = sharedPreferences.getString("email");
-          mailController =new TextEditingController(text: "$email");
+          mailController = TextEditingController(text: "$email");
           password = sharedPreferences.getString("password");
-          if(password==null){
-            password="";
-          }
-          passwordController =new TextEditingController(text: "$password");
+          password ??= "";
+          passwordController = TextEditingController(text: "$password");
           profile_pic = sharedPreferences.getString("profile_pic");
-
         } else {
           name.clear();
           id.clear();
@@ -653,10 +713,10 @@ class _ProfileUpdate extends State<ProfileUpdate>
       sharedPreferences.setBool("check", checkValue!);
       sharedPreferences.setString("name", response!["Name"]);
       sharedPreferences.setString("id", response["Id"].toString());
-     /* sharedPreferences.setString("gender", response["Gender"]);
+      /* sharedPreferences.setString("gender", response["Gender"]);
       sharedPreferences.setString("dob", response["DOB"]);*/
       sharedPreferences.setString("mobile", response["Mobile"]);
-     /* sharedPreferences.setString("email", response["Email"]);*/
+      /* sharedPreferences.setString("email", response["Email"]);*/
       sharedPreferences.setString("password", response["Password"]);
       sharedPreferences.setString("profile_pic", response["ProfilePic"]);
       sharedPreferences.commit();
@@ -664,16 +724,24 @@ class _ProfileUpdate extends State<ProfileUpdate>
   }
 
   var returnData;
-  Future<Map<String, dynamic>> updateProfile(String username, String phone,
-      String gender,String dob,String email,String dev,String? id, File? image) async {
+  Future<Map<String, dynamic>> updateProfile(
+      String username,
+      String phone,
+      String gender,
+      String dob,
+      String email,
+      String dev,
+      String? id,
+      File? image) async {
     print("$username$phone$gender$dob$email$password$id");
-    pr = new ProgressDialog(context: context, );
-    pr.show();
+    pr = ProgressDialog(
+      context: context,
+    );
+    pr.show(msg: "Loading..", barrierDismissible: true);
     final imageUploadRequest =
-    http.MultipartRequest('POST', Uri.parse(APIS.updateProfile));
+        http.MultipartRequest('POST', Uri.parse(APIS.updateProfile));
 
-
-    if(image==null){
+    if (image == null) {
 //  imageUploadRequest.fields['ext'] = mimeTypeData[1];
       imageUploadRequest.fields['username'] = username;
       imageUploadRequest.fields['phone'] = phone;
@@ -682,11 +750,9 @@ class _ProfileUpdate extends State<ProfileUpdate>
       imageUploadRequest.fields['email'] = email;
       imageUploadRequest.fields['deviceToken'] = dev;
       imageUploadRequest.fields['id'] = id!;
-
-    }
-    else{
+    } else {
       final mimeTypeData =
-      lookupMimeType(image.path, headerBytes: [0xFF, 0xD8])!.split('/');
+          lookupMimeType(image.path, headerBytes: [0xFF, 0xD8])!.split('/');
       final file = await http.MultipartFile.fromPath('file', image.path,
           contentType: MediaType(mimeTypeData[0], mimeTypeData[1]));
 
@@ -701,35 +767,38 @@ class _ProfileUpdate extends State<ProfileUpdate>
       imageUploadRequest.files.add(file);
     }
 
-
     try {
       final streamedResponse = await imageUploadRequest.send();
       final response = await http.Response.fromStream(streamedResponse);
       var parsedJson = json.decode(response.body);
       value = parsedJson['data'];
-      print("Status = " + parsedJson['status']);
+      
       if (parsedJson['status'] == "1") {
         pr.close();
-        Toast.show("" + parsedJson['message'],
-            duration: Toast.lengthShort, gravity: Toast.bottom,);
+        Toast.show(
+          parsedJson['message'],
+          duration: Toast.lengthShort,
+          gravity: Toast.bottom,
+        );
         setState(() {
           _onChanged(true, value);
         });
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) => const HomePage()),
         );
       } else {
         pr.close();
-        Toast.show("" + parsedJson['message'],
-            duration: Toast.lengthShort, gravity: Toast.bottom,);
-
+        Toast.show(
+          parsedJson['message'],
+          duration: Toast.lengthShort,
+          gravity: Toast.bottom,
+        );
       }
       return parsedJson;
     } catch (e) {
       print(e);
     }
     return returnData;
-
   }
 }

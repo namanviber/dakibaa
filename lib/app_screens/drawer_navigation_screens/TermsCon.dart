@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:dakibaa/Colors/colors.dart';
@@ -53,9 +53,9 @@ class TermsSettingPage extends State<TermsCondition> {
               onTap: () {
                 Navigator.of(context).pop();
               },
-              child: new Container(
+              child: SizedBox(
                 height: 18,
-                child: new Image.asset(
+                child: Image.asset(
                   "images/back_button.png",
                 ),
               ),
@@ -72,23 +72,23 @@ class TermsSettingPage extends State<TermsCondition> {
               0.0,
             ]),
             image: DecorationImage(
-              image: AssetImage("images/services_background.jpg"),
+              image: const AssetImage("images/services_background.jpg"),
               fit: BoxFit.cover,
-              colorFilter: new ColorFilter.mode(
+              colorFilter: ColorFilter.mode(
                   Colors.black.withOpacity(0.3), BlendMode.dstATop),
             )),
         child: Column(
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 70,
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Column(
                 children: <Widget>[
                   Center(
                     child: Container(
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                         left: 0.0,
                         right: 0.0,
                         top: 20.0,
@@ -103,7 +103,7 @@ class TermsSettingPage extends State<TermsCondition> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Center(
@@ -116,7 +116,7 @@ class TermsSettingPage extends State<TermsCondition> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   )
                 ],
@@ -129,13 +129,13 @@ class TermsSettingPage extends State<TermsCondition> {
                   ? Padding(
                 padding: const EdgeInsets.only(
                     left: 20, right: 20, bottom: 50),
-                child: new Container(
+                child: Container(
                   height: MediaQuery.of(context).size.height * 0.5,
                   decoration: BoxDecoration(
                       color: AppTheme().color_white,
                       borderRadius: BorderRadius.circular(15)),
                   child: Container(
-                    margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                     child: SingleChildScrollView(
                       child: Text(
                         "$Tc1.\n\n$Tc2.\n\n$Tc3.\n\n$Tc4.\n\n$Tc5.",
@@ -183,11 +183,11 @@ class TermsSettingPage extends State<TermsCondition> {
     return Shimmer.fromColors(
         baseColor: Colors.grey[300]!,
         highlightColor: Colors.grey[100]!,
-        child: new Padding(
-          padding: new EdgeInsets.all(10.0),
-          child: new Container(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Container(
             height: MediaQuery.of(context).size.height * 0.5,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(10)),
               color: Colors.white,
             ),

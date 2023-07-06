@@ -15,16 +15,16 @@ class _Number_of_PersonState extends State<Number_of_Person>
     implements ServicesModelContract {
   late ServicesModelPresenter _presenter;
   _Number_of_PersonState() {
-    _presenter = new ServicesModelPresenter(this);
+    _presenter = ServicesModelPresenter(this);
   }
   var pr;
   double? screenHeight;
   double? screenwidth;
   bool status = false;
   bool? checkValue;
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String? personError;
-  TextEditingController personContoller = new TextEditingController();
+  TextEditingController personContoller = TextEditingController();
   var name, email, id, gender, mobile, noperson, phone, dob;
 
   bool validation() {
@@ -67,9 +67,9 @@ class _Number_of_PersonState extends State<Number_of_Person>
       backgroundColor: AppTheme().color_black,
       body: GestureDetector(
         onTap: () {
-          FocusScope.of(context).requestFocus(new FocusNode());
+          FocusScope.of(context).requestFocus(FocusNode());
         },
-        child: new ListView(
+        child: ListView(
           children: [
             Column(
               children: [
@@ -82,9 +82,9 @@ class _Number_of_PersonState extends State<Number_of_Person>
                         0.0,
                       ]),
                       image: DecorationImage(
-                        image: AssetImage("images/services_background.jpg"),
+                        image: const AssetImage("images/services_background.jpg"),
                         fit: BoxFit.cover,
-                        colorFilter: new ColorFilter.mode(
+                        colorFilter: ColorFilter.mode(
                             Colors.black.withOpacity(0.3), BlendMode.dstATop),
                       )),
                   child: Container(
@@ -93,14 +93,14 @@ class _Number_of_PersonState extends State<Number_of_Person>
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.only(top: 30, left: 20),
-                          child: new Row(
+                          child: Row(
                             children: [
-                              new InkWell(
+                              InkWell(
                                 onTap: () {
                                   _scaffoldKey.currentState!.openDrawer();
                                 },
-                                child: new Container(
-                                  child: new Image.asset("images/menu.png"),
+                                child: Container(
+                                  child: Image.asset("images/menu.png"),
                                 ),
                               ),
                             ],
@@ -124,7 +124,7 @@ class _Number_of_PersonState extends State<Number_of_Person>
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(top: 90),
+                          padding: const EdgeInsets.only(top: 90),
                           child: Center(
                               child: Text(
                             "Number of Guests",
@@ -140,8 +140,8 @@ class _Number_of_PersonState extends State<Number_of_Person>
                                   ? 0
                                   : MediaQuery.of(context).size.height / 25,
                               left: 60),
-                          child: new Container(
-                            child: new Row(
+                          child: Container(
+                            child: Row(
                               children: [
                                 Text(
                                   personError == null ? "" : personError!,
@@ -155,7 +155,7 @@ class _Number_of_PersonState extends State<Number_of_Person>
                         ),
                         Padding(
                           padding:
-                              EdgeInsets.only(left: 50.0, top: 8, right: 50.0),
+                              const EdgeInsets.only(left: 50.0, top: 8, right: 50.0),
                           child: Container(
                               height: 45,
                               decoration: BoxDecoration(
@@ -185,12 +185,12 @@ class _Number_of_PersonState extends State<Number_of_Person>
                                   controller: personContoller,
                                   textAlign: TextAlign.center,
                                   keyboardType:
-                                      TextInputType.numberWithOptions(),
-                                  decoration: new InputDecoration(
+                                      const TextInputType.numberWithOptions(),
+                                  decoration: InputDecoration(
                                     border: InputBorder.none,
                                     contentPadding: const EdgeInsets.symmetric(
                                         vertical: 10.0),
-                                    hintStyle: new TextStyle(
+                                    hintStyle: TextStyle(
                                         color: AppTheme().color_red,
                                         fontFamily: 'Montserrat-SemiBold',
                                         fontSize: 18),
@@ -244,7 +244,7 @@ class _Number_of_PersonState extends State<Number_of_Person>
   void onServicesModelError(String errorTxt) {
     // TODO: implement onServicesModelError
     pr.close();
-    print("services error :  " + errorTxt);
+    
   }
 
   @override

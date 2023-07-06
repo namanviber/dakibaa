@@ -11,7 +11,7 @@ class _ItemDescriptionState extends State<ItemDescription> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: new Container(
+      body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
@@ -22,39 +22,39 @@ class _ItemDescriptionState extends State<ItemDescription> {
               ],
             ),
             image: DecorationImage(
-              image: AssetImage("images/services_background.jpg"),
+              image: const AssetImage("images/services_background.jpg"),
               fit: BoxFit.cover,
-              colorFilter: new ColorFilter.mode(
+              colorFilter: ColorFilter.mode(
                   Colors.black.withOpacity(0.3), BlendMode.dstATop),
             )),
 
-        child: new ListView(
+        child: ListView(
           shrinkWrap: true,
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 20),
-              child: new Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  new Expanded(
+                  Expanded(
                       flex: 1,
-                      child: new InkWell(
+                      child: InkWell(
                         onTap: () {
                           Navigator.of(context).pop();
                           //_scaffoldKey.currentState.openDrawer();
                         },
-                        child: new Container(
+                        child: SizedBox(
                           height: 18,
-                          child: new Image.asset(
+                          child: Image.asset(
                             "images/back_button.png",
                           ),
                         ),
                       )),
                   //
 
-                  new Expanded(
+                  Expanded(
                     flex: 4,
-                    child: new Container(
+                    child: SizedBox(
                       height: 45,
                       child: Padding(
                         padding: const EdgeInsets.only(left: 15, top: 10),
@@ -68,9 +68,9 @@ class _ItemDescriptionState extends State<ItemDescription> {
                       ),
                     ),
                   ),
-                  new Expanded(
+                  Expanded(
                     flex: 3,
-                    child: new Container()
+                    child: Container()
                   ),
                   /*new Expanded(
                         child:Padding(
@@ -113,24 +113,24 @@ class _ItemDescriptionState extends State<ItemDescription> {
             ),*/
             Padding(
               padding: const EdgeInsets.only(left: 15,right: 15,top: 30),
-              child: new Container(
+              child: Container(
 
                 decoration: BoxDecoration(
                   color: AppTheme().color_white,
-                  borderRadius: BorderRadius.all(Radius.circular(10)  ),
-                    boxShadow: [
+                  borderRadius: const BorderRadius.all(Radius.circular(10)  ),
+                    boxShadow: const [
                       BoxShadow(
                           color: Colors.black, blurRadius: 5, offset: Offset(0, 5))
                     ],
                 ),
-                child:new Column(
+                child:Column(
                   children: [
-                   new Container(
+                   SizedBox(
                      height: 200,
                      child:  Padding(
                        padding: const EdgeInsets.all(10),
                        child: ClipRRect(
-                         borderRadius: BorderRadius.all(Radius.circular(10)  ),
+                         borderRadius: const BorderRadius.all(Radius.circular(10)  ),
                          child: Image.asset(
                            imageProduct,
                            fit: BoxFit.cover,
@@ -141,87 +141,72 @@ class _ItemDescriptionState extends State<ItemDescription> {
                    ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10,top: 10),
-                      child: new Row(
+                      child: Row(
                         children: [
-                          new Container(
-                            child: new Text(titlename==null?"":titlename!,style: TextStyle(color: AppTheme().color_black,fontFamily: "Montserrat-SemiBold",fontSize: 17),
-                          ))
+                          Text(titlename==null?"":titlename!,style: TextStyle(color: AppTheme().color_black,fontFamily: "Montserrat-SemiBold",fontSize: 17),
+                          )
                         ],
                       ),
                     ),
 
                     Padding(
                       padding: const EdgeInsets.only(left: 10,top: 10,right: 10),
-                      child: new Wrap(
+                      child: Wrap(
                         children: [
-                          new Container(
-                              child: new Text(descp==null?"":descp!,style: TextStyle(color: AppTheme().color_black,
-                                  fontFamily: "Montserrat-SemiBold",fontSize: 14),
-                              ))
+                          Text(descp==null?"":descp!,style: TextStyle(color: AppTheme().color_black,
+                              fontFamily: "Montserrat-SemiBold",fontSize: 14),
+                          )
                         ],
                       ),
                     ),
-                    titlename=="Glassware"?glasswarename==null?new Container():Padding(
+                    titlename=="Glassware"?glasswarename==null?Container():Padding(
                       padding: const EdgeInsets.only(top: 10),
-                      child: new Container(
-                        child: ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: glasswarename.length,
-                          itemBuilder: (context,index){
-                            return Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: new Container(
-                                child: new Row(
-                                  children: [
-                                    new Container(
-                                      child: Text(glasswarename[index],style: TextStyle(
-                                          color: AppTheme().color_black,
-                                          fontFamily: "Montserrat-SemiBold",fontSize: 14
-                                      ),),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        ),
+                      child: ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: glasswarename.length,
+                        itemBuilder: (context,index){
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Row(
+                              children: [
+                                Text(glasswarename[index],style: TextStyle(
+                                    color: AppTheme().color_black,
+                                    fontFamily: "Montserrat-SemiBold",fontSize: 14
+                                ),)
+                              ],
+                            ),
+                          );
+                        },
                       ),
                     ):
-                    titlename=="Beverage"?baveragename==null?new Container():Padding(
+                    titlename=="Beverage"?baveragename==null?Container():Padding(
                       padding: const EdgeInsets.only(top: 10),
-                      child: new Container(
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: baveragename.length,
-                          itemBuilder: (context,index){
-                            return Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: new Container(
-                                child: new Row(
-                                  children: [
-                                    new Container(
-                                      child: Text(baveragename[index],style: TextStyle(
-                                          color: AppTheme().color_black,
-                                          fontFamily: "Montserrat-SemiBold",fontSize: 14
-                                      ),),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        ),
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: baveragename.length,
+                        itemBuilder: (context,index){
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Row(
+                              children: [
+                                Text(baveragename[index],style: TextStyle(
+                                    color: AppTheme().color_black,
+                                    fontFamily: "Montserrat-SemiBold",fontSize: 14
+                                ),)
+                              ],
+                            ),
+                          );
+                        },
                       ),
-                    ):new Container(),
+                    ):Container(),
                     Padding(
                       padding: const EdgeInsets.only(left: 10,top: 10,bottom: 10),
-                      child: new Row(
+                      child: Row(
                         children: [
-                          new Container(
-                              child: new Text(price==null?"":"Price   "+"₹"+price!,style: TextStyle(color: AppTheme().color_red,fontFamily: "Montserrat-SemiBold",fontSize: 18),
-                              ))
+                          Text(price==null?"":"Price   ₹${price!}",style: TextStyle(color: AppTheme().color_red,fontFamily: "Montserrat-SemiBold",fontSize: 18),
+                          )
                         ],
                       ),
                     ),
@@ -236,7 +221,7 @@ class _ItemDescriptionState extends State<ItemDescription> {
                 onTap: (){
                   Navigator.of(context).pop();
                 },
-                child: new Container(
+                child: Container(
                     height: 45,
                     decoration: BoxDecoration(
                       color: AppTheme().color_red,

@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:dakibaa/Colors/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sn_progress_dialog/sn_progress_dialog.dart';import '../../rest_api/ApiList.dart';
-import '../../forget_form.dart';
+import 'forget_form.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:toast/toast.dart';
@@ -31,7 +31,7 @@ class _ForgotPass extends State<ForgotPass> {
       child: GestureDetector(
         onTap: () {
 
-          FocusScope.of(context).requestFocus(new FocusNode());
+          FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Scaffold(
             body: Container(
@@ -42,25 +42,25 @@ class _ForgotPass extends State<ForgotPass> {
 
                   ),
                   image: DecorationImage(
-                    image: AssetImage("images/services_background.jpg"),
+                    image: const AssetImage("images/services_background.jpg"),
                     fit: BoxFit.cover,
-                    colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.3), BlendMode.dstATop),
+                    colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.3), BlendMode.dstATop),
                   )
               ),
               child: ListView(
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(top: 30,left: 20),
-                    child: new Row(
+                    child: Row(
                       children: [
-                        new InkWell(
+                        InkWell(
                           onTap: (){
                             Navigator.of(context).pop();
                             //_scaffoldKey.currentState.openDrawer();
                           },
-                          child: new Container(
+                          child: SizedBox(
                             height: 18,
-                            child: new Image.asset("images/back_button.png",),
+                            child: Image.asset("images/back_button.png",),
                           ),
                         )
                       ],
@@ -81,18 +81,18 @@ class _ForgotPass extends State<ForgotPass> {
                               fontSize: 22),
                         )),
                   ),
-                  SizedBox(height: 40.0),
+                  const SizedBox(height: 40.0),
 
                   Container(
                     width: 100,
                     height: 100,
                     child: Container(
-                        margin: EdgeInsets.all(30.0),
+                        margin: const EdgeInsets.all(30.0),
                         height: 30.0,
                         width: 30.0,
                         child: Image.asset('images/forgot.png',
                         )),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         color: Color.fromRGBO(255,255,255,0.3)),
                   ),
@@ -115,8 +115,8 @@ class _ForgotPass extends State<ForgotPass> {
                   ),*/
                   Container(
                       alignment: Alignment.center,
-                      padding: EdgeInsets.all(10),
-                      child: Text(
+                      padding: const EdgeInsets.all(10),
+                      child: const Text(
                         'Forgot Password ?',
                         style: TextStyle(fontSize: 20,
                             fontWeight: FontWeight.w500,
@@ -124,8 +124,8 @@ class _ForgotPass extends State<ForgotPass> {
                       )),
                   Container(
                       alignment: Alignment.center,
-                      padding: EdgeInsets.only(left: 10, right: 10.0, top: 8.0),
-                      child: Text(
+                      padding: const EdgeInsets.only(left: 10, right: 10.0, top: 8.0),
+                      child: const Text(
                         'Enter the Phone Number',
                         style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500,
                             fontFamily: "Montserrat-SemiBold",color: Colors.white),
@@ -133,86 +133,77 @@ class _ForgotPass extends State<ForgotPass> {
                   Container(
                       alignment: Alignment.center,
                       padding:
-                      EdgeInsets.only(left: 10, right: 10.0, top: 0, bottom: 0),
-                      child: Text(
+                      const EdgeInsets.only(left: 10, right: 10.0, top: 0, bottom: 0),
+                      child: const Text(
                         'associated with your account',
                         style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500,
                             fontFamily: "Montserrat-SemiBold",color: Colors.white),
                       )),
 
                   Container(
-                    margin: EdgeInsets.only(top: 15.0,left: 170.0,right: 170.0),
+                    margin: const EdgeInsets.only(top: 15.0,left: 170.0,right: 170.0),
                     alignment: Alignment.center,
-                    child: Divider(height: 2.0,thickness: 2.0,color: Colors.white,),
+                    child: const Divider(height: 2.0,thickness: 2.0,color: Colors.white,),
                   ),
+
                   Container(
-                    margin: EdgeInsets.only(left: 20.0,top: 30.0,right: 20.0),
+                    margin: const EdgeInsets.only(left: 20.0, top: 15.0, right: 20.0),
                     child: TextFormField(
                       maxLength: 10,
-                      textAlign: TextAlign.center,
-                      validator: (value){
-                        if(value!.isEmpty){
-                          return 'Enter your contact number';
-                        }else if(value.length != 10){
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter your contact';
+                        } else if (value.length != 10) {
                           return "contact must be of 10 digits";
-                        }
-                        else{
+                        } else {
                           return null;
                         }
                       },
-                      style: TextStyle(
-                        color: AppTheme().color_red,
-                        fontFamily: "Montserrat-SemiBold",
-                        fontSize: 17
-                      ),
-                      keyboardType: TextInputType.phone,
+                      textAlign: TextAlign.center,
                       controller: user_NameController,
-                      decoration: new InputDecoration(
-                          border: new OutlineInputBorder(
-                            borderSide: BorderSide(width: 1,color: Colors.white),
-
-                            borderRadius: const BorderRadius.all(
-                              const Radius.circular(50.0),
+                      keyboardType: TextInputType.phone,
+                      decoration: InputDecoration(
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(15.0),
                             ),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                            borderSide: BorderSide(width: 1,color: Colors.white),
+                          focusedBorder: const OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(50.0)),
                           ),
-                          disabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                            borderSide: BorderSide(width: 1,color: Colors.white),
+                          disabledBorder: const OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(50.0)),
                           ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                            borderSide: BorderSide(width: 1,color: Colors.white),
+                          enabledBorder: const OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(50.0)),
                           ),
-                          errorStyle: TextStyle(
-                            color: Colors.white,
-                            wordSpacing: 1.0,
+                          errorBorder: const OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(50.0)),
                           ),
-                          errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                              borderSide: BorderSide(width: 1,color: Colors.white)
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                              borderSide: BorderSide(width: 1,color: Colors.white)
+                          focusedErrorBorder: const OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(50.0)),
                           ),
                           filled: true,
+                          contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          errorStyle: TextStyle(
+                              fontSize: 15,
+                              fontFamily: "Montserrat-SemiBold",
+                              color: AppTheme().color_white),
                           hintStyle: TextStyle(
                               color: AppTheme().color_red,
-                              fontFamily: "Montserrat-SemiBold",
-                              fontSize: 17
-                          ),
-                          hintText: " Phone No.",
+                              fontFamily: "Montserrat-SemiBold"),
+                          hintText: "Contact No.",
                           counterText: "",
                           fillColor: AppTheme().color_white),
-
-
                     ),
                   ),
-                  SizedBox(height: 20,),
+
+                  const SizedBox(height: 20,),
 
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 90),
@@ -279,8 +270,8 @@ class _ForgotPass extends State<ForgotPass> {
   }
 
   Future<Map<String, dynamic>> getCheckData() async {
-    pr = new ProgressDialog(context: context, );
-    pr.show();
+    pr = ProgressDialog(context: context, );
+    pr.show(msg: "Loading..", barrierDismissible: true);
     // print(token);
     final response = await http.post(Uri.parse(APIS.checkRegistration),
         headers: {'Accept': 'application/json'},
@@ -288,10 +279,8 @@ class _ForgotPass extends State<ForgotPass> {
         {
           "value":user_NameController.text
         });
-    print(response.body);
     var parsedJson = json.decode(response.body);
     value = parsedJson['result'];
-    print("Status = " + parsedJson['status']);
     if (parsedJson['status'] == "1") {
       pr.close();
       Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
@@ -301,19 +290,14 @@ class _ForgotPass extends State<ForgotPass> {
         context,
         MaterialPageRoute(builder: (context) => ForgetForm(number: user_NameController.text)),
       );*/
-     /* Toast.show("" + parsedJson['message'], context,
+     /* Toast.show(parsedJson['message'], context,
           duration: Toast.lengthLong, gravity: Toast.bottom,);*/
     } else if(parsedJson['status'] == "0"){
       pr.close();
-      Toast.show("" + parsedJson['message'],
+      Toast.show(parsedJson['message'],
           duration: Toast.lengthLong, gravity: Toast.bottom,);
     }
     return parsedJson;
   }
 }
-//decoration: BoxDecoration(
-//gradient: LinearGradient(colors: [
-//Color.fromRGBO(
-//207, 0, 105, 0.8),
-//Color.fromRGBO(255, 168, 81, 0.8)
-//]))
+

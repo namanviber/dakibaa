@@ -36,17 +36,17 @@ class ServiceModelNew {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['productname'] = this.productname;
-    data['product_descr'] = this.productDescr;
-    data['rate15'] = this.rate15;
-    data['rate30'] = this.rate30;
-    data['rate50'] = this.rate50;
-    data['rate75'] = this.rate75;
-    data['rate100'] = this.rate100;
-    data['isactive'] = this.isactive;
-    data['imagename'] = this.imagename;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['productname'] = productname;
+    data['product_descr'] = productDescr;
+    data['rate15'] = rate15;
+    data['rate30'] = rate30;
+    data['rate50'] = rate50;
+    data['rate75'] = rate75;
+    data['rate100'] = rate100;
+    data['isactive'] = isactive;
+    data['imagename'] = imagename;
     return data;
   }
 }

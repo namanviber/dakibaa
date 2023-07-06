@@ -1,8 +1,5 @@
-
-import 'package:flutter/material.dart';
 import 'package:dakibaa/models/paytm_model.dart';
 import 'package:dakibaa/rest_api/rest_api.dart';
-import 'package:dakibaa/models/services_model.dart';
 
 abstract class PaytmModelContract {
   void onPaytmModelSuccess(PaytmModel response);
@@ -12,7 +9,7 @@ abstract class PaytmModelContract {
 class PaytmModelPresenter {
 
   PaytmModelContract _view;
-  RestDataSource api = new RestDataSource();
+  RestDataSource api = RestDataSource();
   PaytmModelPresenter(this._view);
   getpaytm(String? orderid_paytm, Mode, txn_id, userid) {
     api.paytm_api_call(orderid_paytm, Mode, txn_id, userid).then((PaytmModel res) {

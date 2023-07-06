@@ -17,7 +17,6 @@ class Cart extends StatefulWidget {
 
 class CartPage extends State<Cart> {
   bool? checkValue;
-  AnimationController? _controller;
   double? screenHeight;
   double? screenwidth;
   File? _image;
@@ -48,64 +47,57 @@ class CartPage extends State<Cart> {
   var message;
   Future<Map<String, dynamic>> getData(var uid) async {
     /*  pr = new ProgressDialog(context, );
-    pr.show();*/
+    pr.show(msg: "Loading..", barrierDismissible: true);*/
     // print(token);
     final response = await http.post(Uri.parse(APIS.getCartList),
         headers: {'Accept': 'application/json'},
         body: {"userid": uid.toString()});
     var parsedJson = json.decode(response.body);
-    print(response.body);
     value = json.decode(response.body);
 
     if (parsedJson['status'] == "1") {
       message = value!["message"];
-      // pr.dismiss();
       if (mounted) {
         setState(() {
           for (int i = 0; i < value!["data"].length; i++) {
-            CartModel _productModel =
-                new CartModel("", "", "", "", "", "", "", 0, "");
-            print(value!["data"][i]["Id"].toString());
+            CartModel productModel =
+                CartModel("", "", "", "", "", "", "", 0, "");
             id1 = value!["data"][i]["cid"].toString();
             list.add(id1.toString());
-            _productModel.Id = value!["data"][i]["productid"].toString();
-            _productModel.cid = value!["data"][i]["cid"].toString();
+            productModel.Id = value!["data"][i]["productid"].toString();
+            productModel.cid = value!["data"][i]["cid"].toString();
             // _productModel.C_Id = value["data"][i]["C_Id"];
-            _productModel.Productname = value!["data"][i]["Productname"];
+            productModel.Productname = value!["data"][i]["Productname"];
             if (value!["data"][i].containsKey("productImages")) {
-              _productModel.productImages =
+              productModel.productImages =
                   value!["data"][i]["productImages"][0]["Imagename"];
             }
-            _productModel.Description = value!["data"][i]["Description"];
+            productModel.Description = value!["data"][i]["Description"];
             if (value!["data"][i].containsKey("productPrice")) {
-              _productModel.productPrice =
+              productModel.productPrice =
                   value!["data"][i]["productPrice"][0]["Price"];
             }
-            _productModel.unitId = value!["data"][i]["unitid"].toString();
+            productModel.unitId = value!["data"][i]["unitid"].toString();
 
-            _productModel.count = value!["data"][i]["quantity"];
-            _productModel.price = value!["data"][i]["amount"].toString();
-            cartModel.add(_productModel);
-            print(_productModel);
-            print(_productModel.Id);
+            productModel.count = value!["data"][i]["quantity"];
+            productModel.price = value!["data"][i]["amount"].toString();
+            cartModel.add(productModel);
             sumP = int.parse(cartModel[i].price);
             given_list.add(sumP);
             sum = given_list.fold(
                 0, (previous, current) => previous + current as int);
-            print("Sum wqww: ${sum}");
-            print("Sumsdasda : ${given_list}");
           }
         });
       }
       Toast.show(
-        "" + parsedJson['message'],
+        parsedJson['message'],
         duration: Toast.lengthShort,
         gravity: Toast.bottom,
       );
     } else {
       // pr.dismiss();
       Toast.show(
-        "" + parsedJson['message'],
+        parsedJson['message'],
         duration: Toast.lengthShort,
         gravity: Toast.bottom,
       );
@@ -116,11 +108,6 @@ class CartPage extends State<Cart> {
 
   Future<Map<String, dynamic>> getCountData(
       String productId, int index, price) async {
-    print(id);
-    print(count);
-    print(productId);
-    /*   pr = new ProgressDialog(context, );
-    pr.show();*/
 
     final response = await http.post(Uri.parse(APIS.addPackageCount), headers: {
       'Accept': 'application/json'
@@ -141,7 +128,7 @@ class CartPage extends State<Cart> {
     });
     var parsedJson = json.decode(response.body);
     value1 = json.decode(response.body);
-    /*  print("Status = " + parsedJson['status']);*/
+    /*  */
     if (parsedJson['status'] == "1") {
       //  pr.dismiss();
 
@@ -150,14 +137,14 @@ class CartPage extends State<Cart> {
         getData(id);
       });
       Toast.show(
-        "" + parsedJson['message'],
+        parsedJson['message'],
         duration: Toast.lengthShort,
         gravity: Toast.bottom,
       );
     } else {
       //  pr.dismiss();
       Toast.show(
-        "" + parsedJson['message'],
+        parsedJson['message'],
         duration: Toast.lengthShort,
         gravity: Toast.bottom,
       );
@@ -166,16 +153,16 @@ class CartPage extends State<Cart> {
   }
 
   Future<Map<String, dynamic>> removeProductCart(String cid) async {
-    pr = new ProgressDialog(
+    pr = ProgressDialog(
       context: context,
     );
-    pr.show();
+    pr.show(msg: "Loading..", barrierDismissible: true);
 
     final response = await http.post(Uri.parse(APIS.removeProductCart),
         headers: {'Accept': 'application/json'}, body: {"ID": cid.toString()});
     var parsedJson = json.decode(response.body);
     value2 = json.decode(response.body);
-    /*  print("Status = " + parsedJson['status']);*/
+    /*  */
     if (parsedJson['status'] == "1") {
       pr.close();
 
@@ -186,14 +173,14 @@ class CartPage extends State<Cart> {
       });
 
       Toast.show(
-        "" + parsedJson['message'],
+        parsedJson['message'],
         duration: Toast.lengthShort,
         gravity: Toast.bottom,
       );
     } else {
       pr.close();
       Toast.show(
-        "" + parsedJson['message'],
+        parsedJson['message'],
         duration: Toast.lengthShort,
         gravity: Toast.bottom,
       );
@@ -268,7 +255,7 @@ class CartPage extends State<Cart> {
         resizeToAvoidBottomInset: false,
         body: Container(
           height: screenHeight,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(colors: [
               Color.fromRGBO(220, 84, 85, 0.8),
               Color.fromRGBO(140, 53, 52, 1)
@@ -299,7 +286,7 @@ class CartPage extends State<Cart> {
                   children: <Widget>[
                     Center(
                       child: Container(
-                          padding: EdgeInsets.only(
+                          padding: const EdgeInsets.only(
                             left: 0.0,
                             right: 0.0,
                             top: 20.0,
@@ -315,10 +302,10 @@ class CartPage extends State<Cart> {
                             ),
                           )),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Center(
+                    const Center(
                       child: Text(
                         "CART",
                         style: TextStyle(
@@ -331,7 +318,7 @@ class CartPage extends State<Cart> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Container(
@@ -350,14 +337,14 @@ class CartPage extends State<Cart> {
                                 Container(
                                   child: Container(
                                     height: 140,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(18))),
                                     child: Row(
                                       children: <Widget>[
                                         Container(
-                                          margin: EdgeInsets.only(
+                                          margin: const EdgeInsets.only(
                                               right: 0,
                                               left: 0,
                                               top: 0,
@@ -365,7 +352,7 @@ class CartPage extends State<Cart> {
                                           height: 140,
                                           width: 100,
                                           decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.only(
+                                              borderRadius: const BorderRadius.only(
                                                   topLeft: Radius.circular(18),
                                                   bottomLeft:
                                                       Radius.circular(18)),
@@ -388,7 +375,7 @@ class CartPage extends State<Cart> {
                                                 Center(
                                                   child: Expanded(
                                                     child: Container(
-                                                      padding: EdgeInsets.only(
+                                                      padding: const EdgeInsets.only(
                                                         right: 25,
                                                         top: 4,
                                                       ),
@@ -396,7 +383,7 @@ class CartPage extends State<Cart> {
                                                         "${cartModel[index].Productname}",
                                                         maxLines: 2,
                                                         softWrap: true,
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             color: Colors.red,
                                                             fontFamily:
                                                                 'Roboto',
@@ -408,198 +395,186 @@ class CartPage extends State<Cart> {
                                                     ),
                                                   ),
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   height: 6,
                                                 ),
                                                 Expanded(
                                                   child: Row(
                                                     children: <Widget>[
-                                                      Expanded(
-                                                        child: Container(
-                                                          child: Text(
-                                                            "Description:- ",
-                                                            style: TextStyle(
-                                                                color:
-                                                                    Colors.red,
-                                                                fontFamily:
-                                                                    'Roboto',
-                                                                fontSize: 16,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                letterSpacing:
-                                                                    1.0),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Container(
-                                                          child: Text(
-                                                            "${cartModel[index].Description}",
-                                                            maxLines: 2,
-                                                            style: TextStyle(
+                                                      const Expanded(
+                                                        child: Text(
+                                                          "Description:- ",
+                                                          style: TextStyle(
                                                               color:
-                                                                  Colors.black,
+                                                                  Colors.red,
                                                               fontFamily:
                                                                   'Roboto',
-                                                              fontSize: 14,
-                                                            ),
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              letterSpacing:
+                                                                  1.0),
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Text(
+                                                          "${cartModel[index].Description}",
+                                                          maxLines: 2,
+                                                          style: const TextStyle(
+                                                            color:
+                                                                Colors.black,
+                                                            fontFamily:
+                                                                'Roboto',
+                                                            fontSize: 14,
                                                           ),
                                                         ),
                                                       )
                                                     ],
                                                   ),
                                                 ),
-                                                Container(
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: <Widget>[
-                                                      Center(
-                                                        child: Container(
-                                                          height: 30,
-                                                          width: 80,
-                                                          child: Center(
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: <Widget>[
+                                                    Center(
+                                                      child: Container(
+                                                        height: 30,
+                                                        width: 80,
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .all(Radius
+                                                                      .circular(
+                                                                          20)),
+                                                          color: Colors.red,
+                                                        ),
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Rs ${cartModel[index].price}",
+                                                            style: const TextStyle(
+                                                              color: Colors
+                                                                  .white,
+                                                              fontFamily:
+                                                                  'Roboto',
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets
+                                                              .all(8.0),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .end,
+                                                        children: <Widget>[
+                                                          GestureDetector(
+                                                            onTap: () {
+                                                              setState(() {
+                                                                count = cartModel[
+                                                                        index]
+                                                                    .count;
+                                                                p = cartModel[
+                                                                        index]
+                                                                    .productPrice;
+                                                                productId = cartModel[
+                                                                        index]
+                                                                    .Id
+                                                                    .toString();
+                                                                given_list
+                                                                    .clear();
+                                                              });
+                                                              _removeProduct(
+                                                                  count,
+                                                                  productId,
+                                                                  index);
+                                                            },
+                                                            child: const Icon(
+                                                              Icons
+                                                                  .remove_circle,
+                                                              size: 24,
+                                                              color: Colors
+                                                                  .redAccent,
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    bottom: 2,
+                                                                    right: 8,
+                                                                    left: 8),
                                                             child: Text(
-                                                              "Rs ${cartModel[index].price}",
-                                                              style: TextStyle(
+                                                              "${cartModel[index].count}",
+                                                              style:
+                                                                  const TextStyle(
                                                                 color: Colors
-                                                                    .white,
+                                                                    .redAccent,
                                                                 fontFamily:
                                                                     'Roboto',
-                                                                fontSize: 16,
+                                                                fontSize: 18,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold,
                                                               ),
                                                             ),
                                                           ),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            20)),
-                                                            color: Colors.red,
-                                                          ),
-                                                        ),
+                                                          GestureDetector(
+                                                            onTap: () {
+                                                              setState(() {
+                                                                count = cartModel[
+                                                                        index]
+                                                                    .count;
+                                                                p = cartModel[
+                                                                        index]
+                                                                    .productPrice;
+                                                                productId = cartModel[
+                                                                        index]
+                                                                    .Id
+                                                                    .toString();
+                                                                given_list
+                                                                    .clear();
+                                                              });
+                                                              _addProduct(
+                                                                  count,
+                                                                  productId
+                                                                      .toString(),
+                                                                  index);
+                                                            },
+                                                            child: const Icon(
+                                                              Icons
+                                                                  .add_circle,
+                                                              size: 24,
+                                                              color: Colors
+                                                                  .redAccent,
+                                                            ),
+                                                          )
+                                                        ],
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .end,
-                                                          children: <Widget>[
-                                                            GestureDetector(
-                                                              onTap: () {
-                                                                setState(() {
-                                                                  count = cartModel[
-                                                                          index]
-                                                                      .count;
-                                                                  p = cartModel[
-                                                                          index]
-                                                                      .productPrice;
-                                                                  productId = cartModel[
-                                                                          index]
-                                                                      .Id
-                                                                      .toString();
-                                                                  given_list
-                                                                      .clear();
-                                                                });
-                                                                _removeProduct(
-                                                                    count,
-                                                                    productId,
-                                                                    index);
-                                                              },
-                                                              child: Container(
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .remove_circle,
-                                                                  size: 24,
-                                                                  color: Colors
-                                                                      .redAccent,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Container(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      bottom: 2,
-                                                                      right: 8,
-                                                                      left: 8),
-                                                              child: Text(
-                                                                "${cartModel[index].count}",
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: Colors
-                                                                      .redAccent,
-                                                                  fontFamily:
-                                                                      'Roboto',
-                                                                  fontSize: 18,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            GestureDetector(
-                                                              onTap: () {
-                                                                setState(() {
-                                                                  count = cartModel[
-                                                                          index]
-                                                                      .count;
-                                                                  p = cartModel[
-                                                                          index]
-                                                                      .productPrice;
-                                                                  productId = cartModel[
-                                                                          index]
-                                                                      .Id
-                                                                      .toString();
-                                                                  given_list
-                                                                      .clear();
-                                                                });
-                                                                _addProduct(
-                                                                    count,
-                                                                    productId
-                                                                        .toString(),
-                                                                    index);
-                                                              },
-                                                              child: Container(
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .add_circle,
-                                                                  size: 24,
-                                                                  color: Colors
-                                                                      .redAccent,
-                                                                ),
-                                                              ),
-                                                            )
-                                                          ],
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
+                                                    )
+                                                  ],
                                                 ),
-                                                Container(
-                                                  child: Text(
-                                                    " BASE PRICE : Rs ${cartModel[index].productPrice}",
-                                                    maxLines: 3,
-                                                    style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontFamily: 'Roboto',
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
+                                                Text(
+                                                  " BASE PRICE : Rs ${cartModel[index].productPrice}",
+                                                  maxLines: 3,
+                                                  style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontFamily: 'Roboto',
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.bold,
                                                   ),
                                                 )
                                               ],
@@ -618,13 +593,13 @@ class CartPage extends State<Cart> {
                                       removeProductCart(
                                           cartModel[index].cid.toString());
                                     },
-                                    icon: Icon(Icons.cancel),
+                                    icon: const Icon(Icons.cancel),
                                     color: Colors.black,
                                   ),
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 8,
                             ),
                           ],
@@ -632,68 +607,68 @@ class CartPage extends State<Cart> {
                       );
                     }),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 18,
               ),
               Container(
-                child: Container(
-                    margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                    height: 80,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: new BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: new BorderRadius.only(
-                          bottomRight: const Radius.circular(25.0),
-                          topRight: const Radius.circular(25.0),
-                          bottomLeft: const Radius.circular(25.0),
-                          topLeft: const Radius.circular(25.0),
-                        )),
-                    child: Center(
-                      child: Container(
-                        margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                        child: TextField(
-                          style: TextStyle(fontSize: 18),
-                          decoration: InputDecoration.collapsed(
-                            hintText: "ADD MORE REQUIREMENTS",
-                            hintStyle: TextStyle(
-                              fontSize: 18.0,
-                              color: Colors.redAccent,
-                            ),
+                  margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  height: 80,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(25.0),
+                        topRight: Radius.circular(25.0),
+                        bottomLeft: Radius.circular(25.0),
+                        topLeft: Radius.circular(25.0),
+                      )),
+                  child: Center(
+                    child: Container(
+                      margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: const TextField(
+                        style: TextStyle(fontSize: 18),
+                        decoration: InputDecoration.collapsed(
+                          hintText: "ADD MORE REQUIREMENTS",
+                          hintStyle: TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.redAccent,
                           ),
                         ),
                       ),
-                    )),
-              ),
+                    ),
+                  )),
               Center(
                 child: Row(
                   children: <Widget>[
                     Container(
-                      margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                      margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                       width: 140,
                       height: 50,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Colors.red,
+                      ),
                       child: Center(
                         child: Container(
-                          margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                           child: Column(
                             children: <Widget>[
                               Container(
-                                margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                                margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                                 alignment: Alignment.center,
-                                child: Container(
-                                  child: Text(
-                                    "TOTAL SUM",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                        letterSpacing: 2.0),
-                                  ),
+                                child: const Text(
+                                  "TOTAL SUM",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      letterSpacing: 2.0),
                                 ),
                               ),
                               Container(
                                 alignment: Alignment.center,
                                 child: message == "Cart is blank"
-                                    ? Text(
+                                    ? const Text(
                                         "0 RS",
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
@@ -702,9 +677,9 @@ class CartPage extends State<Cart> {
                                             letterSpacing: 2.0),
                                       )
                                     : Text(
-                                        sum.toString() + " RS",
+                                        "$sum RS",
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 16,
                                             letterSpacing: 2.0),
@@ -714,15 +689,11 @@ class CartPage extends State<Cart> {
                           ),
                         ),
                       ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        color: Colors.red,
-                      ),
                     ),
                     Container(
                       width: 140,
                       height: 50,
-                      margin: EdgeInsets.fromLTRB(40, 10, 10, 10),
+                      margin: const EdgeInsets.fromLTRB(40, 10, 10, 10),
                       child: ElevatedButton(
                         onPressed: () {
                           if (message == "Cart is blank") {
@@ -736,7 +707,7 @@ class CartPage extends State<Cart> {
                               if (i == (list.length - 1)) {
                                 id_list = id_list + list[i];
                               } else {
-                                id_list = id_list + list[i] + ",";
+                                id_list = "$id_list${list[i]},";
                               }
                             }
                             Navigator.push(
@@ -749,19 +720,17 @@ class CartPage extends State<Cart> {
                         },
                         child: Center(
                           child: Container(
-                            child: Container(
-                              constraints: BoxConstraints(
-                                  maxWidth: 200.0, minHeight: 50.0),
-                              alignment: Alignment.center,
-                              child: Text(
-                                "CHECK OUT",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: 2.0),
-                              ),
+                            constraints: const BoxConstraints(
+                                maxWidth: 200.0, minHeight: 50.0),
+                            alignment: Alignment.center,
+                            child: const Text(
+                              "CHECK OUT",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: 2.0),
                             ),
                           ),
                         ),
@@ -782,15 +751,15 @@ class CartPage extends State<Cart> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Log In First'),
+          title: const Text('Log In First'),
           content: const Text('Please login first to check the Profile!!!'),
           actions: <Widget>[
             TextButton(
-              child: Text('Ok'),
+              child: const Text('Ok'),
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
                 );
               },
             ),

@@ -21,7 +21,7 @@ class InternetConnection extends StatefulWidget {
 }
 
 class _InternetConnectionState extends State<InternetConnection> {
-  final GlobalKey<ScaffoldState>_globalKey=new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState>_globalKey=GlobalKey<ScaffoldState>();
   internet(){
     NetworkConnection.check().then((internet){
       if(internet!=null&&internet){
@@ -38,18 +38,18 @@ class _InternetConnectionState extends State<InternetConnection> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: new Column(
+        body: Column(
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 50,left: 20),
-              child: new Row(
+              child: Row(
                 children: [
-                  new InkWell(
+                  InkWell(
                     onTap: (){
                       Navigator.of(context).pop();
                     },
-                    child: new Container(
-                      child: new Image.asset("images/back_button.png",width: 20,height: 20,color: AppTheme().color_black,),
+                    child: Container(
+                      child: Image.asset("images/back_button.png",width: 20,height: 20,color: AppTheme().color_black,),
                     ),
                   ),
                 ],
@@ -57,7 +57,7 @@ class _InternetConnectionState extends State<InternetConnection> {
             ),
             Padding(
               padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/5),
-              child: new Container(
+              child: Container(
                 child:Image.asset("images/internet.jpg") ,
               ),
             ),

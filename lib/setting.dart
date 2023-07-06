@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:dakibaa/app_screens/authorization_screens/login_pagenew.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'app_screens/drawer_navigation_screens/ContactUs.dart';
 import 'app_screens/drawer_navigation_screens/Privacy.dart';
 import 'app_screens/drawer_navigation_screens/TermsCon.dart';
-import 'change_password.dart';
+import 'app_screens/drawer_navigation_screens/change_password.dart';
 import 'app_screens/drawer_navigation_screens/faq_screen.dart';
 
 
@@ -29,24 +29,22 @@ class PartySettingPage extends State<PartySetting> {
     screenwidth = MediaQuery.of(context).size.width;
 
     // TODO: implement build
-    return Container(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Container(
-          height: screenHeight,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              Color.fromRGBO(220, 84, 85, 0.8),
-              Color.fromRGBO(140, 53, 52, 1)
-            ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
-          ),
-          child: Stack(
-            children: <Widget>[
-              pageTitle(context),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Container(
+        height: screenHeight,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(colors: [
+            Color.fromRGBO(220, 84, 85, 0.8),
+            Color.fromRGBO(140, 53, 52, 1)
+          ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+        ),
+        child: Stack(
+          children: <Widget>[
+            pageTitle(context),
 
-              profile_Page(context),
-            ],
-          ),
+            profile_Page(context),
+          ],
         ),
       ),
     );
@@ -55,7 +53,7 @@ class PartySettingPage extends State<PartySetting> {
   Widget pageTitle(BuildContext context) {
     return Container(
 
-      margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+      margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -63,7 +61,7 @@ class PartySettingPage extends State<PartySetting> {
           Center(
             child: Container(
 
-                padding: EdgeInsets.only(
+                padding: const EdgeInsets.only(
                   left: 0.0,
                   right: 0.0,
                   top: 20.0,
@@ -84,17 +82,17 @@ class PartySettingPage extends State<PartySetting> {
 
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Center(
+          const Center(
             child: Text(
               "SETTING",
               style: TextStyle(
                   fontSize: 28, color: Colors.black, fontWeight: FontWeight.w600,letterSpacing: 2),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
 
@@ -120,7 +118,7 @@ class PartySettingPage extends State<PartySetting> {
   Widget profile_Page(BuildContext context) {
     return Container(
 
-      margin: EdgeInsets.fromLTRB(0, 160, 0, 0),
+      margin: const EdgeInsets.fromLTRB(0, 160, 0, 0),
       alignment: Alignment.bottomCenter,
       child: ListView(
         children: <Widget>[
@@ -142,16 +140,16 @@ class PartySettingPage extends State<PartySetting> {
                         height: 55,
                         width: 70,
 
-                        decoration: new BoxDecoration(
+                        decoration: const BoxDecoration(
                             color: Colors.white,
-                            borderRadius: new BorderRadius.only(
-                              bottomRight: const Radius.circular(20.0),
-                              topRight: const Radius.circular(20.0),
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(20.0),
+                              topRight: Radius.circular(20.0),
                             )
                         ),
                         child:
                         Container(
-                          margin: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                          margin: const EdgeInsets.fromLTRB(15, 10, 15, 10),
                           child: Image.asset(
                             "images/faqs.png",
                             fit: BoxFit.fill,
@@ -165,8 +163,8 @@ class PartySettingPage extends State<PartySetting> {
                     ),
                     Container(
 
-                      margin: EdgeInsets.fromLTRB(15, 0, 0, 0),
-                      child: Text(
+                      margin: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                      child: const Text(
                         "FAQS",
                         style: TextStyle(
                             fontSize: 28, color: Colors.white, fontWeight: FontWeight.w600, letterSpacing: 4.0),
@@ -177,7 +175,7 @@ class PartySettingPage extends State<PartySetting> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               GestureDetector(
@@ -194,16 +192,16 @@ class PartySettingPage extends State<PartySetting> {
                         height: 55,
                         width: 70,
 
-                        decoration: new BoxDecoration(
+                        decoration: const BoxDecoration(
                             color: Colors.white,
-                            borderRadius: new BorderRadius.only(
-                              bottomRight: const Radius.circular(20.0),
-                              topRight: const Radius.circular(20.0),
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(20.0),
+                              topRight: Radius.circular(20.0),
                             )
                         ),
                         child:
                         Container(
-                          margin: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                          margin: const EdgeInsets.fromLTRB(15, 10, 15, 10),
                           child: Image.asset(
                             "images/terms.png",
 
@@ -216,8 +214,8 @@ class PartySettingPage extends State<PartySetting> {
 
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                      child: Text(
+                      margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: const Text(
                         "T&C",
                         style: TextStyle(
                             fontSize: 28, color: Colors.white, fontWeight: FontWeight.w600, letterSpacing: 1.0),
@@ -228,7 +226,7 @@ class PartySettingPage extends State<PartySetting> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               GestureDetector(
@@ -245,16 +243,16 @@ class PartySettingPage extends State<PartySetting> {
                         height: 55,
                         width: 70,
 
-                        decoration: new BoxDecoration(
+                        decoration: const BoxDecoration(
                             color: Colors.white,
-                            borderRadius: new BorderRadius.only(
-                              bottomRight: const Radius.circular(20.0),
-                              topRight: const Radius.circular(20.0),
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(20.0),
+                              topRight: Radius.circular(20.0),
                             )
                         ),
                         child:
                         Container(
-                          margin: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                          margin: const EdgeInsets.fromLTRB(15, 10, 15, 10),
                           child: Image.asset(
                             "images/LOCK_1.png",
                             fit: BoxFit.contain,
@@ -267,8 +265,8 @@ class PartySettingPage extends State<PartySetting> {
 
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                      child: Text(
+                      margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: const Text(
                         "Privacy",
                         style: TextStyle(
                             fontSize: 28, color: Colors.white, fontWeight: FontWeight.w600, letterSpacing: 1.0),
@@ -279,7 +277,7 @@ class PartySettingPage extends State<PartySetting> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               GestureDetector(
@@ -295,16 +293,16 @@ class PartySettingPage extends State<PartySetting> {
                       child: Container(
                         height: 55,
                         width: 70,
-                        decoration: new BoxDecoration(
+                        decoration: const BoxDecoration(
                             color: Colors.white,
-                            borderRadius: new BorderRadius.only(
-                              bottomRight: const Radius.circular(20.0),
-                              topRight: const Radius.circular(20.0),
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(20.0),
+                              topRight: Radius.circular(20.0),
                             )
                         ),
                         child:
                         Container(
-                          margin: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                          margin: const EdgeInsets.fromLTRB(15, 10, 15, 10),
                           child: Image.asset(
                             "images/password.png",
                             fit: BoxFit.contain,
@@ -317,8 +315,8 @@ class PartySettingPage extends State<PartySetting> {
 
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                      child: Text(
+                      margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: const Text(
                         "Change Password",
                         style: TextStyle(
                             fontSize: 28, color: Colors.white, fontWeight: FontWeight.w600, letterSpacing: 1.0),
@@ -329,7 +327,7 @@ class PartySettingPage extends State<PartySetting> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               GestureDetector(
@@ -345,16 +343,16 @@ class PartySettingPage extends State<PartySetting> {
                       child: Container(
                         height: 55,
                         width: 70,
-                        decoration: new BoxDecoration(
+                        decoration: const BoxDecoration(
                             color: Colors.white,
-                            borderRadius: new BorderRadius.only(
-                              bottomRight: const Radius.circular(20.0),
-                              topRight: const Radius.circular(20.0),
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(20.0),
+                              topRight: Radius.circular(20.0),
                             )
                         ),
                         child:
                         Container(
-                          margin: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                          margin: const EdgeInsets.fromLTRB(15, 10, 15, 10),
                           child: Image.asset(
                             "images/phonesetting.png",
                             fit: BoxFit.contain,
@@ -367,8 +365,8 @@ class PartySettingPage extends State<PartySetting> {
 
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                      child: Text(
+                      margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: const Text(
                         "Contact Us",
                         style: TextStyle(
                             fontSize: 28, color: Colors.white, fontWeight: FontWeight.w600, letterSpacing: 1.0),
@@ -379,7 +377,7 @@ class PartySettingPage extends State<PartySetting> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               GestureDetector(
@@ -392,16 +390,16 @@ class PartySettingPage extends State<PartySetting> {
                       child: Container(
                         height: 55,
                         width: 70,
-                        decoration: new BoxDecoration(
+                        decoration: const BoxDecoration(
                             color: Colors.white,
-                            borderRadius: new BorderRadius.only(
-                              bottomRight: const Radius.circular(20.0),
-                              topRight: const Radius.circular(20.0),
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(20.0),
+                              topRight: Radius.circular(20.0),
                             )
                         ),
                         child:
                         Container(
-                          margin: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                          margin: const EdgeInsets.fromLTRB(15, 10, 15, 10),
                           child: Image.asset(
                             "images/logout.png",
                             fit: BoxFit.contain,
@@ -414,8 +412,8 @@ class PartySettingPage extends State<PartySetting> {
 
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                      child: Text(
+                      margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: const Text(
                         "Log Out",
                         style: TextStyle(
                             fontSize: 28, color: Colors.white, fontWeight: FontWeight.w600, letterSpacing: 1.0),
@@ -443,7 +441,7 @@ class PartySettingPage extends State<PartySetting> {
     //Navigator.pop(context,true);// It worked for me instead of above line
     // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FirstScreen()),);
     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-        LoginPage()), (Route<dynamic> route) => false);
+        const LoginPage()), (Route<dynamic> route) => false);
   }
 
 

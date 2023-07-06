@@ -1,10 +1,10 @@
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'profile_update.dart';
+import '../../profile_update.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'image_picker_handler.dart';
-import 'app_screens/authorization_screens/login_pagenew.dart';
+import '../../image_picker_handler.dart';
+import '../authorization_screens/login_pagenew.dart';
 
 
 class EditProfilePage extends StatefulWidget {
@@ -29,16 +29,14 @@ class ProfileScreenPage extends State<EditProfilePage>
     screenwidth = MediaQuery.of(context).size.width;
 
     // TODO: implement build
-    return Container(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Stack(
-          children: <Widget>[
-           /* lowerHalf(context),
-            upperHalf(context),*/
-            profile_Page(context),
-          ],
-        ),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Stack(
+        children: <Widget>[
+         /* lowerHalf(context),
+          upperHalf(context),*/
+          profile_Page(context),
+        ],
       ),
     );
   }
@@ -92,10 +90,10 @@ class ProfileScreenPage extends State<EditProfilePage>
         Center(
           child: Container(
 
-            alignment: AlignmentDirectional(0.0, 0.0),
+            alignment: const AlignmentDirectional(0.0, 0.0),
             child: Card(
-              margin: new EdgeInsets.fromLTRB(30.0, 100.0, 30.0, 20.0),
-              color: Color.fromRGBO(245, 246, 251, 1),
+              margin: const EdgeInsets.fromLTRB(30.0, 100.0, 30.0, 20.0),
+              color: const Color.fromRGBO(245, 246, 251, 1),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
               ),
@@ -108,7 +106,7 @@ class ProfileScreenPage extends State<EditProfilePage>
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Container(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           left: 10.0,
                           right: 0.0,
                           top: 20.0,
@@ -116,28 +114,28 @@ class ProfileScreenPage extends State<EditProfilePage>
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            new GestureDetector(
+                            GestureDetector(
                               onTap: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(builder: (context) => ProfileUpdate()),
                                 );
                               },
-                              child: new Center(
+                              child: Center(
                                 child: _image == null
                                     ? GestureDetector(
                                   //  onTap: () => imagePicker.showDialog(context),
-                                  child: Container(
+                                  child: SizedBox(
                                       height: 90.0,
                                       width: 100,
-                                      child: new Center(
-                                        child: new CircleAvatar(
+                                      child: Center(
+                                        child: CircleAvatar(
                                           radius: 60.0,
                                           backgroundImage: NetworkImage(
                                               "http://partyapp.v2infotech.net/resources/$profile_pic"),
                                           // backgroundColor: Colors.white,
                                           child: Container(
-                                            margin: EdgeInsets.fromLTRB(
+                                            margin: const EdgeInsets.fromLTRB(
                                                 40, 0, 0, 40),
                                             child: Image.asset(
                                               "images/edit.png",
@@ -149,19 +147,19 @@ class ProfileScreenPage extends State<EditProfilePage>
                                         ),
                                       )),
                                 )
-                                    : new Container(
+                                    : Container(
                                   height: 90.0,
                                   width: 90.0,
-                                  decoration: new BoxDecoration(
+                                  decoration: BoxDecoration(
                                     // color: Colors.lightBlue,
-                                    image: new DecorationImage(
-                                      image: new FileImage(_image!),
+                                    image: DecorationImage(
+                                      image: FileImage(_image!),
                                       fit: BoxFit.cover,
                                     ),
                                     border: Border.all(
                                         color: Colors.black, width: 1.0),
-                                    borderRadius: new BorderRadius.all(
-                                        const Radius.circular(60.0)),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(60.0)),
                                   ),
                                 ),
                               ),
@@ -169,7 +167,7 @@ class ProfileScreenPage extends State<EditProfilePage>
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
                       Center(
@@ -180,7 +178,7 @@ class ProfileScreenPage extends State<EditProfilePage>
                           child: Text(
                             "$name",
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.black,
                                 fontFamily: "Raleway",
                                 fontSize: 20,
@@ -195,10 +193,10 @@ class ProfileScreenPage extends State<EditProfilePage>
                       Column(children: <Widget>[
                         Row(children: <Widget>[
                           Expanded(
-                            child: new Container(
+                            child: Container(
                                 margin: const EdgeInsets.only(
                                     left: 20.0, right: 20.0),
-                                child: Divider(
+                                child: const Divider(
                                   color: Color.fromRGBO(140, 53, 52, 1),
                                   height: 36,
                                   thickness: 1,
@@ -206,7 +204,7 @@ class ProfileScreenPage extends State<EditProfilePage>
                           ),
                         ]),
                       ]),
-                      SizedBox(
+                      const SizedBox(
                         height: 14,
                       ),
                       Column(
@@ -216,7 +214,7 @@ class ProfileScreenPage extends State<EditProfilePage>
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: <Widget>[
-                                Text('NAME. -',
+                                const Text('NAME. -',
                                   style: TextStyle(
                                       color: Color.fromRGBO(220, 84, 85, 1),
                                       fontFamily: "Raleway",
@@ -225,7 +223,7 @@ class ProfileScreenPage extends State<EditProfilePage>
                                 ),
                                 Text(
                                   "    $name",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.black,
                                       fontFamily: "Raleway",
                                       fontSize: 16,
@@ -234,7 +232,7 @@ class ProfileScreenPage extends State<EditProfilePage>
                               ],
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 18,
                           ),
                           Container(
@@ -242,7 +240,7 @@ class ProfileScreenPage extends State<EditProfilePage>
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: <Widget>[
-                                Text('PHONE NO. -',
+                                const Text('PHONE NO. -',
                                   style: TextStyle(
                                       color: Color.fromRGBO(220, 84, 85, 1),
                                       fontFamily: "Raleway",
@@ -251,7 +249,7 @@ class ProfileScreenPage extends State<EditProfilePage>
                                 ),
                                 Text(
                                   "    $mobile",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.black,
                                       fontFamily: "Raleway",
                                       fontSize: 16,
@@ -338,7 +336,7 @@ class ProfileScreenPage extends State<EditProfilePage>
                               ],
                             ),
                           ),*/
-                          SizedBox(
+                          const SizedBox(
                             height: 18,
                           ),
                           Container(
@@ -346,7 +344,7 @@ class ProfileScreenPage extends State<EditProfilePage>
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: <Widget>[
-                                Text('PASSWORD -',
+                                const Text('PASSWORD -',
                                   style: TextStyle(
                                       color: Color.fromRGBO(220, 84, 85, 1),
                                       fontFamily: "Raleway",
@@ -355,7 +353,7 @@ class ProfileScreenPage extends State<EditProfilePage>
                                 ),
                                 Text(
                                   "    $password",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.black,
                                       fontFamily: "Raleway",
                                       fontSize: 16,
@@ -383,11 +381,11 @@ class ProfileScreenPage extends State<EditProfilePage>
     super.initState();
     getCredential();
 
-    _controller = new AnimationController(
+    _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 500),
     );
-    imagePicker = new ImagePickerHandler(this, _controller);
+    imagePicker = ImagePickerHandler(this, _controller);
     imagePicker.init();
   }
 
@@ -408,15 +406,15 @@ class ProfileScreenPage extends State<EditProfilePage>
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Log In First'),
+          title: const Text('Log In First'),
           content: const Text('Please login first to check the Profile!!!'),
           actions: <Widget>[
             TextButton(
-              child: Text('Ok'),
+              child: const Text('Ok'),
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
                 );
               },
             ),

@@ -12,10 +12,9 @@ class AppTheme {
   final Color color_royal_blue= Color(0xff191970);
   final Color color_logo= Color(0xff55585F);
   final Color color_gold=Color(0xffd7a81e);*/
-  final wine_color=Color(0xff8e1520);
-  /*final Color color_black = Colors.black;*/
-  final color_black=Color(0xff313131);
+  final wine_color=const Color(0xff8e1520);
+  final color_black=const Color(0xff313131);
   final color_white = const Color(0xFFFFFFFF);
-  final color_red=Color(0xffD62525);
+  final color_red=const Color(0xffD62525);
 
 }

@@ -9,7 +9,7 @@ abstract class ServicesModelContract {
 class ServicesModelPresenter {
 
   ServicesModelContract _view;
-  RestDataSource api = new RestDataSource();
+  RestDataSource api = RestDataSource();
   ServicesModelPresenter(this._view);
 
   getServices() {

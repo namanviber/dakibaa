@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class ProductServicesModel{
 
   var prod_id;

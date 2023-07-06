@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'about_dakibaa.dart';
+import 'package:toast/toast.dart';
+import 'app_screens/home_screens/about_dakibaa.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
@@ -9,7 +10,7 @@ Future<void> main() async {
 }
 class MyApp extends StatefulWidget{
   @override
-  _myApp createState() => new _myApp();
+  _myApp createState() => _myApp();
 }
 
 class _myApp extends  State<MyApp>{
@@ -19,6 +20,7 @@ class _myApp extends  State<MyApp>{
 
   @override
   Widget build(BuildContext context) {
+    ToastContext().init(context);//-> This part
     getCredential();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MaterialApp(

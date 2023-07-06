@@ -1,11 +1,8 @@
 import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dakibaa/Colors/colors.dart';
-import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:http/http.dart' as http;
+import 'package:http/http.dart' as http;
 import 'package:shimmer/shimmer.dart';
-import 'package:toast/toast.dart';
 
 import '../../rest_api/ApiList.dart';
 
@@ -44,9 +41,9 @@ class FaqScreen1 extends State<FaqScreen> {
               onTap: () {
                 Navigator.of(context).pop();
               },
-              child: new Container(
+              child: Container(
                 height: 18,
-                child: new Image.asset(
+                child: Image.asset(
                   "images/back_button.png",
                 ),
               ),
@@ -63,14 +60,14 @@ class FaqScreen1 extends State<FaqScreen> {
                 0.0,
               ]),
               image: DecorationImage(
-                image: AssetImage("images/services_background.jpg"),
+                image: const AssetImage("images/services_background.jpg"),
                 fit: BoxFit.cover,
-                colorFilter: new ColorFilter.mode(
+                colorFilter: ColorFilter.mode(
                     Colors.black.withOpacity(0.3), BlendMode.dstATop),
               )),
-          child: new Column(
+          child: Column(
             children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 70,
               ),
               Center(
@@ -83,7 +80,7 @@ class FaqScreen1 extends State<FaqScreen> {
               ),
               Center(
                 child: Container(
-                  margin: EdgeInsets.only(top: 10.0),
+                  margin: const EdgeInsets.only(top: 10.0),
                   child: Text(
                     "FAQs",
                     style: TextStyle(
@@ -94,7 +91,7 @@ class FaqScreen1 extends State<FaqScreen> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
               _isProgressBarShown
@@ -110,19 +107,19 @@ class FaqScreen1 extends State<FaqScreen> {
                                 return Padding(
                                   padding: const EdgeInsets.only(
                                       top: 10, right: 20, left: 20, bottom: 10),
-                                  child: new Container(
+                                  child: Container(
                                       decoration: BoxDecoration(
                                           color: AppTheme().color_white,
                                           borderRadius:
                                               BorderRadius.circular(12)),
                                       child: ExpansionTile(
                                         childrenPadding:
-                                            EdgeInsets.only(top: 0, bottom: 20),
+                                            const EdgeInsets.only(top: 0, bottom: 20),
                                         title: Container(
                                           height: 50,
-                                          margin: EdgeInsets.only(top: 0),
+                                          margin: const EdgeInsets.only(top: 0),
                                           alignment: Alignment.centerLeft,
-                                          padding: EdgeInsets.all(0.0),
+                                          padding: const EdgeInsets.all(0.0),
                                           child: Row(
                                             children: <Widget>[
                                               Expanded(
@@ -146,13 +143,13 @@ class FaqScreen1 extends State<FaqScreen> {
                                         children: [
                                           Visibility(
                                             visible: setVisible[index],
-                                            child: new Container(
-                                              margin: EdgeInsets.only(
+                                            child: Container(
+                                              margin: const EdgeInsets.only(
                                                   left: 15, top: 5),
                                               width: MediaQuery.of(context)
                                                   .size
                                                   .width,
-                                              decoration: BoxDecoration(),
+                                              decoration: const BoxDecoration(),
                                               child: Text(
                                                 "${listData![index]["Answer"]}",
                                                 style: TextStyle(
@@ -193,21 +190,21 @@ class FaqScreen1 extends State<FaqScreen> {
   }
 
   Widget itemLoading() {
-    return new Padding(
-        padding: new EdgeInsets.only(top: 0.0),
+    return Padding(
+        padding: const EdgeInsets.only(top: 0.0),
         child: Shimmer.fromColors(
             baseColor: Colors.grey[300]!,
             highlightColor: Colors.grey[100]!,
-            child: new Column(
+            child: Column(
               children: [
-                new Row(
+                Row(
                   children: [
-                    new Expanded(
-                      child: new Padding(
-                        padding: new EdgeInsets.all(10.0),
-                        child: new Container(
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
                           height: 60.0,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                             color: Colors.white,
                           ),
@@ -216,15 +213,15 @@ class FaqScreen1 extends State<FaqScreen> {
                     ),
                   ],
                 ),
-                new Padding(padding: new EdgeInsets.only(top: 10)),
-                new Row(
+                const Padding(padding: EdgeInsets.only(top: 10)),
+                Row(
                   children: [
-                    new Expanded(
-                      child: new Padding(
-                        padding: new EdgeInsets.all(10.0),
-                        child: new Container(
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
                           height: 60.0,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                             color: Colors.white,
                           ),
@@ -233,15 +230,15 @@ class FaqScreen1 extends State<FaqScreen> {
                     ),
                   ],
                 ),
-                new Padding(padding: new EdgeInsets.only(top: 10)),
-                new Row(
+                const Padding(padding: EdgeInsets.only(top: 10)),
+                Row(
                   children: [
-                    new Expanded(
-                      child: new Padding(
-                        padding: new EdgeInsets.all(10.0),
-                        child: new Container(
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
                           height: 60.0,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                             color: Colors.white,
                           ),
@@ -250,15 +247,15 @@ class FaqScreen1 extends State<FaqScreen> {
                     ),
                   ],
                 ),
-                new Padding(padding: new EdgeInsets.only(top: 10)),
-                new Row(
+                const Padding(padding: EdgeInsets.only(top: 10)),
+                Row(
                   children: [
-                    new Expanded(
-                      child: new Padding(
-                        padding: new EdgeInsets.all(10.0),
-                        child: new Container(
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
                           height: 60.0,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                             color: Colors.white,
                           ),
@@ -267,15 +264,15 @@ class FaqScreen1 extends State<FaqScreen> {
                     ),
                   ],
                 ),
-                new Padding(padding: new EdgeInsets.only(top: 10)),
-                new Row(
+                const Padding(padding: EdgeInsets.only(top: 10)),
+                Row(
                   children: [
-                    new Expanded(
-                      child: new Padding(
-                        padding: new EdgeInsets.all(10.0),
-                        child: new Container(
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
                           height: 60.0,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                             color: Colors.white,
                           ),
@@ -284,7 +281,7 @@ class FaqScreen1 extends State<FaqScreen> {
                     ),
                   ],
                 ),
-                new Padding(padding: new EdgeInsets.only(top: 10)),
+                const Padding(padding: EdgeInsets.only(top: 10)),
               ],
             )));
   }

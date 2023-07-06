@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:dakibaa/Colors/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:http/http.dart' as http;
 import 'package:toast/toast.dart';
@@ -29,17 +29,17 @@ class ContactUsPage extends State<ContactUs> {
   var mail;
   var address;
   late var number;
-  final TextEditingController nameController = new TextEditingController();
-  final TextEditingController emailController = new TextEditingController();
-  final TextEditingController messageController = new TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController messageController = TextEditingController();
   final _formkey = GlobalKey<FormState>();
 
 
 
   Future<Map<String, dynamic>> getData() async {
     //  print(myController1.text);
-    pr = new ProgressDialog(context: context, );
-    pr.show();
+    pr = ProgressDialog(context: context, );
+    pr.show(msg: "Loading..", barrierDismissible: true);
     // print(token);
     final response = await http.post(Uri.parse(APIS.addMessage),
         headers: {'Accept': 'application/json'},
@@ -49,19 +49,19 @@ class ContactUsPage extends State<ContactUs> {
     print(response.body);
     var parsedJson = json.decode(response.body);
     value = parsedJson['data'];
-    print("Status = " + parsedJson['status']);
+    
     if (parsedJson['status'] == "1") {
       pr.close();
-      Toast.show("" + parsedJson['message'],
+      Toast.show(parsedJson['message'],
           duration: Toast.lengthShort, gravity: Toast.bottom,);
       //_onChanged(value);
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(builder: (context) => const HomePage()),
       );
     } else {
       pr.close();
-      Toast.show("" + parsedJson['message'],
+      Toast.show(parsedJson['message'],
           duration: Toast.lengthShort, gravity: Toast.bottom,);
 
     }
@@ -98,7 +98,7 @@ class ContactUsPage extends State<ContactUs> {
   Widget build(BuildContext context) {
     Pattern pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regex = new RegExp(pattern as String);
+    RegExp regex = RegExp(pattern as String);
     return Form(
       key: _formkey,
       child: Container(
@@ -114,9 +114,9 @@ class ContactUsPage extends State<ContactUs> {
                   onTap: () {
                     Navigator.of(context).pop();
                   },
-                  child: new Container(
+                  child: Container(
                     height: 18,
-                    child: new Image.asset(
+                    child: Image.asset(
                       "images/back_button.png",
                     ),
                   ),
@@ -134,22 +134,22 @@ class ContactUsPage extends State<ContactUs> {
 
                   ),
                   image: DecorationImage(
-                    image: AssetImage("images/services_background.jpg"),
+                    image: const AssetImage("images/services_background.jpg"),
                     fit: BoxFit.cover,
-                    colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.3), BlendMode.dstATop),
+                    colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.3), BlendMode.dstATop),
                   )
               ),
             child:  Container(
-              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+              margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
               alignment: Alignment.bottomCenter,
               child: ListView(
                 children: <Widget>[
-                 new Column(
+                 Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Center(
                         child: Container(
-                            padding: EdgeInsets.only(
+                            padding: const EdgeInsets.only(
                               left: 0.0,
                               right: 0.0,
                               top: 10.0,
@@ -166,8 +166,8 @@ class ContactUsPage extends State<ContactUs> {
                             )),
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(30, 10, 0, 0),
-                        child: Center(
+                        margin: const EdgeInsets.fromLTRB(30, 10, 0, 0),
+                        child: const Center(
                           child: Text(
                             "Contact us",
                             style: TextStyle(
@@ -181,9 +181,9 @@ class ContactUsPage extends State<ContactUs> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(5, 20, 0, 5),
+                        margin: const EdgeInsets.fromLTRB(5, 20, 0, 5),
                         width: MediaQuery.of(context).size.width-32,
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             "Feel Free To Drop Us a Message Or Call",
                             textAlign: TextAlign.center,
@@ -195,7 +195,7 @@ class ContactUsPage extends State<ContactUs> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       GestureDetector(
@@ -211,10 +211,10 @@ class ContactUsPage extends State<ContactUs> {
                             height: 45,
                             child:Padding(
                               padding: const EdgeInsets.only(left: 10,right: 10),
-                              child: new Row(
+                              child: Row(
                                 children: [
                                   Image.asset("images/call.png",height: 20,width: 30,),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
                                   Text(
@@ -233,7 +233,7 @@ class ContactUsPage extends State<ContactUs> {
                         ),
                       ),
 
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       GestureDetector(
@@ -251,10 +251,10 @@ class ContactUsPage extends State<ContactUs> {
                           height: 45,
                           child:Padding(
                             padding: const EdgeInsets.only(left: 10,right: 10),
-                            child: new Row(
+                            child: Row(
                               children: [
                                 Image.asset("images/mesg.png",height: 20,width: 30,),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
                                 Text(
@@ -274,21 +274,21 @@ class ContactUsPage extends State<ContactUs> {
                         ),
                       ),
                       mesg==false
-                          ?new Container()
+                          ?Container()
                           :Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
 
                           Padding(
                             padding: const EdgeInsets.only(left: 20,top: 20,right: 20),
-                            child: new Container(
+                            child: Container(
                               decoration: BoxDecoration(
                                   color: AppTheme().color_white,
                                   borderRadius: BorderRadius.circular(10)
                               ),
 
                               child:Container(
-                                margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                                margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                                 child: TextFormField(
                                   validator: (value){
                                     if(value!.isEmpty){
@@ -318,19 +318,19 @@ class ContactUsPage extends State<ContactUs> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 20,right: 20),
-                            child: new Container(
+                            child: Container(
                               decoration: BoxDecoration(
                                   color: AppTheme().color_white,
                                   borderRadius: BorderRadius.circular(10)
                               ),
 
                               child:Container(
-                                margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                                margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                                 child: TextFormField(
                                   validator: (value){
                                     if(value!.isEmpty){
@@ -364,12 +364,12 @@ class ContactUsPage extends State<ContactUs> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           Padding(
                               padding: const EdgeInsets.only(left: 20,right: 20),
-                              child:new Container(
+                              child:Container(
 
                                 decoration: BoxDecoration(
                                     color: AppTheme().color_white,
@@ -377,7 +377,7 @@ class ContactUsPage extends State<ContactUs> {
                                 ),
 
                                 child:Container(
-                                  margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                                  margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                                   child: TextFormField(
                                     validator: (value){
                                       if(value!.isEmpty){
@@ -408,7 +408,7 @@ class ContactUsPage extends State<ContactUs> {
                                 ),
                               )
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 25,
                           ),
                           Container(

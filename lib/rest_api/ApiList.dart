@@ -1,8 +1,8 @@
 
 class APIS {
 
-  static final String _baseUrl = "http://partyapp.v2infotech.net/api/party";
-  static final String _baseUrl1 = "http://shoppingapp.v2infotech.net/api";
+  static const String _baseUrl = "http://partyapp.v2infotech.net/api/party";
+  static const String _baseUrl1 = "http://shoppingapp.v2infotech.net/api";
   static var usersSignUp = "$_baseUrl/User/signup";
   static var usersLogin = "$_baseUrl/User/login";
   static var forgetPassword = "$_baseUrl/User/forgetPassword";

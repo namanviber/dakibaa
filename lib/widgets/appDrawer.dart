@@ -3,12 +3,12 @@ import 'package:dakibaa/Colors/colors.dart';
 import 'package:dakibaa/app_screens/drawer_navigation_screens/ContactUs.dart';
 import 'package:dakibaa/app_screens/drawer_navigation_screens/Privacy.dart';
 import 'package:dakibaa/app_screens/drawer_navigation_screens/TermsCon.dart';
-import 'package:dakibaa/about_dakibaa.dart';
+import 'package:dakibaa/app_screens/home_screens/about_dakibaa.dart';
 import 'package:dakibaa/app_screens/drawer_navigation_screens/about_us.dart';
-import 'package:dakibaa/change_password.dart';
+import 'package:dakibaa/app_screens/drawer_navigation_screens/change_password.dart';
 import 'package:dakibaa/app_screens/drawer_navigation_screens/dakibaa_services.dart';
 import 'package:dakibaa/app_screens/drawer_navigation_screens/faq_screen.dart';
-import 'package:dakibaa/orderhistoy.dart';
+import 'package:dakibaa/app_screens/drawer_navigation_screens/orderhistoy.dart';
 import 'package:dakibaa/profile_update.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../common/constant.dart';
@@ -66,7 +66,7 @@ class _AppDrawerState extends State<AppDrawer> {
       backgroundColor: AppTheme().color_red,
       child: ListView(
         children: [
-          Container(
+          SizedBox(
               height: 150,
               child: Padding(
                 padding: const EdgeInsets.only(top: 20),
@@ -117,7 +117,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                     child: Center(
                                       child: Container(
                                         child: Text(
-                                          name == null ? "Guest Login" : "name",
+                                          name ?? "Guest Login",
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                               color: AppTheme().color_white,
@@ -134,7 +134,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                     child: Center(
                                       child: Container(
                                         child: Text(
-                                          email == null ? "" : email,
+                                          email ?? "",
                                           style: TextStyle(
                                               color: AppTheme().color_white,
                                               fontSize: 12,
@@ -150,7 +150,7 @@ class _AppDrawerState extends State<AppDrawer> {
                         ],
                       )
                     : Center(
-                        child: Container(
+                        child: SizedBox(
                           height: 100,
                           child: Center(
                             child: Image.asset(
@@ -171,7 +171,7 @@ class _AppDrawerState extends State<AppDrawer> {
           ListTile(
             title: Text("Home", style: listText),
             leading: Padding(
-                padding: EdgeInsets.only(left: 5),
+                padding: const EdgeInsets.only(left: 5),
                 child: Image.asset(
                   "images/home.png",
                   width: 30,
@@ -186,7 +186,7 @@ class _AppDrawerState extends State<AppDrawer> {
               ? ListTile(
                   title: Text("Profile", style: listText),
                   leading: Padding(
-                      padding: EdgeInsets.only(left: 5),
+                      padding: const EdgeInsets.only(left: 5),
                       child: Icon(
                         Icons.person,
                         color: AppTheme().color_white,
@@ -199,12 +199,12 @@ class _AppDrawerState extends State<AppDrawer> {
                             builder: (context) => ProfileUpdate()));
                   },
                 )
-              : SizedBox(),
+              : const SizedBox(),
           (checkValue&& !isguest)
               ? ListTile(
                   title: Text("Change Password", style: listText),
                   leading: Padding(
-                      padding: EdgeInsets.only(left: 5),
+                      padding: const EdgeInsets.only(left: 5),
                       child: Image.asset(
                         "images/change_password.png",
                         width: 30,
@@ -217,11 +217,11 @@ class _AppDrawerState extends State<AppDrawer> {
                             builder: (context) => ChangePassword()));
                   },
                 )
-              : SizedBox(),
+              : const SizedBox(),
           ListTile(
             title: Text("Privacy", style: listText),
             leading: Padding(
-                padding: EdgeInsets.only(left: 5),
+                padding: const EdgeInsets.only(left: 5),
                 child: Image.asset(
                   "images/privacy.png",
                   width: 30,
@@ -235,7 +235,7 @@ class _AppDrawerState extends State<AppDrawer> {
           ListTile(
             title: Text("FAQs", style: listText),
             leading: Padding(
-                padding: EdgeInsets.only(left: 5),
+                padding: const EdgeInsets.only(left: 5),
                 child: Image.asset(
                   "images/faqs.png",
                   width: 30,
@@ -249,7 +249,7 @@ class _AppDrawerState extends State<AppDrawer> {
           ListTile(
             title: Text("T&C", style: listText),
             leading: Padding(
-                padding: EdgeInsets.only(left: 5),
+                padding: const EdgeInsets.only(left: 5),
                 child: Image.asset(
                   "images/tc.png",
                   width: 30,
@@ -263,7 +263,7 @@ class _AppDrawerState extends State<AppDrawer> {
           ListTile(
             title: Text("Gallery", style: listText),
             leading: Padding(
-                padding: EdgeInsets.only(left: 5),
+                padding: const EdgeInsets.only(left: 5),
                 child: Image.asset(
                   "images/gallery.png",
                   width: 30,
@@ -284,7 +284,7 @@ class _AppDrawerState extends State<AppDrawer> {
                           fontWeight: FontWeight.bold,
                           fontFamily: "Montserrat-Medium")),
                   leading: Padding(
-                      padding: EdgeInsets.only(left: 5),
+                      padding: const EdgeInsets.only(left: 5),
                       child: Image.asset(
                         "images/order_hist.ico",
                         width: 30,
@@ -298,11 +298,11 @@ class _AppDrawerState extends State<AppDrawer> {
                             builder: (context) => OrderHistoryScreen()));
                   },
                 )
-              : SizedBox(),
+              : const SizedBox(),
           ListTile(
             title: Text("Services", style: listText),
             leading: Padding(
-                padding: EdgeInsets.only(left: 5),
+                padding: const EdgeInsets.only(left: 5),
                 child: Image.asset(
                   "images/services.png",
                   width: 30,
@@ -311,13 +311,13 @@ class _AppDrawerState extends State<AppDrawer> {
                 )),
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => DakibaaServices()));
+                  MaterialPageRoute(builder: (context) => const DakibaaServices()));
             },
           ),
           ListTile(
             title: Text("Contact Us", style: listText),
             leading: Padding(
-                padding: EdgeInsets.only(left: 5),
+                padding: const EdgeInsets.only(left: 5),
                 child: Image.asset(
                   "images/contact_us.png",
                   width: 30,
@@ -331,7 +331,7 @@ class _AppDrawerState extends State<AppDrawer> {
           ListTile(
             title: Text("About Us", style: listText),
             leading: Padding(
-                padding: EdgeInsets.only(left: 5),
+                padding: const EdgeInsets.only(left: 5),
                 child: Image.asset(
                   "images/aboutus.png",
                   width: 30,
@@ -340,7 +340,7 @@ class _AppDrawerState extends State<AppDrawer> {
                 )),
             onTap: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => AboutUs()));
+                  context, MaterialPageRoute(builder: (context) => const AboutUs()));
             },
           ),
           (checkValue)
@@ -352,7 +352,7 @@ class _AppDrawerState extends State<AppDrawer> {
                           fontWeight: FontWeight.bold,
                           fontFamily: "Montserrat-Medium")),
                   leading: Padding(
-                      padding: EdgeInsets.only(left: 5),
+                      padding: const EdgeInsets.only(left: 5),
                       child: Image.asset(
                         "images/logout.png",
                         width: 30,
@@ -362,7 +362,7 @@ class _AppDrawerState extends State<AppDrawer> {
                     dialogs("Confirm Exit");
                   },
                 )
-              : SizedBox(),
+              : const SizedBox(),
         ],
       ),
     );
@@ -379,7 +379,7 @@ class _AppDrawerState extends State<AppDrawer> {
               bottom: MediaQuery.of(context).size.height / 3),
           child: AlertDialog(
             backgroundColor: AppTheme().color_red,
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10))),
             content: Container(
                 child: Center(
@@ -390,7 +390,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Container(
-                        padding: EdgeInsets.only(top: 0),
+                        padding: const EdgeInsets.only(top: 0),
                         width: 200,
                         child: Center(
                           child: Text(
@@ -404,7 +404,7 @@ class _AppDrawerState extends State<AppDrawer> {
                         ))
                   ],
                 ),
-                Padding(padding: EdgeInsets.only(top: 20)),
+                const Padding(padding: EdgeInsets.only(top: 20)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -418,7 +418,7 @@ class _AppDrawerState extends State<AppDrawer> {
                         decoration: BoxDecoration(
                             color: AppTheme().color_white,
                             borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
+                                const BorderRadius.all(Radius.circular(10))),
                         child: Center(
                           child: Text("Cancel",
                               style: TextStyle(
@@ -428,7 +428,7 @@ class _AppDrawerState extends State<AppDrawer> {
                         ),
                       ),
                     ),
-                    Padding(padding: EdgeInsets.only(left: 10)),
+                    const Padding(padding: EdgeInsets.only(left: 10)),
                     InkWell(
                       onTap: () {
                         logOut();
@@ -439,7 +439,7 @@ class _AppDrawerState extends State<AppDrawer> {
                         decoration: BoxDecoration(
                             color: AppTheme().color_white,
                             borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
+                                const BorderRadius.all(Radius.circular(10))),
                         child: Center(
                           child: Text(
                             "OK",

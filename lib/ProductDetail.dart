@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
-import 'dart:async';
-import 'dart:convert';
-import 'package:toast/toast.dart';
 import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:shared_preferences/shared_preferences.dart';
 class ProductDetail extends StatefulWidget {
   var data,image;
@@ -37,11 +34,11 @@ class ScreenState extends State<ProductDetail> {
     screenHeight = MediaQuery.of(context).size.height;
     // TODO: implement build
     return Scaffold(
-      backgroundColor: Color.fromRGBO(102, 153, 153, 0.8),
+      backgroundColor: const Color.fromRGBO(102, 153, 153, 0.8),
       body: SingleChildScrollView(
         child: Container(
           height: screenHeight,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(colors: [
               Color.fromRGBO(220, 84, 85, 0.8),
               Color.fromRGBO(140, 53, 52, 1)
@@ -49,30 +46,30 @@ class ScreenState extends State<ProductDetail> {
           ),
           child: Column(
             children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 15.0,
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(10, 50, 10, 0),
+                margin: const EdgeInsets.fromLTRB(10, 50, 10, 0),
                 width: MediaQuery.of(context).size.width,
                 height: 200.0,
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    image: new DecorationImage(
+                    image: DecorationImage(
                       image: NetworkImage( "http://partyapp.v2infotech.net/resources/" +
                          image),
                       fit: BoxFit.cover,
                     )
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15.0,
               ),
               Container(
-                  padding: EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.all(15.0),
                   child: Text(
                     data,
-                    style: TextStyle(color: Colors.white, fontSize: 18,
+                    style: const TextStyle(color: Colors.white, fontSize: 18,
                     wordSpacing: 2,
                     letterSpacing: 2),
                   )),

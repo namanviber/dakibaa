@@ -6,11 +6,11 @@ import 'package:dakibaa/number_of_person.dart';
 import 'package:dakibaa/app_screens/authorization_screens/signup_pagenew.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:http/http.dart' as http;
+import 'package:sn_progress_dialog/sn_progress_dialog.dart';
+import 'package:http/http.dart' as http;
 import '../../rest_api/ApiList.dart';
-import '../../Services.dart';
 import '../../common/constant.dart';
 import 'forget_password.dart';
 import '../../home_page.dart';
@@ -26,8 +26,8 @@ class _LoginPageState extends State<LoginPage> {
   String? usernameError, passwordError;
   String? password, username;
   bool checkValue = false;
-  final TextEditingController usernameController = new TextEditingController();
-  final TextEditingController passwordController = new TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   late ProgressDialog pr;
   Map<String, dynamic>? value;
   late SharedPreferences sharedPreferences;
@@ -60,12 +60,12 @@ class _LoginPageState extends State<LoginPage> {
       });
     }
 
-
     return status;
   }
 
   @override
   Widget build(BuildContext context) {
+    ToastContext().init(context);//-> This part
     double screenHeight = MediaQuery.of(context).size.height;
     double screenwidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -78,15 +78,15 @@ class _LoginPageState extends State<LoginPage> {
                 Colors.white.withOpacity(0.1),
                 Colors.black,
                 Colors.black,
-              ], stops: [
+              ], stops: const [
                 0.0,
                 1,
                 1
               ]),
               image: DecorationImage(
-                image: AssetImage("images/background.jpg"),
+                image: const AssetImage("images/background.jpg"),
                 fit: BoxFit.cover,
-                colorFilter: new ColorFilter.mode(
+                colorFilter: ColorFilter.mode(
                     Colors.black.withOpacity(0.3), BlendMode.dstATop),
               )),
           child: Padding(
@@ -101,88 +101,154 @@ class _LoginPageState extends State<LoginPage> {
                   width: 300,
                   fit: BoxFit.cover,
                 ),
-                Container(
-                    width: screenwidth * 0.7,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: AppTheme().color_white,
-                        borderRadius: BorderRadius.circular(50)),
-                    child: TextFormField(
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: 17,
-                        color: AppTheme().color_red,
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          username = value;
-                        });
-                      },
-                      cursorColor: AppTheme().color_red,
-                      controller: usernameController,
-                      textAlign: TextAlign.center,
-                      decoration: new InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding:
-                            const EdgeInsets.symmetric(vertical: 10.0),
-                        hintStyle: new TextStyle(
-                            color: AppTheme().color_red,
-                            fontFamily: 'Montserrat',
-                            fontSize: 20),
-                        hintText: "Username",
-                      ),
-                    )),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  width: screenwidth * 0.7,
-                  height: 50,
-                  decoration: BoxDecoration(
-                      color: AppTheme().color_white,
-                      borderRadius: BorderRadius.circular(50)),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 48),
-                    child: TextFormField(
-                      style: TextStyle(fontFamily: 'Montserrat', fontSize: 17, color: AppTheme().color_red),
-                      onChanged: (value) {
-                        setState(() {
-                          password = value;
-                        });
-                      },
-                      cursorColor: AppTheme().color_red,
-                      controller: passwordController,
-                      textAlign: TextAlign.center,
-                      obscureText: passwordVisible1,
-                      decoration: new InputDecoration(
-                        suffixIcon: IconButton(
-                            onPressed: () {
+                Form(
+                    key: _formkey,
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(left: 20.0, top: 50.0, right: 20.0),
+                          child: TextFormField(
+                            textAlign: TextAlign.center,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter name';
+                              }
+                              return null;
+                            },
+                            controller: usernameController,
+                            onChanged: (value) {
                               setState(() {
-                                passwordVisible1 = !passwordVisible1;
+                                username = value;
                               });
                             },
-                            icon: Icon(
-                              // Based on passwordVisible state choose the icon
-                              passwordVisible1
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              color: AppTheme().color_red,
-                            )),
-                        border: InputBorder.none,
-                        contentPadding:
-                            const EdgeInsets.symmetric(vertical: 10.0),
-                        hintStyle: new TextStyle(
-                            color: AppTheme().color_red,
-                            fontFamily: 'Montserrat',
-                            fontSize: 20),
-                        hintText: "Password",
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 1, color: AppTheme().color_white),
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(50.0),
+                                  ),
+                                ),
+                                focusedBorder: const OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(50.0)),
+                                ),
+                                disabledBorder: const OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(50.0)),
+                                ),
+                                enabledBorder: const OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(50.0)),
+                                ),
+                                errorBorder: const OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(50.0)),
+                                ),
+                                focusedErrorBorder: const OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(50.0)),
+                                ),
+                                filled: true,
+                                contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                errorStyle: TextStyle(
+                                    fontSize: 15,
+                                    fontFamily: "Montserrat-SemiBold",
+                                    color: AppTheme().color_white),
+                                hintStyle: TextStyle(
+                                    color: Colors.red[800],
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "Montserrat-SemiBold"),
+                                hintText: "Username",
+                                fillColor: AppTheme().color_white),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(
+                              left: 20.0, top: 15.0, right: 20.0),
+                          child: TextFormField(
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter password';
+                              } else if (value.length < 8) {
+                                return "Passwor must be of min 8 digits";
+                              } else {
+                                return null;
+                              }
+                            },
+                            onChanged: (value) {
+                              setState(() {
+                                password = value;
+                              });
+                            },
+                            textAlign: TextAlign.center,
+                            controller: passwordController,
+                            obscureText: passwordVisible1,
+                            keyboardType: TextInputType.phone,
+                            decoration: InputDecoration(
+                                suffixIcon: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        passwordVisible1 = !passwordVisible1;
+                                      });
+                                    },
+                                    icon: Icon(
+                                      // Based on passwordVisible state choose the icon
+                                      passwordVisible1
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                      color: Colors.red,
+                                    )),
+
+                                border: const OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(15.0),
+                                  ),
+                                ),
+                                focusedBorder: const OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(50.0)),
+                                ),
+                                disabledBorder: const OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(50.0)),
+                                ),
+                                enabledBorder: const OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(50.0)),
+                                ),
+                                errorBorder: const OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(50.0)),
+                                ),
+                                focusedErrorBorder: const OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(50.0)),
+                                ),
+                                filled: true,
+                                contentPadding:
+                                const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                errorStyle: TextStyle(
+                                    fontSize: 15,
+                                    fontFamily: "Montserrat-SemiBold",
+                                    color: AppTheme().color_white),
+                                hintStyle: TextStyle(
+                                    color: AppTheme().color_red,
+                                    fontFamily: "Montserrat-SemiBold"),
+                                hintText: "Password",
+                                counterText: "",
+                                fillColor: AppTheme().color_white),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                      ],
+                    )),
+
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -202,7 +268,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Container(
@@ -214,7 +280,12 @@ class _LoginPageState extends State<LoginPage> {
                       border: Border.all(color: AppTheme().color_red)),
                   child: GestureDetector(
                     onTap: () {
-                      getData();
+                      if (_formkey.currentState!.validate()) {
+                        getData();} else {
+                        Toast.show("Please Enter Your Credentials",
+                          duration: Toast.lengthLong,
+                          gravity: Toast.top,);
+                      }
                     },
                     child: Center(
                       child: Text(
@@ -227,7 +298,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Container(
@@ -240,18 +311,22 @@ class _LoginPageState extends State<LoginPage> {
                   child: GestureDetector(
                     onTap: () {
                       setGuest();
-                      pr = new ProgressDialog(context: context,);
+                      pr = ProgressDialog(
+                        context: context,
+                      );
                       pr.show(msg: "Singing in...");
                       NetworkConnection.check().then((intenet) async {
                         print(intenet);
                         if (intenet != null && intenet) {
                           pr.close();
-                          Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context) => Number_of_Person()));
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => Number_of_Person()));
                         } else {
                           pr.close();
                           Navigator.push(
-                              context, MaterialPageRoute(builder: (context) => InternetConnection()));
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => InternetConnection()));
                         }
                       });
                     },
@@ -266,7 +341,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 GestureDetector(
@@ -276,7 +351,7 @@ class _LoginPageState extends State<LoginPage> {
                       MaterialPageRoute(builder: (context) => SignupPage()),
                     );
                   },
-                  child: Text(
+                  child: const Text(
                     "New User ? SignUp",
                     style: TextStyle(
                         fontFamily: 'Montserrat',
@@ -296,24 +371,28 @@ class _LoginPageState extends State<LoginPage> {
   var returnData;
 
   Future<Map<String, dynamic>> getData() async {
-    pr = new ProgressDialog(context: context, );
+    pr = ProgressDialog(
+      context: context,
+    );
     if (SignupValidation()) {
       NetworkConnection.check().then((intenet) async {
         if (intenet != null && intenet) {
-          pr.show();
-          final response = await http.post(Uri.parse(APIS.usersLogin), headers: {
-            'Accept': 'application/json'
-          }, body: {
-            "username": usernameController.text,
-            "password": passwordController.text
-          });
+          pr.show(msg: "Loading..", barrierDismissible: true);
+          final response = await http.post(Uri.parse(APIS.usersLogin),
+              headers: {
+                'Accept': 'application/json'
+              },
+              body: {
+                "username": usernameController.text,
+                "password": passwordController.text
+              });
           print(response.body);
           var parsedJson = json.decode(response.body);
           value = parsedJson['data'];
-          print("Status = " + parsedJson['status']);
+          
           if (parsedJson['status'] == "1") {
             pr.close();
-            new SharedPreferencesClass().setloginstatus(true);
+            SharedPreferencesClass().setloginstatus(true);
             sharedPreferences = await SharedPreferences.getInstance();
             if (mounted) {
               setState(() {
@@ -322,8 +401,11 @@ class _LoginPageState extends State<LoginPage> {
                 sharedPreferences.setBool("isguest", false);
               });
             }
-            Toast.show("" + parsedJson['message'],
-                duration: Toast.lengthShort, gravity: Toast.bottom,);
+            Toast.show(
+              parsedJson['message'],
+              duration: Toast.lengthShort,
+              gravity: Toast.bottom,
+            );
             //_onChanged(value);
             loginstatus = "signin";
             Navigator.of(context).pushAndRemoveUntil(
@@ -331,14 +413,16 @@ class _LoginPageState extends State<LoginPage> {
                 (Route<dynamic> route) => false);
           } else {
             pr.close();
-            Toast.show("" + parsedJson['message'],
-                duration: Toast.lengthShort, gravity: Toast.bottom,);
+            Toast.show(
+              parsedJson['message'],
+              duration: Toast.lengthShort,
+              gravity: Toast.bottom,
+            );
           }
           return parsedJson;
         } else {
-
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => InternetConnection()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => InternetConnection()));
         }
       });
     }
@@ -384,8 +468,8 @@ class _LoginPageState extends State<LoginPage> {
     bool loginstatus = await SharedPreferencesClass().getloginstatus();
     loginstatus == true
         ? Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (BuildContext context) => HomePage()))
+            MaterialPageRoute(builder: (BuildContext context) => const HomePage()))
         : Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (BuildContext context) => LoginPage()));
+            MaterialPageRoute(builder: (BuildContext context) => const LoginPage()));
   }
 }

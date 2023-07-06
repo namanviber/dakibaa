@@ -18,7 +18,7 @@ class _FailScreenState extends State<FailScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
         child: Scaffold(
-          body: new Container(
+          body: Container(
             height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -30,29 +30,27 @@ class _FailScreenState extends State<FailScreen> {
                 image: DecorationImage(
                   image: AssetImage("images/services_background.jpg"),
                   fit: BoxFit.cover,
-                  colorFilter: new ColorFilter.mode(
+                  colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.3), BlendMode.dstATop),
                 )),
-            child: new ListView(
+            child: ListView(
               shrinkWrap: true,
               children: [
-                new Column(
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
                       padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/3.5),
-                      child: new Container(
+                      child: Container(
                         height: 100,
-                        child: new Image.asset('images/fail.png'),
+                        child: Image.asset('images/fail.png'),
                       ),
                     ),
-                    new Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        new Container(
-                          child: Text("Transaction Fail",style: TextStyle(color: AppTheme().color_white,fontSize: 35,fontFamily: 'Montserrat'),),
-                        ),
+                        Text("Transaction Fail",style: TextStyle(color: AppTheme().color_white,fontSize: 35,fontFamily: 'Montserrat'),),
                       ],
                     ),
                     SizedBox(

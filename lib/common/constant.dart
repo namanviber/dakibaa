@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:dakibaa/models/paytm_model.dart';
 import 'package:dakibaa/models/product_model_services.dart';
 import 'package:dakibaa/models/services_model.dart';
@@ -23,12 +22,12 @@ String? descp;
 var id_com;
 String? price;
 PaytmModel? paytmModel;
-String? payment_txnid = null;
-String? payment_mesg = null;
-String? payment_bank = null;
-String? payment_OrderID = null;
+String? payment_txnid;
+String? payment_mesg;
+String? payment_bank;
+String? payment_OrderID;
 
-String? payment_amount = null;
+String? payment_amount;
 List<String>glasswareimg=["images/onepic.jpeg","images/secondpic.jpeg","images/thirdpic.jpeg","images/fourthpic.jpeg","images/fivepic.jpeg","images/sixpic.jpeg","images/sevenpic.jpeg"];
 List<String>glasswarename=["1. HI BALL","2. OLD FASHIONED","3. BEER","4. RED WINE","5. WHITE WINE","6. SHOT","7. CHAMPAGNE","8. MARTINI","9. MARGARITA","10. BRANDY BALLOON","11. TOM COLLINS","12. HURRICANE"];
 List<String>baveragename=["1. ORANGE JUICE","2. PINEAPPLE JUICE","3. CRANBERRY JUICE","4. MONIN  SYRUP 250ML","5. BROWN SUGAR",

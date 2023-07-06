@@ -11,41 +11,41 @@ Widget getErrorWidget(BuildContext context, FlutterErrorDetails error) {
             ],
           ),
           image: DecorationImage(
-            image: AssetImage("images/services_background.jpg"),
+            image: const AssetImage("images/services_background.jpg"),
             fit: BoxFit.cover,
-            colorFilter: new ColorFilter.mode(
+            colorFilter: ColorFilter.mode(
                 Colors.black.withOpacity(0.3), BlendMode.dstATop),
           )),
       width : 300,
       height: 250,
       child: Column(
         children: <Widget>[
-          Expanded(
+          const Expanded(
             flex: 1,
-            child: new Text("",
+            child: Text("",
             ),
           ),
           Expanded(
             flex: 3,
-            child: new Center(
-              child: new Image.asset("images/error.png",height: 200,width: 200),
+            child: Center(
+              child: Image.asset("images/error.png",height: 200,width: 200),
             ),
           ),
 
           Expanded(
               flex: 3,
-              child: new Container(
-                padding: EdgeInsets.only(top: 20),
-                child: new Text("Error occured due to unknown reason. Please try again later.",
+              child: Container(
+                padding: const EdgeInsets.only(top: 20),
+                child: const Text("Error occured due to unknown reason. Please try again later.",
                   textAlign: TextAlign.center,maxLines: 3,
                 ),
               )
           ),
           Expanded(
               flex: 1,
-              child: new ElevatedButton(
-                  child: new Text('Back',
-                    style: new TextStyle(
+              child: ElevatedButton(
+                  child: const Text('Back',
+                    style: TextStyle(
                       fontSize: 14 ,
                       height: 1.0 ,
                       color: Colors.white ,
@@ -55,7 +55,7 @@ Widget getErrorWidget(BuildContext context, FlutterErrorDetails error) {
                    Navigator.pop(context);
                   })
           ),
-          new Padding(padding: EdgeInsets.only(top: 20)),
+          const Padding(padding: EdgeInsets.only(top: 20)),
         ],
       ),
     ),
