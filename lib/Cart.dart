@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'models/CartModel.dart';
 import 'package:sn_progress_dialog/sn_progress_dialog.dart';
@@ -11,6 +10,8 @@ import 'checkout_screen.dart';
 import 'app_screens/authorization_screens/login_pagenew.dart';
 
 class Cart extends StatefulWidget {
+  const Cart({super.key});
+
   @override
   CartPage createState() => CartPage();
 }
@@ -19,7 +20,6 @@ class CartPage extends State<Cart> {
   bool? checkValue;
   double? screenHeight;
   double? screenwidth;
-  File? _image;
   late ProgressDialog pr;
   Map<String, dynamic>? value, value1, value2;
   List listData = [];
@@ -233,7 +233,6 @@ class CartPage extends State<Cart> {
       checkValue = value;
       sharedPreferences.setBool("check", checkValue!);
       sharedPreferences.setString("price", price.toString());
-      sharedPreferences.commit();
     });
   }
 
@@ -250,22 +249,20 @@ class CartPage extends State<Cart> {
     screenwidth = MediaQuery.of(context).size.width;
 
     // TODO: implement build
-    return Container(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Container(
-          height: screenHeight,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(colors: [
-              Color.fromRGBO(220, 84, 85, 0.8),
-              Color.fromRGBO(140, 53, 52, 1)
-            ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
-          ),
-          child: Stack(
-            children: <Widget>[
-              profile_Page(context),
-            ],
-          ),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Container(
+        height: screenHeight,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(colors: [
+            Color.fromRGBO(220, 84, 85, 0.8),
+            Color.fromRGBO(140, 53, 52, 1)
+          ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+        ),
+        child: Stack(
+          children: <Widget>[
+            profile_Page(context),
+          ],
         ),
       ),
     );
@@ -279,49 +276,45 @@ class CartPage extends State<Cart> {
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Center(
-                      child: Container(
-                          padding: const EdgeInsets.only(
-                            left: 0.0,
-                            right: 0.0,
-                            top: 20.0,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Center(
+                    child: Container(
+                        padding: const EdgeInsets.only(
+                          left: 0.0,
+                          right: 0.0,
+                          top: 20.0,
+                        ),
+                        child: Center(
+                          child: Image.asset(
+                            "images/shopping_cart.png",
+                            fit: BoxFit.fill,
+                            height: 90,
+                            width: 90,
                           ),
-                          child: Center(
-                            child: Container(
-                              child: Image.asset(
-                                "images/shopping_cart.png",
-                                fit: BoxFit.fill,
-                                height: 90,
-                                width: 90,
-                              ),
-                            ),
-                          )),
+                        )),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Center(
+                    child: Text(
+                      "CART",
+                      style: TextStyle(
+                          fontSize: 30,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 4),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Center(
-                      child: Text(
-                        "CART",
-                        style: TextStyle(
-                            fontSize: 30,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 4),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 10,
               ),
-              Container(
+              SizedBox(
                 height: 260,
                 child: ListView.builder(
                     scrollDirection: Axis.vertical,
@@ -335,254 +328,252 @@ class CartPage extends State<Cart> {
                             Stack(
                               children: <Widget>[
                                 Container(
-                                  child: Container(
-                                    height: 140,
-                                    decoration: const BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(18))),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Container(
-                                          margin: const EdgeInsets.only(
-                                              right: 0,
-                                              left: 0,
-                                              top: 0,
-                                              bottom: 0),
-                                          height: 140,
-                                          width: 100,
-                                          decoration: BoxDecoration(
-                                              borderRadius: const BorderRadius.only(
-                                                  topLeft: Radius.circular(18),
-                                                  bottomLeft:
-                                                      Radius.circular(18)),
-                                              image: DecorationImage(
-                                                image: NetworkImage(
-                                                    "http://adminparty.v2infotech.net/images/productimages/" +
-                                                        cartModel[index]
-                                                            .productImages),
-                                                fit: BoxFit.cover,
-                                              )),
-                                        ),
-                                        Expanded(
-                                          child: Container(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                Center(
-                                                  child: Expanded(
-                                                    child: Container(
-                                                      padding: const EdgeInsets.only(
-                                                        right: 25,
-                                                        top: 4,
-                                                      ),
-                                                      child: Text(
-                                                        "${cartModel[index].Productname}",
-                                                        maxLines: 2,
-                                                        softWrap: true,
-                                                        style: const TextStyle(
-                                                            color: Colors.red,
-                                                            fontFamily:
-                                                                'Roboto',
-                                                            fontSize: 18,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            letterSpacing: 1.0),
-                                                      ),
+                                  height: 140,
+                                  decoration: const BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(18))),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Container(
+                                        margin: const EdgeInsets.only(
+                                            right: 0,
+                                            left: 0,
+                                            top: 0,
+                                            bottom: 0),
+                                        height: 140,
+                                        width: 100,
+                                        decoration: BoxDecoration(
+                                            borderRadius: const BorderRadius.only(
+                                                topLeft: Radius.circular(18),
+                                                bottomLeft:
+                                                    Radius.circular(18)),
+                                            image: DecorationImage(
+                                              image: NetworkImage(
+                                                  "http://adminparty.v2infotech.net/images/productimages/" +
+                                                      cartModel[index]
+                                                          .productImages),
+                                              fit: BoxFit.cover,
+                                            )),
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              Center(
+                                                child: Expanded(
+                                                  child: Container(
+                                                    padding: const EdgeInsets.only(
+                                                      right: 25,
+                                                      top: 4,
                                                     ),
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  height: 6,
-                                                ),
-                                                Expanded(
-                                                  child: Row(
-                                                    children: <Widget>[
-                                                      const Expanded(
-                                                        child: Text(
-                                                          "Description:- ",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.red,
-                                                              fontFamily:
-                                                                  'Roboto',
-                                                              fontSize: 16,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              letterSpacing:
-                                                                  1.0),
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Text(
-                                                          "${cartModel[index].Description}",
-                                                          maxLines: 2,
-                                                          style: const TextStyle(
-                                                            color:
-                                                                Colors.black,
-                                                            fontFamily:
-                                                                'Roboto',
-                                                            fontSize: 14,
-                                                          ),
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: <Widget>[
-                                                    Center(
-                                                      child: Container(
-                                                        height: 30,
-                                                        width: 80,
-                                                        decoration:
-                                                            const BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .all(Radius
-                                                                      .circular(
-                                                                          20)),
+                                                    child: Text(
+                                                      "${cartModel[index].Productname}",
+                                                      maxLines: 2,
+                                                      softWrap: true,
+                                                      style: const TextStyle(
                                                           color: Colors.red,
-                                                        ),
-                                                        child: Center(
-                                                          child: Text(
-                                                            "Rs ${cartModel[index].price}",
-                                                            style: const TextStyle(
-                                                              color: Colors
-                                                                  .white,
-                                                              fontFamily:
-                                                                  'Roboto',
-                                                              fontSize: 16,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                            ),
-                                                          ),
-                                                        ),
+                                                          fontFamily:
+                                                              'Roboto',
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          letterSpacing: 1.0),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                height: 6,
+                                              ),
+                                              Expanded(
+                                                child: Row(
+                                                  children: <Widget>[
+                                                    const Expanded(
+                                                      child: Text(
+                                                        "Description:- ",
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.red,
+                                                            fontFamily:
+                                                                'Roboto',
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold,
+                                                            letterSpacing:
+                                                                1.0),
                                                       ),
                                                     ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets
-                                                              .all(8.0),
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .end,
-                                                        children: <Widget>[
-                                                          GestureDetector(
-                                                            onTap: () {
-                                                              setState(() {
-                                                                count = cartModel[
-                                                                        index]
-                                                                    .count;
-                                                                p = cartModel[
-                                                                        index]
-                                                                    .productPrice;
-                                                                productId = cartModel[
-                                                                        index]
-                                                                    .Id
-                                                                    .toString();
-                                                                given_list
-                                                                    .clear();
-                                                              });
-                                                              _removeProduct(
-                                                                  count,
-                                                                  productId,
-                                                                  index);
-                                                            },
-                                                            child: const Icon(
-                                                              Icons
-                                                                  .remove_circle,
-                                                              size: 24,
-                                                              color: Colors
-                                                                  .redAccent,
-                                                            ),
-                                                          ),
-                                                          Container(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    bottom: 2,
-                                                                    right: 8,
-                                                                    left: 8),
-                                                            child: Text(
-                                                              "${cartModel[index].count}",
-                                                              style:
-                                                                  const TextStyle(
-                                                                color: Colors
-                                                                    .redAccent,
-                                                                fontFamily:
-                                                                    'Roboto',
-                                                                fontSize: 18,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          GestureDetector(
-                                                            onTap: () {
-                                                              setState(() {
-                                                                count = cartModel[
-                                                                        index]
-                                                                    .count;
-                                                                p = cartModel[
-                                                                        index]
-                                                                    .productPrice;
-                                                                productId = cartModel[
-                                                                        index]
-                                                                    .Id
-                                                                    .toString();
-                                                                given_list
-                                                                    .clear();
-                                                              });
-                                                              _addProduct(
-                                                                  count,
-                                                                  productId
-                                                                      .toString(),
-                                                                  index);
-                                                            },
-                                                            child: const Icon(
-                                                              Icons
-                                                                  .add_circle,
-                                                              size: 24,
-                                                              color: Colors
-                                                                  .redAccent,
-                                                            ),
-                                                          )
-                                                        ],
+                                                    Expanded(
+                                                      child: Text(
+                                                        "${cartModel[index].Description}",
+                                                        maxLines: 2,
+                                                        style: const TextStyle(
+                                                          color:
+                                                              Colors.black,
+                                                          fontFamily:
+                                                              'Roboto',
+                                                          fontSize: 14,
+                                                        ),
                                                       ),
                                                     )
                                                   ],
                                                 ),
-                                                Text(
-                                                  " BASE PRICE : Rs ${cartModel[index].productPrice}",
-                                                  maxLines: 3,
-                                                  style: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontFamily: 'Roboto',
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.bold,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: <Widget>[
+                                                  Center(
+                                                    child: Container(
+                                                      height: 30,
+                                                      width: 80,
+                                                      decoration:
+                                                          const BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .all(Radius
+                                                                    .circular(
+                                                                        20)),
+                                                        color: Colors.red,
+                                                      ),
+                                                      child: Center(
+                                                        child: Text(
+                                                          "Rs ${cartModel[index].price}",
+                                                          style: const TextStyle(
+                                                            color: Colors
+                                                                .white,
+                                                            fontFamily:
+                                                                'Roboto',
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
                                                   ),
-                                                )
-                                              ],
-                                            ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets
+                                                            .all(8.0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
+                                                      children: <Widget>[
+                                                        GestureDetector(
+                                                          onTap: () {
+                                                            setState(() {
+                                                              count = cartModel[
+                                                                      index]
+                                                                  .count;
+                                                              p = cartModel[
+                                                                      index]
+                                                                  .productPrice;
+                                                              productId = cartModel[
+                                                                      index]
+                                                                  .Id
+                                                                  .toString();
+                                                              given_list
+                                                                  .clear();
+                                                            });
+                                                            _removeProduct(
+                                                                count,
+                                                                productId,
+                                                                index);
+                                                          },
+                                                          child: const Icon(
+                                                            Icons
+                                                                .remove_circle,
+                                                            size: 24,
+                                                            color: Colors
+                                                                .redAccent,
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  bottom: 2,
+                                                                  right: 8,
+                                                                  left: 8),
+                                                          child: Text(
+                                                            "${cartModel[index].count}",
+                                                            style:
+                                                                const TextStyle(
+                                                              color: Colors
+                                                                  .redAccent,
+                                                              fontFamily:
+                                                                  'Roboto',
+                                                              fontSize: 18,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        GestureDetector(
+                                                          onTap: () {
+                                                            setState(() {
+                                                              count = cartModel[
+                                                                      index]
+                                                                  .count;
+                                                              p = cartModel[
+                                                                      index]
+                                                                  .productPrice;
+                                                              productId = cartModel[
+                                                                      index]
+                                                                  .Id
+                                                                  .toString();
+                                                              given_list
+                                                                  .clear();
+                                                            });
+                                                            _addProduct(
+                                                                count,
+                                                                productId
+                                                                    .toString(),
+                                                                index);
+                                                          },
+                                                          child: const Icon(
+                                                            Icons
+                                                                .add_circle,
+                                                            size: 24,
+                                                            color: Colors
+                                                                .redAccent,
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              Text(
+                                                " BASE PRICE : Rs ${cartModel[index].productPrice}",
+                                                maxLines: 3,
+                                                style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontFamily: 'Roboto',
+                                                  fontSize: 14,
+                                                  fontWeight:
+                                                      FontWeight.bold,
+                                                ),
+                                              )
+                                            ],
                                           ),
-                                        )
-                                      ],
-                                    ),
+                                        ),
+                                      )
+                                    ],
                                   ),
                                 ),
                                 Positioned(
@@ -698,7 +689,7 @@ class CartPage extends State<Cart> {
                         onPressed: () {
                           if (message == "Cart is blank") {
                             Toast.show(
-                              "" + "Please add some items in the cart",
+                              "" "Please add some items in the cart",
                               duration: Toast.lengthShort,
                               gravity: Toast.bottom,
                             );

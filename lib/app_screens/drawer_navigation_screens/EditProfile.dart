@@ -8,6 +8,8 @@ import '../authorization_screens/login_pagenew.dart';
 
 
 class EditProfilePage extends StatefulWidget {
+  const EditProfilePage({super.key});
+
   @override
   ProfileScreenPage createState() => ProfileScreenPage();
 }
@@ -100,272 +102,270 @@ class ProfileScreenPage extends State<EditProfilePage>
               elevation: 8,
               child: Padding(
                 padding: const EdgeInsets.only(left:10.0,right:10.0,top:30.0),
-                child: Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        padding: const EdgeInsets.only(
-                          left: 10.0,
-                          right: 0.0,
-                          top: 20.0,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => ProfileUpdate()),
-                                );
-                              },
-                              child: Center(
-                                child: _image == null
-                                    ? GestureDetector(
-                                  //  onTap: () => imagePicker.showDialog(context),
-                                  child: SizedBox(
-                                      height: 90.0,
-                                      width: 100,
-                                      child: Center(
-                                        child: CircleAvatar(
-                                          radius: 60.0,
-                                          backgroundImage: NetworkImage(
-                                              "http://partyapp.v2infotech.net/resources/$profile_pic"),
-                                          // backgroundColor: Colors.white,
-                                          child: Container(
-                                            margin: const EdgeInsets.fromLTRB(
-                                                40, 0, 0, 40),
-                                            child: Image.asset(
-                                              "images/edit.png",
-                                              fit: BoxFit.fill,
-                                              height: 30,
-                                              width: 30,
-                                            ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      padding: const EdgeInsets.only(
+                        left: 10.0,
+                        right: 0.0,
+                        top: 20.0,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => ProfileUpdate()),
+                              );
+                            },
+                            child: Center(
+                              child: _image == null
+                                  ? GestureDetector(
+                                //  onTap: () => imagePicker.showDialog(context),
+                                child: SizedBox(
+                                    height: 90.0,
+                                    width: 100,
+                                    child: Center(
+                                      child: CircleAvatar(
+                                        radius: 60.0,
+                                        backgroundImage: NetworkImage(
+                                            "http://partyapp.v2infotech.net/resources/$profile_pic"),
+                                        // backgroundColor: Colors.white,
+                                        child: Container(
+                                          margin: const EdgeInsets.fromLTRB(
+                                              40, 0, 0, 40),
+                                          child: Image.asset(
+                                            "images/edit.png",
+                                            fit: BoxFit.fill,
+                                            height: 30,
+                                            width: 30,
                                           ),
                                         ),
-                                      )),
-                                )
-                                    : Container(
-                                  height: 90.0,
-                                  width: 90.0,
-                                  decoration: BoxDecoration(
-                                    // color: Colors.lightBlue,
-                                    image: DecorationImage(
-                                      image: FileImage(_image!),
-                                      fit: BoxFit.cover,
-                                    ),
-                                    border: Border.all(
-                                        color: Colors.black, width: 1.0),
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(60.0)),
+                                      ),
+                                    )),
+                              )
+                                  : Container(
+                                height: 90.0,
+                                width: 90.0,
+                                decoration: BoxDecoration(
+                                  // color: Colors.lightBlue,
+                                  image: DecorationImage(
+                                    image: FileImage(_image!),
+                                    fit: BoxFit.cover,
                                   ),
+                                  border: Border.all(
+                                      color: Colors.black, width: 1.0),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(60.0)),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      Center(
-
-                        child: Container(
-
-                          alignment: Alignment.topCenter,
-                          child: Text(
-                            "$name",
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontFamily: "Raleway",
-                                fontSize: 20,
-
-                                fontWeight: FontWeight.w400),
-                          ),
-
-
-
-                        ),
-                      ),
-                      Column(children: <Widget>[
-                        Row(children: <Widget>[
-                          Expanded(
-                            child: Container(
-                                margin: const EdgeInsets.only(
-                                    left: 20.0, right: 20.0),
-                                child: const Divider(
-                                  color: Color.fromRGBO(140, 53, 52, 1),
-                                  height: 36,
-                                  thickness: 1,
-                                )),
-                          ),
-                        ]),
-                      ]),
-                      const SizedBox(
-                        height: 14,
-                      ),
-                      Column(
-                        children: <Widget>[
-                          Container(
-                            margin: const EdgeInsets.only(left: 15.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                const Text('NAME. -',
-                                  style: TextStyle(
-                                      color: Color.fromRGBO(220, 84, 85, 1),
-                                      fontFamily: "Raleway",
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                Text(
-                                  "    $name",
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: "Raleway",
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 18,
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(left: 15.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                const Text('PHONE NO. -',
-                                  style: TextStyle(
-                                      color: Color.fromRGBO(220, 84, 85, 1),
-                                      fontFamily: "Raleway",
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                Text(
-                                  "    $mobile",
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: "Raleway",
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            ),
-                          ),
-                   /*       SizedBox(
-                            height: 14,
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(left: 15.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                Text('EMAIL -',
-                                  style: TextStyle(
-                                      color: Color.fromRGBO(220, 84, 85, 1),
-                                      fontFamily: "Raleway",
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                Text(
-                                  "    $email",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: "Raleway",
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            ),
-                          )*/
-                 /*         SizedBox(
-                            height: 16,
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(left: 15.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                Text('GENDER -',
-                                  style: TextStyle(
-                                      color: Color.fromRGBO(220, 84, 85, 1),
-                                      fontFamily: "Raleway",
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                Text(
-                                  "    $gender",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: "Raleway",
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 16,
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(left: 15.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                Text('D.O.B -',
-                                  style: TextStyle(
-                                      color: Color.fromRGBO(220, 84, 85, 1),
-                                      fontFamily: "Raleway",
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                Text(
-                                  "    $dob",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: "Raleway",
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            ),
-                          ),*/
-                          const SizedBox(
-                            height: 18,
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(left: 15.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                const Text('PASSWORD -',
-                                  style: TextStyle(
-                                      color: Color.fromRGBO(220, 84, 85, 1),
-                                      fontFamily: "Raleway",
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                Text(
-                                  "    $password",
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: "Raleway",
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
                             ),
                           ),
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Center(
+
+                      child: Container(
+
+                        alignment: Alignment.topCenter,
+                        child: Text(
+                          "$name",
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontFamily: "Raleway",
+                              fontSize: 20,
+
+                              fontWeight: FontWeight.w400),
+                        ),
+
+
+
+                      ),
+                    ),
+                    Column(children: <Widget>[
+                      Row(children: <Widget>[
+                        Expanded(
+                          child: Container(
+                              margin: const EdgeInsets.only(
+                                  left: 20.0, right: 20.0),
+                              child: const Divider(
+                                color: Color.fromRGBO(140, 53, 52, 1),
+                                height: 36,
+                                thickness: 1,
+                              )),
+                        ),
+                      ]),
+                    ]),
+                    const SizedBox(
+                      height: 14,
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Container(
+                          margin: const EdgeInsets.only(left: 15.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              const Text('NAME. -',
+                                style: TextStyle(
+                                    color: Color.fromRGBO(220, 84, 85, 1),
+                                    fontFamily: "Raleway",
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              Text(
+                                "    $name",
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: "Raleway",
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 18,
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(left: 15.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              const Text('PHONE NO. -',
+                                style: TextStyle(
+                                    color: Color.fromRGBO(220, 84, 85, 1),
+                                    fontFamily: "Raleway",
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              Text(
+                                "    $mobile",
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: "Raleway",
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ],
+                          ),
+                        ),
+                 /*       SizedBox(
+                          height: 14,
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(left: 15.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Text('EMAIL -',
+                                style: TextStyle(
+                                    color: Color.fromRGBO(220, 84, 85, 1),
+                                    fontFamily: "Raleway",
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              Text(
+                                "    $email",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: "Raleway",
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ],
+                          ),
+                        )*/
+                 /*         SizedBox(
+                          height: 16,
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(left: 15.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Text('GENDER -',
+                                style: TextStyle(
+                                    color: Color.fromRGBO(220, 84, 85, 1),
+                                    fontFamily: "Raleway",
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              Text(
+                                "    $gender",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: "Raleway",
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(left: 15.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Text('D.O.B -',
+                                style: TextStyle(
+                                    color: Color.fromRGBO(220, 84, 85, 1),
+                                    fontFamily: "Raleway",
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              Text(
+                                "    $dob",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: "Raleway",
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ],
+                          ),
+                        ),*/
+                        const SizedBox(
+                          height: 18,
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(left: 15.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              const Text('PASSWORD -',
+                                style: TextStyle(
+                                    color: Color.fromRGBO(220, 84, 85, 1),
+                                    fontFamily: "Raleway",
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              Text(
+                                "    $password",
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: "Raleway",
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),

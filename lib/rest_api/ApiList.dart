@@ -1,7 +1,8 @@
 
 class APIS {
 
-  static const String _baseUrl = "http://partyapp.v2infotech.net/api/party";
+  // static const String _baseUrl = "http://partyapp.v2infotech.net/api/party";
+  static const String _baseUrl = "http://localhost:3500/api/party";
   static const String _baseUrl1 = "http://shoppingapp.v2infotech.net/api";
   static var usersSignUp = "$_baseUrl/User/signup";
   static var usersLogin = "$_baseUrl/User/login";
@@ -14,7 +15,8 @@ class APIS {
   static var getCartList = "$_baseUrl/Cart/getCartList";
   static var addPackageCount = "$_baseUrl/Cart/addPackageCount";
   static var termsCondition = "$_baseUrl/TC/getTC";
-  static var getTC = "$_baseUrl1/TC/getTC";
+  // static var getTC = "$_baseUrl1/TC/getTC";
+  static var getTC = "$_baseUrl/TC/getTC";
   static var privacy = "$_baseUrl/Privacy/getPrivacy";
   static var privacy1 = "$_baseUrl/Privacy/privacyPolicy";
   static var faq = "$_baseUrl/Faq/getFaqQuesAns";

@@ -7,6 +7,8 @@ import 'package:shimmer/shimmer.dart';
 import '../../rest_api/ApiList.dart';
 
 class FaqScreen extends StatefulWidget {
+  const FaqScreen({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return FaqScreen1();
@@ -41,7 +43,7 @@ class FaqScreen1 extends State<FaqScreen> {
               onTap: () {
                 Navigator.of(context).pop();
               },
-              child: Container(
+              child: SizedBox(
                 height: 18,
                 child: Image.asset(
                   "images/back_button.png",
@@ -56,7 +58,7 @@ class FaqScreen1 extends State<FaqScreen> {
           decoration: BoxDecoration(
               gradient: RadialGradient(colors: [
                 Colors.black.withOpacity(0.9)
-              ], stops: [
+              ], stops: const [
                 0.0,
               ]),
               image: DecorationImage(

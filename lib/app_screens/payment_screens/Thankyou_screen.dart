@@ -1,98 +1,123 @@
 import 'package:flutter/material.dart';
-import 'package:dakibaa/number_of_person.dart';
+import 'package:dakibaa/app_screens/home_screens/number_of_person.dart';
 
 import '../../Colors/colors.dart';
-import '../../common/constant.dart';
-
-class ThankyouScreen extends StatefulWidget {
-  @override
-  _ThankyouScreenState createState() => _ThankyouScreenState();
-}
-
-class _ThankyouScreenState extends State<ThankyouScreen> {
+class ThankYouScreen extends StatelessWidget {
+  String OrderID;
+  ThankYouScreen({required this.OrderID, super.key});
   Future<bool> _onWillPop() async {
     return false;
   }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
         onWillPop: _onWillPop,
         child: Scaffold(
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.black.withOpacity(0.8),
-                Colors.black.withOpacity(0.8),
-              ],
-            ),
-            image: DecorationImage(
-              image: AssetImage("images/services_background.jpg"),
-              fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.3), BlendMode.dstATop),
-            )),
-        child: ListView(
-          shrinkWrap: true,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+          body: Container(
+            height: MediaQuery.of(context).size.height,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.black.withOpacity(0.8),
+                    Colors.black.withOpacity(0.8),
+                  ],
+                ),
+                image: DecorationImage(
+                  image: const AssetImage("images/services_background.jpg"),
+                  fit: BoxFit.cover,
+                  colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.3), BlendMode.dstATop),
+                )),
+            child: ListView(
+              shrinkWrap: true,
               children: [
-                Padding(
-                  padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/3.5),
-                  child: SizedBox(
-                    height: 100,
-                    child: Image.asset('images/thumsup.gif'),
-                  ),
-                ),
-                Row(
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      child: Text("Thank You",style: TextStyle(color: AppTheme().color_white,fontSize: 35,fontFamily: 'Montserrat'),),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height / 3.5),
+                      child: SizedBox(
+                        height: 100,
+                        child: Image.asset('images/thumsup.gif'),
+                      ),
                     ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Wrap(
-                  alignment: WrapAlignment.center,
-                  children: [
-                    Container(
-                      child: Text(payment_mesg != null?"Your Order has been placed \nReference Number :  "+payment_OrderID!:""
-                        ,textAlign: TextAlign.center,style: TextStyle(color: AppTheme().color_white,fontSize: 15,fontFamily: 'Montserrat-SemiBold'),),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20,right: 110,left: 110),
-                  child: GestureDetector(
-                    onTap: () {
-                      /*if (_formkey.currentState.validate()) {
-                            _formkey.currentState.save();
-                            setState(() {});
-                            getData();
-                          }*/
-                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                          Number_of_Person()), (Route<dynamic> route) => false);
-                    },
-                    child: Container(
-                        height: 45,
-                        decoration: BoxDecoration(
-                            color: AppTheme().color_red,
-                            borderRadius: BorderRadius.circular(50),
-                            border: Border.all( color:AppTheme().color_red)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Thank You",
+                          style: TextStyle(
+                              color: AppTheme().color_white,
+                              fontSize: 35,
+                              fontFamily: 'Montserrat'),
                         ),
-                        //margin: EdgeInsets.only(top: 5.0,left: 80,right: 80),
-                        child:Center(
-                          child: Text("OK".toUpperCase(),style: TextStyle(
-                              fontFamily: 'Montserrat',fontSize: 20,color: AppTheme().color_white),),
-                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "We will Contact You Soon",
+                          style: TextStyle(
+                              color: AppTheme().color_white,
+                              fontSize: 14,
+                              fontFamily: 'Montserrat'),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Wrap(
+                      alignment: WrapAlignment.center,
+                      children: [
+                        Text(
+                          "Order ID :  $OrderID",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: AppTheme().color_white,
+                              fontSize: 15,
+                              fontFamily: 'Montserrat-SemiBold'),
+                        ),
+                        // Text(payment_mesg != null?"Your Order has been placed \nReference Number :  "+payment_OrderID!:""
+                        //   ,textAlign: TextAlign.center,style: TextStyle(color: AppTheme().color_white,fontSize: 15,fontFamily: 'Montserrat-SemiBold'),),
+                      ],
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 20, right: 110, left: 110),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (context) => Number_of_Person()),
+                              (Route<dynamic> route) => false);
+                        },
+                        child: Container(
+                            height: 45,
+                            decoration: BoxDecoration(
+                                color: AppTheme().color_red,
+                                borderRadius: BorderRadius.circular(50),
+                                border:
+                                    Border.all(color: AppTheme().color_red)),
+                            //margin: EdgeInsets.only(top: 5.0,left: 80,right: 80),
+                            child: Center(
+                              child: Text(
+                                "OK".toUpperCase(),
+                                style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    fontSize: 20,
+                                    color: AppTheme().color_white),
+                              ),
+                            )
 
-                      /*ButtonTheme(
+                            /*ButtonTheme(
 
                               minWidth: 360.0,
                               child: RaisedButton(
@@ -124,12 +149,12 @@ class _ThankyouScreenState extends State<ThankyouScreen> {
                                   shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(15.0))
                               ),
                             ),*/
+                            ),
+                      ),
                     ),
-                  ),
-                ),
-              ],
-            )
-            /*payment_mesg != null
+                  ],
+                )
+                /*payment_mesg != null
                 ? Text('Transaction Status: $payment_mesg\n',style: TextStyle(color: AppTheme().color_white,fontFamily: 'Montserrat-SemiBold',fontSize: 17),)
                 : Container(),
             payment_txnid != null
@@ -144,9 +169,9 @@ class _ThankyouScreenState extends State<ThankyouScreen> {
             payment_amount != null
                 ? Text('Transaction Amount: $payment_amount\n',style: TextStyle(color: AppTheme().color_white,fontFamily: 'Montserrat-SemiBold',fontSize: 15),)
                 : Container(),*/
-          ],
-        ),
-      ),
-    ));
+              ],
+            ),
+          ),
+        ));
   }
 }

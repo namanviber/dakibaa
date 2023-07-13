@@ -7,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:toast/toast.dart';
 class OrderHistoryScreen extends StatefulWidget {
+  const OrderHistoryScreen({super.key});
+
   @override
   _OrderHistoryScreenState createState() => _OrderHistoryScreenState();
 }
@@ -122,7 +124,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
             ):data!["status"]=="0"?
             Padding(
               padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/3.5),
-              child: Container(
+              child: SizedBox(
                 height: 50,
                 child: Center(
                   child: Text("No Data Found",style: TextStyle(
@@ -144,7 +146,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                        decoration: BoxDecoration(
                            color: AppTheme().color_white,
                            borderRadius: BorderRadius.circular(15),
-                         boxShadow: [const BoxShadow(
+                         boxShadow: const [BoxShadow(
                              color: Colors.black, blurRadius: 5, )]
                        ),
                        child: Column(

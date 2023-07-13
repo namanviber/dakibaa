@@ -9,6 +9,8 @@ Future<void> main() async {
   runApp(MyApp());
 }
 class MyApp extends StatefulWidget{
+  const MyApp({super.key});
+
   @override
   _myApp createState() => _myApp();
 }

@@ -9,6 +9,8 @@ import '../authorization_screens/login_pagenew.dart';
 
 
 class ChangePassword extends StatefulWidget {
+  const ChangePassword({super.key});
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -58,7 +60,7 @@ class _ChangePassword extends State<ChangePassword> {
                   gradient: RadialGradient(
 
                       colors: [Colors.black.withOpacity(0.9)],
-                      stops: [0.0, ]
+                      stops: const [0.0, ]
                   ),
                   image: DecorationImage(
                     image: const AssetImage("images/services_background.jpg"),

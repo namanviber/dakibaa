@@ -13,6 +13,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'common/constant.dart';
 
 class Paytmscreen extends StatefulWidget {
+  const Paytmscreen({super.key});
+
   @override
   _PaytmscreenState createState() => _PaytmscreenState();
 }
@@ -196,48 +198,57 @@ class _PaytmscreenState extends State<Paytmscreen>
 //                            child: CircularProgressIndicator()),
 //                      )
 //                    : Container(),
-                ElevatedButton(
-                  onPressed: () {
-                    //Firstly Generate CheckSum bcoz Paytm Require this
-                    generateTxnToken(0);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppTheme().color_red,
-                    textStyle: TextStyle(
-                        color: AppTheme().color_white,
-                        fontFamily: 'Montserrat',
-                        fontSize: 17),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height*0.7,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          //Firstly Generate CheckSum bcoz Paytm Require this
+                          generateTxnToken(0);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppTheme().color_red,
+                          textStyle: TextStyle(
+                              color: AppTheme().color_white,
+                              fontFamily: 'Montserrat',
+                              fontSize: 17),
+                        ),
+                        child: const Text("Pay using Wallet"),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          //Firstly Generate CheckSum bcoz Paytm Require this
+                          generateTxnToken(1);
+                        },
+                        child: const Text("Pay using Net Banking"),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppTheme().color_red,
+                          textStyle: TextStyle(
+                              color: AppTheme().color_white,
+                              fontFamily: 'Montserrat',
+                              fontSize: 17),
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          //Firstly Generate CheckSum bcoz Paytm Require this
+                          generateTxnToken(2);
+                        },
+                        child: const Text("Pay using UPI"),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppTheme().color_red,
+                          textStyle: TextStyle(
+                              color: AppTheme().color_white,
+                              fontFamily: 'Montserrat',
+                              fontSize: 17),
+                        ),
+                      ),
+                    ],
                   ),
-                  child: const Text("Pay using Wallet"),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    //Firstly Generate CheckSum bcoz Paytm Require this
-                    generateTxnToken(1);
-                  },
-                  child: const Text("Pay using Net Banking"),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppTheme().color_red,
-                    textStyle: TextStyle(
-                        color: AppTheme().color_white,
-                        fontFamily: 'Montserrat',
-                        fontSize: 17),
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    //Firstly Generate CheckSum bcoz Paytm Require this
-                    generateTxnToken(2);
-                  },
-                  child: const Text("Pay using UPI"),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppTheme().color_red,
-                    textStyle: TextStyle(
-                        color: AppTheme().color_white,
-                        fontFamily: 'Montserrat',
-                        fontSize: 17),
-                  ),
-                ),
+
                 /* RaisedButton(
                   onPressed: () {
                     //Firstly Generate CheckSum bcoz Paytm Require this
@@ -270,12 +281,10 @@ class _PaytmscreenState extends State<Paytmscreen>
     });
     String orderId = DateTime.now().millisecondsSinceEpoch.toString();
 
-    String callBackUrl = (testing
+    String callBackUrl = '${testing
             ? 'https://securegw-stage.paytm.in'
-            : 'https://securegw.paytm.in') +
-        '/theia/paytmCallback?ORDER_ID=' +
-        orderId;
-    print("orderId:   " + orderId);
+            : 'https://securegw.paytm.in'}/theia/paytmCallback?ORDER_ID=$orderId';
+    print("orderId:   $orderId");
     //Host the Server Side Code on your Server and use your URL here. The following URL may or may not work. Because hosted on free server.
     //Server Side code url: https://github.com/mrdishant/Paytm-Plugin-Server
     var url = 'https://desolate-anchorage-29312.herokuapp.com/generateTxnToken';
@@ -321,10 +330,17 @@ class _PaytmscreenState extends State<Paytmscreen>
             payment_mesg = value['errorMessage'];
           } else {
             if (value['response'] != null) {
+              print("vallllllll: ${value["response"]}");
+              payment_mesg = value['response']['RESPMSG'];
+              payment_txnid = value['response']['TXNID'];
+              payment_amount = value['response']['TXNAMOUNT'];
+              payment_bank = value['response']['BANKNAME'];
+              payment_OrderID = value['response']['ORDERID'];
               if (value['response']['RESPMSG'] == 'Txn Success') {
                 pr.close();
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => ThankyouScreen()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) =>
+                        ThankYouScreen(OrderID: payment_OrderID ?? "")));
                 _presenter.getpaytm(
                     value['response']['ORDERID'],
                     value['response']['BANKNAME'],
@@ -335,11 +351,6 @@ class _PaytmscreenState extends State<Paytmscreen>
                 Navigator.of(context).pushReplacement(
                     MaterialPageRoute(builder: (context) => FailScreen()));
               }
-              payment_mesg = value['response']['RESPMSG'];
-              payment_txnid = value['response']['TXNID'];
-              payment_amount = value['response']['TXNAMOUNT'];
-              payment_bank = value['response']['BANKNAME'];
-              payment_OrderID = value['response']['ORDERID'];
             }
           }
 
@@ -355,7 +366,7 @@ class _PaytmscreenState extends State<Paytmscreen>
   @override
   void onPaytmModelError(String errorTxt) {
     // TODO: implement onPaytmModelError
-    print("Error:   " + errorTxt);
+    print("Error:   $errorTxt");
   }
 
   @override

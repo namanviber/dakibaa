@@ -15,6 +15,8 @@ import 'common/constant.dart';
 import 'widgets/appDrawer.dart';
 
 class Services extends StatefulWidget {
+  const Services({super.key});
+
   @override
   ServicesPage createState() => ServicesPage();
 }
@@ -218,28 +220,28 @@ class ServicesPage extends State<Services> {
                                         SERVICES_LIST![index].productname;
                                     imageProduct = pic_list[index];
                                     descp = SERVICES_LIST![index].productDescr;
-                                    if (person! <= 15) {
+                                    if (person! >= 15 && person! < 30) {
                                       price = SERVICES_LIST![index]
                                           .rate15
                                           .toString();
-                                    } else if (person! <= 30) {
+                                    } else if (person! >= 30 && person! < 50) {
                                       price = SERVICES_LIST![index]
                                           .rate30
                                           .toString();
-                                    } else if (person! <= 50) {
+                                    } else if (person! >= 50 && person! < 75) {
                                       price = SERVICES_LIST![index]
                                           .rate50
                                           .toString();
-                                    } else if (person! <= 75) {
+                                    } else if (person! >= 75 &&
+                                        person! < 1000) {
                                       price = SERVICES_LIST![index]
                                           .rate75
                                           .toString();
-                                    } else if (person! <= 1000) {
+                                    } else if (person! > 1000) {
                                       price = SERVICES_LIST![index]
                                           .rate100
                                           .toString();
                                     }
-
                                   });
                                   Navigator.push(
                                     context,
@@ -427,7 +429,7 @@ class Counter extends StatefulWidget {
   final int? index;
   final List<ServiceModelNew>? listData;
 
-  Counter({this.index, this.listData});
+  Counter({super.key, this.index, this.listData});
 
   @override
   _CounterState createState() => _CounterState();
@@ -459,10 +461,12 @@ class _CounterState extends State<Counter> {
   }
 
   void totalrates() {
-    if (person! <= 15) {
+    if (person! >= 15 && person! < 30) {
+      totalamount = 0;
       for (int i = 0; i < widget.listData!.length; i++) {
         if (widget.listData![i].id == 1) {
           producttotal += widget.listData![i].rate15!;
+          print(producttotal);
         }
         if (widget.listData![i].id == 2) {
           producttotal += widget.listData![i].rate15!;
@@ -494,7 +498,7 @@ class _CounterState extends State<Counter> {
         product.add(productModel);
       }
       jsons = jsonEncode(product.map((e) => e!.toJson()).toList());
-    } else if (person! <= 30) {
+    } else if (person! >= 30 && person! < 50) {
       for (int i = 0; i < widget.listData!.length; i++) {
         if (widget.listData![i].id == 1) {
           producttotal += widget.listData![i].rate30!;
@@ -528,7 +532,7 @@ class _CounterState extends State<Counter> {
         product.add(productModel);
       }
       jsons = jsonEncode(product.map((e) => e!.toJson()).toList());
-     } else if (person! <= 50) {
+    } else if (person! >= 50 && person! < 75) {
       for (int i = 0; i < widget.listData!.length; i++) {
         if (widget.listData![i].id == 1) {
           producttotal += widget.listData![i].rate50!;
@@ -562,7 +566,7 @@ class _CounterState extends State<Counter> {
         product.add(productModel);
       }
       jsons = jsonEncode(product.map((e) => e!.toJson()).toList());
-    } else if (person! <= 75) {
+    } else if (person! >= 75 && person! < 1000) {
       for (int i = 0; i < widget.listData!.length; i++) {
         if (widget.listData![i].id == 1) {
           producttotal += widget.listData![i].rate75!;
@@ -596,7 +600,7 @@ class _CounterState extends State<Counter> {
         product.add(productModel);
       }
       jsons = jsonEncode(product.map((e) => e!.toJson()).toList());
-    } else if (person! <= 1000) {
+    } else if (person! > 1000) {
       for (int i = 0; i < widget.listData!.length; i++) {
         if (widget.listData![i].id == 1) {
           producttotal += widget.listData![i].rate100!;
@@ -642,15 +646,15 @@ class _CounterState extends State<Counter> {
           0,
         );
         productModel!.prod_id = widget.listData![widget.index!].id.toString();
-        if (person! <= 15) {
+        if (person! >= 15 && person! < 30) {
           productModel!.total = price;
-        } else if (person! <= 30) {
+        } else if (person! >= 30 && person! < 50) {
           productModel!.total = price;
-        } else if (person! <= 50) {
+        } else if (person! >= 50 && person! < 75) {
           productModel!.total = price;
-        } else if (person! <= 75) {
+        } else if (person! >= 75 && person! < 1000) {
           productModel!.total = price;
-        } else if (person! <= 1000) {
+        } else if (person! > 1000) {
           productModel!.total = price;
         }
         if (widget.listData![widget.index!].id == 3) {
@@ -667,15 +671,15 @@ class _CounterState extends State<Counter> {
       } else {
         if (product[widget.index!]!.prod_id ==
             widget.listData![widget.index!].id.toString()) {
-          if (person! <= 15) {
+          if (person! >= 15 && person! < 30) {
             productModel!.total = price;
-          } else if (person! <= 30) {
+          } else if (person! >= 30 && person! < 50) {
             productModel!.total = price;
-          } else if (person! <= 50) {
+          } else if (person! >= 50 && person! < 75) {
             productModel!.total = price;
-          } else if (person! <= 75) {
+          } else if (person! >= 75 && person! < 1000) {
             productModel!.total = price;
-          } else if (person! <= 1000) {
+          } else if (person! > 1000) {
             productModel!.total = price;
           }
           if (widget.listData![widget.index!].id == 3 &&
@@ -696,32 +700,31 @@ class _CounterState extends State<Counter> {
 
   void gls_rate() {
     if (checkedValue_2 == true) {
-      if (person! <= 15) {
-        if (widget.listData![widget.index!].id == 3) {
-          totalamount = totalamount - person_mult_price;
-
-        } else if (widget.listData![widget.index!].id == 4) {
-          totalamount = totalamount - person_mult_price;
-        }
-      } else if (person! <= 30) {
+      if (person! >= 15 && person! < 30) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount - person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount - person_mult_price;
         }
-      } else if (person! <= 50) {
+      } else if (person! >= 30 && person! < 50) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount - person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount - person_mult_price;
         }
-      } else if (person! <= 75) {
+      } else if (person! >= 50 && person! < 75) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount - person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount - person_mult_price;
         }
-      } else if (person! <= 1000) {
+      } else if (person! >= 75 && person! < 1000) {
+        if (widget.listData![widget.index!].id == 3) {
+          totalamount = totalamount - person_mult_price;
+        } else if (widget.listData![widget.index!].id == 4) {
+          totalamount = totalamount - person_mult_price;
+        }
+      } else if (person! > 1000) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount - person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
@@ -729,31 +732,31 @@ class _CounterState extends State<Counter> {
         }
       }
     } else if (checkedValue_2 == false) {
-      if (person! <= 15) {
+      if (person! >= 15 && person! < 30) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount + person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount + person_mult_price;
         }
-      } else if (person! <= 30) {
+      } else if (person! >= 30 && person! < 50) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount + person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount + person_mult_price;
         }
-      } else if (person! <= 50) {
+      } else if (person! >= 50 && person! < 75) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount + person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount + person_mult_price;
         }
-      } else if (person! <= 75) {
+      } else if (person! >= 75 && person! < 1000) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount + person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount + person_mult_price;
         }
-      } else if (person! <= 1000) {
+      } else if (person! > 1000) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount + person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
@@ -765,32 +768,31 @@ class _CounterState extends State<Counter> {
 
   void bev_rate() {
     if (checkedValue_1 == true) {
-      if (person! <= 15) {
-        if (widget.listData![widget.index!].id == 3) {
-          totalamount = totalamount - person_mult_price;
-
-        } else if (widget.listData![widget.index!].id == 4) {
-          totalamount = totalamount - person_mult_price;
-        }
-      } else if (person! <= 30) {
+      if (person! >= 15 && person! < 30) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount - person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount - person_mult_price;
         }
-      } else if (person! <= 50) {
+      } else if (person! >= 30 && person! < 50) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount - person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount - person_mult_price;
         }
-      } else if (person! <= 75) {
+      } else if (person! >= 50 && person! < 75) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount - person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount - person_mult_price;
         }
-      } else if (person! <= 1000) {
+      } else if (person! >= 75 && person! < 1000) {
+        if (widget.listData![widget.index!].id == 3) {
+          totalamount = totalamount - person_mult_price;
+        } else if (widget.listData![widget.index!].id == 4) {
+          totalamount = totalamount - person_mult_price;
+        }
+      } else if (person! > 1000) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount - person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
@@ -798,31 +800,31 @@ class _CounterState extends State<Counter> {
         }
       }
     } else if (checkedValue_1 == false) {
-      if (person! <= 15) {
+      if (person! >= 15 && person! < 30) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount + person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount + person_mult_price;
         }
-      } else if (person! <= 30) {
+      } else if (person! >= 30 && person! < 50) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount + person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount + person_mult_price;
         }
-      } else if (person! <= 50) {
+      } else if (person! >= 50 && person! < 75) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount + person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount + person_mult_price;
         }
-      } else if (person! <= 75) {
+      } else if (person! >= 75 && person! < 1000) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount + person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
           totalamount = totalamount + person_mult_price;
         }
-      } else if (person! <= 1000) {
+      } else if (person! > 1000) {
         if (widget.listData![widget.index!].id == 3) {
           totalamount = totalamount + person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
@@ -833,49 +835,39 @@ class _CounterState extends State<Counter> {
   }
 
   void mult_rate() {
-    if (person! <= 15) {
+    if (person! >= 15 && person! < 30) {
       if (widget.listData![widget.index!].id == 3) {
         person_mult_price = person! * widget.listData![widget.index!].rate15!;
-
       } else if (widget.listData![widget.index!].id == 4) {
         person_mult_price = person! * widget.listData![widget.index!].rate15!;
-        
       }
     }
-    if (person! <= 30) {
+    if (person! >= 30 && person! < 50) {
       if (widget.listData![widget.index!].id == 3) {
         person_mult_price = person! * widget.listData![widget.index!].rate30!;
-        
       } else if (widget.listData![widget.index!].id == 4) {
         person_mult_price = person! * widget.listData![widget.index!].rate30!;
-        
       }
     }
-    if (person! <= 50) {
+    if (person! >= 50 && person! < 75) {
       if (widget.listData![widget.index!].id == 3) {
         person_mult_price = person! * widget.listData![widget.index!].rate50!;
-        
       } else if (widget.listData![widget.index!].id == 4) {
         person_mult_price = person! * widget.listData![widget.index!].rate50!;
-        
       }
     }
-    if (person! <= 75) {
+    if (person! >= 75 && person! < 1000) {
       if (widget.listData![widget.index!].id == 3) {
         person_mult_price = person! * widget.listData![widget.index!].rate75!;
-        
       } else if (widget.listData![widget.index!].id == 4) {
         person_mult_price = person! * widget.listData![widget.index!].rate75!;
-        
       }
     }
-    if (person! <= 1000) {
+    if (person! > 1000) {
       if (widget.listData![widget.index!].id == 3) {
         person_mult_price = person! * widget.listData![widget.index!].rate100!;
-        
       } else if (widget.listData![widget.index!].id == 4) {
         person_mult_price = person! * widget.listData![widget.index!].rate100!;
-        
       }
     }
   }
@@ -883,35 +875,35 @@ class _CounterState extends State<Counter> {
   void add_services() {
     setState(() {
       services++;
-      if (person! <= 15) {
+      if (person! >= 15 && person! < 30) {
         price = services * widget.listData![widget.index!].rate15!;
         totalamount = totalamount + widget.listData![widget.index!].rate15!;
         producttotal = totalamount;
-        
+
         addItemToList();
-      } else if (person! <= 30) {
+      } else if (person! >= 30 && person! < 50) {
         price = services * widget.listData![widget.index!].rate30!;
         totalamount = totalamount + widget.listData![widget.index!].rate30!;
         producttotal = totalamount;
-        
+
         addItemToList();
-      } else if (person! <= 50) {
+      } else if (person! >= 50 && person! < 75) {
         price = services * widget.listData![widget.index!].rate50!;
         totalamount = totalamount + widget.listData![widget.index!].rate50!;
         producttotal = totalamount;
-        
+
         addItemToList();
-      } else if (person! <= 75) {
+      } else if (person! >= 75 && person! < 1000) {
         price = services * widget.listData![widget.index!].rate75!;
         totalamount = totalamount + widget.listData![widget.index!].rate75!;
         producttotal = totalamount;
-        
+
         addItemToList();
-      } else if (person! <= 1000) {
+      } else if (person! > 1000) {
         price = services * widget.listData![widget.index!].rate100!;
         totalamount = totalamount + widget.listData![widget.index!].rate100!;
         producttotal = totalamount;
-        
+
         addItemToList();
       }
     });
@@ -920,31 +912,31 @@ class _CounterState extends State<Counter> {
   void miuns_services() {
     setState(() {
       services--;
-      if (person! <= 15) {
+      if (person! >= 15 && person! < 30) {
         price = services * widget.listData![widget.index!].rate15!;
         totalamount = totalamount - widget.listData![widget.index!].rate15!;
         producttotal = totalamount;
-        
+
         addItemToList();
-      } else if (person! <= 30) {
+      } else if (person! >= 30 && person! < 50) {
         price = services * widget.listData![widget.index!].rate30!;
         totalamount = totalamount - widget.listData![widget.index!].rate30!;
         producttotal = totalamount;
-        
+
         addItemToList();
-      } else if (person! <= 50) {
+      } else if (person! >= 50 && person! < 75) {
         price = services * widget.listData![widget.index!].rate50!;
         totalamount = totalamount - widget.listData![widget.index!].rate50!;
         producttotal = totalamount;
-        
+
         addItemToList();
-      } else if (person! <= 75) {
+      } else if (person! >= 75 && person! < 1000) {
         price = services * widget.listData![widget.index!].rate75!;
         totalamount = totalamount - widget.listData![widget.index!].rate75!;
         producttotal = totalamount;
-        
+
         addItemToList();
-      } else if (person! <= 1000) {
+      } else if (person! > 1000) {
         price = services * widget.listData![widget.index!].rate100!;
         totalamount = totalamount - widget.listData![widget.index!].rate100!;
         producttotal = totalamount;
@@ -1043,7 +1035,7 @@ class _CounterState extends State<Counter> {
                   Expanded(
                     child: Wrap(
                       children: [
-                        person! <= 15
+                        person! >= 15 && person! < 30
                             ? Text(
                                 'Price ₹ ${widget.listData![widget.index!].rate15}',
                                 textAlign: TextAlign.left,
@@ -1053,7 +1045,7 @@ class _CounterState extends State<Counter> {
                                     fontSize: 10,
                                     fontWeight: FontWeight.bold),
                               )
-                            : person! <= 30
+                            : person! >= 30 && person! < 50
                                 ? Text(
                                     'Price ₹${widget.listData![widget.index!].rate30}',
                                     textAlign: TextAlign.left,
@@ -1063,10 +1055,9 @@ class _CounterState extends State<Counter> {
                                       fontSize: 10,
                                     ),
                                   )
-                                : person! <= 50
+                                : person! >= 50 && person! < 75
                                     ? Text(
-                                        'Price ₹${widget.listData![widget.index!]
-                                                    .rate50}',
+                                        'Price ₹${widget.listData![widget.index!].rate50}',
                                         textAlign: TextAlign.left,
                                         //overflow:TextOverflow.ellipsis ,
                                         style: TextStyle(
@@ -1075,11 +1066,9 @@ class _CounterState extends State<Counter> {
                                           fontSize: 10,
                                         ),
                                       )
-                                    : person! <= 75
+                                    : person! >= 75 && person! < 1000
                                         ? Text(
-                                            'Price ₹${widget.listData![widget.index!]
-                                                            .rate75! *
-                                                        services}',
+                                            'Price ₹${widget.listData![widget.index!].rate75! * services}',
                                             textAlign: TextAlign.left,
                                             //overflow:TextOverflow.ellipsis ,
                                             style: TextStyle(
@@ -1088,14 +1077,9 @@ class _CounterState extends State<Counter> {
                                               fontSize: 10,
                                             ),
                                           )
-                                        : person! <= 1000
+                                        : person! > 1000
                                             ? Text(
-                                                'Price ₹${widget
-                                                                .listData![
-                                                                    widget
-                                                                        .index!]
-                                                                .rate100! *
-                                                            services}',
+                                                'Price ₹${widget.listData![widget.index!].rate100! * services}',
                                                 textAlign: TextAlign.left,
                                                 //overflow:TextOverflow.ellipsis ,
                                                 style: TextStyle(
@@ -1125,10 +1109,9 @@ class _CounterState extends State<Counter> {
                                             child: Icon(Icons.remove_circle,
                                                 color: AppTheme().color_white),
                                           ),
-                                    person! <= 15
+                                    person! >= 15 && person! < 30
                                         ? Text(
-                                            '${person}x${widget.listData![widget.index!]
-                                                        .rate15}',
+                                            '${person}x${widget.listData![widget.index!].rate15}',
                                             textAlign: TextAlign.left,
                                             //overflow:TextOverflow.ellipsis ,
                                             style: TextStyle(
@@ -1137,12 +1120,9 @@ class _CounterState extends State<Counter> {
                                               fontSize: 12,
                                             ),
                                           )
-                                        : person! <= 30
+                                        : person! >= 30 && person! < 50
                                             ? Text(
-                                                '${person}x${widget
-                                                            .listData![
-                                                                widget.index!]
-                                                            .rate30}',
+                                                '${person}x${widget.listData![widget.index!].rate30}',
                                                 textAlign: TextAlign.left,
                                                 //overflow:TextOverflow.ellipsis ,
                                                 style: TextStyle(
@@ -1152,13 +1132,9 @@ class _CounterState extends State<Counter> {
                                                   fontSize: 12,
                                                 ),
                                               )
-                                            : person! <= 50
+                                            : person! >= 50 && person! < 75
                                                 ? Text(
-                                                    '${person}x${widget
-                                                                .listData![
-                                                                    widget
-                                                                        .index!]
-                                                                .rate50}',
+                                                    '${person}x${widget.listData![widget.index!].rate50}',
                                                     textAlign: TextAlign.left,
                                                     //overflow:TextOverflow.ellipsis ,
                                                     style: TextStyle(
@@ -1169,13 +1145,10 @@ class _CounterState extends State<Counter> {
                                                       fontSize: 12,
                                                     ),
                                                   )
-                                                : person! <= 75
+                                                : person! >= 75 &&
+                                                        person! < 1000
                                                     ? Text(
-                                                        '${person}x${widget
-                                                                    .listData![
-                                                                        widget
-                                                                            .index!]
-                                                                    .rate75}',
+                                                        '${person}x${widget.listData![widget.index!].rate75}',
                                                         textAlign:
                                                             TextAlign.left,
                                                         //overflow:TextOverflow.ellipsis ,
@@ -1187,12 +1160,9 @@ class _CounterState extends State<Counter> {
                                                           fontSize: 12,
                                                         ),
                                                       )
-                                                    : person! <= 1000
+                                                    : person! > 1000
                                                         ? Text(
-                                                            '${person}x${widget
-                                                                        .listData![
-                                                                            widget.index!]
-                                                                        .rate100}',
+                                                            '${person}x${widget.listData![widget.index!].rate100}',
                                                             textAlign:
                                                                 TextAlign.left,
                                                             //overflow:TextOverflow.ellipsis ,
@@ -1226,7 +1196,7 @@ class _CounterState extends State<Counter> {
                                               ),
                                         const Padding(
                                             padding: EdgeInsets.only(left: 2)),
-                                        person! <= 15
+                                        person! >= 15 && person! < 30
                                             ? Text(
                                                 '${person}x${widget.listData![widget.index!].rate15}',
                                                 textAlign: TextAlign.left,
@@ -1238,13 +1208,9 @@ class _CounterState extends State<Counter> {
                                                   fontSize: 12,
                                                 ),
                                               )
-                                            : person! <= 30
+                                            : person! >= 30 && person! < 50
                                                 ? Text(
-                                                    '${person}x${widget
-                                                                .listData![
-                                                                    widget
-                                                                        .index!]
-                                                                .rate30}',
+                                                    '${person}x${widget.listData![widget.index!].rate30}',
                                                     textAlign: TextAlign.left,
                                                     //overflow:TextOverflow.ellipsis ,
                                                     style: TextStyle(
@@ -1255,13 +1221,9 @@ class _CounterState extends State<Counter> {
                                                       fontSize: 12,
                                                     ),
                                                   )
-                                                : person! <= 50
+                                                : person! >= 50 && person! < 75
                                                     ? Text(
-                                                        '${person}x${widget
-                                                                    .listData![
-                                                                        widget
-                                                                            .index!]
-                                                                    .rate50}',
+                                                        '${person}x${widget.listData![widget.index!].rate50}',
                                                         textAlign:
                                                             TextAlign.left,
                                                         //overflow:TextOverflow.ellipsis ,
@@ -1273,12 +1235,10 @@ class _CounterState extends State<Counter> {
                                                           fontSize: 12,
                                                         ),
                                                       )
-                                                    : person! <= 75
+                                                    : person! >= 75 &&
+                                                            person! < 1000
                                                         ? Text(
-                                                            '${person}x${widget
-                                                                        .listData![
-                                                                            widget.index!]
-                                                                        .rate75}',
+                                                            '${person}x${widget.listData![widget.index!].rate75}',
                                                             textAlign:
                                                                 TextAlign.left,
                                                             //overflow:TextOverflow.ellipsis ,
@@ -1290,10 +1250,9 @@ class _CounterState extends State<Counter> {
                                                               fontSize: 12,
                                                             ),
                                                           )
-                                                        : person! <= 1000
+                                                        : person! > 1000
                                                             ? Text(
-                                                                '${person}x${widget.listData![widget.index!]
-                                                                            .rate100}',
+                                                                '${person}x${widget.listData![widget.index!].rate100}',
                                                                 textAlign:
                                                                     TextAlign
                                                                         .left,
@@ -1356,7 +1315,7 @@ class _CounterState extends State<Counter> {
                         color: AppTheme().color_black,
                         borderRadius: BorderRadius.circular(10)),
                     child: Center(
-                        child: person! <= 15
+                        child: person! >= 15 && person! < 30
                             ? Text(
                                 widget.listData![widget.index!].productname ==
                                         "Glassware"
@@ -1365,15 +1324,16 @@ class _CounterState extends State<Counter> {
                                                 .productname ==
                                             "Beverage"
                                         ? '₹$person_mult_price'
-                                        : '₹${widget.listData![widget.index!]
-                                                        .rate100! *
-                                                    services}',
+                                        :
+                                // rate10000000
+
+                                '₹${widget.listData![widget.index!].rate15! * services}',
                                 style: TextStyle(
                                     color: AppTheme().color_white,
                                     fontFamily: "Montserrat",
                                     fontSize: 15),
                               )
-                            : person! <= 30
+                            : person! >= 30 && person! < 50
                                 ? Text(
                                     widget.listData![widget.index!]
                                                 .productname ==
@@ -1383,15 +1343,13 @@ class _CounterState extends State<Counter> {
                                                     .productname ==
                                                 "Beverage"
                                             ? '₹$person_mult_price'
-                                            : '₹${widget.listData![widget.index!]
-                                                            .rate100! *
-                                                        services}',
+                                            : '₹${widget.listData![widget.index!].rate30! * services}',
                                     style: TextStyle(
                                         color: AppTheme().color_white,
                                         fontFamily: "Montserrat",
                                         fontSize: 15),
                                   )
-                                : person! <= 50
+                                : person! >= 50 && person! < 75
                                     ? Text(
                                         widget.listData![widget.index!]
                                                     .productname ==
@@ -1401,18 +1359,13 @@ class _CounterState extends State<Counter> {
                                                         .productname ==
                                                     "Beverage"
                                                 ? '₹$person_mult_price'
-                                                : '₹${widget
-                                                                .listData![
-                                                                    widget
-                                                                        .index!]
-                                                                .rate100! *
-                                                            services}',
+                                                : '₹${widget.listData![widget.index!].rate50! * services}',
                                         style: TextStyle(
                                             color: AppTheme().color_white,
                                             fontFamily: "Montserrat",
                                             fontSize: 15),
                                       )
-                                    : person! <= 75
+                                    : person! >= 75 && person! < 1000
                                         ? Text(
                                             widget.listData![widget.index!]
                                                         .productname ==
@@ -1424,18 +1377,13 @@ class _CounterState extends State<Counter> {
                                                             .productname ==
                                                         "Beverage"
                                                     ? '₹$person_mult_price'
-                                                    : '₹${widget
-                                                                    .listData![
-                                                                        widget
-                                                                            .index!]
-                                                                    .rate100! *
-                                                                services}',
+                                                    : '₹${widget.listData![widget.index!].rate75! * services}',
                                             style: TextStyle(
                                                 color: AppTheme().color_white,
                                                 fontFamily: "Montserrat",
                                                 fontSize: 15),
                                           )
-                                        : person! <= 1000
+                                        : person! > 1000
                                             ? Text(
                                                 widget.listData![widget.index!]
                                                             .productname ==
@@ -1448,9 +1396,7 @@ class _CounterState extends State<Counter> {
                                                                 .productname ==
                                                             "Beverage"
                                                         ? '₹$person_mult_price'
-                                                        : '₹${widget.listData![widget.index!]
-                                                                        .rate100! *
-                                                                    services}',
+                                                        : '₹${widget.listData![widget.index!].rate100! * services}',
                                                 style: TextStyle(
                                                     color:
                                                         AppTheme().color_white,

@@ -9,6 +9,8 @@ import 'package:shimmer/shimmer.dart';
 import '../../rest_api/ApiList.dart';
 
 class TermsCondition extends StatefulWidget {
+  const TermsCondition({super.key});
+
   @override
   TermsSettingPage createState() => TermsSettingPage();
 }
@@ -68,7 +70,7 @@ class TermsSettingPage extends State<TermsCondition> {
         decoration: BoxDecoration(
             gradient: RadialGradient(colors: [
               Colors.black.withOpacity(0.9)
-            ], stops: [
+            ], stops: const [
               0.0,
             ]),
             image: DecorationImage(
@@ -93,13 +95,11 @@ class TermsSettingPage extends State<TermsCondition> {
                         right: 0.0,
                         top: 20.0,
                       ),
-                      child: Container(
-                        child: Image.asset(
-                          "images/tc_logo.png",
-                          fit: BoxFit.fill,
-                          height: 70,
-                          width: 50,
-                        ),
+                      child: Image.asset(
+                        "images/tc_logo.png",
+                        fit: BoxFit.fill,
+                        height: 70,
+                        width: 50,
                       ),
                     ),
                   ),

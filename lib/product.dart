@@ -13,7 +13,7 @@ import 'app_screens/authorization_screens/login_pagenew.dart';
 
 class ProductScreen extends StatefulWidget {
   Map? data;
-  ProductScreen({this.data});
+  ProductScreen({super.key, this.data});
 
   @override
   Product createState() => Product(data: data);
@@ -181,8 +181,8 @@ class Product extends State<ProductScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          const Center(
+        children: const <Widget>[
+          Center(
             child:Center(
             child: Text(
               "Product",
@@ -264,18 +264,16 @@ class Product extends State<ProductScreen> {
                                 Expanded(
                                   child: Row(
                                     children: <Widget>[
-                                      Container(
-                                        child: const Text(
-                                          "Description:- ",
+                                      const Text(
+                                        "Description:- ",
 
-                                          style: TextStyle(
-                                              color: Colors.red,
-                                              fontFamily: 'Roboto',
-                                              fontSize: 16,
+                                        style: TextStyle(
+                                            color: Colors.red,
+                                            fontFamily: 'Roboto',
+                                            fontSize: 16,
 
-                                              fontWeight: FontWeight.bold,
-                                              letterSpacing: 1.0),
-                                        ),
+                                            fontWeight: FontWeight.bold,
+                                            letterSpacing: 1.0),
                                       ),
                                       Expanded(
                                         child: Container(
@@ -546,7 +544,6 @@ class Product extends State<ProductScreen> {
       checkValue = value;
       sharedPreferences.setBool("check", checkValue);
       sharedPreferences.setString("price",price.toString());
-      sharedPreferences.commit();
     });
   }
   getCredential() async {
@@ -576,7 +573,6 @@ class Product extends State<ProductScreen> {
       checkValue = value;
       sharedPreferences.setBool("check", checkValue);
       sharedPreferences.setString("pid", response!["Id"]);
-      sharedPreferences.commit();
     });
   }
 

@@ -129,7 +129,8 @@ class _State extends State<HomePage> {
                   height: 30.0,
                 ),
 
-           *//* SizedBox(
+           */
+        /* SizedBox(
               height: 30.0,
               width: 30,
               child: Stack(
@@ -168,7 +169,8 @@ class _State extends State<HomePage> {
 
               ],
                   ),
-            ),*//*
+            ),*/
+        /*
                 title: Text("")),
             BottomNavigationBarItem(
                 icon: Image(

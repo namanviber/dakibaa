@@ -23,7 +23,7 @@ class _AboutUsState extends State<AboutUs> {
               onTap: () {
                 Navigator.of(context).pop();
               },
-              child: Container(
+              child: SizedBox(
                 height: 18,
                 child: Image.asset(
                   "images/back_button.png",
@@ -54,16 +54,14 @@ class _AboutUsState extends State<AboutUs> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const SizedBox(height: 70,),
-              Container(
-                child: Center(
-                  child: Text(
-                    "About Us",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 25,
-                        color: AppTheme().color_white,
-                        fontFamily: "Montserrat"),
-                  ),
+              Center(
+                child: Text(
+                  "About Us",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 25,
+                      color: AppTheme().color_white,
+                      fontFamily: "Montserrat"),
                 ),
               ),
               Padding(

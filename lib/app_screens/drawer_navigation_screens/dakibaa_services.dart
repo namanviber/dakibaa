@@ -51,20 +51,18 @@ class _DakibaaServicesState extends State<DakibaaServices> {
             )),
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const SizedBox(height: 70,),
-              Container(
-                child: Center(
-                  child: Text(
-                    "Services Provided",
-                    style: TextStyle(
-                        fontSize: 25,
-                        color: AppTheme().color_white,
-                        fontFamily: "Montserrat"),
-                  ),
+              Center(
+                child: Text(
+                  "Services Provided",
+                  style: TextStyle(
+                      fontSize: 25,
+                      color: AppTheme().color_white,
+                      fontFamily: "Montserrat"),
                 ),
               ),
+              //
               Padding(
                 padding: EdgeInsets.only(
                     top: MediaQuery.of(context).size.height / 20,

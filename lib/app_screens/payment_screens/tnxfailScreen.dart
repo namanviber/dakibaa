@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:dakibaa/Colors/colors.dart';
 
-import '../../number_of_person.dart';
+import '../home_screens/number_of_person.dart';
 
 class FailScreen extends StatefulWidget {
+  const FailScreen({super.key});
+
   @override
   _FailScreenState createState() => _FailScreenState();
 }
@@ -17,6 +19,7 @@ class _FailScreenState extends State<FailScreen> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
+        onWillPop: _onWillPop,
         child: Scaffold(
           body: Container(
             height: MediaQuery.of(context).size.height,
@@ -28,7 +31,7 @@ class _FailScreenState extends State<FailScreen> {
                   ],
                 ),
                 image: DecorationImage(
-                  image: AssetImage("images/services_background.jpg"),
+                  image: const AssetImage("images/services_background.jpg"),
                   fit: BoxFit.cover,
                   colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.3), BlendMode.dstATop),
@@ -42,7 +45,7 @@ class _FailScreenState extends State<FailScreen> {
                   children: [
                     Padding(
                       padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/3.5),
-                      child: Container(
+                      child: SizedBox(
                         height: 100,
                         child: Image.asset('images/fail.png'),
                       ),
@@ -53,7 +56,7 @@ class _FailScreenState extends State<FailScreen> {
                         Text("Transaction Fail",style: TextStyle(color: AppTheme().color_white,fontSize: 35,fontFamily: 'Montserrat'),),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
 
@@ -137,7 +140,7 @@ class _FailScreenState extends State<FailScreen> {
               ],
             ),
           ),
-        ), onWillPop: _onWillPop);
+        ));
   }
 }
 

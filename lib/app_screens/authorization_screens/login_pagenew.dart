@@ -2,20 +2,19 @@ import 'dart:convert';
 import 'package:dakibaa/Colors/colors.dart';
 import 'package:dakibaa/common/shared_preferences.dart';
 import 'package:dakibaa/network/network.dart';
-import 'package:dakibaa/number_of_person.dart';
+import 'package:dakibaa/app_screens/home_screens/number_of_person.dart';
 import 'package:dakibaa/app_screens/authorization_screens/signup_pagenew.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
-
 import 'package:flutter/material.dart';
 import 'package:sn_progress_dialog/sn_progress_dialog.dart';
 import 'package:http/http.dart' as http;
 import '../../rest_api/ApiList.dart';
-import '../../common/constant.dart';
+import '../../common/constant.dart';                                                                   
 import 'forget_password.dart';
-import '../../home_page.dart';
+import '../../home_page.dart';                                                                          
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatefulWidget {                   
   const LoginPage({super.key});
 
   @override
@@ -24,9 +23,9 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   String? usernameError, passwordError;
-  String? password, username;
+  String? password, email;
   bool checkValue = false;
-  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   late ProgressDialog pr;
   Map<String, dynamic>? value;
@@ -41,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
 
     passwordError = null;
     usernameError = null;
-    if (username == "" || username == null) {
+    if (email == "" || email == null) {
       setState(() {
         usernameError = 'Enter Username';
         status = false;
@@ -65,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    ToastContext().init(context);//-> This part
+    ToastContext().init(context); //-> This part
     double screenHeight = MediaQuery.of(context).size.height;
     double screenwidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -106,19 +105,24 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(
                       children: [
                         Container(
-                          margin: const EdgeInsets.only(left: 20.0, top: 50.0, right: 20.0),
+                          margin: const EdgeInsets.only(
+                              left: 20.0, top: 50.0, right: 20.0),
                           child: TextFormField(
                             textAlign: TextAlign.center,
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return 'Please enter name';
+                                return 'Please enter your email';
+                              } else if (!value.contains("@") ||
+                                  !value.contains('.')) {
+                                return 'Email address is not Valid.';
+                              } else {
+                                return null;
                               }
-                              return null;
                             },
-                            controller: usernameController,
+                            controller: emailController,
                             onChanged: (value) {
                               setState(() {
-                                username = value;
+                                email = value;
                               });
                             },
                             decoration: InputDecoration(
@@ -131,26 +135,27 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 focusedBorder: const OutlineInputBorder(
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(50.0)),
+                                      BorderRadius.all(Radius.circular(50.0)),
                                 ),
                                 disabledBorder: const OutlineInputBorder(
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(50.0)),
+                                      BorderRadius.all(Radius.circular(50.0)),
                                 ),
                                 enabledBorder: const OutlineInputBorder(
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(50.0)),
+                                      BorderRadius.all(Radius.circular(50.0)),
                                 ),
                                 errorBorder: const OutlineInputBorder(
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(50.0)),
+                                      BorderRadius.all(Radius.circular(50.0)),
                                 ),
                                 focusedErrorBorder: const OutlineInputBorder(
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(50.0)),
+                                      BorderRadius.all(Radius.circular(50.0)),
                                 ),
                                 filled: true,
-                                contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                contentPadding:
+                                    const EdgeInsets.fromLTRB(10, 0, 0, 0),
                                 errorStyle: TextStyle(
                                     fontSize: 15,
                                     fontFamily: "Montserrat-SemiBold",
@@ -159,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                                     color: Colors.red[800],
                                     fontWeight: FontWeight.bold,
                                     fontFamily: "Montserrat-SemiBold"),
-                                hintText: "Username",
+                                hintText: "Email",
                                 fillColor: AppTheme().color_white),
                           ),
                         ),
@@ -174,7 +179,18 @@ class _LoginPageState extends State<LoginPage> {
                               if (value!.isEmpty) {
                                 return 'Please enter password';
                               } else if (value.length < 8) {
-                                return "Passwor must be of min 8 digits";
+                                return "Password must be of min 8 digits and max 15 digits";
+                              } else if (value.length > 16) {
+                                return "Password must be of min 8 digits and max 15 digits";
+                              } else if (!value.contains(RegExp(r'[A-Z]'))) {
+                                return "Password should contain upper,lower,digit and Special character";
+                              } else if (!value.contains(RegExp(r'[0-9]'))) {
+                                return "Password should contain upper,lower,digit and Special character";
+                              } else if (!value.contains(RegExp(r'[a-z]'))) {
+                                return "Password should contain upper,lower,digit and Special character";
+                              } else if (!value
+                                  .contains(RegExp(r'[#?!@$%^&*-]'))) {
+                                return "Password should contain upper,lower,digit and Special character";
                               } else {
                                 return null;
                               }
@@ -187,7 +203,7 @@ class _LoginPageState extends State<LoginPage> {
                             textAlign: TextAlign.center,
                             controller: passwordController,
                             obscureText: passwordVisible1,
-                            keyboardType: TextInputType.phone,
+                            keyboardType: TextInputType.text,
                             decoration: InputDecoration(
                                 suffixIcon: IconButton(
                                     onPressed: () {
@@ -202,7 +218,6 @@ class _LoginPageState extends State<LoginPage> {
                                           : Icons.visibility,
                                       color: Colors.red,
                                     )),
-
                                 border: const OutlineInputBorder(
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(15.0),
@@ -210,27 +225,27 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 focusedBorder: const OutlineInputBorder(
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(50.0)),
+                                      BorderRadius.all(Radius.circular(50.0)),
                                 ),
                                 disabledBorder: const OutlineInputBorder(
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(50.0)),
+                                      BorderRadius.all(Radius.circular(50.0)),
                                 ),
                                 enabledBorder: const OutlineInputBorder(
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(50.0)),
+                                      BorderRadius.all(Radius.circular(50.0)),
                                 ),
                                 errorBorder: const OutlineInputBorder(
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(50.0)),
+                                      BorderRadius.all(Radius.circular(50.0)),
                                 ),
                                 focusedErrorBorder: const OutlineInputBorder(
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(50.0)),
+                                      BorderRadius.all(Radius.circular(50.0)),
                                 ),
                                 filled: true,
                                 contentPadding:
-                                const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                    const EdgeInsets.fromLTRB(10, 0, 0, 0),
                                 errorStyle: TextStyle(
                                     fontSize: 15,
                                     fontFamily: "Montserrat-SemiBold",
@@ -248,7 +263,6 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ],
                     )),
-
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -281,10 +295,13 @@ class _LoginPageState extends State<LoginPage> {
                   child: GestureDetector(
                     onTap: () {
                       if (_formkey.currentState!.validate()) {
-                        getData();} else {
-                        Toast.show("Please Enter Your Credentials",
+                        getData();
+                      } else {
+                        Toast.show(
+                          "Please Enter Your Credentials",
                           duration: Toast.lengthLong,
-                          gravity: Toast.top,);
+                          gravity: Toast.top,
+                        );
                       }
                     },
                     child: Center(
@@ -371,6 +388,8 @@ class _LoginPageState extends State<LoginPage> {
   var returnData;
 
   Future<Map<String, dynamic>> getData() async {
+    ToastContext().init(context); //-> This part
+
     pr = ProgressDialog(
       context: context,
     );
@@ -383,13 +402,13 @@ class _LoginPageState extends State<LoginPage> {
                 'Accept': 'application/json'
               },
               body: {
-                "username": usernameController.text,
+                "email": emailController.text,
                 "password": passwordController.text
               });
           print(response.body);
           var parsedJson = json.decode(response.body);
           value = parsedJson['data'];
-          
+
           if (parsedJson['status'] == "1") {
             pr.close();
             SharedPreferencesClass().setloginstatus(true);
@@ -397,14 +416,14 @@ class _LoginPageState extends State<LoginPage> {
             if (mounted) {
               setState(() {
                 _onChanged(true, value);
-                sharedPreferences.setString("email", value!["Mobile"]);
+                // sharedPreferences.setString("email", value!["Mobile"]);
                 sharedPreferences.setBool("isguest", false);
               });
             }
             Toast.show(
               parsedJson['message'],
               duration: Toast.lengthShort,
-              gravity: Toast.bottom,
+              gravity: Toast.top,
             );
             //_onChanged(value);
             loginstatus = "signin";
@@ -435,7 +454,7 @@ class _LoginPageState extends State<LoginPage> {
       checkValue = value;
       sharedPreferences.setBool("check", checkValue);
       sharedPreferences.setString("name", response!["Name"]);
-      sharedPreferences.setString("id", response["Id"].toString());
+      sharedPreferences.setString("id", response["id"].toString());
       /* sharedPreferences.setString("gender", response["Gender"]);
       sharedPreferences.setString("dob", response["DOB"]);*/
       sharedPreferences.setString("mobile", response["Mobile"]);
@@ -443,7 +462,6 @@ class _LoginPageState extends State<LoginPage> {
       sharedPreferences.setString("password", response["Password"]);
       sharedPreferences.setString("profile_pic", response["ProfilePic"]);
       profile_pic = response["ProfilePic"];
-      sharedPreferences.commit();
     });
   }
 
@@ -467,9 +485,9 @@ class _LoginPageState extends State<LoginPage> {
   void getstatus() async {
     bool loginstatus = await SharedPreferencesClass().getloginstatus();
     loginstatus == true
-        ? Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (BuildContext context) => const HomePage()))
-        : Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (BuildContext context) => const LoginPage()));
+        ? Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (BuildContext context) => const HomePage()))
+        : Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (BuildContext context) => const LoginPage()));
   }
 }

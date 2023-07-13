@@ -6,8 +6,9 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:dakibaa/Colors/colors.dart';
-import 'package:dakibaa/number_of_person.dart';
-import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dakibaa/app_screens/home_screens/number_of_person.dart';
+import 'package:sn_progress_dialog/sn_progress_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'package:http/http.dart' as http;
 
@@ -16,8 +17,9 @@ import 'login_pagenew.dart';
 class OtpScreen extends StatefulWidget {
   String? type;
   String? otpphone;
+  String mobile;
 
-  OtpScreen({this.type, this.otpphone});
+  OtpScreen({super.key, this.type, this.otpphone, required this.mobile});
   @override
   Otp createState() => Otp(type: type);
 }
@@ -42,12 +44,12 @@ class Otp extends State<OtpScreen> {
   FocusNode textThirdFocusNode = FocusNode();
   FocusNode textFourthFocusNode = FocusNode();
   String? type;
+  bool resendotpbool = false;
 
   Otp({this.type});
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
         body: GestureDetector(
       onTap: () {
@@ -56,26 +58,23 @@ class Otp extends State<OtpScreen> {
       child: Container(
         decoration: BoxDecoration(
             gradient: RadialGradient(
-
-                colors: [Colors.black.withOpacity(0.9)],
-                stops: const [0.0]
-            ),
+                colors: [Colors.black.withOpacity(0.9)], stops: const [0.0]),
             image: DecorationImage(
               image: const AssetImage("images/signup_background.jpg"),
               fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.3), BlendMode.dstATop),
-            )
-        ),
+              colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.3), BlendMode.dstATop),
+            )),
         child: Padding(
             padding: const EdgeInsets.all(10),
             child: ListView(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(top: 20,left: 10),
+                  padding: const EdgeInsets.only(top: 20, left: 10),
                   child: Row(
                     children: [
                       InkWell(
-                        onTap: (){
+                        onTap: () {
                           Navigator.pop(context);
                         },
                         child: SizedBox(
@@ -128,7 +127,8 @@ class Otp extends State<OtpScreen> {
                     )),
                 Container(
                     alignment: Alignment.center,
-                    padding: const EdgeInsets.only(left: 10, right: 10.0, top: 8.0),
+                    padding:
+                        const EdgeInsets.only(left: 10, right: 10.0, top: 8.0),
                     child: const Text(
                       'Enter the 4-digit code sent to your',
                       style: TextStyle(
@@ -139,7 +139,8 @@ class Otp extends State<OtpScreen> {
                     )),
                 Container(
                     alignment: Alignment.center,
-                    padding: const EdgeInsets.only(left: 10, right: 10.0, top: 0.0),
+                    padding:
+                        const EdgeInsets.only(left: 10, right: 10.0, top: 0.0),
                     child: const Text(
                       'Mobile Number',
                       style: TextStyle(
@@ -153,7 +154,8 @@ class Otp extends State<OtpScreen> {
                 ),
                 Container(
                     alignment: Alignment.center,
-                    padding: const EdgeInsets.only(left: 10, right: 10.0, top: 5.0),
+                    padding:
+                        const EdgeInsets.only(left: 10, right: 10.0, top: 5.0),
                     child: Text(
                       widget.otpphone ?? "",
                       style: const TextStyle(
@@ -166,7 +168,8 @@ class Otp extends State<OtpScreen> {
                   height: 5.0,
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: 5.0, left: 170.0, right: 170.0),
+                  margin: const EdgeInsets.only(
+                      top: 5.0, left: 170.0, right: 170.0),
                   alignment: Alignment.center,
                   child: const Divider(
                     height: 2.0,
@@ -188,7 +191,8 @@ class Otp extends State<OtpScreen> {
                             Flexible(
                               child: Container(
                                 //margin: EdgeInsets.fromLTRB(15,0,10,0),
-                                padding: const EdgeInsets.only(left: 10, right: 10),
+                                padding:
+                                    const EdgeInsets.only(left: 10, right: 10),
                                 child: Padding(
                                   padding:
                                       const EdgeInsets.only(right: 0, left: 0),
@@ -198,8 +202,8 @@ class Otp extends State<OtpScreen> {
                                           color: AppTheme().color_white,
                                           border: Border.all(
                                               width: 1.0,
-                                              color:
-                                                  const Color.fromRGBO(0, 0, 0, 0.1)),
+                                              color: const Color.fromRGBO(
+                                                  0, 0, 0, 0.1)),
                                           borderRadius: const BorderRadius.all(
                                               Radius.circular(100.0))),
                                       child: TextFormField(
@@ -221,7 +225,7 @@ class Otp extends State<OtpScreen> {
                                         style: TextStyle(
                                             fontSize: 24.0,
                                             color: AppTheme().color_red,
-                                        fontFamily: "Montserrat-SemiBold"),
+                                            fontFamily: "Montserrat-SemiBold"),
                                       )),
                                 ),
 //                                PinInputTextField(
@@ -235,18 +239,19 @@ class Otp extends State<OtpScreen> {
                             Flexible(
                               child: Container(
                                 // margin: EdgeInsets.fromLTRB(10,0,10,0),
-                                padding: const EdgeInsets.only(left: 10, right: 10),
+                                padding:
+                                    const EdgeInsets.only(left: 10, right: 10),
                                 child: Padding(
                                   padding:
-                                      const EdgeInsets.only(right:0, left: 0),
+                                      const EdgeInsets.only(right: 0, left: 0),
                                   child: Container(
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                           color: AppTheme().color_white,
                                           border: Border.all(
                                               width: 1.0,
-                                              color:
-                                                  const Color.fromRGBO(0, 0, 0, 0.1)),
+                                              color: const Color.fromRGBO(
+                                                  0, 0, 0, 0.1)),
                                           borderRadius: const BorderRadius.all(
                                               Radius.circular(100.0))),
                                       child: TextFormField(
@@ -283,23 +288,24 @@ class Otp extends State<OtpScreen> {
                             Flexible(
                               child: Container(
                                 // margin: EdgeInsets.fromLTRB(10,0,10,0),
-                                padding: const EdgeInsets.only(left: 10, right: 10),
+                                padding:
+                                    const EdgeInsets.only(left: 10, right: 10),
                                 child: Padding(
                                   padding:
-                                      const EdgeInsets.only(right:0, left: 0),
+                                      const EdgeInsets.only(right: 0, left: 0),
                                   child: Container(
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         color: AppTheme().color_white,
                                         border: Border.all(
                                             width: 1.0,
-                                            color:
-                                                const Color.fromRGBO(0, 0, 0, 0.1)),
+                                            color: const Color.fromRGBO(
+                                                0, 0, 0, 0.1)),
                                         borderRadius: const BorderRadius.all(
                                             Radius.circular(200.0)),
                                       ),
                                       child: TextFormField(
-                                        cursorColor:AppTheme().color_red,
+                                        cursorColor: AppTheme().color_red,
                                         decoration: const InputDecoration(
                                             border: InputBorder.none),
                                         keyboardType: TextInputType.phone,
@@ -332,7 +338,8 @@ class Otp extends State<OtpScreen> {
                             Flexible(
                               child: Container(
                                 //  margin: EdgeInsets.fromLTRB(10,0,15,0),
-                                padding: const EdgeInsets.only(left: 10, right: 10),
+                                padding:
+                                    const EdgeInsets.only(left: 10, right: 10),
                                 child: Padding(
                                   padding:
                                       const EdgeInsets.only(right: 0, left: 0),
@@ -342,12 +349,11 @@ class Otp extends State<OtpScreen> {
                                           color: AppTheme().color_white,
                                           border: Border.all(
                                               width: 1.0,
-                                              color:
-                                                  const Color.fromRGBO(0, 0, 0, 0.1)),
+                                              color: const Color.fromRGBO(
+                                                  0, 0, 0, 0.1)),
                                           borderRadius: const BorderRadius.all(
                                               Radius.circular(100.0))),
                                       child: TextFormField(
-
                                         cursorColor: AppTheme().color_red,
                                         decoration: const InputDecoration(
                                             border: InputBorder.none),
@@ -399,9 +405,11 @@ class Otp extends State<OtpScreen> {
                               controller3.text +
                               controller4.text);
                         } else {
-                          Toast.show("" + "Please enter full otp",
+                          Toast.show(
+                            "" + "Please enter full otp",
                             duration: Toast.lengthLong,
-                            gravity: Toast.top,);
+                            gravity: Toast.top,
+                          );
                         }
                       },
                       child: Center(
@@ -421,14 +429,31 @@ class Otp extends State<OtpScreen> {
                 ),
                 Container(
                   alignment: Alignment.center,
-                  child: Text(
-                    "Resend Code in $_start",
-                    style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: "Montserrat-SemiBold",
-                        color: Colors.white),
-                  ),
+                  child: (resendotpbool)
+                      ? GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _start = 60;
+                              reSendOtp();
+                            });
+                          },
+                          child: Text(
+                            "Resend OTP",
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "Montserrat-SemiBold",
+                                color: AppTheme().color_red),
+                          ),
+                        )
+                      : Text(
+                          "Resend Code in $_start",
+                          style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Montserrat-SemiBold",
+                              color: Colors.white),
+                        ),
                 ),
               ],
             )),
@@ -446,11 +471,23 @@ class Otp extends State<OtpScreen> {
           controller2.text +
           controller3.text +
           controller4.text,
+      "Mobile": widget.mobile,
     });
+    print("Auth URL: $myUrl");
+    print({
+      "type": type.toString(),
+      "otp": controller1.text +
+          controller2.text +
+          controller3.text +
+          controller4.text,
+      "Mobile": widget.mobile,
+    });
+    print("response: $response");
     var parsedJson = json.decode(response.body);
+    print("response: $parsedJson");
 
     if (parsedJson['status'] == "1") {
-      pr.close();
+      // pr.close();
       value = parsedJson['data'];
 /*
       Toast.show(parsedJson['message'], context,
@@ -465,9 +502,19 @@ class Otp extends State<OtpScreen> {
           _onChanged(true, value);
         });
         // Navigator.of(context).pushNamedAndRemoveUntil('/screen2', (Route<dynamic> route) => false);
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => Number_of_Person()),
-                (Route<dynamic> route) => false);
+
+
+        if(parsedJson['status']["message"]['accRegistered'] == "otp matched"){
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => Number_of_Person()),
+                  (Route<dynamic> route) => false);
+        } else{
+          Toast.show(
+            parsedJson['status']["message"]['accRegistered'],
+            duration: Toast.lengthShort,
+            gravity: Toast.bottom,
+          );
+        }
       }
 
 /*  Navigator.push(
@@ -476,8 +523,11 @@ class Otp extends State<OtpScreen> {
       );*/
     } else {
       pr.close();
-      Toast.show(parsedJson['message'],
-          duration: Toast.lengthLong, gravity: Toast.bottom,);
+      Toast.show(
+        parsedJson['status']["message"]['accRegistered'],
+        duration: Toast.lengthLong,
+        gravity: Toast.bottom,
+      );
     }
     return parsedJson;
   }
@@ -485,8 +535,10 @@ class Otp extends State<OtpScreen> {
   Future<Map<String, dynamic>> reSendOtp() async {
     sharedPreferences = await SharedPreferences.getInstance();
     num = sharedPreferences.getString("number");
-    pr = ProgressDialog(context: context, );
-    pr.show(msg: "Loading..", barrierDismissible: true);
+    // pr = ProgressDialog(
+    //   context: context,
+    // );
+    // pr.show(msg: "Loading..", barrierDismissible: true);
     String myUrl = "$baseUrl/party/User/resendOtp";
     final response = await http.post(Uri.parse(myUrl),
         headers: {'Accept': 'application/json'}, body: {"number": num});
@@ -494,16 +546,19 @@ class Otp extends State<OtpScreen> {
     var parsedJson = json.decode(response.body);
     value = parsedJson['data'];
     if (parsedJson['status'] == "1") {
-      pr.close();
+      // pr.close();
       // temp = 1;
       /* Toast.show(parsedJson['message'], context,
           duration: Toast.lengthLong, gravity: Toast.bottom,);*/
       resendotp = parsedJson['message'];
       otp1 = resendotp.split(' ')[3].split('').reversed.join();
     } else {
-      pr.close();
-      Toast.show(parsedJson['message'],
-          duration: Toast.lengthLong, gravity: Toast.bottom,);
+      // pr.close();
+      Toast.show(
+        parsedJson['message'],
+        duration: Toast.lengthLong,
+        gravity: Toast.bottom,
+      );
     }
     return parsedJson;
   }
@@ -521,7 +576,6 @@ class Otp extends State<OtpScreen> {
       sharedPreferences.setString("email", response["Mobile"]);
       sharedPreferences.setString("password", response["Password"]);
       sharedPreferences.setString("profile_pic", response["ProfilePic"]);
-      sharedPreferences.commit();
     });
   }
 
@@ -532,8 +586,9 @@ class Otp extends State<OtpScreen> {
         print(_start);
       });
       if (_start == -1) {
-        reSendOtp();
-        _start = 60;
+        setState(() {
+          resendotpbool = true;
+        });
       }
       if (_start == 50) {
         // receiveMsg();

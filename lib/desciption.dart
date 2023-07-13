@@ -3,6 +3,8 @@ import 'package:dakibaa/Colors/colors.dart';
 import 'package:dakibaa/common/constant.dart';
 
 class ItemDescription extends StatefulWidget {
+  const ItemDescription({super.key});
+
   @override
   _ItemDescriptionState createState() => _ItemDescriptionState();
 }

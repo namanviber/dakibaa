@@ -10,8 +10,8 @@ import '../../rest_api/ApiList.dart';
 import 'otp_screen.dart';
 
 class ForgetForm extends StatefulWidget {
-  String? number;
-  ForgetForm({this.number});
+  String number;
+  ForgetForm({super.key, required this.number});
   @override
   _ForgetForm createState() => _ForgetForm(number: number);
 }
@@ -272,7 +272,7 @@ class _ForgetForm extends State<ForgetForm> {
                 Padding(
                   padding:
                       const EdgeInsets.only(left: 90.0, top: 25.0, right: 90.0),
-                  child: Container(
+                  child: SizedBox(
                     height: 45,
 
                     //margin: EdgeInsets.only(left: 20.0,top: 25.0,right: 20.0),
@@ -330,7 +330,7 @@ class _ForgetForm extends State<ForgetForm> {
       //_onChanged(value);
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => OtpScreen(type: 'forget')),
+        MaterialPageRoute(builder: (context) => OtpScreen(type: 'forget', mobile: widget.number,)),
       );
     } else {
       pr.close();

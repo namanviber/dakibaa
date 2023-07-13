@@ -1,11 +1,12 @@
 import 'dart:io';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:mime/mime.dart';
 import 'package:dakibaa/Colors/colors.dart';
-import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sn_progress_dialog/sn_progress_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import '../../rest_api/ApiList.dart';
 import '../../image_picker_handler.dart';
@@ -13,6 +14,8 @@ import 'package:http_parser/http_parser.dart';
 import 'otp_screen.dart';
 
 class SignupPage extends StatefulWidget {
+  const SignupPage({super.key});
+
   @override
   _SignupPageState createState() => _SignupPageState();
 }
@@ -31,9 +34,9 @@ class _SignupPageState extends State<SignupPage>
   String? usernameError, contactError, passwordError, conPasswordError;
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController contactController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController conPasswordController =
-      TextEditingController();
+  final TextEditingController conPasswordController = TextEditingController();
   File? _image;
   late var token;
   bool? checkValue;
@@ -90,7 +93,7 @@ class _SignupPageState extends State<SignupPage>
     conPasswordError = null;
     if (username == "" || username == null) {
       setState(() {
-        usernameError = 'Enter Username';
+        usernameError = 'Enter Name';
         status = false;
       });
     }
@@ -128,7 +131,7 @@ class _SignupPageState extends State<SignupPage>
 
   @override
   Widget build(BuildContext context) {
-    ToastContext().init(context);//-> This part
+    ToastContext().init(context); //-> This part
     screenHeight = MediaQuery.of(context).size.height;
     screenwidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -144,7 +147,7 @@ class _SignupPageState extends State<SignupPage>
               onTap: () {
                 Navigator.pop(context);
               },
-              child: Container(
+              child: SizedBox(
                 width: 30,
                 height: 20,
                 child: Image.asset("images/back_button.png"),
@@ -246,15 +249,23 @@ class _SignupPageState extends State<SignupPage>
                     ),
                   ),
                   Container(
-                    margin: const EdgeInsets.only(left: 20.0, top: 50.0, right: 20.0),
+                    margin: const EdgeInsets.only(
+                        left: 20.0, top: 50.0, right: 20.0),
                     child: TextFormField(
                       textAlign: TextAlign.center,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please enter name';
+                          return 'Please enter Name';
+                        } else if (value.length < 4 && value.length > 20) {
+                          return 'Enter atLeast 4 digit.';
+                        } else if (!value.contains(RegExp(r'[a-zA-Z]'))) {
+                          return 'Invalid Name.';
+                        }else if (value.contains(RegExp(r'[0-9]'))) {
+                          return 'Invalid Name.';
                         }
                         return null;
                       },
+                      keyboardType: TextInputType.text,
                       controller: usernameController,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
@@ -285,7 +296,8 @@ class _SignupPageState extends State<SignupPage>
                                 BorderRadius.all(Radius.circular(50.0)),
                           ),
                           filled: true,
-                          contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          contentPadding:
+                              const EdgeInsets.fromLTRB(10, 0, 0, 0),
                           errorStyle: TextStyle(
                               fontSize: 15,
                               fontFamily: "Montserrat-SemiBold",
@@ -294,12 +306,13 @@ class _SignupPageState extends State<SignupPage>
                               color: Colors.red[800],
                               fontWeight: FontWeight.bold,
                               fontFamily: "Montserrat-SemiBold"),
-                          hintText: "Username",
+                          hintText: "Name",
                           fillColor: AppTheme().color_white),
                     ),
                   ),
                   Container(
-                    margin: const EdgeInsets.only(left: 20.0, top: 15.0, right: 20.0),
+                    margin: const EdgeInsets.only(
+                        left: 20.0, top: 15.0, right: 20.0),
                     child: TextFormField(
                       maxLength: 10,
                       validator: (value) {
@@ -341,7 +354,8 @@ class _SignupPageState extends State<SignupPage>
                                 BorderRadius.all(Radius.circular(50.0)),
                           ),
                           filled: true,
-                          contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          contentPadding:
+                              const EdgeInsets.fromLTRB(10, 0, 0, 0),
                           errorStyle: TextStyle(
                               fontSize: 15,
                               fontFamily: "Montserrat-SemiBold",
@@ -360,9 +374,77 @@ class _SignupPageState extends State<SignupPage>
                     child: TextFormField(
                       validator: (value) {
                         if (value!.isEmpty) {
+                          return 'Please enter your email';
+                        } else if (!value.contains("@") ||
+                            !value.contains('.')) {
+                          return 'Email address is not Valid.';
+                        } else {
+                          return null;
+                        }
+                      },
+                      textAlign: TextAlign.center,
+                      controller: emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(15.0),
+                            ),
+                          ),
+                          focusedBorder: const OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(50.0)),
+                          ),
+                          disabledBorder: const OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(50.0)),
+                          ),
+                          enabledBorder: const OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(50.0)),
+                          ),
+                          errorBorder: const OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(50.0)),
+                          ),
+                          focusedErrorBorder: const OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(50.0)),
+                          ),
+                          filled: true,
+                          contentPadding:
+                              const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          errorStyle: TextStyle(
+                              fontSize: 15,
+                              fontFamily: "Montserrat-SemiBold",
+                              color: AppTheme().color_white),
+                          hintStyle: TextStyle(
+                              color: AppTheme().color_red,
+                              fontFamily: "Montserrat-SemiBold"),
+                          hintText: "Email ID",
+                          counterText: "",
+                          fillColor: AppTheme().color_white),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(
+                        left: 20.0, top: 15.0, right: 20.0),
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
                           return 'Please enter password';
                         } else if (value.length < 8) {
-                          return "Passwor must be of min 8 digits";
+                          return "Password must be of min 8 and max 15 digits";
+                        } else if (value.length > 16) {
+                          return "Password must be of min 8 digits and max 15 digits";
+                        } else if (!value.contains(RegExp(r'[A-Z]'))) {
+                          return "Password should contain upper character";
+                        } else if (!value.contains(RegExp(r'[0-9]'))) {
+                          return "Password should contain digit";
+                        } else if (!value.contains(RegExp(r'[a-z]'))) {
+                          return "Password should contain lower chracter";
+                        } else if (!value.contains(RegExp(r'[#?!@$%^&*-]'))) {
+                          return "Password should contain Special character";
                         } else {
                           return null;
                         }
@@ -370,7 +452,7 @@ class _SignupPageState extends State<SignupPage>
                       textAlign: TextAlign.center,
                       controller: passwordController,
                       obscureText: passwordVisible1,
-                      keyboardType: TextInputType.phone,
+                      keyboardType: TextInputType.text,
                       decoration: InputDecoration(
                           suffixIcon: IconButton(
                               onPressed: () {
@@ -385,7 +467,6 @@ class _SignupPageState extends State<SignupPage>
                                     : Icons.visibility,
                                 color: Colors.red,
                               )),
-
                           border: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(15.0),
@@ -393,27 +474,27 @@ class _SignupPageState extends State<SignupPage>
                           ),
                           focusedBorder: const OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(50.0)),
+                                BorderRadius.all(Radius.circular(50.0)),
                           ),
                           disabledBorder: const OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(50.0)),
+                                BorderRadius.all(Radius.circular(50.0)),
                           ),
                           enabledBorder: const OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(50.0)),
+                                BorderRadius.all(Radius.circular(50.0)),
                           ),
                           errorBorder: const OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(50.0)),
+                                BorderRadius.all(Radius.circular(50.0)),
                           ),
                           focusedErrorBorder: const OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(50.0)),
+                                BorderRadius.all(Radius.circular(50.0)),
                           ),
                           filled: true,
                           contentPadding:
-                          const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              const EdgeInsets.fromLTRB(10, 0, 0, 0),
                           errorStyle: TextStyle(
                               fontSize: 15,
                               fontFamily: "Montserrat-SemiBold",
@@ -442,7 +523,7 @@ class _SignupPageState extends State<SignupPage>
                       textAlign: TextAlign.center,
                       controller: conPasswordController,
                       obscureText: passwordVisible,
-                      keyboardType: TextInputType.phone,
+                      keyboardType: TextInputType.text,
                       decoration: InputDecoration(
                           suffixIcon: IconButton(
                               onPressed: () {
@@ -457,7 +538,6 @@ class _SignupPageState extends State<SignupPage>
                                     : Icons.visibility,
                                 color: Colors.red,
                               )),
-
                           border: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(15.0),
@@ -465,27 +545,27 @@ class _SignupPageState extends State<SignupPage>
                           ),
                           focusedBorder: const OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(50.0)),
+                                BorderRadius.all(Radius.circular(50.0)),
                           ),
                           disabledBorder: const OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(50.0)),
+                                BorderRadius.all(Radius.circular(50.0)),
                           ),
                           enabledBorder: const OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(50.0)),
+                                BorderRadius.all(Radius.circular(50.0)),
                           ),
                           errorBorder: const OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(50.0)),
+                                BorderRadius.all(Radius.circular(50.0)),
                           ),
                           focusedErrorBorder: const OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(50.0)),
+                                BorderRadius.all(Radius.circular(50.0)),
                           ),
                           filled: true,
                           contentPadding:
-                          const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              const EdgeInsets.fromLTRB(10, 0, 0, 0),
                           errorStyle: TextStyle(
                               fontSize: 15,
                               fontFamily: "Montserrat-SemiBold",
@@ -498,7 +578,9 @@ class _SignupPageState extends State<SignupPage>
                           fillColor: AppTheme().color_white),
                     ),
                   ),
-                  const SizedBox(height: 40,),
+                  const SizedBox(
+                    height: 40,
+                  ),
                   Container(
                     width: screenwidth! * 0.7,
                     height: 50,
@@ -515,14 +597,25 @@ class _SignupPageState extends State<SignupPage>
                                 contactController.text,
                                 "",
                                 "01/01/1990",
-                                "abc@gmail.com",
+                                emailController.text,
                                 passwordController.text,
                                 "ljhasfdnnlzs568794544",
                                 _image);
                           } else {
-                            Toast.show("Please select image",
-                                duration: Toast.lengthLong,
-                                gravity: Toast.top,);
+                            // Toast.show(
+                            // "Please select image",
+                            // duration: Toast.lengthLong,
+                            // gravity: Toast.top,
+                            // );
+                            getsignUpData(
+                                usernameController.text,
+                                contactController.text,
+                                "",
+                                "01/01/1990",
+                                emailController.text,
+                                passwordController.text,
+                                "ljhasfdnnlzs568794544",
+                                null);
                           }
                         }
                       },
@@ -556,13 +649,14 @@ class _SignupPageState extends State<SignupPage>
       String password,
       String deviceToken,
       File? image) async {
-    pr = ProgressDialog(context: context, );
+    pr = ProgressDialog(
+      context: context,
+    );
     pr.show(msg: "Loading..", barrierDismissible: true);
 
     final imageUploadRequest =
         http.MultipartRequest('POST', Uri.parse(APIS.usersSignUp));
 
-//    imageUploadRequest.fields['ext'] = mimeTypeData[1];
     imageUploadRequest.fields['username'] = username;
     imageUploadRequest.fields['phone'] = phone;
     imageUploadRequest.fields['gender'] = gender;
@@ -571,35 +665,55 @@ class _SignupPageState extends State<SignupPage>
     imageUploadRequest.fields['password'] = password;
     imageUploadRequest.fields['deviceToken'] = deviceToken;
 
+// Check if image is not null
     if (image != null) {
       final mimeTypeData =
           lookupMimeType(image.path, headerBytes: [0xFF, 0xD8])?.split('/');
       final file = await http.MultipartFile.fromPath('file', image.path,
           contentType: MediaType(mimeTypeData![0], mimeTypeData[1]));
+// Add the image file to the request
       imageUploadRequest.files.add(file);
     }
+
     try {
       final streamedResponse = await imageUploadRequest.send();
       final response = await http.Response.fromStream(streamedResponse);
       var parsedJson = json.decode(response.body);
+      print(parsedJson);
       if (parsedJson['status'] == "1") {
         pr.close();
-        /* Toast.show(parsedJson['message'], context,
-            duration: Toast.lengthLong, gravity: Toast.bottom,);*/
         _onChanged(parsedJson['message'], phone);
-        String otp = parsedJson['message'].toString().replaceAll("Otp For registration send to your Mobile", "");
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => OtpScreen(type: 'register', otpphone: otp,)),
-        );
+        String otp = parsedJson['message']
+            .toString()
+            .replaceAll("Otp For registration send to your Mobile", "");
+
+        if(parsedJson['status']['data']["recordsets"][0]["accRegistered"] == "Already Registered"){
+          Toast.show(
+            parsedJson['status']['data']["recordsets"][0]["accRegistered"],
+            duration: Toast.lengthShort,
+            gravity: Toast.bottom,
+          );
+
+        } else{
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => OtpScreen(
+                  type: 'register',
+                  otpphone: otp,
+                  mobile: phone,
+                )),
+          );
+
+        }
+
       } else {
         pr.close();
-        Toast.show(parsedJson['message'],
-            duration: Toast.lengthLong, gravity: Toast.bottom,);
-        /*Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => SignupPage()),
-        );*/
+        Toast.show(
+          parsedJson['status']['data']["recordsets"][0]["accRegistered"],
+          duration: Toast.lengthLong,
+          gravity: Toast.bottom,
+        );
       }
       return parsedJson;
     } catch (e) {
@@ -607,6 +721,89 @@ class _SignupPageState extends State<SignupPage>
     }
     return returnData;
   }
+//   Future<Map<String, dynamic>> getsignUpData(
+//       String username,
+//       String phone,
+//       String gender,
+//       String dob,
+//       String email,
+//       String password,
+//       String deviceToken,
+//       File? image) async {
+//     pr = ProgressDialog(
+//       context: context,
+//     );
+//     pr.show(msg: "Loading..", barrierDismissible: true);
+//
+//     final imageUploadRequest =
+//         http.MultipartRequest('POST', Uri.parse(APIS.usersSignUp));
+//
+// //    imageUploadRequest.fields['ext'] = mimeTypeData[1];
+//     imageUploadRequest.fields['username'] = username;
+//     imageUploadRequest.fields['phone'] = phone;
+//     imageUploadRequest.fields['gender'] = gender;
+//     imageUploadRequest.fields['dob'] = dob;
+//     imageUploadRequest.fields['email'] = email;
+//     imageUploadRequest.fields['password'] = password;
+//     imageUploadRequest.fields['deviceToken'] = deviceToken;
+//
+//     if (image != null) {
+//       final mimeTypeData =
+//           lookupMimeType(image.path, headerBytes: [0xFF, 0xD8])?.split('/');
+//       final file = await http.MultipartFile.fromPath('file', image.path,
+//           contentType: MediaType(mimeTypeData![0], mimeTypeData[1]));
+//       imageUploadRequest.files.add(file);
+//     }
+//     // else {
+//       // final mimeTypeData =
+//       //     lookupMimeType('images/categorys_image.jpg', headerBytes: [0xFF, 0xD8])?.split('/');
+//       // ByteData imageBytes = await rootBundle.load('images/categorys_image.jpg');
+//       // List<int> imageData = await imageBytes.buffer.asUint8List();
+//       //
+//       // final file = await http.MultipartFile.fromBytes(
+//       //     "image", imageData,
+//       //     filename: "default",contentType: MediaType(mimeTypeData![0], mimeTypeData[1]));
+//
+//       // imageUploadRequest.fields['deviceToken'] = deviceToken;
+//     // }
+//     try {
+//       final streamedResponse = await imageUploadRequest.send();
+//       final response = await http.Response.fromStream(streamedResponse);
+//       var parsedJson = json.decode(response.body);
+//       if (parsedJson['status'] == "1") {
+//         pr.close();
+//         /* Toast.show(parsedJson['message'], context,
+//             duration: Toast.lengthLong, gravity: Toast.bottom,);*/
+//         _onChanged(parsedJson['message'], phone);
+//         String otp = parsedJson['message']
+//             .toString()
+//             .replaceAll("Otp For registration send to your Mobile", "");
+//         Navigator.push(
+//           context,
+//           MaterialPageRoute(
+//               builder: (context) => OtpScreen(
+//                     type: 'register',
+//                     otpphone: otp,
+//                   )),
+//         );
+//       } else {
+//         pr.close();
+//         Toast.show(
+//           parsedJson['message'],
+//           duration: Toast.lengthLong,
+//           gravity: Toast.bottom,
+//         );
+//         /*Navigator.push(
+//           context,
+//           MaterialPageRoute(builder: (context) => SignupPage()),
+//         );*/
+//       }
+//       return parsedJson;
+//     } catch (e) {
+//       print(e);
+//     }
+//     return returnData;
+//   }
 
   @override
   void dispose() {
@@ -645,7 +842,6 @@ class _SignupPageState extends State<SignupPage>
     setState(() {
       sharedPreferences.setString("otp", otp!);
       sharedPreferences.setString("number", contact);
-      sharedPreferences.commit();
     });
   }
 }

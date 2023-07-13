@@ -9,6 +9,8 @@ import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:shim
 import '../../rest_api/ApiList.dart';
 
 class Privacy extends StatefulWidget {
+  const Privacy({super.key});
+
   @override
   PrivacySettingPage createState() => PrivacySettingPage();
 }
@@ -64,7 +66,7 @@ class PrivacySettingPage extends State<Privacy> {
               gradient: RadialGradient(
 
                   colors: [Colors.black.withOpacity(0.9)],
-                  stops: [0.0, ]
+                  stops: const [0.0, ]
               ),
               image: DecorationImage(
                 image: const AssetImage("images/services_background.jpg"),
@@ -80,17 +82,14 @@ class PrivacySettingPage extends State<Privacy> {
                   children: <Widget>[
                     const SizedBox(height: 70,),
                     Center(
-                      child: Container(
-                          child: Center(
-                            child: Container(
-                              child: Image.asset(
-                                "images/privacy_logo.png",
-                                fit: BoxFit.cover,
-                                height: 60,
-                                width: 60,
-                              ),
-                            ),
-                          )),
+                      child: Center(
+                        child: Image.asset(
+                          "images/privacy_logo.png",
+                          fit: BoxFit.cover,
+                          height: 60,
+                          width: 60,
+                        ),
+                      ),
                     ),
                     Center(
                       child: Text(
@@ -103,7 +102,7 @@ class PrivacySettingPage extends State<Privacy> {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 30,
                     ),
                   ],
                 ),
@@ -116,7 +115,6 @@ class PrivacySettingPage extends State<Privacy> {
                   padding: const EdgeInsets.only(
                       left: 20, right: 20, bottom: 50),
                   child: Container(
-                    height: MediaQuery.of(context).size.height * 0.5,
                     decoration: BoxDecoration(
                         color: AppTheme().color_white,
                         borderRadius: BorderRadius.circular(15)),

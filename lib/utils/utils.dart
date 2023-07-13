@@ -8,7 +8,7 @@ class NetworkUtil {
   NetworkUtil.internal();
   factory NetworkUtil() => _instance;
 
-  final JsonDecoder _decoder = JsonDecoder();
+  final JsonDecoder _decoder = const JsonDecoder();
 
   // Future<dynamic> get (String url, {required Map headers}) {
   //   return http.get(url, headers: headers as Map<String, String>).then((http.Response response) {

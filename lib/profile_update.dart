@@ -13,6 +13,8 @@ import 'home_page.dart';
 import 'package:http_parser/http_parser.dart';
 
 class ProfileUpdate extends StatefulWidget {
+  const ProfileUpdate({super.key});
+
   @override
   _ProfileUpdate createState() => _ProfileUpdate();
 }
@@ -99,7 +101,7 @@ class _ProfileUpdate extends State<ProfileUpdate>
         decoration: BoxDecoration(
             gradient: RadialGradient(colors: [
               Colors.black.withOpacity(0.9)
-            ], stops: [
+            ], stops: const [
               0.0,
             ]),
             image: DecorationImage(
@@ -137,7 +139,7 @@ class _ProfileUpdate extends State<ProfileUpdate>
                                       onTap: () {
                                         Navigator.pop(context);
                                       },
-                                      child: Container(
+                                      child: SizedBox(
                                         width: 30,
                                         height: 20,
                                         child: Image.asset(
@@ -719,7 +721,6 @@ class _ProfileUpdate extends State<ProfileUpdate>
       /* sharedPreferences.setString("email", response["Email"]);*/
       sharedPreferences.setString("password", response["Password"]);
       sharedPreferences.setString("profile_pic", response["ProfilePic"]);
-      sharedPreferences.commit();
     });
   }
 

@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:shared_preferences/shared_preferences.dart';
 class ProductDetail extends StatefulWidget {
   var data,image;
-  ProductDetail({this.data,this.image});
+  ProductDetail({super.key, this.data,this.image});
 
   @override
   ScreenState createState() => ScreenState(data: data,image:image);

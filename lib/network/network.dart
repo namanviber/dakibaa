@@ -16,6 +16,8 @@ class NetworkConnection{
 }
 
 class InternetConnection extends StatefulWidget {
+  const InternetConnection({super.key});
+
   @override
   _InternetConnectionState createState() => _InternetConnectionState();
 }
@@ -48,18 +50,14 @@ class _InternetConnectionState extends State<InternetConnection> {
                     onTap: (){
                       Navigator.of(context).pop();
                     },
-                    child: Container(
-                      child: Image.asset("images/back_button.png",width: 20,height: 20,color: AppTheme().color_black,),
-                    ),
+                    child: Image.asset("images/back_button.png",width: 20,height: 20,color: AppTheme().color_black,),
                   ),
                 ],
               ),
             ),
             Padding(
               padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/5),
-              child: Container(
-                child:Image.asset("images/internet.jpg") ,
-              ),
+              child: Image.asset("images/internet.jpg"),
             ),
           ],
         )

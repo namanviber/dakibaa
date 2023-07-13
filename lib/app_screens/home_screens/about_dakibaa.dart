@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dakibaa/Colors/colors.dart';
 import 'package:dakibaa/app_screens/authorization_screens/login_pagenew.dart';
-import 'package:dakibaa/number_of_person.dart';
+import 'package:dakibaa/app_screens/home_screens/number_of_person.dart';
 import 'package:dakibaa/widgets/appDrawer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -95,17 +95,15 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
-                  child: Container(
-                    child: Center(
-                      child: Text(
-                        "WELCOME TO PLANWEY\n OUR PARTY SERVICES",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 25,
-                            color: AppTheme().color_white,
-                            fontFamily: "MontBlancDemo-Bold",
-                            fontWeight: FontWeight.bold),
-                      ),
+                  child: Center(
+                    child: Text(
+                      "WELCOME TO PLANWEY\n OUR PARTY SERVICES",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 25,
+                          color: AppTheme().color_white,
+                          fontFamily: "MontBlancDemo-Bold",
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),

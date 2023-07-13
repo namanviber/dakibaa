@@ -7,7 +7,7 @@ class ImagePickerDialog extends StatelessWidget {
   final AnimationController? _controller;
   late BuildContext context;
 
-  ImagePickerDialog(this._listener, this._controller);
+  ImagePickerDialog(this._listener, this._controller, {super.key});
 
   Animation<double>? _drawerContentsOpacity;
   Animation<Offset>? _drawerDetailsPosition;
@@ -119,8 +119,8 @@ class ImagePickerDialog extends StatelessWidget {
       decoration: BoxDecoration(
         color: bgColor,
         borderRadius: const BorderRadius.all(Radius.circular(100.0)),
-        boxShadow: <BoxShadow>[
-          const BoxShadow(
+        boxShadow: const <BoxShadow>[
+          BoxShadow(
             color: Colors.red,
             offset: Offset(1.0, 6.0),
             blurRadius: 0.001,

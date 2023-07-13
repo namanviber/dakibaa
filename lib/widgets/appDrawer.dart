@@ -97,7 +97,17 @@ class _AppDrawerState extends State<AppDrawer> {
                                               )
                                             : Image.network(
                                                 "http://partyapp.v2infotech.net/resources/${profile_pic!}",
-                                                fit: BoxFit.cover))),
+                                                fit: BoxFit.cover,
+                                                errorBuilder: (BuildContext
+                                                        context,
+                                                    Object exception,
+                                                    StackTrace? stackTrace) {
+                                                  return Image.asset(
+                                                    "images/categorys_image.jpg",
+                                                    fit: BoxFit.cover,
+                                                  );
+                                                },
+                                              ))),
                               ),
                             ],
                           ),
@@ -113,17 +123,15 @@ class _AppDrawerState extends State<AppDrawer> {
                                               10.5
                                           : MediaQuery.of(context).size.height /
                                               13),
-                                  child: Container(
-                                    child: Center(
-                                      child: Container(
-                                        child: Text(
-                                          name ?? "Guest Login",
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              color: AppTheme().color_white,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold),
-                                        ),
+                                  child: Center(
+                                    child: Container(
+                                      child: Text(
+                                        name ?? "Guest Login",
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            color: AppTheme().color_white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                   ),
@@ -200,7 +208,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   },
                 )
               : const SizedBox(),
-          (checkValue&& !isguest)
+          (checkValue && !isguest)
               ? ListTile(
                   title: Text("Change Password", style: listText),
                   leading: Padding(
@@ -275,7 +283,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   context, MaterialPageRoute(builder: (context) => Gallery()));
             },
           ),
-          (checkValue  && !isguest)
+          (checkValue && !isguest)
               ? ListTile(
                   title: Text("Order History",
                       style: TextStyle(
@@ -310,8 +318,10 @@ class _AppDrawerState extends State<AppDrawer> {
                   color: AppTheme().color_white,
                 )),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const DakibaaServices()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const DakibaaServices()));
             },
           ),
           ListTile(
@@ -339,8 +349,8 @@ class _AppDrawerState extends State<AppDrawer> {
                   color: AppTheme().color_white,
                 )),
             onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const AboutUs()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const AboutUs()));
             },
           ),
           (checkValue)

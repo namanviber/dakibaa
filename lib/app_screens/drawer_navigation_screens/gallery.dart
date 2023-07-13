@@ -4,6 +4,8 @@ import 'package:image_picker/image_picker.dart';
 import '../../Colors/colors.dart';
 
 class Gallery extends StatefulWidget {
+  const Gallery({super.key});
+
   @override
   _GalleryState createState() => _GalleryState();
 }
@@ -139,13 +141,11 @@ class _GalleryState extends State<Gallery> {
                                   top: 10.0,
                                 ),
                                 child: Center(
-                                  child: Container(
-                                    child: Image.asset(
-                                      "images/gallery.png",
-                                      color: AppTheme().color_white,
-                                      fit: BoxFit.cover,
-                                      height: 60,
-                                    ),
+                                  child: Image.asset(
+                                    "images/gallery.png",
+                                    color: AppTheme().color_white,
+                                    fit: BoxFit.cover,
+                                    height: 60,
                                   ),
                                 )),
                           ),
@@ -166,7 +166,7 @@ class _GalleryState extends State<Gallery> {
                         ],
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       height: MediaQuery.of(context).size.height / 1.6,
                       child: GridView.builder(
                         itemCount: imageslist.length,
