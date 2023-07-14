@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -260,7 +261,7 @@ class _SignupPageState extends State<SignupPage>
                           return 'Enter atLeast 4 digit.';
                         } else if (!value.contains(RegExp(r'[a-zA-Z]'))) {
                           return 'Invalid Name.';
-                        }else if (value.contains(RegExp(r'[0-9]'))) {
+                        } else if (value.contains(RegExp(r'[0-9]'))) {
                           return 'Invalid Name.';
                         }
                         return null;
@@ -591,32 +592,37 @@ class _SignupPageState extends State<SignupPage>
                     child: GestureDetector(
                       onTap: () {
                         if (_formkey.currentState!.validate()) {
-                          if (_image != null) {
-                            getsignUpData(
-                                usernameController.text,
-                                contactController.text,
-                                "",
-                                "01/01/1990",
-                                emailController.text,
-                                passwordController.text,
-                                "ljhasfdnnlzs568794544",
-                                _image);
-                          } else {
-                            // Toast.show(
-                            // "Please select image",
-                            // duration: Toast.lengthLong,
-                            // gravity: Toast.top,
-                            // );
-                            getsignUpData(
-                                usernameController.text,
-                                contactController.text,
-                                "",
-                                "01/01/1990",
-                                emailController.text,
-                                passwordController.text,
-                                "ljhasfdnnlzs568794544",
-                                null);
-                          }
+                          signUp(
+                              usernameController.text,
+                              contactController.text,
+                              "",
+                              "01/01/1990",
+                              emailController.text,
+                              passwordController.text,
+                              "ljhasfdnnlzs568794544",
+                              _image);
+                          // if (_image != null) {
+                          //   getsignUpData(
+                          //       usernameController.text,
+                          //       contactController.text,
+                          //       "",
+                          //       "01/01/1990",
+                          //       emailController.text,
+                          //       passwordController.text,
+                          //       "ljhasfdnnlzs568794544",
+                          //       _image);
+                          // }
+                          // else {
+                          //   getsignUpData(
+                          //       usernameController.text,
+                          //       contactController.text,
+                          //       "",
+                          //       "01/01/1990",
+                          //       emailController.text,
+                          //       passwordController.text,
+                          //       "ljhasfdnnlzs568794544",
+                          //       null);
+                          // }
                         }
                       },
                       child: Center(
@@ -639,171 +645,101 @@ class _SignupPageState extends State<SignupPage>
     );
   }
 
-  var returnData;
-  Future<Map<String, dynamic>> getsignUpData(
-      String username,
-      String phone,
-      String gender,
-      String dob,
-      String email,
-      String password,
-      String deviceToken,
-      File? image) async {
+  void signUp(String username, String phone, String gender, String dob,
+      String email, String password, String deviceToken, File? image) async {
     pr = ProgressDialog(
       context: context,
     );
-    pr.show(msg: "Loading..", barrierDismissible: true);
-
-    final imageUploadRequest =
-        http.MultipartRequest('POST', Uri.parse(APIS.usersSignUp));
-
-    imageUploadRequest.fields['username'] = username;
-    imageUploadRequest.fields['phone'] = phone;
-    imageUploadRequest.fields['gender'] = gender;
-    imageUploadRequest.fields['dob'] = dob;
-    imageUploadRequest.fields['email'] = email;
-    imageUploadRequest.fields['password'] = password;
-    imageUploadRequest.fields['deviceToken'] = deviceToken;
-
-// Check if image is not null
-    if (image != null) {
-      final mimeTypeData =
-          lookupMimeType(image.path, headerBytes: [0xFF, 0xD8])?.split('/');
-      final file = await http.MultipartFile.fromPath('file', image.path,
-          contentType: MediaType(mimeTypeData![0], mimeTypeData[1]));
-// Add the image file to the request
-      imageUploadRequest.files.add(file);
-    }
+    pr.show(msg: "Processing..", barrierDismissible: true);
 
     try {
+      final imageUploadRequest =
+          http.MultipartRequest('POST', Uri.parse(APIS.usersSignUp));
+
+      imageUploadRequest.fields['username'] = username;
+      imageUploadRequest.fields['phone'] = phone;
+      imageUploadRequest.fields['gender'] = gender;
+      imageUploadRequest.fields['dob'] = dob;
+      imageUploadRequest.fields['email'] = email;
+      imageUploadRequest.fields['password'] = password;
+      imageUploadRequest.fields['deviceToken'] = deviceToken;
+
+      if (image != null) {
+        final mimeTypeData =
+            lookupMimeType(image.path, headerBytes: [0xFF, 0xD8])?.split('/');
+        final file = await http.MultipartFile.fromPath('file', image.path,
+            contentType: MediaType(mimeTypeData![0], mimeTypeData[1]));
+        imageUploadRequest.files.add(file);
+      }
+
+      print("Data:  ${imageUploadRequest.toString()}");
+
       final streamedResponse = await imageUploadRequest.send();
-      final response = await http.Response.fromStream(streamedResponse);
-      var parsedJson = json.decode(response.body);
-      print(parsedJson);
-      if (parsedJson['status'] == "1") {
-        pr.close();
-        _onChanged(parsedJson['message'], phone);
-        String otp = parsedJson['message']
-            .toString()
-            .replaceAll("Otp For registration send to your Mobile", "");
-
-        if(parsedJson['status']['data']["recordsets"][0]["accRegistered"] == "Already Registered"){
-          Toast.show(
-            parsedJson['status']['data']["recordsets"][0]["accRegistered"],
-            duration: Toast.lengthShort,
-            gravity: Toast.bottom,
-          );
-
-        } else{
-          Navigator.push(
-            context,
-            MaterialPageRoute(
+      if (streamedResponse.statusCode == 200) {
+        final response = await http.Response.fromStream(streamedResponse);
+        var parsedJson = json.decode(response.body);
+        print("response body: $parsedJson");
+        print("Data:  ${parsedJson['data']["recordsets"].toString()}");
+        if (parsedJson['status'] == "1") {
+          pr.close();
+          if (parsedJson['data']["recordsets"]
+              .toString()
+              .toLowerCase()
+              .contains("[]")) {
+            String otp = parsedJson['message']
+                .toString()
+                .replaceAll("Otp For registration send to your Mobile", "");
+            Navigator.push(
+              context,
+              MaterialPageRoute(
                 builder: (context) => OtpScreen(
                   type: 'register',
                   otpphone: otp,
                   mobile: phone,
-                )),
+                ),
+              ),
+            );
+          } else {
+            Toast.show(
+              parsedJson['data']["recordsets"][0][0]["accRegistered"],
+              duration: Toast.lengthLong,
+              gravity: Toast.top,
+            );
+          }
+        } else {
+          pr.close();
+
+          Toast.show(
+            parsedJson['data']["recordsets"][0][0]["accRegistered"],
+            duration: Toast.lengthLong,
+            gravity: Toast.top,
           );
-
         }
-
-      } else {
-        pr.close();
-        Toast.show(
-          parsedJson['status']['data']["recordsets"][0]["accRegistered"],
-          duration: Toast.lengthLong,
-          gravity: Toast.bottom,
-        );
       }
-      return parsedJson;
-    } catch (e) {
-      print(e);
+      else{
+        pr.close();
+        throw Exception();
+      }
+    } on HttpException {
+      Toast.show(
+        "Internal Server Error",
+        duration: Toast.lengthLong,
+        gravity: Toast.top,
+      );
+    } on FormatException {
+      Toast.show(
+        "Server Error",
+        duration: Toast.lengthLong,
+        gravity: Toast.top,
+      );
+    } on TimeoutException {
+      Toast.show(
+        "Request time out Try again",
+        duration: Toast.lengthLong,
+        gravity: Toast.top,
+      );
     }
-    return returnData;
   }
-//   Future<Map<String, dynamic>> getsignUpData(
-//       String username,
-//       String phone,
-//       String gender,
-//       String dob,
-//       String email,
-//       String password,
-//       String deviceToken,
-//       File? image) async {
-//     pr = ProgressDialog(
-//       context: context,
-//     );
-//     pr.show(msg: "Loading..", barrierDismissible: true);
-//
-//     final imageUploadRequest =
-//         http.MultipartRequest('POST', Uri.parse(APIS.usersSignUp));
-//
-// //    imageUploadRequest.fields['ext'] = mimeTypeData[1];
-//     imageUploadRequest.fields['username'] = username;
-//     imageUploadRequest.fields['phone'] = phone;
-//     imageUploadRequest.fields['gender'] = gender;
-//     imageUploadRequest.fields['dob'] = dob;
-//     imageUploadRequest.fields['email'] = email;
-//     imageUploadRequest.fields['password'] = password;
-//     imageUploadRequest.fields['deviceToken'] = deviceToken;
-//
-//     if (image != null) {
-//       final mimeTypeData =
-//           lookupMimeType(image.path, headerBytes: [0xFF, 0xD8])?.split('/');
-//       final file = await http.MultipartFile.fromPath('file', image.path,
-//           contentType: MediaType(mimeTypeData![0], mimeTypeData[1]));
-//       imageUploadRequest.files.add(file);
-//     }
-//     // else {
-//       // final mimeTypeData =
-//       //     lookupMimeType('images/categorys_image.jpg', headerBytes: [0xFF, 0xD8])?.split('/');
-//       // ByteData imageBytes = await rootBundle.load('images/categorys_image.jpg');
-//       // List<int> imageData = await imageBytes.buffer.asUint8List();
-//       //
-//       // final file = await http.MultipartFile.fromBytes(
-//       //     "image", imageData,
-//       //     filename: "default",contentType: MediaType(mimeTypeData![0], mimeTypeData[1]));
-//
-//       // imageUploadRequest.fields['deviceToken'] = deviceToken;
-//     // }
-//     try {
-//       final streamedResponse = await imageUploadRequest.send();
-//       final response = await http.Response.fromStream(streamedResponse);
-//       var parsedJson = json.decode(response.body);
-//       if (parsedJson['status'] == "1") {
-//         pr.close();
-//         /* Toast.show(parsedJson['message'], context,
-//             duration: Toast.lengthLong, gravity: Toast.bottom,);*/
-//         _onChanged(parsedJson['message'], phone);
-//         String otp = parsedJson['message']
-//             .toString()
-//             .replaceAll("Otp For registration send to your Mobile", "");
-//         Navigator.push(
-//           context,
-//           MaterialPageRoute(
-//               builder: (context) => OtpScreen(
-//                     type: 'register',
-//                     otpphone: otp,
-//                   )),
-//         );
-//       } else {
-//         pr.close();
-//         Toast.show(
-//           parsedJson['message'],
-//           duration: Toast.lengthLong,
-//           gravity: Toast.bottom,
-//         );
-//         /*Navigator.push(
-//           context,
-//           MaterialPageRoute(builder: (context) => SignupPage()),
-//         );*/
-//       }
-//       return parsedJson;
-//     } catch (e) {
-//       print(e);
-//     }
-//     return returnData;
-//   }
 
   @override
   void dispose() {
@@ -834,14 +770,6 @@ class _SignupPageState extends State<SignupPage>
       } else {
         checkValue = false;
       }
-    });
-  }
-
-  _onChanged(String? otp, String contact) async {
-    sharedPreferences = await SharedPreferences.getInstance();
-    setState(() {
-      sharedPreferences.setString("otp", otp!);
-      sharedPreferences.setString("number", contact);
     });
   }
 }

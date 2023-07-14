@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-
+import 'dart:io';
+import 'package:dakibaa/rest_api/ApiList.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -11,7 +12,7 @@ import 'package:sn_progress_dialog/sn_progress_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:pinput/pinput.dart';
 import 'login_pagenew.dart';
 
 class OtpScreen extends StatefulWidget {
@@ -186,202 +187,220 @@ class Otp extends State<OtpScreen> {
                         const SizedBox(
                           height: 10,
                         ),
-                        Row(
-                          children: <Widget>[
-                            Flexible(
-                              child: Container(
-                                //margin: EdgeInsets.fromLTRB(15,0,10,0),
-                                padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(right: 0, left: 0),
-                                  child: Container(
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                          color: AppTheme().color_white,
-                                          border: Border.all(
-                                              width: 1.0,
-                                              color: const Color.fromRGBO(
-                                                  0, 0, 0, 0.1)),
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(100.0))),
-                                      child: TextFormField(
-                                        cursorColor: AppTheme().color_red,
-                                        decoration: const InputDecoration(
-                                            border: InputBorder.none),
-                                        keyboardType: TextInputType.phone,
-                                        textInputAction: TextInputAction.next,
-                                        onFieldSubmitted: (String value) {
-                                          FocusScope.of(context).requestFocus(
-                                              textSecondFocusNode);
-                                        },
-                                        inputFormatters: [
-                                          LengthLimitingTextInputFormatter(1),
-                                        ],
-                                        enabled: true,
-                                        controller: controller1,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: 24.0,
-                                            color: AppTheme().color_red,
-                                            fontFamily: "Montserrat-SemiBold"),
-                                      )),
-                                ),
-//                                PinInputTextField(
-//                                  pinLength: 4,
-//                                  decoration: UnderlineDecoration(
-//                                      textStyle: TextStyle(
-//                                          color: Colors.black)),
-//                                ),
-                              ),
+                        Pinput(
+                          controller: controller1,
+                          androidSmsAutofillMethod:
+                              AndroidSmsAutofillMethod.smsUserConsentApi,
+                          listenForMultipleSmsOnAndroid: true,
+                          defaultPinTheme: PinTheme(
+                            width: 56,
+                            height: 56,
+                            textStyle: TextStyle(
+                              fontSize: 22,
+                              color: AppTheme().color_red,
                             ),
-                            Flexible(
-                              child: Container(
-                                // margin: EdgeInsets.fromLTRB(10,0,10,0),
-                                padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(right: 0, left: 0),
-                                  child: Container(
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                          color: AppTheme().color_white,
-                                          border: Border.all(
-                                              width: 1.0,
-                                              color: const Color.fromRGBO(
-                                                  0, 0, 0, 0.1)),
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(100.0))),
-                                      child: TextFormField(
-                                        cursorColor: AppTheme().color_red,
-                                        decoration: const InputDecoration(
-                                            border: InputBorder.none),
-                                        keyboardType: TextInputType.phone,
-                                        focusNode: textSecondFocusNode,
-                                        textInputAction: TextInputAction.next,
-                                        onFieldSubmitted: (String value) {
-                                          FocusScope.of(context)
-                                              .requestFocus(textThirdFocusNode);
-                                        },
-                                        inputFormatters: [
-                                          LengthLimitingTextInputFormatter(1),
-                                        ],
-                                        enabled: true,
-                                        controller: controller2,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: 24.0,
-                                            color: AppTheme().color_red,
-                                            fontFamily: "Montserrat-SemiBold"),
-                                      )),
-                                ),
-//                                PinInputTextField(
-//                                  pinLength: 4,
-//                                  decoration: UnderlineDecoration(
-//                                      textStyle: TextStyle(
-//                                          color: Colors.black)),
-//                                ),
-                              ),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(50)),
+                              color: AppTheme().color_white,
                             ),
-                            Flexible(
-                              child: Container(
-                                // margin: EdgeInsets.fromLTRB(10,0,10,0),
-                                padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(right: 0, left: 0),
-                                  child: Container(
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                        color: AppTheme().color_white,
-                                        border: Border.all(
-                                            width: 1.0,
-                                            color: const Color.fromRGBO(
-                                                0, 0, 0, 0.1)),
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(200.0)),
-                                      ),
-                                      child: TextFormField(
-                                        cursorColor: AppTheme().color_red,
-                                        decoration: const InputDecoration(
-                                            border: InputBorder.none),
-                                        keyboardType: TextInputType.phone,
-                                        focusNode: textThirdFocusNode,
-                                        textInputAction: TextInputAction.next,
-                                        onFieldSubmitted: (value) {
-                                          FocusScope.of(context).requestFocus(
-                                              textFourthFocusNode);
-                                        },
-                                        inputFormatters: [
-                                          LengthLimitingTextInputFormatter(1),
-                                        ],
-                                        enabled: true,
-                                        controller: controller3,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: 24.0,
-                                            color: AppTheme().color_red,
-                                            fontFamily: "Montserrat-SemiBold"),
-                                      )),
-                                ),
-//                                PinInputTextField(
-//                                  pinLength: 4,
-//                                  decoration: UnderlineDecoration(
-//                                      textStyle: TextStyle(
-//                                          color: Colors.black)),
-//                                ),
-                              ),
-                            ),
-                            Flexible(
-                              child: Container(
-                                //  margin: EdgeInsets.fromLTRB(10,0,15,0),
-                                padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(right: 0, left: 0),
-                                  child: Container(
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                          color: AppTheme().color_white,
-                                          border: Border.all(
-                                              width: 1.0,
-                                              color: const Color.fromRGBO(
-                                                  0, 0, 0, 0.1)),
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(100.0))),
-                                      child: TextFormField(
-                                        cursorColor: AppTheme().color_red,
-                                        decoration: const InputDecoration(
-                                            border: InputBorder.none),
-                                        keyboardType: TextInputType.phone,
-                                        focusNode: textFourthFocusNode,
-                                        textInputAction: TextInputAction.done,
-                                        inputFormatters: [
-                                          LengthLimitingTextInputFormatter(1),
-                                        ],
-                                        enabled: true,
-                                        controller: controller4,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: 24.0,
-                                            color: AppTheme().color_red,
-                                            fontFamily: "Montserrat-SemiBold"),
-                                      )),
-                                ),
-//                                PinInputTextField(
-//                                  pinLength: 4,
-//                                  decoration: UnderlineDecoration(
-//                                      textStyle: TextStyle(
-//                                          color: Colors.black)),
-//                                ),
-                              ),
-                            ),
-                          ],
+                          ),
+                          hapticFeedbackType: HapticFeedbackType.lightImpact,
                         ),
+//                         const SizedBox(
+//                           height: 10,
+//                         ),
+//                         Row(
+//                           children: <Widget>[
+//                             Flexible(
+//                               child: Container(
+//                                 //margin: EdgeInsets.fromLTRB(15,0,10,0),
+//                                 padding:
+//                                     const EdgeInsets.only(left: 10, right: 10),
+//                                 child: Padding(
+//                                   padding:
+//                                       const EdgeInsets.only(right: 0, left: 0),
+//                                   child: Container(
+//                                       alignment: Alignment.center,
+//                                       decoration: BoxDecoration(
+//                                           color: AppTheme().color_white,
+//                                           border: Border.all(
+//                                               width: 1.0,
+//                                               color: const Color.fromRGBO(
+//                                                   0, 0, 0, 0.1)),
+//                                           borderRadius: const BorderRadius.all(
+//                                               Radius.circular(100.0))),
+//                                       child: TextFormField(
+//                                         cursorColor: AppTheme().color_red,
+//                                         decoration: const InputDecoration(
+//                                             border: InputBorder.none),
+//                                         keyboardType: TextInputType.phone,
+//                                         textInputAction: TextInputAction.next,
+//                                         onFieldSubmitted: (String value) {
+//                                           FocusScope.of(context).requestFocus(
+//                                               textSecondFocusNode);
+//                                         },
+//                                         inputFormatters: [
+//                                           LengthLimitingTextInputFormatter(1),
+//                                         ],
+//                                         enabled: true,
+//                                         controller: controller1,
+//                                         textAlign: TextAlign.center,
+//                                         style: TextStyle(
+//                                             fontSize: 24.0,
+//                                             color: AppTheme().color_red,
+//                                             fontFamily: "Montserrat-SemiBold"),
+//                                       )),
+//                                 ),
+// //                                PinInputTextField(
+// //                                  pinLength: 4,
+// //                                  decoration: UnderlineDecoration(
+// //                                      textStyle: TextStyle(
+// //                                          color: Colors.black)),
+// //                                ),
+//                               ),
+//                             ),
+//                             Flexible(
+//                               child: Container(
+//                                 // margin: EdgeInsets.fromLTRB(10,0,10,0),
+//                                 padding:
+//                                     const EdgeInsets.only(left: 10, right: 10),
+//                                 child: Padding(
+//                                   padding:
+//                                       const EdgeInsets.only(right: 0, left: 0),
+//                                   child: Container(
+//                                       alignment: Alignment.center,
+//                                       decoration: BoxDecoration(
+//                                           color: AppTheme().color_white,
+//                                           border: Border.all(
+//                                               width: 1.0,
+//                                               color: const Color.fromRGBO(
+//                                                   0, 0, 0, 0.1)),
+//                                           borderRadius: const BorderRadius.all(
+//                                               Radius.circular(100.0))),
+//                                       child: TextFormField(
+//                                         cursorColor: AppTheme().color_red,
+//                                         decoration: const InputDecoration(
+//                                             border: InputBorder.none),
+//                                         keyboardType: TextInputType.phone,
+//                                         focusNode: textSecondFocusNode,
+//                                         textInputAction: TextInputAction.next,
+//                                         onFieldSubmitted: (String value) {
+//                                           FocusScope.of(context)
+//                                               .requestFocus(textThirdFocusNode);
+//                                         },
+//                                         inputFormatters: [
+//                                           LengthLimitingTextInputFormatter(1),
+//                                         ],
+//                                         enabled: true,
+//                                         controller: controller2,
+//                                         textAlign: TextAlign.center,
+//                                         style: TextStyle(
+//                                             fontSize: 24.0,
+//                                             color: AppTheme().color_red,
+//                                             fontFamily: "Montserrat-SemiBold"),
+//                                       )),
+//                                 ),
+// //                                ),
+//                               ),
+//                             ),
+//                             Flexible(
+//                               child: Container(
+//                                 // margin: EdgeInsets.fromLTRB(10,0,10,0),
+//                                 padding:
+//                                     const EdgeInsets.only(left: 10, right: 10),
+//                                 child: Padding(
+//                                   padding:
+//                                       const EdgeInsets.only(right: 0, left: 0),
+//                                   child: Container(
+//                                       alignment: Alignment.center,
+//                                       decoration: BoxDecoration(
+//                                         color: AppTheme().color_white,
+//                                         border: Border.all(
+//                                             width: 1.0,
+//                                             color: const Color.fromRGBO(
+//                                                 0, 0, 0, 0.1)),
+//                                         borderRadius: const BorderRadius.all(
+//                                             Radius.circular(200.0)),
+//                                       ),
+//                                       child: TextFormField(
+//                                         cursorColor: AppTheme().color_red,
+//                                         decoration: const InputDecoration(
+//                                             border: InputBorder.none),
+//                                         keyboardType: TextInputType.phone,
+//                                         focusNode: textThirdFocusNode,
+//                                         textInputAction: TextInputAction.next,
+//                                         onFieldSubmitted: (value) {
+//                                           FocusScope.of(context).requestFocus(
+//                                               textFourthFocusNode);
+//                                         },
+//                                         inputFormatters: [
+//                                           LengthLimitingTextInputFormatter(1),
+//                                         ],
+//                                         enabled: true,
+//                                         controller: controller3,
+//                                         textAlign: TextAlign.center,
+//                                         style: TextStyle(
+//                                             fontSize: 24.0,
+//                                             color: AppTheme().color_red,
+//                                             fontFamily: "Montserrat-SemiBold"),
+//                                       )),
+//                                 ),
+// //                                PinInputTextField(
+// //                                  pinLength: 4,
+// //                                  decoration: UnderlineDecoration(
+// //                                      textStyle: TextStyle(
+// //                                          color: Colors.black)),
+// //                                ),
+//                               ),
+//                             ),
+//                             Flexible(
+//                               child: Container(
+//                                 //  margin: EdgeInsets.fromLTRB(10,0,15,0),
+//                                 padding:
+//                                     const EdgeInsets.only(left: 10, right: 10),
+//                                 child: Padding(
+//                                   padding:
+//                                       const EdgeInsets.only(right: 0, left: 0),
+//                                   child: Container(
+//                                       alignment: Alignment.center,
+//                                       decoration: BoxDecoration(
+//                                           color: AppTheme().color_white,
+//                                           border: Border.all(
+//                                               width: 1.0,
+//                                               color: const Color.fromRGBO(
+//                                                   0, 0, 0, 0.1)),
+//                                           borderRadius: const BorderRadius.all(
+//                                               Radius.circular(100.0))),
+//                                       child: TextFormField(
+//                                         cursorColor: AppTheme().color_red,
+//                                         decoration: const InputDecoration(
+//                                             border: InputBorder.none),
+//                                         keyboardType: TextInputType.phone,
+//                                         focusNode: textFourthFocusNode,
+//                                         textInputAction: TextInputAction.done,
+//                                         inputFormatters: [
+//                                           LengthLimitingTextInputFormatter(1),
+//                                         ],
+//                                         enabled: true,
+//                                         controller: controller4,
+//                                         textAlign: TextAlign.center,
+//                                         style: TextStyle(
+//                                             fontSize: 24.0,
+//                                             color: AppTheme().color_red,
+//                                             fontFamily: "Montserrat-SemiBold"),
+//                                       )),
+//                                 ),
+// //                                PinInputTextField(
+// //                                  pinLength: 4,
+// //                                  decoration: UnderlineDecoration(
+// //                                      textStyle: TextStyle(
+// //                                          color: Colors.black)),
+// //                                ),
+//                               ),
+//                             ),
+//                           ],
+//                         ),
                       ],
                     ),
                   ),
@@ -396,17 +415,19 @@ class Otp extends State<OtpScreen> {
                         border: Border.all(color: AppTheme().color_red)),
                     child: GestureDetector(
                       onTap: () {
-                        if (controller1.text.isNotEmpty &&
-                            controller2.text.isNotEmpty &&
-                            controller3.text.isNotEmpty &&
-                            controller4.text.isNotEmpty) {
-                          sendOtp(controller1.text +
-                              controller2.text +
-                              controller3.text +
-                              controller4.text);
+                        if (controller1.text.isNotEmpty) {
+                          // &&
+                          // controller2.text.isNotEmpty &&
+                          // controller3.text.isNotEmpty &&
+                          // controller4.text.isNotEmpty
+                          // sendOtp(controller1.text +
+                          //     controller2.text +
+                          //     controller3.text +
+                          //     controller4.text);
+                          sendOtp(controller1.text);
                         } else {
                           Toast.show(
-                            "" + "Please enter full otp",
+                            "Please enter full otp",
                             duration: Toast.lengthLong,
                             gravity: Toast.top,
                           );
@@ -435,6 +456,7 @@ class Otp extends State<OtpScreen> {
                             setState(() {
                               _start = 60;
                               reSendOtp();
+                              resendotpbool = false;
                             });
                           },
                           child: Text(
@@ -461,76 +483,161 @@ class Otp extends State<OtpScreen> {
     ));
   }
 
-  Future<Map<String, dynamic>> sendOtp(String otp) async {
-    String myUrl = "$baseUrl/party/User/otpAuth";
-    final response = await http.post(Uri.parse(myUrl), headers: {
-      'Accept': 'application/json'
-    }, body: {
-      "type": type.toString(),
-      "otp": controller1.text +
-          controller2.text +
-          controller3.text +
-          controller4.text,
-      "Mobile": widget.mobile,
-    });
-    print("Auth URL: $myUrl");
-    print({
-      "type": type.toString(),
-      "otp": controller1.text +
-          controller2.text +
-          controller3.text +
-          controller4.text,
-      "Mobile": widget.mobile,
-    });
-    print("response: $response");
-    var parsedJson = json.decode(response.body);
-    print("response: $parsedJson");
+  void sendOtp(String otp) async {
+    pr = ProgressDialog(
+      context: context,
+    );
+    pr.show(msg: "Verifying..", barrierDismissible: true);
 
-    if (parsedJson['status'] == "1") {
-      // pr.close();
-      value = parsedJson['data'];
-/*
-      Toast.show(parsedJson['message'], context,
-          duration: Toast.lengthLong, gravity: Toast.bottom,);*/
-      _timer!.cancel();
-      if (type == "forget") {
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => const LoginPage()),
-            (Route<dynamic> route) => false);
-      } else {
-        setState(() {
-          _onChanged(true, value);
-        });
-        // Navigator.of(context).pushNamedAndRemoveUntil('/screen2', (Route<dynamic> route) => false);
+    try {
+      final response = await http.post(Uri.parse(APIS.otpAuth), headers: {
+        'Accept': 'application/json'
+      }, body: {
+        "type": type.toString(),
+        "otp": otp,
+        "Mobile": widget.mobile,
+      });
 
+      print("Data:  ${Uri.parse(APIS.otpAuth)}");
+      print("body ${{
+        "type": type.toString(),
+        "otp": otp,
+        "Mobile": widget.mobile,
+      }}");
 
-        if(parsedJson['status']["message"]['accRegistered'] == "otp matched"){
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => Number_of_Person()),
+      if (response.statusCode == 200) {
+        var parsedJson = json.decode(response.body);
+        print("response body: $parsedJson");
+
+        if (parsedJson['status'] == "1") {
+          pr.close();
+          value = parsedJson['data'];
+          if (type == "forget") {
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => const LoginPage()),
+                (Route<dynamic> route) => false);
+          } else {
+
+            if (parsedJson["message"]['accRegistered'] == "otp matched") {
+              _timer!.cancel();
+              setState(() {
+                _onChanged(true, value);
+              });
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                      builder: (context) => const Number_of_Person()),
                   (Route<dynamic> route) => false);
-        } else{
+            } else {
+              Toast.show(
+                "OTP doesn't match",
+                duration: Toast.lengthLong,
+                gravity: Toast.bottom,
+              );
+            }
+          }
+        } else {
+          pr.close();
           Toast.show(
-            parsedJson['status']["message"]['accRegistered'],
-            duration: Toast.lengthShort,
+            parsedJson["message"]['accRegistered'],
+            duration: Toast.lengthLong,
             gravity: Toast.bottom,
           );
         }
       }
-
-/*  Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => HomePage()),
-      );*/
-    } else {
-      pr.close();
+      else{
+        pr.close();
+        throw Exception();
+      }
+    } on HttpException {
       Toast.show(
-        parsedJson['status']["message"]['accRegistered'],
+        "Internal Server Error",
         duration: Toast.lengthLong,
-        gravity: Toast.bottom,
+        gravity: Toast.top,
+      );
+    } on FormatException {
+      Toast.show(
+        "Server Error",
+        duration: Toast.lengthLong,
+        gravity: Toast.top,
+      );
+    } on TimeoutException {
+      Toast.show(
+        "Request time out Try again",
+        duration: Toast.lengthLong,
+        gravity: Toast.top,
       );
     }
-    return parsedJson;
   }
+
+//   Future<Map<String, dynamic>> sendOtp(String otp) async {
+//     final response = await http.post(Uri.parse(APIS.otpAuth), headers: {
+//       'Accept': 'application/json'
+//     }, body: {
+//       "type": type.toString(),
+//       "otp": controller1.text +
+//           controller2.text +
+//           controller3.text +
+//           controller4.text,
+//       "Mobile": widget.mobile,
+//     });
+//
+//
+//     print({
+//       "type": type.toString(),
+//       "otp": controller1.text +
+//           controller2.text +
+//           controller3.text +
+//           controller4.text,
+//       "Mobile": widget.mobile,
+//     });
+//     print("response: $response");
+//     var parsedJson = json.decode(response.body);
+//     print("response: $parsedJson");
+//
+//     if (parsedJson['status'] == "1") {
+//       // pr.close();
+//       value = parsedJson['data'];
+// /*
+//       Toast.show(parsedJson['message'], context,
+//           duration: Toast.lengthLong, gravity: Toast.bottom,);*/
+//       _timer!.cancel();
+//       if (type == "forget") {
+//         Navigator.of(context).pushAndRemoveUntil(
+//             MaterialPageRoute(builder: (context) => const LoginPage()),
+//             (Route<dynamic> route) => false);
+//       } else {
+//         setState(() {
+//           _onChanged(true, value);
+//         });
+//         // Navigator.of(context).pushNamedAndRemoveUntil('/screen2', (Route<dynamic> route) => false);
+//
+//         if (parsedJson['status']["message"]['accRegistered'] == "otp matched") {
+//           Navigator.of(context).pushAndRemoveUntil(
+//               MaterialPageRoute(builder: (context) => Number_of_Person()),
+//               (Route<dynamic> route) => false);
+//         } else {
+//           Toast.show(
+//             parsedJson['status']["message"]['accRegistered'],
+//             duration: Toast.lengthShort,
+//             gravity: Toast.bottom,
+//           );
+//         }
+//       }
+//
+// /*  Navigator.push(
+//         context,
+//         MaterialPageRoute(builder: (context) => HomePage()),
+//       );*/
+//     } else {
+//       pr.close();
+//       Toast.show(
+//         parsedJson['status']["message"]['accRegistered'],
+//         duration: Toast.lengthLong,
+//         gravity: Toast.bottom,
+//       );
+//     }
+//     return parsedJson;
+//   }
 
   Future<Map<String, dynamic>> reSendOtp() async {
     sharedPreferences = await SharedPreferences.getInstance();
@@ -581,28 +688,23 @@ class Otp extends State<OtpScreen> {
 
   void startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      print(_start);
       setState(() {
-        _start--;
-        print(_start);
+        if (!resendotpbool) {
+          _start--;
+          if (_start == -1) {
+            setState(() {
+              resendotpbool = true;
+            });
+          }
+        }
       });
-      if (_start == -1) {
-        setState(() {
-          resendotpbool = true;
-        });
-      }
-      if (_start == 50) {
-        // receiveMsg();
-        //  getOtp();
-      }
     });
   }
 
   @override
   void dispose() {
     controller1.dispose();
-    controller2.dispose();
-    controller3.dispose();
-    controller4.dispose();
     _timer?.cancel();
     super.dispose();
   }
@@ -615,34 +717,7 @@ class Otp extends State<OtpScreen> {
     // receiveMsg();
     startTimer();
   }
-  // void receiveMsg() {
-  //   SmsReceiver receiver = new SmsReceiver();
-  //   receiver.onSmsReceived.listen((SmsMessage msg) {
-  //     List<String> data = msg.body.split(': ');
-  //     var otpdata = data[1];
-  //     List<String> o = otpdata.split('');
-  //     print(o);
-  //     controller1.text = o[0];
-  //     controller2.text = o[1];
-  //     controller3.text = o[2];
-  //     controller4.text = o[3];
-  //   });
 
-  // }
-  /*getOtp() async {
-    List<SmsMessage> messages =
-    await new SmsQuery().querySms(address: '+919871949688');
-    print(messages[0].body);
-    List<String> data = messages[0].body.split(': ');
-//    Toast.show(data[1], context, duration: Toast.lengthShort, gravity:  Toast.bottom,);
-    var otpdata = data[1];
-    List<String> o = otpdata.split('');
-    print(o);
-    controller1.text = o[0];
-    controller2.text = o[1];
-    controller3.text = o[2];
-    controller4.text = o[3];
-  }*/
   getCredential() async {
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {

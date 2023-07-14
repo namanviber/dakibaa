@@ -52,6 +52,7 @@ dependencies:
   flutter_page_transition: ^0.1.6
   connectivity:
   paytm:
+  pinput: ^2.2.31
 
 dev_dependencies:
   build_runner: ^2.3.3

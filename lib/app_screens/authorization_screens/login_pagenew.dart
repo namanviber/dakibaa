@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:dakibaa/Colors/colors.dart';
 import 'package:dakibaa/common/shared_preferences.dart';
 import 'package:dakibaa/network/network.dart';
@@ -10,11 +12,11 @@ import 'package:flutter/material.dart';
 import 'package:sn_progress_dialog/sn_progress_dialog.dart';
 import 'package:http/http.dart' as http;
 import '../../rest_api/ApiList.dart';
-import '../../common/constant.dart';                                                                   
+import '../../common/constant.dart';
 import 'forget_password.dart';
-import '../../home_page.dart';                                                                          
+import '../../home_page.dart';
 
-class LoginPage extends StatefulWidget {                   
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
@@ -295,7 +297,9 @@ class _LoginPageState extends State<LoginPage> {
                   child: GestureDetector(
                     onTap: () {
                       if (_formkey.currentState!.validate()) {
-                        getData();
+                        // getData();
+                        signIn(emailController.text.toLowerCase().trim(),
+                            passwordController.text.trim());
                       } else {
                         Toast.show(
                           "Please Enter Your Credentials",
@@ -386,6 +390,72 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   var returnData;
+
+  void signIn(String email, String password) async {
+    pr = ProgressDialog(
+      context: context,
+    );
+    pr.show(msg: "Processing..", barrierDismissible: true);
+
+    try {
+      final response = await http.post(Uri.parse(APIS.usersLogin),
+          headers: {'Accept': 'application/json'},
+          body: {"email": email, "password": password});
+
+      print("Data:  ${Uri.parse(APIS.usersLogin)}");
+
+      if (response.statusCode == 200) {
+        var parsedJson = json.decode(response.body);
+        print("response body: $parsedJson");
+
+        if (parsedJson['status'] == "1") {
+          pr.close();
+          SharedPreferencesClass().setloginstatus(true);
+          sharedPreferences = await SharedPreferences.getInstance();
+          setState(() {
+            _onChanged(true, parsedJson['data']);
+            sharedPreferences.setBool("isguest", false);
+          });
+          Toast.show(
+            parsedJson['message'],
+            duration: Toast.lengthShort,
+            gravity: Toast.bottom,
+          );
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => const Number_of_Person()),
+              (Route<dynamic> route) => false);
+        } else {
+          pr.close();
+          Toast.show(
+            parsedJson['message'],
+            duration: Toast.lengthLong,
+            gravity: Toast.top,
+          );
+        }
+      } else {
+        pr.close();
+        throw Exception();
+      }
+    } on HttpException {
+      Toast.show(
+        "Internal Server Error",
+        duration: Toast.lengthLong,
+        gravity: Toast.top,
+      );
+    } on FormatException {
+      Toast.show(
+        "Server Error",
+        duration: Toast.lengthLong,
+        gravity: Toast.top,
+      );
+    } on TimeoutException {
+      Toast.show(
+        "Request time out Try again",
+        duration: Toast.lengthLong,
+        gravity: Toast.top,
+      );
+    }
+  }
 
   Future<Map<String, dynamic>> getData() async {
     ToastContext().init(context); //-> This part

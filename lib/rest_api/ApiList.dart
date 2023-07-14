@@ -1,8 +1,7 @@
-
 class APIS {
-
   // static const String _baseUrl = "http://partyapp.v2infotech.net/api/party";
-  static const String _baseUrl = "http://localhost:3500/api/party";
+  static const String _baseUrl = "http://192.168.1.4:3500/api/party";
+  // static const String _baseUrl = "http://192.168.1.13:3500/api/party";
   static const String _baseUrl1 = "http://shoppingapp.v2infotech.net/api";
   static var usersSignUp = "$_baseUrl/User/signup";
   static var usersLogin = "$_baseUrl/User/login";
@@ -29,6 +28,5 @@ class APIS {
   static var ProductDetails = "$_baseUrl/Order/Product_details";
   static var Save_ptmres = "$_baseUrl/Order/Save_ptmres";
   static var OrderHistory = "$_baseUrl/Order/Order_history";
-
-
+  static var otpAuth = "$_baseUrl/User/otpAuth";
 }
