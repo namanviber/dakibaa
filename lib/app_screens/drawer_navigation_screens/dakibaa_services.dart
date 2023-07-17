@@ -58,7 +58,7 @@ class _DakibaaServicesState extends State<DakibaaServices> {
                   "Services Provided",
                   style: TextStyle(
                       fontSize: 25,
-                      color: AppTheme().color_white,
+                      color: AppTheme().colorWhite,
                       fontFamily: "Montserrat"),
                 ),
               ),
@@ -70,7 +70,7 @@ class _DakibaaServicesState extends State<DakibaaServices> {
                     right: 15),
                 child: Container(
                     decoration: BoxDecoration(
-                        color: AppTheme().color_white,
+                        color: AppTheme().colorWhite,
                         borderRadius: const BorderRadius.all(Radius.circular(10))),
                     child: Padding(
                       padding: const EdgeInsets.only(
@@ -80,7 +80,7 @@ class _DakibaaServicesState extends State<DakibaaServices> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 17,
-                            color: AppTheme().color_red,
+                            color: AppTheme().colorRed,
                             fontFamily: "Montserrat-SemiBold"),
                       ),
                     )),

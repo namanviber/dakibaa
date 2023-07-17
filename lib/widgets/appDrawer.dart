@@ -27,7 +27,7 @@ class _AppDrawerState extends State<AppDrawer> {
   var name, email, id, gender, mobile, noperson, phone, dob;
 
   TextStyle listText = TextStyle(
-      color: AppTheme().color_white,
+      color: AppTheme().colorWhite,
       fontSize: 20,
       fontWeight: FontWeight.bold,
       fontFamily: "MontBlancDemo-Bold-Medium");
@@ -55,7 +55,6 @@ class _AppDrawerState extends State<AppDrawer> {
   }
 
   void initState() {
-    // TODO: implement initState
     super.initState();
     getCredential();
   }
@@ -63,7 +62,7 @@ class _AppDrawerState extends State<AppDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: AppTheme().color_red,
+      backgroundColor: AppTheme().colorRed,
       child: ListView(
         children: [
           SizedBox(
@@ -83,9 +82,9 @@ class _AppDrawerState extends State<AppDrawer> {
                                     decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(100),
-                                        color: AppTheme().color_white,
+                                        color: AppTheme().colorWhite,
                                         border: Border.all(
-                                            color: AppTheme().color_white,
+                                            color: AppTheme().colorWhite,
                                             width: 5)),
                                     child: ClipRRect(
                                         borderRadius:
@@ -124,31 +123,25 @@ class _AppDrawerState extends State<AppDrawer> {
                                           : MediaQuery.of(context).size.height /
                                               13),
                                   child: Center(
-                                    child: Container(
-                                      child: Text(
-                                        name ?? "Guest Login",
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            color: AppTheme().color_white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
-                                      ),
+                                    child: Text(
+                                      name ?? "Guest Login",
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          color: AppTheme().colorWhite,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 5),
-                                  child: Container(
-                                    child: Center(
-                                      child: Container(
-                                        child: Text(
-                                          email ?? "",
-                                          style: TextStyle(
-                                              color: AppTheme().color_white,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
+                                  child: Center(
+                                    child: Text(
+                                      email ?? "",
+                                      style: TextStyle(
+                                          color: AppTheme().colorWhite,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ),
@@ -197,14 +190,14 @@ class _AppDrawerState extends State<AppDrawer> {
                       padding: const EdgeInsets.only(left: 5),
                       child: Icon(
                         Icons.person,
-                        color: AppTheme().color_white,
+                        color: AppTheme().colorWhite,
                         size: 30,
                       )),
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ProfileUpdate()));
+                            builder: (context) => const ProfileUpdate()));
                   },
                 )
               : const SizedBox(),
@@ -222,7 +215,7 @@ class _AppDrawerState extends State<AppDrawer> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ChangePassword()));
+                            builder: (context) => const ChangePassword()));
                   },
                 )
               : const SizedBox(),
@@ -236,8 +229,8 @@ class _AppDrawerState extends State<AppDrawer> {
                   height: 30,
                 )),
             onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Privacy()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const Privacy()));
             },
           ),
           ListTile(
@@ -251,7 +244,7 @@ class _AppDrawerState extends State<AppDrawer> {
                 )),
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => FaqScreen()));
+                  MaterialPageRoute(builder: (context) => const FaqScreen()));
             },
           ),
           ListTile(
@@ -264,8 +257,10 @@ class _AppDrawerState extends State<AppDrawer> {
                   height: 30,
                 )),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => TermsCondition()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const TermsCondition()));
             },
           ),
           ListTile(
@@ -279,15 +274,15 @@ class _AppDrawerState extends State<AppDrawer> {
                   color: Colors.white,
                 )),
             onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Gallery()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const Gallery()));
             },
           ),
           (checkValue && !isguest)
               ? ListTile(
                   title: Text("Order History",
                       style: TextStyle(
-                          color: AppTheme().color_white,
+                          color: AppTheme().colorWhite,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           fontFamily: "Montserrat-Medium")),
@@ -297,13 +292,13 @@ class _AppDrawerState extends State<AppDrawer> {
                         "images/order_hist.ico",
                         width: 30,
                         height: 30,
-                        color: AppTheme().color_white,
+                        color: AppTheme().colorWhite,
                       )),
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => OrderHistoryScreen()));
+                            builder: (context) => const OrderHistoryScreen()));
                   },
                 )
               : const SizedBox(),
@@ -315,7 +310,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   "images/services.png",
                   width: 30,
                   height: 30,
-                  color: AppTheme().color_white,
+                  color: AppTheme().colorWhite,
                 )),
             onTap: () {
               Navigator.push(
@@ -335,7 +330,7 @@ class _AppDrawerState extends State<AppDrawer> {
                 )),
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ContactUs()));
+                  MaterialPageRoute(builder: (context) => const ContactUs()));
             },
           ),
           ListTile(
@@ -346,7 +341,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   "images/aboutus.png",
                   width: 30,
                   height: 30,
-                  color: AppTheme().color_white,
+                  color: AppTheme().colorWhite,
                 )),
             onTap: () {
               Navigator.push(context,
@@ -357,7 +352,7 @@ class _AppDrawerState extends State<AppDrawer> {
               ? ListTile(
                   title: Text("Logout",
                       style: TextStyle(
-                          color: AppTheme().color_white,
+                          color: AppTheme().colorWhite,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           fontFamily: "Montserrat-Medium")),
@@ -369,7 +364,7 @@ class _AppDrawerState extends State<AppDrawer> {
                         height: 30,
                       )),
                   onTap: () {
-                    dialogs("Confirm Exit");
+                    dialogs("Confirm LogOut");
                   },
                 )
               : const SizedBox(),
@@ -388,12 +383,11 @@ class _AppDrawerState extends State<AppDrawer> {
               top: MediaQuery.of(context).size.height / 3,
               bottom: MediaQuery.of(context).size.height / 3),
           child: AlertDialog(
-            backgroundColor: AppTheme().color_red,
+            backgroundColor: AppTheme().colorRed,
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10))),
-            content: Container(
-                child: Center(
-                    child: Column(
+            content: Center(
+                child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Row(
@@ -406,7 +400,7 @@ class _AppDrawerState extends State<AppDrawer> {
                           child: Text(
                             mesg,
                             style: TextStyle(
-                                color: AppTheme().color_white,
+                                color: AppTheme().colorWhite,
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "Montserrat-SemiBold"),
@@ -426,13 +420,13 @@ class _AppDrawerState extends State<AppDrawer> {
                         width: 100,
                         height: 30,
                         decoration: BoxDecoration(
-                            color: AppTheme().color_white,
+                            color: AppTheme().colorWhite,
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(10))),
                         child: Center(
                           child: Text("Cancel",
                               style: TextStyle(
-                                  color: AppTheme().color_red,
+                                  color: AppTheme().colorRed,
                                   fontSize: 15,
                                   fontFamily: "Montserrat-SemiBold")),
                         ),
@@ -447,14 +441,14 @@ class _AppDrawerState extends State<AppDrawer> {
                         width: 100,
                         height: 30,
                         decoration: BoxDecoration(
-                            color: AppTheme().color_white,
+                            color: AppTheme().colorWhite,
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(10))),
                         child: Center(
                           child: Text(
                             "OK",
                             style: TextStyle(
-                                color: AppTheme().color_red,
+                                color: AppTheme().colorRed,
                                 fontSize: 15,
                                 fontFamily: "Montserrat-SemiBold"),
                           ),
@@ -464,7 +458,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   ],
                 )
               ],
-            ))),
+            )),
           ),
         );
       },

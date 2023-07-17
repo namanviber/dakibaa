@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:mime/mime.dart';
 import 'package:dakibaa/Colors/colors.dart';
@@ -193,22 +192,22 @@ class _SignupPageState extends State<SignupPage>
                                     decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(100),
-                                        color: AppTheme().color_white,
+                                        color: AppTheme().colorWhite,
                                         border: Border.all(
-                                            color: AppTheme().color_white,
+                                            color: AppTheme().colorWhite,
                                             width: 5)),
                                     child: Icon(
                                       Icons.person,
                                       size: 40,
-                                      color: AppTheme().color_red,
+                                      color: AppTheme().colorRed,
                                     ))
                                 : Container(
                                     decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(100),
-                                        color: AppTheme().color_white,
+                                        color: AppTheme().colorWhite,
                                         border: Border.all(
-                                            color: AppTheme().color_white,
+                                            color: AppTheme().colorWhite,
                                             width: 5)),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(200),
@@ -227,11 +226,11 @@ class _SignupPageState extends State<SignupPage>
                               width: 30,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(100),
-                                color: AppTheme().color_white,
+                                color: AppTheme().colorWhite,
                               ),
                               child: Icon(
                                 Icons.add,
-                                color: AppTheme().color_red,
+                                color: AppTheme().colorRed,
                               ),
                             ),
                           ))
@@ -242,7 +241,7 @@ class _SignupPageState extends State<SignupPage>
                     child: Text(
                       "Create Your Account",
                       style: TextStyle(
-                          color: AppTheme().color_white,
+                          color: AppTheme().colorWhite,
                           fontSize: 23.0,
                           fontFamily: "Montserrat-SemiBold"
                           // fontWeight: FontWeight.bold,
@@ -271,7 +270,7 @@ class _SignupPageState extends State<SignupPage>
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
-                                width: 1, color: AppTheme().color_white),
+                                width: 1, color: AppTheme().colorWhite),
                             borderRadius: const BorderRadius.all(
                               Radius.circular(50.0),
                             ),
@@ -302,13 +301,13 @@ class _SignupPageState extends State<SignupPage>
                           errorStyle: TextStyle(
                               fontSize: 15,
                               fontFamily: "Montserrat-SemiBold",
-                              color: AppTheme().color_white),
+                              color: AppTheme().colorWhite),
                           hintStyle: TextStyle(
                               color: Colors.red[800],
                               fontWeight: FontWeight.bold,
                               fontFamily: "Montserrat-SemiBold"),
                           hintText: "Name",
-                          fillColor: AppTheme().color_white),
+                          fillColor: AppTheme().colorWhite),
                     ),
                   ),
                   Container(
@@ -360,13 +359,13 @@ class _SignupPageState extends State<SignupPage>
                           errorStyle: TextStyle(
                               fontSize: 15,
                               fontFamily: "Montserrat-SemiBold",
-                              color: AppTheme().color_white),
+                              color: AppTheme().colorWhite),
                           hintStyle: TextStyle(
-                              color: AppTheme().color_red,
+                              color: AppTheme().colorRed,
                               fontFamily: "Montserrat-SemiBold"),
                           hintText: "Contact No.",
                           counterText: "",
-                          fillColor: AppTheme().color_white),
+                          fillColor: AppTheme().colorWhite),
                     ),
                   ),
                   Container(
@@ -418,13 +417,13 @@ class _SignupPageState extends State<SignupPage>
                           errorStyle: TextStyle(
                               fontSize: 15,
                               fontFamily: "Montserrat-SemiBold",
-                              color: AppTheme().color_white),
+                              color: AppTheme().colorWhite),
                           hintStyle: TextStyle(
-                              color: AppTheme().color_red,
+                              color: AppTheme().colorRed,
                               fontFamily: "Montserrat-SemiBold"),
                           hintText: "Email ID",
                           counterText: "",
-                          fillColor: AppTheme().color_white),
+                          fillColor: AppTheme().colorWhite),
                     ),
                   ),
                   Container(
@@ -497,15 +496,15 @@ class _SignupPageState extends State<SignupPage>
                           contentPadding:
                               const EdgeInsets.fromLTRB(10, 0, 0, 0),
                           errorStyle: TextStyle(
-                              fontSize: 15,
+                              fontSize: 10,
                               fontFamily: "Montserrat-SemiBold",
-                              color: AppTheme().color_white),
+                              color: AppTheme().colorWhite),
                           hintStyle: TextStyle(
-                              color: AppTheme().color_red,
+                              color: AppTheme().colorRed,
                               fontFamily: "Montserrat-SemiBold"),
                           hintText: "Password",
                           counterText: "",
-                          fillColor: AppTheme().color_white),
+                          fillColor: AppTheme().colorWhite),
                     ),
                   ),
                   Container(
@@ -570,13 +569,13 @@ class _SignupPageState extends State<SignupPage>
                           errorStyle: TextStyle(
                               fontSize: 15,
                               fontFamily: "Montserrat-SemiBold",
-                              color: AppTheme().color_white),
+                              color: AppTheme().colorWhite),
                           hintStyle: TextStyle(
-                              color: AppTheme().color_red,
+                              color: AppTheme().colorRed,
                               fontFamily: "Montserrat-SemiBold"),
                           hintText: "Confirm Password",
                           counterText: "",
-                          fillColor: AppTheme().color_white),
+                          fillColor: AppTheme().colorWhite),
                     ),
                   ),
                   const SizedBox(
@@ -586,9 +585,9 @@ class _SignupPageState extends State<SignupPage>
                     width: screenwidth! * 0.7,
                     height: 50,
                     decoration: BoxDecoration(
-                        color: AppTheme().color_red,
+                        color: AppTheme().colorRed,
                         borderRadius: BorderRadius.circular(50),
-                        border: Border.all(color: AppTheme().color_red)),
+                        border: Border.all(color: AppTheme().colorRed)),
                     child: GestureDetector(
                       onTap: () {
                         if (_formkey.currentState!.validate()) {
@@ -631,7 +630,7 @@ class _SignupPageState extends State<SignupPage>
                           style: TextStyle(
                               fontFamily: 'Montserrat',
                               fontSize: 20,
-                              color: AppTheme().color_white),
+                              color: AppTheme().colorWhite),
                         ),
                       ),
                     ),
@@ -656,7 +655,7 @@ class _SignupPageState extends State<SignupPage>
       final imageUploadRequest =
           http.MultipartRequest('POST', Uri.parse(APIS.usersSignUp));
 
-      imageUploadRequest.fields['username'] = username;
+      imageUploadRequest.fields['name'] = username;
       imageUploadRequest.fields['phone'] = phone;
       imageUploadRequest.fields['gender'] = gender;
       imageUploadRequest.fields['dob'] = dob;
@@ -685,7 +684,7 @@ class _SignupPageState extends State<SignupPage>
           if (parsedJson['data']["recordsets"]
               .toString()
               .toLowerCase()
-              .contains("[]")) {
+              .contains("[[{: 1}]]")) {
             String otp = parsedJson['message']
                 .toString()
                 .replaceAll("Otp For registration send to your Mobile", "");
@@ -693,7 +692,7 @@ class _SignupPageState extends State<SignupPage>
               context,
               MaterialPageRoute(
                 builder: (context) => OtpScreen(
-                  type: 'register',
+                  type: 'OtpAuth',
                   otpphone: otp,
                   mobile: phone,
                 ),
@@ -703,7 +702,7 @@ class _SignupPageState extends State<SignupPage>
             Toast.show(
               parsedJson['data']["recordsets"][0][0]["accRegistered"],
               duration: Toast.lengthLong,
-              gravity: Toast.top,
+              gravity: Toast.bottom,
             );
           }
         } else {
@@ -712,11 +711,10 @@ class _SignupPageState extends State<SignupPage>
           Toast.show(
             parsedJson['data']["recordsets"][0][0]["accRegistered"],
             duration: Toast.lengthLong,
-            gravity: Toast.top,
+            gravity: Toast.bottom,
           );
         }
-      }
-      else{
+      } else {
         pr.close();
         throw Exception();
       }
@@ -724,19 +722,19 @@ class _SignupPageState extends State<SignupPage>
       Toast.show(
         "Internal Server Error",
         duration: Toast.lengthLong,
-        gravity: Toast.top,
+        gravity: Toast.bottom,
       );
     } on FormatException {
       Toast.show(
         "Server Error",
         duration: Toast.lengthLong,
-        gravity: Toast.top,
+        gravity: Toast.bottom,
       );
     } on TimeoutException {
       Toast.show(
         "Request time out Try again",
         duration: Toast.lengthLong,
-        gravity: Toast.top,
+        gravity: Toast.bottom,
       );
     }
   }
@@ -748,9 +746,9 @@ class _SignupPageState extends State<SignupPage>
   }
 
   @override
-  userImage(File _image) {
+  userImage(File image) {
     setState(() {
-      this._image = _image;
+      _image = image;
     });
   }
 

@@ -32,11 +32,11 @@ class RestDataSource {
   }
 
 
-  Future<PaytmModel> paytm_api_call(String? orderid_paytm,String? Mode,String? txn_id,String? userid) {
+  Future<PaytmModel> paytm_api_call(String? orderidPaytm,String? Mode,String? txnId,String? userid) {
     Map<String, String?> body = {
-      "orderid_paytm":orderid_paytm,
+      "orderid_paytm":orderidPaytm,
       "Mode":Mode,
-      "txn_id":txn_id,
+      "txn_id":txnId,
       "userid":userid
     };
     return _netUtil.post(APIS.Save_ptmres, body: body, headers: {}, encoding: null).then((dynamic res) {

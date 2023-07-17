@@ -55,7 +55,7 @@ class _PaytmscreenState extends State<Paytmscreen>
   void initState() {
     super.initState();
     getCredential();
-    amount = double.parse(totalamount.toString());
+    amount = double.parse(totalAmount.toString());
   }
 
   getCredential() async {
@@ -114,7 +114,7 @@ class _PaytmscreenState extends State<Paytmscreen>
                             },
                             icon: Icon(
                               Icons.arrow_back,
-                              color: AppTheme().color_white,
+                              color: AppTheme().colorWhite,
                               size: 25,
                             )),
                       ),
@@ -124,7 +124,7 @@ class _PaytmscreenState extends State<Paytmscreen>
                       child: Text(
                         "Paytm Options",
                         style: TextStyle(
-                            color: AppTheme().color_white,
+                            color: AppTheme().colorWhite,
                             fontSize: 25,
                             fontFamily: 'Montserrat'),
                       ),
@@ -199,7 +199,7 @@ class _PaytmscreenState extends State<Paytmscreen>
 //                      )
 //                    : Container(),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height*0.7,
+                  height: MediaQuery.of(context).size.height * 0.7,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -209,9 +209,9 @@ class _PaytmscreenState extends State<Paytmscreen>
                           generateTxnToken(0);
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppTheme().color_red,
+                          backgroundColor: AppTheme().colorRed,
                           textStyle: TextStyle(
-                              color: AppTheme().color_white,
+                              color: AppTheme().colorWhite,
                               fontFamily: 'Montserrat',
                               fontSize: 17),
                         ),
@@ -222,28 +222,28 @@ class _PaytmscreenState extends State<Paytmscreen>
                           //Firstly Generate CheckSum bcoz Paytm Require this
                           generateTxnToken(1);
                         },
-                        child: const Text("Pay using Net Banking"),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppTheme().color_red,
+                          backgroundColor: AppTheme().colorRed,
                           textStyle: TextStyle(
-                              color: AppTheme().color_white,
+                              color: AppTheme().colorWhite,
                               fontFamily: 'Montserrat',
                               fontSize: 17),
                         ),
+                        child: const Text("Pay using Net Banking"),
                       ),
                       ElevatedButton(
                         onPressed: () {
                           //Firstly Generate CheckSum bcoz Paytm Require this
                           generateTxnToken(2);
                         },
-                        child: const Text("Pay using UPI"),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppTheme().color_red,
+                          backgroundColor: AppTheme().colorRed,
                           textStyle: TextStyle(
-                              color: AppTheme().color_white,
+                              color: AppTheme().colorWhite,
                               fontFamily: 'Montserrat',
                               fontSize: 17),
                         ),
+                        child: const Text("Pay using UPI"),
                       ),
                     ],
                   ),
@@ -281,9 +281,8 @@ class _PaytmscreenState extends State<Paytmscreen>
     });
     String orderId = DateTime.now().millisecondsSinceEpoch.toString();
 
-    String callBackUrl = '${testing
-            ? 'https://securegw-stage.paytm.in'
-            : 'https://securegw.paytm.in'}/theia/paytmCallback?ORDER_ID=$orderId';
+    String callBackUrl =
+        '${testing ? 'https://securegw-stage.paytm.in' : 'https://securegw.paytm.in'}/theia/paytmCallback?ORDER_ID=$orderId';
     print("orderId:   $orderId");
     //Host the Server Side Code on your Server and use your URL here. The following URL may or may not work. Because hosted on free server.
     //Server Side code url: https://github.com/mrdishant/Paytm-Plugin-Server
@@ -349,12 +348,12 @@ class _PaytmscreenState extends State<Paytmscreen>
               } else {
                 pr.close();
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => FailScreen()));
+                    MaterialPageRoute(builder: (context) => const FailScreen()));
               }
             }
           }
 
-          print("payment_response" + value['response']['TXNID']);
+          print("payment_response ${value["response"]['TXNID']}");
         });
       });
     } catch (e) {

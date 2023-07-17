@@ -1,8 +1,5 @@
 import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:dakibaa/Colors/colors.dart';
 import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:http/http.dart' as http;
 import 'package:shimmer/shimmer.dart';
@@ -16,12 +13,10 @@ class TermsCondition extends StatefulWidget {
 }
 
 class TermsSettingPage extends State<TermsCondition> {
-  AnimationController? _controller;
   double? screenHeight;
   double? screenwidth;
   bool _isProgressBarShown = true;
   bool hasData = false;
-  File? _image;
   Map<String, dynamic>? value;
   List<dynamic>? listData;
   Map? data;
@@ -111,7 +106,7 @@ class TermsSettingPage extends State<TermsCondition> {
                       "Terms & Conditions",
                       style: TextStyle(
                         fontSize: 30,
-                        color: AppTheme().color_white,
+                        color: AppTheme().colorWhite,
                         fontFamily: "Montserrat-SemiBold",
                       ),
                     ),
@@ -132,7 +127,7 @@ class TermsSettingPage extends State<TermsCondition> {
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.5,
                   decoration: BoxDecoration(
-                      color: AppTheme().color_white,
+                      color: AppTheme().colorWhite,
                       borderRadius: BorderRadius.circular(15)),
                   child: Container(
                     margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
@@ -141,7 +136,7 @@ class TermsSettingPage extends State<TermsCondition> {
                         "$Tc1.\n\n$Tc2.\n\n$Tc3.\n\n$Tc4.\n\n$Tc5.",
                         style: TextStyle(
                             fontSize: 14,
-                            color: AppTheme().color_red,
+                            color: AppTheme().colorRed,
                             fontFamily: "Montserrat-SemiBold"),
                       ),
                     ),

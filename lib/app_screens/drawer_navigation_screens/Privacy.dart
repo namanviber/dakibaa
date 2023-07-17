@@ -1,7 +1,5 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:http/http.dart' as http;
-
 import 'package:flutter/material.dart';
 import 'package:dakibaa/Colors/colors.dart';
 import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:shimmer/shimmer.dart';
@@ -16,10 +14,8 @@ class Privacy extends StatefulWidget {
 }
 
 class PrivacySettingPage extends State<Privacy> {
-  AnimationController? _controller;
   double? screenHeight;
   double? screenwidth;
-  File? _image;
   Map<String, dynamic>? value;
   List<dynamic>? listData;
   Map? data;
@@ -96,7 +92,7 @@ class PrivacySettingPage extends State<Privacy> {
                         "Privacy",
                         style: TextStyle(
                             fontSize: 30,
-                            color: AppTheme().color_white,
+                            color: AppTheme().colorWhite,
                             fontFamily: "Montserrat-SemiBold",
                             ),
                       ),
@@ -116,7 +112,7 @@ class PrivacySettingPage extends State<Privacy> {
                       left: 20, right: 20, bottom: 50),
                   child: Container(
                     decoration: BoxDecoration(
-                        color: AppTheme().color_white,
+                        color: AppTheme().colorWhite,
                         borderRadius: BorderRadius.circular(15)),
                     child: Container(
                       margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
@@ -125,7 +121,7 @@ class PrivacySettingPage extends State<Privacy> {
                           "We are committed to protecting and respecting your privacy. This policy (together with our website and mobile application terms and conditions that apply to your use of our website) sets in place the fundamentals based on which any personal data we collect from you or that you provide us, will be processed. Please read the following points carefully to understand our views and practices regarding your personal data and how we will treat it.",
                           style: TextStyle(
                               fontSize: 17,
-                              color: AppTheme().color_red,
+                              color: AppTheme().colorRed,
                               fontFamily: "Montserrat-SemiBold"),
                         ),
                       ),

@@ -14,7 +14,6 @@ import 'package:http/http.dart' as http;
 import '../../rest_api/ApiList.dart';
 import '../../common/constant.dart';
 import 'forget_password.dart';
-import '../../home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -70,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenwidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: AppTheme().color_black,
+      backgroundColor: AppTheme().colorBlack,
       body: SingleChildScrollView(
         child: Container(
           height: screenHeight,
@@ -130,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      width: 1, color: AppTheme().color_white),
+                                      width: 1, color: AppTheme().colorWhite),
                                   borderRadius: const BorderRadius.all(
                                     Radius.circular(50.0),
                                   ),
@@ -161,13 +160,13 @@ class _LoginPageState extends State<LoginPage> {
                                 errorStyle: TextStyle(
                                     fontSize: 15,
                                     fontFamily: "Montserrat-SemiBold",
-                                    color: AppTheme().color_white),
+                                    color: AppTheme().colorWhite),
                                 hintStyle: TextStyle(
                                     color: Colors.red[800],
                                     fontWeight: FontWeight.bold,
                                     fontFamily: "Montserrat-SemiBold"),
                                 hintText: "Email",
-                                fillColor: AppTheme().color_white),
+                                fillColor: AppTheme().colorWhite),
                           ),
                         ),
                         const SizedBox(
@@ -251,13 +250,13 @@ class _LoginPageState extends State<LoginPage> {
                                 errorStyle: TextStyle(
                                     fontSize: 15,
                                     fontFamily: "Montserrat-SemiBold",
-                                    color: AppTheme().color_white),
+                                    color: AppTheme().colorWhite),
                                 hintStyle: TextStyle(
-                                    color: AppTheme().color_red,
+                                    color: AppTheme().colorRed,
                                     fontFamily: "Montserrat-SemiBold"),
                                 hintText: "Password",
                                 counterText: "",
-                                fillColor: AppTheme().color_white),
+                                fillColor: AppTheme().colorWhite),
                           ),
                         ),
                         const SizedBox(
@@ -269,7 +268,7 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ForgotPass()),
+                      MaterialPageRoute(builder: (context) => const ForgotPass()),
                     );
                   },
                   child: SizedBox(
@@ -280,7 +279,7 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(
                           fontSize: 16.0,
                           fontFamily: 'Montserrat',
-                          color: AppTheme().color_white),
+                          color: AppTheme().colorWhite),
                     ),
                   ),
                 ),
@@ -291,9 +290,9 @@ class _LoginPageState extends State<LoginPage> {
                   width: screenwidth * 0.7,
                   height: 50,
                   decoration: BoxDecoration(
-                      color: AppTheme().color_red,
+                      color: AppTheme().colorRed,
                       borderRadius: BorderRadius.circular(50),
-                      border: Border.all(color: AppTheme().color_red)),
+                      border: Border.all(color: AppTheme().colorRed)),
                   child: GestureDetector(
                     onTap: () {
                       if (_formkey.currentState!.validate()) {
@@ -304,7 +303,7 @@ class _LoginPageState extends State<LoginPage> {
                         Toast.show(
                           "Please Enter Your Credentials",
                           duration: Toast.lengthLong,
-                          gravity: Toast.top,
+                          gravity: Toast.bottom,
                         );
                       }
                     },
@@ -314,7 +313,7 @@ class _LoginPageState extends State<LoginPage> {
                         style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontSize: 20,
-                            color: AppTheme().color_white),
+                            color: AppTheme().colorWhite),
                       ),
                     ),
                   ),
@@ -326,9 +325,9 @@ class _LoginPageState extends State<LoginPage> {
                   width: screenwidth * 0.7,
                   height: 50,
                   decoration: BoxDecoration(
-                      color: AppTheme().color_red,
+                      color: AppTheme().colorRed,
                       borderRadius: BorderRadius.circular(50),
-                      border: Border.all(color: AppTheme().color_red)),
+                      border: Border.all(color: AppTheme().colorRed)),
                   child: GestureDetector(
                     onTap: () {
                       setGuest();
@@ -341,13 +340,13 @@ class _LoginPageState extends State<LoginPage> {
                         if (intenet != null && intenet) {
                           pr.close();
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => Number_of_Person()));
+                              builder: (context) => const Number_of_Person()));
                         } else {
                           pr.close();
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => InternetConnection()));
+                                  builder: (context) => const InternetConnection()));
                         }
                       });
                     },
@@ -357,7 +356,7 @@ class _LoginPageState extends State<LoginPage> {
                         style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontSize: 20,
-                            color: AppTheme().color_white),
+                            color: AppTheme().colorWhite),
                       ),
                     ),
                   ),
@@ -369,7 +368,7 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SignupPage()),
+                      MaterialPageRoute(builder: (context) => const SignupPage()),
                     );
                   },
                   child: const Text(
@@ -392,6 +391,7 @@ class _LoginPageState extends State<LoginPage> {
   var returnData;
 
   void signIn(String email, String password) async {
+    ToastContext().init(context);//-> This part
     pr = ProgressDialog(
       context: context,
     );
@@ -413,23 +413,19 @@ class _LoginPageState extends State<LoginPage> {
           SharedPreferencesClass().setloginstatus(true);
           sharedPreferences = await SharedPreferences.getInstance();
           setState(() {
-            _onChanged(true, parsedJson['data']);
+            var value = parsedJson["data"][0];
+            _onChanged(true, value);
             sharedPreferences.setBool("isguest", false);
           });
-          Toast.show(
-            parsedJson['message'],
-            duration: Toast.lengthShort,
-            gravity: Toast.bottom,
-          );
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (context) => const Number_of_Person()),
               (Route<dynamic> route) => false);
         } else {
           pr.close();
           Toast.show(
-            parsedJson['message'],
+            parsedJson['message'] ,
             duration: Toast.lengthLong,
-            gravity: Toast.top,
+            gravity: Toast.bottom,
           );
         }
       } else {
@@ -440,82 +436,21 @@ class _LoginPageState extends State<LoginPage> {
       Toast.show(
         "Internal Server Error",
         duration: Toast.lengthLong,
-        gravity: Toast.top,
+        gravity: Toast.bottom,
       );
     } on FormatException {
       Toast.show(
         "Server Error",
         duration: Toast.lengthLong,
-        gravity: Toast.top,
+        gravity: Toast.bottom,
       );
     } on TimeoutException {
       Toast.show(
         "Request time out Try again",
         duration: Toast.lengthLong,
-        gravity: Toast.top,
+        gravity: Toast.bottom,
       );
     }
-  }
-
-  Future<Map<String, dynamic>> getData() async {
-    ToastContext().init(context); //-> This part
-
-    pr = ProgressDialog(
-      context: context,
-    );
-    if (SignupValidation()) {
-      NetworkConnection.check().then((intenet) async {
-        if (intenet != null && intenet) {
-          pr.show(msg: "Loading..", barrierDismissible: true);
-          final response = await http.post(Uri.parse(APIS.usersLogin),
-              headers: {
-                'Accept': 'application/json'
-              },
-              body: {
-                "email": emailController.text,
-                "password": passwordController.text
-              });
-          print(response.body);
-          var parsedJson = json.decode(response.body);
-          value = parsedJson['data'];
-
-          if (parsedJson['status'] == "1") {
-            pr.close();
-            SharedPreferencesClass().setloginstatus(true);
-            sharedPreferences = await SharedPreferences.getInstance();
-            if (mounted) {
-              setState(() {
-                _onChanged(true, value);
-                // sharedPreferences.setString("email", value!["Mobile"]);
-                sharedPreferences.setBool("isguest", false);
-              });
-            }
-            Toast.show(
-              parsedJson['message'],
-              duration: Toast.lengthShort,
-              gravity: Toast.top,
-            );
-            //_onChanged(value);
-            loginstatus = "signin";
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => Number_of_Person()),
-                (Route<dynamic> route) => false);
-          } else {
-            pr.close();
-            Toast.show(
-              parsedJson['message'],
-              duration: Toast.lengthShort,
-              gravity: Toast.bottom,
-            );
-          }
-          return parsedJson;
-        } else {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => InternetConnection()));
-        }
-      });
-    }
-    return returnData;
   }
 
   _onChanged(bool value, Map<String, dynamic>? response) async {
@@ -525,10 +460,7 @@ class _LoginPageState extends State<LoginPage> {
       sharedPreferences.setBool("check", checkValue);
       sharedPreferences.setString("name", response!["Name"]);
       sharedPreferences.setString("id", response["id"].toString());
-      /* sharedPreferences.setString("gender", response["Gender"]);
-      sharedPreferences.setString("dob", response["DOB"]);*/
       sharedPreferences.setString("mobile", response["Mobile"]);
-
       sharedPreferences.setString("password", response["Password"]);
       sharedPreferences.setString("profile_pic", response["ProfilePic"]);
       profile_pic = response["ProfilePic"];
@@ -548,16 +480,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
+    super.initState();
     passwordVisible1 = true;
-    //getstatus();
   }
 
-  void getstatus() async {
-    bool loginstatus = await SharedPreferencesClass().getloginstatus();
-    loginstatus == true
-        ? Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (BuildContext context) => const HomePage()))
-        : Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (BuildContext context) => const LoginPage()));
-  }
 }

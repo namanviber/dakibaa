@@ -111,7 +111,7 @@ class _CheckOutScreen extends State<CheckOutScreen> {
                       child: Text(
                         'CHECK OUT',
                         style: TextStyle(
-                            color: AppTheme().color_white,
+                            color: AppTheme().colorWhite,
                             //fontWeight: FontWeight.w500,
                             fontFamily: "Montserrat",
                             fontSize: 25),
@@ -178,10 +178,10 @@ class _CheckOutScreen extends State<CheckOutScreen> {
                                   BorderSide(width: 1, color: Colors.white)),
                           filled: true,
                           hintStyle: TextStyle(
-                              color: AppTheme().color_red,
+                              color: AppTheme().colorRed,
                               fontWeight: FontWeight.bold),
                           hintText: "Full Name",
-                          fillColor: AppTheme().color_white),
+                          fillColor: AppTheme().colorWhite),
                     ),
                   ),
                   Container(
@@ -246,10 +246,10 @@ class _CheckOutScreen extends State<CheckOutScreen> {
                                   BorderSide(width: 1, color: Colors.white)),
                           filled: true,
                           hintStyle: TextStyle(
-                              color: AppTheme().color_red,
+                              color: AppTheme().colorRed,
                               fontWeight: FontWeight.bold),
                           hintText: "Email address",
-                          fillColor: AppTheme().color_white),
+                          fillColor: AppTheme().colorWhite),
                     ),
                   ),
                   Container(
@@ -314,10 +314,10 @@ class _CheckOutScreen extends State<CheckOutScreen> {
                                   BorderSide(width: 1, color: Colors.white)),
                           filled: true,
                           hintStyle: TextStyle(
-                              color: AppTheme().color_red,
+                              color: AppTheme().colorRed,
                               fontWeight: FontWeight.bold),
                           hintText: "Contact no.",
-                          fillColor: AppTheme().color_white),
+                          fillColor: AppTheme().colorWhite),
                     ),
                   ),
                   Container(
@@ -377,10 +377,10 @@ class _CheckOutScreen extends State<CheckOutScreen> {
                                   BorderSide(width: 1, color: Colors.white)),
                           filled: true,
                           hintStyle: TextStyle(
-                              color: AppTheme().color_red,
+                              color: AppTheme().colorRed,
                               fontWeight: FontWeight.bold),
                           hintText: "Address",
-                          fillColor: AppTheme().color_white),
+                          fillColor: AppTheme().colorWhite),
                     ),
                   ),
                   Container(
@@ -446,10 +446,10 @@ class _CheckOutScreen extends State<CheckOutScreen> {
                                     BorderSide(width: 1, color: Colors.white)),
                             filled: true,
                             hintStyle: TextStyle(
-                                color: AppTheme().color_red,
+                                color: AppTheme().colorRed,
                                 fontWeight: FontWeight.bold),
                             hintText: "Date",
-                            fillColor: AppTheme().color_white),
+                            fillColor: AppTheme().colorWhite),
                       ),
                     ),
                   ),
@@ -457,71 +457,69 @@ class _CheckOutScreen extends State<CheckOutScreen> {
                     margin: const EdgeInsets.only(
                         left: 20.0, top: 15.0, right: 20.0),
                     child: GestureDetector(
-                      child: Container(
-                        child: InkWell(
-                          onTap: () {
-                            getStartTime(context);
+                      child: InkWell(
+                        onTap: () {
+                          getStartTime(context);
+                        },
+                        child: TextFormField(
+                          textAlign: TextAlign.center,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Please enter time";
+                            } else {
+                              return null;
+                            }
                           },
-                          child: TextFormField(
-                            textAlign: TextAlign.center,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Please enter time";
-                              } else {
-                                return null;
-                              }
-                            },
-                            enabled: false,
-                            controller: timeController,
-                            decoration: InputDecoration(
-                                border: const OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(width: 1, color: Colors.white),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(50.0),
-                                  ),
+                          enabled: false,
+                          controller: timeController,
+                          decoration: InputDecoration(
+                              border: const OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(width: 1, color: Colors.white),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(50.0),
                                 ),
-                                focusedBorder: const OutlineInputBorder(
+                              ),
+                              focusedBorder: const OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(50.0)),
+                                borderSide:
+                                    BorderSide(width: 1, color: Colors.white),
+                              ),
+                              disabledBorder: const OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(50.0)),
+                                borderSide:
+                                    BorderSide(width: 1, color: Colors.white),
+                              ),
+                              contentPadding: const EdgeInsets.only(
+                                  left: 0.0, top: 5.0, bottom: 0.0),
+                              enabledBorder: const OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(50.0)),
+                                borderSide:
+                                    BorderSide(width: 1, color: Colors.white),
+                              ),
+                              errorStyle: const TextStyle(
+                                color: Colors.white,
+                                wordSpacing: 1.0,
+                              ),
+                              errorBorder: const OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(50.0)),
-                                  borderSide:
-                                      BorderSide(width: 1, color: Colors.white),
-                                ),
-                                disabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 1, color: Colors.white)),
+                              focusedErrorBorder: const OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(50.0)),
-                                  borderSide:
-                                      BorderSide(width: 1, color: Colors.white),
-                                ),
-                                contentPadding: const EdgeInsets.only(
-                                    left: 0.0, top: 5.0, bottom: 0.0),
-                                enabledBorder: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(50.0)),
-                                  borderSide:
-                                      BorderSide(width: 1, color: Colors.white),
-                                ),
-                                errorStyle: const TextStyle(
-                                  color: Colors.white,
-                                  wordSpacing: 1.0,
-                                ),
-                                errorBorder: const OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50.0)),
-                                    borderSide: BorderSide(
-                                        width: 1, color: Colors.white)),
-                                focusedErrorBorder: const OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50.0)),
-                                    borderSide: BorderSide(
-                                        width: 1, color: Colors.white)),
-                                filled: true,
-                                hintStyle: TextStyle(
-                                    color: AppTheme().color_red,
-                                    fontWeight: FontWeight.bold),
-                                hintText: "Time",
-                                fillColor: AppTheme().color_white),
-                          ),
+                                  borderSide: BorderSide(
+                                      width: 1, color: Colors.white)),
+                              filled: true,
+                              hintStyle: TextStyle(
+                                  color: AppTheme().colorRed,
+                                  fontWeight: FontWeight.bold),
+                              hintText: "Time",
+                              fillColor: AppTheme().colorWhite),
                         ),
                       ),
                     ),
@@ -532,11 +530,10 @@ class _CheckOutScreen extends State<CheckOutScreen> {
                     child: ButtonTheme(
                       minWidth: 360.0,
                       child: ElevatedButton(
-                        child: const Text("SUBMIT"),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppTheme().color_red,
+                          backgroundColor: AppTheme().colorRed,
                           textStyle: TextStyle(
-                              color: AppTheme().color_red,
+                              color: AppTheme().colorRed,
                               fontWeight: FontWeight.bold,
                               fontSize: 17),
                         ),
@@ -547,6 +544,7 @@ class _CheckOutScreen extends State<CheckOutScreen> {
                             getData();
                           }
                         },
+                        child: const Text("SUBMIT"),
                       ),
                     ),
                   ),
@@ -571,7 +569,7 @@ class _CheckOutScreen extends State<CheckOutScreen> {
       "key_secret": "dM0xTZCzkiKtJF4p",
       "website": "DEFAULT",
       "orderId": orderId,
-      "amount": totalamount.toString(),
+      "amount": totalAmount.toString(),
       "callbackUrl": 'https://securegw-stage.paytm.in',
       "custId": "1",
       "mode": "0",
@@ -593,7 +591,7 @@ class _CheckOutScreen extends State<CheckOutScreen> {
           mId: "DLjjoP50683529074696",
           orderId: orderId,
           txnToken: txnToken,
-          txnAmount: totalamount.toString(),
+          txnAmount: totalAmount.toString(),
           callBackUrl: "https://securegw-stage.paytm.in",
           staging: false);
       paytmResponse.then((value) {
@@ -620,7 +618,7 @@ class _CheckOutScreen extends State<CheckOutScreen> {
               } else {
                 pr.close();
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => FailScreen()));
+                    MaterialPageRoute(builder: (context) => const FailScreen()));
               }
             }
           }

@@ -66,7 +66,7 @@ class _Number_of_PersonState extends State<Number_of_Person>
     return Scaffold(
       key: _scaffoldKey,
       drawer: AppDrawer(),
-      backgroundColor: AppTheme().color_black,
+      backgroundColor: AppTheme().colorBlack,
       body: GestureDetector(
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
@@ -114,7 +114,7 @@ class _Number_of_PersonState extends State<Number_of_Person>
                           "Planning for Party !",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                          color: AppTheme().color_white,
+                          color: AppTheme().colorWhite,
                           fontSize: 25,
                           fontFamily: "Montserrat"),
                         )),
@@ -125,7 +125,7 @@ class _Number_of_PersonState extends State<Number_of_Person>
                             child: Text(
                           "Number of Guests",
                           style: TextStyle(
-                              color: AppTheme().color_white,
+                              color: AppTheme().colorWhite,
                               fontSize: 22,
                               fontFamily: "Montserrat-SemiBold"),
                         )),
@@ -141,7 +141,7 @@ class _Number_of_PersonState extends State<Number_of_Person>
                             Text(
                               personError == null ? "" : personError!,
                               style: TextStyle(
-                                  color: AppTheme().color_white,
+                                  color: AppTheme().colorWhite,
                                   fontSize: 15),
                             ),
                           ],
@@ -153,13 +153,13 @@ class _Number_of_PersonState extends State<Number_of_Person>
                         child: Container(
                             height: 45,
                             decoration: BoxDecoration(
-                                color: AppTheme().color_white,
+                                color: AppTheme().colorWhite,
                                 borderRadius: BorderRadius.circular(50)),
                             //margin: EdgeInsets.only(left: 20.0,top: MediaQuery.of(context).size.height/15,right: 20.0),
                             child: Center(
                               child: TextFormField(
                                 style: TextStyle(
-                                    color: AppTheme().color_red,
+                                    color: AppTheme().colorRed,
                                     fontFamily: 'Montserrat-SemiBold',
                                     fontSize: 18),
                                 /* validator: (value) {
@@ -175,7 +175,7 @@ class _Number_of_PersonState extends State<Number_of_Person>
                                     print("Person : $person");
                                   });
                                 },
-                                cursorColor: AppTheme().color_red,
+                                cursorColor: AppTheme().colorRed,
                                 controller: personContoller,
                                 textAlign: TextAlign.center,
                                 keyboardType:
@@ -185,7 +185,7 @@ class _Number_of_PersonState extends State<Number_of_Person>
                                   contentPadding: const EdgeInsets.symmetric(
                                       vertical: 10.0),
                                   hintStyle: TextStyle(
-                                      color: AppTheme().color_red,
+                                      color: AppTheme().colorRed,
                                       fontFamily: 'Montserrat-SemiBold',
                                       fontSize: 18),
                                   hintText: "Enter Person",
@@ -201,23 +201,23 @@ class _Number_of_PersonState extends State<Number_of_Person>
                             if (validation()) {
                               Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => Services()));
+                                  MaterialPageRoute(builder: (context) => const Services()));
                             }
                           },
                           child: Container(
                               height: 45,
                               decoration: BoxDecoration(
-                                  color: AppTheme().color_red,
+                                  color: AppTheme().colorRed,
                                   borderRadius: BorderRadius.circular(50),
                                   border: Border.all(
-                                      color: AppTheme().color_red)),
+                                      color: AppTheme().colorRed)),
                               child: Center(
                                 child: Text(
                                   "Continue".toUpperCase(),
                                   style: TextStyle(
                                       fontFamily: 'Montserrat',
                                       fontSize: 20,
-                                      color: AppTheme().color_white),
+                                      color: AppTheme().colorWhite),
                                 ),
                               )),
                         ),
@@ -252,7 +252,7 @@ class _Number_of_PersonState extends State<Number_of_Person>
       });
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => Services()),
+        MaterialPageRoute(builder: (context) => const Services()),
       );
     }
   }

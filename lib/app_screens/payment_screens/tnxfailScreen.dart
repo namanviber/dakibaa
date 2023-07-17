@@ -53,7 +53,7 @@ class _FailScreenState extends State<FailScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Transaction Fail",style: TextStyle(color: AppTheme().color_white,fontSize: 35,fontFamily: 'Montserrat'),),
+                        Text("Transaction Fail",style: TextStyle(color: AppTheme().colorWhite,fontSize: 35,fontFamily: 'Montserrat'),),
                       ],
                     ),
                     const SizedBox(
@@ -64,25 +64,20 @@ class _FailScreenState extends State<FailScreen> {
                       padding: const EdgeInsets.only(top: 20,right: 110,left: 110),
                       child: GestureDetector(
                         onTap: () {
-                          /*if (_formkey.currentState.validate()) {
-                            _formkey.currentState.save();
-                            setState(() {});
-                            getData();
-                          }*/
                           Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                              Number_of_Person()), (Route<dynamic> route) => false);
+                              const Number_of_Person()), (Route<dynamic> route) => false);
                         },
                         child: Container(
                             height: 45,
                             decoration: BoxDecoration(
-                                color: AppTheme().color_red,
+                                color: AppTheme().colorRed,
                                 borderRadius: BorderRadius.circular(50),
-                                border: Border.all( color:AppTheme().color_red)
+                                border: Border.all( color:AppTheme().colorRed)
                             ),
                             //margin: EdgeInsets.only(top: 5.0,left: 80,right: 80),
                             child:Center(
                               child: Text("OK".toUpperCase(),style: TextStyle(
-                                  fontFamily: 'Montserrat',fontSize: 20,color: AppTheme().color_white),),
+                                  fontFamily: 'Montserrat',fontSize: 20,color: AppTheme().colorWhite),),
                             )
 
                           /*ButtonTheme(

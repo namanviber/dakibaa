@@ -7,7 +7,7 @@ class ProductDetail extends StatefulWidget {
   ProductDetail({super.key, this.data,this.image});
 
   @override
-  ScreenState createState() => ScreenState(data: data,image:image);
+  ScreenState createState() => ScreenState();
 }
 
 class ScreenState extends State<ProductDetail> {

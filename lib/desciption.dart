@@ -63,7 +63,7 @@ class _ItemDescriptionState extends State<ItemDescription> {
                         child: Text("Description",
                           style: TextStyle(
                               fontSize: 25,
-                              color: AppTheme().color_white,
+                              color: AppTheme().colorWhite,
                               fontWeight: FontWeight.w600,
                               letterSpacing: 2),
                         ),
@@ -118,7 +118,7 @@ class _ItemDescriptionState extends State<ItemDescription> {
               child: Container(
 
                 decoration: BoxDecoration(
-                  color: AppTheme().color_white,
+                  color: AppTheme().colorWhite,
                   borderRadius: const BorderRadius.all(Radius.circular(10)  ),
                     boxShadow: const [
                       BoxShadow(
@@ -145,7 +145,7 @@ class _ItemDescriptionState extends State<ItemDescription> {
                       padding: const EdgeInsets.only(left: 10,top: 10),
                       child: Row(
                         children: [
-                          Text(titlename==null?"":titlename!,style: TextStyle(color: AppTheme().color_black,fontFamily: "Montserrat-SemiBold",fontSize: 17),
+                          Text(titlename==null?"":titlename!,style: TextStyle(color: AppTheme().colorBlack,fontFamily: "Montserrat-SemiBold",fontSize: 17),
                           )
                         ],
                       ),
@@ -155,7 +155,7 @@ class _ItemDescriptionState extends State<ItemDescription> {
                       padding: const EdgeInsets.only(left: 10,top: 10,right: 10),
                       child: Wrap(
                         children: [
-                          Text(descp==null?"":descp!,style: TextStyle(color: AppTheme().color_black,
+                          Text(descp==null?"":descp!,style: TextStyle(color: AppTheme().colorBlack,
                               fontFamily: "Montserrat-SemiBold",fontSize: 14),
                           )
                         ],
@@ -173,7 +173,7 @@ class _ItemDescriptionState extends State<ItemDescription> {
                             child: Row(
                               children: [
                                 Text(glasswarename[index],style: TextStyle(
-                                    color: AppTheme().color_black,
+                                    color: AppTheme().colorBlack,
                                     fontFamily: "Montserrat-SemiBold",fontSize: 14
                                 ),)
                               ],
@@ -194,7 +194,7 @@ class _ItemDescriptionState extends State<ItemDescription> {
                             child: Row(
                               children: [
                                 Text(baveragename[index],style: TextStyle(
-                                    color: AppTheme().color_black,
+                                    color: AppTheme().colorBlack,
                                     fontFamily: "Montserrat-SemiBold",fontSize: 14
                                 ),)
                               ],
@@ -207,7 +207,7 @@ class _ItemDescriptionState extends State<ItemDescription> {
                       padding: const EdgeInsets.only(left: 10,top: 10,bottom: 10),
                       child: Row(
                         children: [
-                          Text(price==null?"":"Price   ₹${price!}",style: TextStyle(color: AppTheme().color_red,fontFamily: "Montserrat-SemiBold",fontSize: 18),
+                          Text(price==null?"":"Price   ₹${price!}",style: TextStyle(color: AppTheme().colorRed,fontFamily: "Montserrat-SemiBold",fontSize: 18),
                           )
                         ],
                       ),
@@ -226,11 +226,11 @@ class _ItemDescriptionState extends State<ItemDescription> {
                 child: Container(
                     height: 45,
                     decoration: BoxDecoration(
-                      color: AppTheme().color_red,
+                      color: AppTheme().colorRed,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     child:Center(
-                      child: Text("Book Now",style: TextStyle(color: AppTheme().color_white,fontFamily: "Montserrat",fontSize: 17),),
+                      child: Text("Book Now",style: TextStyle(color: AppTheme().colorWhite,fontFamily: "Montserrat",fontSize: 17),),
                     ),
                 ),
               ),

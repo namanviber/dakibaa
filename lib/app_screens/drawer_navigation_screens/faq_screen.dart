@@ -86,7 +86,7 @@ class FaqScreen1 extends State<FaqScreen> {
                   child: Text(
                     "FAQs",
                     style: TextStyle(
-                        color: AppTheme().color_white,
+                        color: AppTheme().colorWhite,
                         fontFamily: "Montserrat-SemiBold",
                         //fontWeight: FontWeight.bold,
                         fontSize: 30.0),
@@ -111,7 +111,7 @@ class FaqScreen1 extends State<FaqScreen> {
                                       top: 10, right: 20, left: 20, bottom: 10),
                                   child: Container(
                                       decoration: BoxDecoration(
-                                          color: AppTheme().color_white,
+                                          color: AppTheme().colorWhite,
                                           borderRadius:
                                               BorderRadius.circular(12)),
                                       child: ExpansionTile(
@@ -125,19 +125,17 @@ class FaqScreen1 extends State<FaqScreen> {
                                           child: Row(
                                             children: <Widget>[
                                               Expanded(
-                                                child: Container(
-                                                  child: Text(
-                                                    "${listData![index]["Question"]}",
-                                                    style: TextStyle(
-                                                      color:
-                                                          AppTheme().color_red,
-                                                      //letterSpacing: 3,
-                                                      fontFamily: "Montserrat",
-                                                      fontSize: 18.0,
-                                                    ),
+                                                flex: 5,
+                                                child: Text(
+                                                  "${listData![index]["Question"]}",
+                                                  style: TextStyle(
+                                                    color:
+                                                        AppTheme().colorRed,
+                                                    //letterSpacing: 3,
+                                                    fontFamily: "Montserrat",
+                                                    fontSize: 18.0,
                                                   ),
                                                 ),
-                                                flex: 5,
                                               ),
                                             ],
                                           ),
@@ -155,7 +153,7 @@ class FaqScreen1 extends State<FaqScreen> {
                                               child: Text(
                                                 "${listData![index]["Answer"]}",
                                                 style: TextStyle(
-                                                  color: AppTheme().color_red,
+                                                  color: AppTheme().colorRed,
                                                   //letterSpacing: 3,
                                                   fontFamily:
                                                       "Montserrat-Medium",

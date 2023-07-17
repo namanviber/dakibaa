@@ -143,7 +143,7 @@ class _GalleryState extends State<Gallery> {
                                 child: Center(
                                   child: Image.asset(
                                     "images/gallery.png",
-                                    color: AppTheme().color_white,
+                                    color: AppTheme().colorWhite,
                                     fit: BoxFit.cover,
                                     height: 60,
                                   ),
@@ -154,7 +154,7 @@ class _GalleryState extends State<Gallery> {
                               "Gallery",
                               style: TextStyle(
                                 fontSize: 30,
-                                color: AppTheme().color_white,
+                                color: AppTheme().colorWhite,
                                 //fontWeight: FontWeight.w600,
                                 fontFamily: "Montserrat-SemiBold",
                               ),

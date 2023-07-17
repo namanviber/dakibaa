@@ -5,7 +5,7 @@ import 'package:dakibaa/models/services_model.dart';
 
 String loginstatus="";
 int showcount=0;
-int totalamount=0;
+int totalAmount=0;
 int totalamount_bev=0;
 int totalamount_glas=0;
 int? person;

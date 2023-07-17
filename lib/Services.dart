@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'Colors/colors.dart';
@@ -22,13 +21,11 @@ class Services extends StatefulWidget {
 }
 
 class ServicesPage extends State<Services> {
-  AnimationController? _controller;
   double? screenHeight;
   double? screenwidth;
   int counter = 0;
   late SharedPreferences sharedPreferences;
   var id;
-  File? _image;
   bool _isProgressBarShown = true;
   bool hasData = false;
   Map? data;
@@ -80,14 +77,6 @@ class ServicesPage extends State<Services> {
 
   @override
   Widget build(BuildContext context) {
-    /*  screenHeight = MediaQuery.of(context).size.height;
-    screenwidth = MediaQuery.of(context).size.width;
-    queryData = MediaQuery.of(context);*/
-    var size = MediaQuery.of(context).size;
-    //print(size.height);
-    final double itemHeight = (size.height - kToolbarHeight - 20) / 3.7;
-    final double itemWidth = size.width / 2;
-    // TODO: implement build
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -144,7 +133,7 @@ class ServicesPage extends State<Services> {
                             "SERVICES",
                             style: TextStyle(
                                 fontSize: 25,
-                                color: AppTheme().color_white,
+                                color: AppTheme().colorWhite,
                                 fontWeight: FontWeight.w600,
                                 letterSpacing: 2),
                           ),
@@ -157,7 +146,7 @@ class ServicesPage extends State<Services> {
                           padding: const EdgeInsets.only(left: 20, right: 20),
                           child: InkWell(
                             onTap: () {
-                              if (totalamount == 0) {
+                              if (totalAmount == 0) {
                                 Toast.show(
                                   "Please select any one product",
                                   duration: Toast.lengthShort,
@@ -173,7 +162,7 @@ class ServicesPage extends State<Services> {
                             },
                             child: Container(
                                 decoration: BoxDecoration(
-                                    color: AppTheme().color_red,
+                                    color: AppTheme().colorRed,
                                     borderRadius: BorderRadius.circular(50)),
                                 height: 35,
                                 child: Center(
@@ -181,7 +170,7 @@ class ServicesPage extends State<Services> {
                                     "Next",
                                     style: TextStyle(
                                         fontSize: 17,
-                                        color: AppTheme().color_white,
+                                        color: AppTheme().colorWhite,
                                         fontWeight: FontWeight.w600,
                                         letterSpacing: 2),
                                   ),
@@ -247,7 +236,7 @@ class ServicesPage extends State<Services> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            ItemDescription()),
+                                            const ItemDescription()),
                                   );
                                 },
                                 child: Counter(
@@ -264,7 +253,7 @@ class ServicesPage extends State<Services> {
                       padding: const EdgeInsets.only(left: 30, right: 30),
                       child: InkWell(
                         onTap: () {
-                          if (totalamount == 0) {
+                          if (totalAmount == 0) {
                             Toast.show(
                               "Please select any one product",
                               duration: Toast.lengthShort,
@@ -280,7 +269,7 @@ class ServicesPage extends State<Services> {
                         child: Container(
                           height: 45,
                           decoration: BoxDecoration(
-                              color: AppTheme().color_red,
+                              color: AppTheme().colorRed,
                               borderRadius: BorderRadius.circular(10)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -288,7 +277,7 @@ class ServicesPage extends State<Services> {
                               Text(
                                 "Total Amount",
                                 style: TextStyle(
-                                    color: AppTheme().color_white,
+                                    color: AppTheme().colorWhite,
                                     fontSize: 18,
                                     fontFamily: "Montserrat"),
                               ),
@@ -298,7 +287,7 @@ class ServicesPage extends State<Services> {
                               Text(
                                 ":",
                                 style: TextStyle(
-                                    color: AppTheme().color_white,
+                                    color: AppTheme().colorWhite,
                                     fontSize: 18,
                                     fontFamily: "Montserrat"),
                               ),
@@ -306,9 +295,9 @@ class ServicesPage extends State<Services> {
                                 width: 20,
                               ),
                               Text(
-                                totalamount.toString(),
+                                totalAmount.toString(),
                                 style: TextStyle(
-                                    color: AppTheme().color_white,
+                                    color: AppTheme().colorWhite,
                                     fontSize: 18,
                                     fontFamily: "Montserrat"),
                               )
@@ -462,7 +451,7 @@ class _CounterState extends State<Counter> {
 
   void totalrates() {
     if (person! >= 15 && person! < 30) {
-      totalamount = 0;
+      totalAmount = 0;
       for (int i = 0; i < widget.listData!.length; i++) {
         if (widget.listData![i].id == 1) {
           producttotal += widget.listData![i].rate15!;
@@ -472,13 +461,13 @@ class _CounterState extends State<Counter> {
           producttotal += widget.listData![i].rate15!;
         }
       }
-      totalamount = producttotal;
+      totalAmount = producttotal;
       if (widget.listData![widget.index!].id == 3) {
-        totalamount_bev = totalamount + person_mult_price;
+        totalamount_bev = totalAmount + person_mult_price;
       }
       if (widget.listData![widget.index!].id == 4) {
         totalamount_bev = totalamount_bev + person_mult_price;
-        totalamount = totalamount_bev;
+        totalAmount = totalamount_bev;
       }
       for (int i = 0; i < widget.listData!.length; i++) {
         productModel = ProductServicesModel(
@@ -487,7 +476,7 @@ class _CounterState extends State<Counter> {
           0,
         );
         productModel!.prod_id = widget.listData![i].id.toString();
-        productModel!.total = totalamount;
+        productModel!.total = totalAmount;
         if (widget.listData![i].productname == "Beverage") {
           productModel!.qyt = person;
         } else if (widget.listData![i].productname == "Glassware") {
@@ -507,13 +496,13 @@ class _CounterState extends State<Counter> {
           producttotal += widget.listData![i].rate30!;
         }
       }
-      totalamount = producttotal;
+      totalAmount = producttotal;
       if (widget.listData![widget.index!].id == 3) {
-        totalamount_bev = totalamount + person_mult_price;
+        totalamount_bev = totalAmount + person_mult_price;
       }
       if (widget.listData![widget.index!].id == 4) {
         totalamount_bev = totalamount_bev + person_mult_price;
-        totalamount = totalamount_bev;
+        totalAmount = totalamount_bev;
       }
       for (int i = 0; i < widget.listData!.length; i++) {
         productModel = ProductServicesModel(
@@ -522,7 +511,7 @@ class _CounterState extends State<Counter> {
           0,
         );
         productModel!.prod_id = widget.listData![i].id.toString();
-        productModel!.total = totalamount;
+        productModel!.total = totalAmount;
         if (widget.listData![widget.index!].id == 3 &&
             widget.listData![widget.index!].id == 4) {
           productModel!.qyt = person;
@@ -541,13 +530,13 @@ class _CounterState extends State<Counter> {
           producttotal += widget.listData![i].rate50!;
         }
       }
-      totalamount = producttotal;
+      totalAmount = producttotal;
       if (widget.listData![widget.index!].id == 3) {
-        totalamount_bev = totalamount + person_mult_price;
+        totalamount_bev = totalAmount + person_mult_price;
       }
       if (widget.listData![widget.index!].id == 4) {
         totalamount_bev = totalamount_bev + person_mult_price;
-        totalamount = totalamount_bev;
+        totalAmount = totalamount_bev;
       }
       for (int i = 0; i < widget.listData!.length; i++) {
         productModel = ProductServicesModel(
@@ -556,7 +545,7 @@ class _CounterState extends State<Counter> {
           0,
         );
         productModel!.prod_id = widget.listData![i].id.toString();
-        productModel!.total = totalamount;
+        productModel!.total = totalAmount;
         if (widget.listData![widget.index!].id == 3 &&
             widget.listData![widget.index!].id == 4) {
           productModel!.qyt = person;
@@ -575,13 +564,13 @@ class _CounterState extends State<Counter> {
           producttotal += widget.listData![i].rate75!;
         }
       }
-      totalamount = producttotal;
+      totalAmount = producttotal;
       if (widget.listData![widget.index!].id == 3) {
-        totalamount_bev = totalamount + person_mult_price;
+        totalamount_bev = totalAmount + person_mult_price;
       }
       if (widget.listData![widget.index!].id == 4) {
         totalamount_bev = totalamount_bev + person_mult_price;
-        totalamount = totalamount_bev;
+        totalAmount = totalamount_bev;
       }
       for (int i = 0; i < widget.listData!.length; i++) {
         productModel = ProductServicesModel(
@@ -590,7 +579,7 @@ class _CounterState extends State<Counter> {
           0,
         );
         productModel!.prod_id = widget.listData![i].id.toString();
-        productModel!.total = totalamount;
+        productModel!.total = totalAmount;
         if (widget.listData![widget.index!].id == 3 &&
             widget.listData![widget.index!].id == 4) {
           productModel!.qyt = person;
@@ -609,13 +598,13 @@ class _CounterState extends State<Counter> {
           producttotal += widget.listData![i].rate100!;
         }
       }
-      totalamount = producttotal;
+      totalAmount = producttotal;
       if (widget.listData![widget.index!].id == 3) {
-        totalamount_bev = totalamount + person_mult_price;
+        totalamount_bev = totalAmount + person_mult_price;
       }
       if (widget.listData![widget.index!].id == 4) {
         totalamount_bev = totalamount_bev + person_mult_price;
-        totalamount = totalamount_bev;
+        totalAmount = totalamount_bev;
       }
       for (int i = 0; i < widget.listData!.length; i++) {
         productModel = ProductServicesModel(
@@ -624,7 +613,7 @@ class _CounterState extends State<Counter> {
           0,
         );
         productModel!.prod_id = widget.listData![i].id.toString();
-        productModel!.total = totalamount;
+        productModel!.total = totalAmount;
         if (widget.listData![widget.index!].id == 3 &&
             widget.listData![widget.index!].id == 4) {
           productModel!.qyt = person;
@@ -689,7 +678,7 @@ class _CounterState extends State<Counter> {
             productModel!.qyt = services;
           }
           for (int i = 0; i < product.length; i++) {
-            product[i]!.total = totalamount;
+            product[i]!.total = totalAmount;
           }
           product[widget.index!]!.qyt = productModel!.qyt;
         }
@@ -702,65 +691,65 @@ class _CounterState extends State<Counter> {
     if (checkedValue_2 == true) {
       if (person! >= 15 && person! < 30) {
         if (widget.listData![widget.index!].id == 3) {
-          totalamount = totalamount - person_mult_price;
+          totalAmount = totalAmount - person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
-          totalamount = totalamount - person_mult_price;
+          totalAmount = totalAmount - person_mult_price;
         }
       } else if (person! >= 30 && person! < 50) {
         if (widget.listData![widget.index!].id == 3) {
-          totalamount = totalamount - person_mult_price;
+          totalAmount = totalAmount - person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
-          totalamount = totalamount - person_mult_price;
+          totalAmount = totalAmount - person_mult_price;
         }
       } else if (person! >= 50 && person! < 75) {
         if (widget.listData![widget.index!].id == 3) {
-          totalamount = totalamount - person_mult_price;
+          totalAmount = totalAmount - person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
-          totalamount = totalamount - person_mult_price;
+          totalAmount = totalAmount - person_mult_price;
         }
       } else if (person! >= 75 && person! < 1000) {
         if (widget.listData![widget.index!].id == 3) {
-          totalamount = totalamount - person_mult_price;
+          totalAmount = totalAmount - person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
-          totalamount = totalamount - person_mult_price;
+          totalAmount = totalAmount - person_mult_price;
         }
       } else if (person! > 1000) {
         if (widget.listData![widget.index!].id == 3) {
-          totalamount = totalamount - person_mult_price;
+          totalAmount = totalAmount - person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
-          totalamount = totalamount - person_mult_price;
+          totalAmount = totalAmount - person_mult_price;
         }
       }
     } else if (checkedValue_2 == false) {
       if (person! >= 15 && person! < 30) {
         if (widget.listData![widget.index!].id == 3) {
-          totalamount = totalamount + person_mult_price;
+          totalAmount = totalAmount + person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
-          totalamount = totalamount + person_mult_price;
+          totalAmount = totalAmount + person_mult_price;
         }
       } else if (person! >= 30 && person! < 50) {
         if (widget.listData![widget.index!].id == 3) {
-          totalamount = totalamount + person_mult_price;
+          totalAmount = totalAmount + person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
-          totalamount = totalamount + person_mult_price;
+          totalAmount = totalAmount + person_mult_price;
         }
       } else if (person! >= 50 && person! < 75) {
         if (widget.listData![widget.index!].id == 3) {
-          totalamount = totalamount + person_mult_price;
+          totalAmount = totalAmount + person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
-          totalamount = totalamount + person_mult_price;
+          totalAmount = totalAmount + person_mult_price;
         }
       } else if (person! >= 75 && person! < 1000) {
         if (widget.listData![widget.index!].id == 3) {
-          totalamount = totalamount + person_mult_price;
+          totalAmount = totalAmount + person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
-          totalamount = totalamount + person_mult_price;
+          totalAmount = totalAmount + person_mult_price;
         }
       } else if (person! > 1000) {
         if (widget.listData![widget.index!].id == 3) {
-          totalamount = totalamount + person_mult_price;
+          totalAmount = totalAmount + person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
-          totalamount = totalamount + person_mult_price;
+          totalAmount = totalAmount + person_mult_price;
         }
       }
     }
@@ -770,65 +759,65 @@ class _CounterState extends State<Counter> {
     if (checkedValue_1 == true) {
       if (person! >= 15 && person! < 30) {
         if (widget.listData![widget.index!].id == 3) {
-          totalamount = totalamount - person_mult_price;
+          totalAmount = totalAmount - person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
-          totalamount = totalamount - person_mult_price;
+          totalAmount = totalAmount - person_mult_price;
         }
       } else if (person! >= 30 && person! < 50) {
         if (widget.listData![widget.index!].id == 3) {
-          totalamount = totalamount - person_mult_price;
+          totalAmount = totalAmount - person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
-          totalamount = totalamount - person_mult_price;
+          totalAmount = totalAmount - person_mult_price;
         }
       } else if (person! >= 50 && person! < 75) {
         if (widget.listData![widget.index!].id == 3) {
-          totalamount = totalamount - person_mult_price;
+          totalAmount = totalAmount - person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
-          totalamount = totalamount - person_mult_price;
+          totalAmount = totalAmount - person_mult_price;
         }
       } else if (person! >= 75 && person! < 1000) {
         if (widget.listData![widget.index!].id == 3) {
-          totalamount = totalamount - person_mult_price;
+          totalAmount = totalAmount - person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
-          totalamount = totalamount - person_mult_price;
+          totalAmount = totalAmount - person_mult_price;
         }
       } else if (person! > 1000) {
         if (widget.listData![widget.index!].id == 3) {
-          totalamount = totalamount - person_mult_price;
+          totalAmount = totalAmount - person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
-          totalamount = totalamount - person_mult_price;
+          totalAmount = totalAmount - person_mult_price;
         }
       }
     } else if (checkedValue_1 == false) {
       if (person! >= 15 && person! < 30) {
         if (widget.listData![widget.index!].id == 3) {
-          totalamount = totalamount + person_mult_price;
+          totalAmount = totalAmount + person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
-          totalamount = totalamount + person_mult_price;
+          totalAmount = totalAmount + person_mult_price;
         }
       } else if (person! >= 30 && person! < 50) {
         if (widget.listData![widget.index!].id == 3) {
-          totalamount = totalamount + person_mult_price;
+          totalAmount = totalAmount + person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
-          totalamount = totalamount + person_mult_price;
+          totalAmount = totalAmount + person_mult_price;
         }
       } else if (person! >= 50 && person! < 75) {
         if (widget.listData![widget.index!].id == 3) {
-          totalamount = totalamount + person_mult_price;
+          totalAmount = totalAmount + person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
-          totalamount = totalamount + person_mult_price;
+          totalAmount = totalAmount + person_mult_price;
         }
       } else if (person! >= 75 && person! < 1000) {
         if (widget.listData![widget.index!].id == 3) {
-          totalamount = totalamount + person_mult_price;
+          totalAmount = totalAmount + person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
-          totalamount = totalamount + person_mult_price;
+          totalAmount = totalAmount + person_mult_price;
         }
       } else if (person! > 1000) {
         if (widget.listData![widget.index!].id == 3) {
-          totalamount = totalamount + person_mult_price;
+          totalAmount = totalAmount + person_mult_price;
         } else if (widget.listData![widget.index!].id == 4) {
-          totalamount = totalamount + person_mult_price;
+          totalAmount = totalAmount + person_mult_price;
         }
       }
     }
@@ -877,32 +866,32 @@ class _CounterState extends State<Counter> {
       services++;
       if (person! >= 15 && person! < 30) {
         price = services * widget.listData![widget.index!].rate15!;
-        totalamount = totalamount + widget.listData![widget.index!].rate15!;
-        producttotal = totalamount;
+        totalAmount = totalAmount + widget.listData![widget.index!].rate15!;
+        producttotal = totalAmount;
 
         addItemToList();
       } else if (person! >= 30 && person! < 50) {
         price = services * widget.listData![widget.index!].rate30!;
-        totalamount = totalamount + widget.listData![widget.index!].rate30!;
-        producttotal = totalamount;
+        totalAmount = totalAmount + widget.listData![widget.index!].rate30!;
+        producttotal = totalAmount;
 
         addItemToList();
       } else if (person! >= 50 && person! < 75) {
         price = services * widget.listData![widget.index!].rate50!;
-        totalamount = totalamount + widget.listData![widget.index!].rate50!;
-        producttotal = totalamount;
+        totalAmount = totalAmount + widget.listData![widget.index!].rate50!;
+        producttotal = totalAmount;
 
         addItemToList();
       } else if (person! >= 75 && person! < 1000) {
         price = services * widget.listData![widget.index!].rate75!;
-        totalamount = totalamount + widget.listData![widget.index!].rate75!;
-        producttotal = totalamount;
+        totalAmount = totalAmount + widget.listData![widget.index!].rate75!;
+        producttotal = totalAmount;
 
         addItemToList();
       } else if (person! > 1000) {
         price = services * widget.listData![widget.index!].rate100!;
-        totalamount = totalamount + widget.listData![widget.index!].rate100!;
-        producttotal = totalamount;
+        totalAmount = totalAmount + widget.listData![widget.index!].rate100!;
+        producttotal = totalAmount;
 
         addItemToList();
       }
@@ -914,32 +903,32 @@ class _CounterState extends State<Counter> {
       services--;
       if (person! >= 15 && person! < 30) {
         price = services * widget.listData![widget.index!].rate15!;
-        totalamount = totalamount - widget.listData![widget.index!].rate15!;
-        producttotal = totalamount;
+        totalAmount = totalAmount - widget.listData![widget.index!].rate15!;
+        producttotal = totalAmount;
 
         addItemToList();
       } else if (person! >= 30 && person! < 50) {
         price = services * widget.listData![widget.index!].rate30!;
-        totalamount = totalamount - widget.listData![widget.index!].rate30!;
-        producttotal = totalamount;
+        totalAmount = totalAmount - widget.listData![widget.index!].rate30!;
+        producttotal = totalAmount;
 
         addItemToList();
       } else if (person! >= 50 && person! < 75) {
         price = services * widget.listData![widget.index!].rate50!;
-        totalamount = totalamount - widget.listData![widget.index!].rate50!;
-        producttotal = totalamount;
+        totalAmount = totalAmount - widget.listData![widget.index!].rate50!;
+        producttotal = totalAmount;
 
         addItemToList();
       } else if (person! >= 75 && person! < 1000) {
         price = services * widget.listData![widget.index!].rate75!;
-        totalamount = totalamount - widget.listData![widget.index!].rate75!;
-        producttotal = totalamount;
+        totalAmount = totalAmount - widget.listData![widget.index!].rate75!;
+        producttotal = totalAmount;
 
         addItemToList();
       } else if (person! > 1000) {
         price = services * widget.listData![widget.index!].rate100!;
-        totalamount = totalamount - widget.listData![widget.index!].rate100!;
-        producttotal = totalamount;
+        totalAmount = totalAmount - widget.listData![widget.index!].rate100!;
+        producttotal = totalAmount;
 
         addItemToList();
       }
@@ -985,7 +974,7 @@ class _CounterState extends State<Counter> {
                     textAlign: TextAlign.left,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                        color: AppTheme().color_black,
+                        color: AppTheme().colorBlack,
                         fontFamily: 'Montserrat',
                         fontSize: 15,
                         fontWeight: FontWeight.bold),
@@ -998,8 +987,8 @@ class _CounterState extends State<Counter> {
                           height: 20.0,
                           width: 20.0,
                           child: Checkbox(
-                              activeColor: AppTheme().color_black,
-                              checkColor: AppTheme().color_white,
+                              activeColor: AppTheme().colorBlack,
+                              checkColor: AppTheme().colorWhite,
                               value: checkedValue_1,
                               onChanged: (value) {
                                 bev_rate();
@@ -1015,8 +1004,8 @@ class _CounterState extends State<Counter> {
                                 height: 20.0,
                                 width: 20.0,
                                 child: Checkbox(
-                                    activeColor: AppTheme().color_black,
-                                    checkColor: AppTheme().color_white,
+                                    activeColor: AppTheme().colorBlack,
+                                    checkColor: AppTheme().colorWhite,
                                     value: checkedValue_2,
                                     onChanged: (value) {
                                       gls_rate();
@@ -1040,7 +1029,7 @@ class _CounterState extends State<Counter> {
                                 'Price ₹ ${widget.listData![widget.index!].rate15}',
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
-                                    color: AppTheme().color_black,
+                                    color: AppTheme().colorBlack,
                                     fontFamily: 'Montserrat-SemiBold',
                                     fontSize: 10,
                                     fontWeight: FontWeight.bold),
@@ -1050,7 +1039,7 @@ class _CounterState extends State<Counter> {
                                     'Price ₹${widget.listData![widget.index!].rate30}',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
-                                      color: AppTheme().color_black,
+                                      color: AppTheme().colorBlack,
                                       fontFamily: 'Montserrat-SemiBold',
                                       fontSize: 10,
                                     ),
@@ -1061,7 +1050,7 @@ class _CounterState extends State<Counter> {
                                         textAlign: TextAlign.left,
                                         //overflow:TextOverflow.ellipsis ,
                                         style: TextStyle(
-                                          color: AppTheme().color_black,
+                                          color: AppTheme().colorBlack,
                                           fontFamily: 'Montserrat-SemiBold',
                                           fontSize: 10,
                                         ),
@@ -1072,7 +1061,7 @@ class _CounterState extends State<Counter> {
                                             textAlign: TextAlign.left,
                                             //overflow:TextOverflow.ellipsis ,
                                             style: TextStyle(
-                                              color: AppTheme().color_black,
+                                              color: AppTheme().colorBlack,
                                               fontFamily: 'Montserrat-SemiBold',
                                               fontSize: 10,
                                             ),
@@ -1083,7 +1072,7 @@ class _CounterState extends State<Counter> {
                                                 textAlign: TextAlign.left,
                                                 //overflow:TextOverflow.ellipsis ,
                                                 style: TextStyle(
-                                                  color: AppTheme().color_black,
+                                                  color: AppTheme().colorBlack,
                                                   fontFamily:
                                                       'Montserrat-SemiBold',
                                                   fontSize: 10,
@@ -1101,13 +1090,13 @@ class _CounterState extends State<Counter> {
                                   children: [
                                     services == 0
                                         ? Icon(Icons.remove_circle,
-                                            color: AppTheme().color_black)
+                                            color: AppTheme().colorBlack)
                                         : InkWell(
                                             onTap: () {
                                               // miuns_services();
                                             },
                                             child: Icon(Icons.remove_circle,
-                                                color: AppTheme().color_white),
+                                                color: AppTheme().colorWhite),
                                           ),
                                     person! >= 15 && person! < 30
                                         ? Text(
@@ -1115,7 +1104,7 @@ class _CounterState extends State<Counter> {
                                             textAlign: TextAlign.left,
                                             //overflow:TextOverflow.ellipsis ,
                                             style: TextStyle(
-                                              color: AppTheme().color_black,
+                                              color: AppTheme().colorBlack,
                                               fontFamily: 'Montserrat-SemiBold',
                                               fontSize: 12,
                                             ),
@@ -1126,7 +1115,7 @@ class _CounterState extends State<Counter> {
                                                 textAlign: TextAlign.left,
                                                 //overflow:TextOverflow.ellipsis ,
                                                 style: TextStyle(
-                                                  color: AppTheme().color_black,
+                                                  color: AppTheme().colorBlack,
                                                   fontFamily:
                                                       'Montserrat-SemiBold',
                                                   fontSize: 12,
@@ -1139,7 +1128,7 @@ class _CounterState extends State<Counter> {
                                                     //overflow:TextOverflow.ellipsis ,
                                                     style: TextStyle(
                                                       color: AppTheme()
-                                                          .color_black,
+                                                          .colorBlack,
                                                       fontFamily:
                                                           'Montserrat-SemiBold',
                                                       fontSize: 12,
@@ -1154,7 +1143,7 @@ class _CounterState extends State<Counter> {
                                                         //overflow:TextOverflow.ellipsis ,
                                                         style: TextStyle(
                                                           color: AppTheme()
-                                                              .color_black,
+                                                              .colorBlack,
                                                           fontFamily:
                                                               'Montserrat-SemiBold',
                                                           fontSize: 12,
@@ -1168,7 +1157,7 @@ class _CounterState extends State<Counter> {
                                                             //overflow:TextOverflow.ellipsis ,
                                                             style: TextStyle(
                                                               color: AppTheme()
-                                                                  .color_black,
+                                                                  .colorBlack,
                                                               fontFamily:
                                                                   'Montserrat-SemiBold',
                                                               fontSize: 12,
@@ -1185,14 +1174,14 @@ class _CounterState extends State<Counter> {
                                       children: [
                                         services == 0
                                             ? Icon(Icons.remove_circle,
-                                                color: AppTheme().color_black)
+                                                color: AppTheme().colorBlack)
                                             : InkWell(
                                                 onTap: () {
                                                   //miuns_services();
                                                 },
                                                 child: Icon(Icons.remove_circle,
                                                     color:
-                                                        AppTheme().color_white),
+                                                        AppTheme().colorWhite),
                                               ),
                                         const Padding(
                                             padding: EdgeInsets.only(left: 2)),
@@ -1202,7 +1191,7 @@ class _CounterState extends State<Counter> {
                                                 textAlign: TextAlign.left,
                                                 //overflow:TextOverflow.ellipsis ,
                                                 style: TextStyle(
-                                                  color: AppTheme().color_black,
+                                                  color: AppTheme().colorBlack,
                                                   fontFamily:
                                                       'Montserrat-SemiBold',
                                                   fontSize: 12,
@@ -1215,7 +1204,7 @@ class _CounterState extends State<Counter> {
                                                     //overflow:TextOverflow.ellipsis ,
                                                     style: TextStyle(
                                                       color: AppTheme()
-                                                          .color_black,
+                                                          .colorBlack,
                                                       fontFamily:
                                                           'Montserrat-SemiBold',
                                                       fontSize: 12,
@@ -1229,7 +1218,7 @@ class _CounterState extends State<Counter> {
                                                         //overflow:TextOverflow.ellipsis ,
                                                         style: TextStyle(
                                                           color: AppTheme()
-                                                              .color_black,
+                                                              .colorBlack,
                                                           fontFamily:
                                                               'Montserrat-SemiBold',
                                                           fontSize: 12,
@@ -1244,7 +1233,7 @@ class _CounterState extends State<Counter> {
                                                             //overflow:TextOverflow.ellipsis ,
                                                             style: TextStyle(
                                                               color: AppTheme()
-                                                                  .color_black,
+                                                                  .colorBlack,
                                                               fontFamily:
                                                                   'Montserrat-SemiBold',
                                                               fontSize: 12,
@@ -1260,7 +1249,7 @@ class _CounterState extends State<Counter> {
                                                                 style:
                                                                     TextStyle(
                                                                   color: AppTheme()
-                                                                      .color_black,
+                                                                      .colorBlack,
                                                                   fontFamily:
                                                                       'Montserrat-SemiBold',
                                                                   fontSize: 12,
@@ -1275,14 +1264,14 @@ class _CounterState extends State<Counter> {
                                       children: [
                                         services == 0
                                             ? Icon(Icons.remove_circle,
-                                                color: AppTheme().color_black)
+                                                color: AppTheme().colorBlack)
                                             : InkWell(
                                                 onTap: () {
                                                   miuns_services();
                                                 },
                                                 child: Icon(Icons.remove_circle,
                                                     color:
-                                                        AppTheme().color_black),
+                                                        AppTheme().colorBlack),
                                               ),
                                         const Padding(
                                             padding: EdgeInsets.only(left: 2)),
@@ -1291,7 +1280,7 @@ class _CounterState extends State<Counter> {
                                               ? "1"
                                               : services.toString(),
                                           style: TextStyle(
-                                              color: AppTheme().color_black),
+                                              color: AppTheme().colorBlack),
                                         ),
                                         const Padding(
                                             padding: EdgeInsets.only(left: 2)),
@@ -1300,7 +1289,7 @@ class _CounterState extends State<Counter> {
                                             add_services();
                                           },
                                           child: Icon(Icons.add_circle_sharp,
-                                              color: AppTheme().color_black),
+                                              color: AppTheme().colorBlack),
                                         )
                                       ],
                                     )))
@@ -1312,7 +1301,7 @@ class _CounterState extends State<Counter> {
                 child: Container(
                     height: 25,
                     decoration: BoxDecoration(
-                        color: AppTheme().color_black,
+                        color: AppTheme().colorBlack,
                         borderRadius: BorderRadius.circular(10)),
                     child: Center(
                         child: person! >= 15 && person! < 30
@@ -1329,7 +1318,7 @@ class _CounterState extends State<Counter> {
 
                                 '₹${widget.listData![widget.index!].rate15! * services}',
                                 style: TextStyle(
-                                    color: AppTheme().color_white,
+                                    color: AppTheme().colorWhite,
                                     fontFamily: "Montserrat",
                                     fontSize: 15),
                               )
@@ -1345,7 +1334,7 @@ class _CounterState extends State<Counter> {
                                             ? '₹$person_mult_price'
                                             : '₹${widget.listData![widget.index!].rate30! * services}',
                                     style: TextStyle(
-                                        color: AppTheme().color_white,
+                                        color: AppTheme().colorWhite,
                                         fontFamily: "Montserrat",
                                         fontSize: 15),
                                   )
@@ -1361,7 +1350,7 @@ class _CounterState extends State<Counter> {
                                                 ? '₹$person_mult_price'
                                                 : '₹${widget.listData![widget.index!].rate50! * services}',
                                         style: TextStyle(
-                                            color: AppTheme().color_white,
+                                            color: AppTheme().colorWhite,
                                             fontFamily: "Montserrat",
                                             fontSize: 15),
                                       )
@@ -1379,7 +1368,7 @@ class _CounterState extends State<Counter> {
                                                     ? '₹$person_mult_price'
                                                     : '₹${widget.listData![widget.index!].rate75! * services}',
                                             style: TextStyle(
-                                                color: AppTheme().color_white,
+                                                color: AppTheme().colorWhite,
                                                 fontFamily: "Montserrat",
                                                 fontSize: 15),
                                           )
@@ -1399,7 +1388,7 @@ class _CounterState extends State<Counter> {
                                                         : '₹${widget.listData![widget.index!].rate100! * services}',
                                                 style: TextStyle(
                                                     color:
-                                                        AppTheme().color_white,
+                                                        AppTheme().colorWhite,
                                                     fontFamily: "Montserrat",
                                                     fontSize: 15),
                                               )

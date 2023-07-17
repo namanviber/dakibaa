@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:dakibaa/Colors/colors.dart';
 import 'package:dakibaa/app_screens/authorization_screens/login_pagenew.dart';
 import 'package:dakibaa/app_screens/home_screens/number_of_person.dart';
@@ -101,7 +100,7 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 25,
-                          color: AppTheme().color_white,
+                          color: AppTheme().colorWhite,
                           fontFamily: "MontBlancDemo-Bold",
                           fontWeight: FontWeight.bold),
                     ),
@@ -111,7 +110,7 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
                   padding: const EdgeInsets.only(top: 20, left: 70, right: 70),
                   child: Container(
                     height: 1,
-                    color: AppTheme().color_white,
+                    color: AppTheme().colorWhite,
                   ),
                 ),
                 Padding(
@@ -127,7 +126,7 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 17,
-                      color: AppTheme().color_white,
+                      color: AppTheme().colorWhite,
                       fontFamily: "Montserrat-SemiBold"),
                     ),
                   ),
@@ -139,7 +138,7 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
                       right: 15),
                   child: Container(
                       decoration: BoxDecoration(
-                        color: AppTheme().color_white,
+                        color: AppTheme().colorWhite,
                         //borderRadius: BorderRadius.all(Radius.circular(10))
                       ),
                       child: Padding(
@@ -150,17 +149,15 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
-                  child: Container(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Text(
-                        "InHouse Party",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: AppTheme().color_white,
-                            fontFamily: "MontBlancDemo-Bold"),
-                      ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Text(
+                      "InHouse Party",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: AppTheme().colorWhite,
+                          fontFamily: "MontBlancDemo-Bold"),
                     ),
                   ),
                 ),
@@ -171,7 +168,7 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
                       right: 15),
                   child: Container(
                       decoration: BoxDecoration(
-                        color: AppTheme().color_white,
+                        color: AppTheme().colorWhite,
                         //borderRadius: BorderRadius.all(Radius.circular(10))
                       ),
                       child: Padding(
@@ -182,18 +179,17 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
-                  child: Container(
-                      child: Padding(
+                  child: Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: Text(
-                      "CORPORATE PARTY",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: AppTheme().color_white,
-                          fontFamily: "MontBlancDemo-Bold"),
+                  "CORPORATE PARTY",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: AppTheme().colorWhite,
+                      fontFamily: "MontBlancDemo-Bold"),
                     ),
-                  )),
+                  ),
                 ),
                 Padding(
                     padding: const EdgeInsets.only(
@@ -204,7 +200,7 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Number_of_Person()));
+                                  builder: (context) => const Number_of_Person()));
                         } else {
                           Navigator.push(
                               context,
@@ -216,14 +212,14 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
                         height: 45,
                         decoration: BoxDecoration(
                             borderRadius: const BorderRadius.all(Radius.circular(10)),
-                            color: AppTheme().color_red),
+                            color: AppTheme().colorRed),
                         child: Center(
                           child: Text(
                             "Book Now",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 18,
-                                color: AppTheme().color_white,
+                                color: AppTheme().colorWhite,
                                 fontFamily: "MontBlancDemo-Bold"),
                           ),
                         ),

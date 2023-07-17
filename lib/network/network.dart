@@ -23,7 +23,6 @@ class InternetConnection extends StatefulWidget {
 }
 
 class _InternetConnectionState extends State<InternetConnection> {
-  final GlobalKey<ScaffoldState>_globalKey=GlobalKey<ScaffoldState>();
   internet(){
     NetworkConnection.check().then((internet){
       if(internet!=null&&internet){
@@ -50,7 +49,7 @@ class _InternetConnectionState extends State<InternetConnection> {
                     onTap: (){
                       Navigator.of(context).pop();
                     },
-                    child: Image.asset("images/back_button.png",width: 20,height: 20,color: AppTheme().color_black,),
+                    child: Image.asset("images/back_button.png",width: 20,height: 20,color: AppTheme().colorBlack,),
                   ),
                 ],
               ),

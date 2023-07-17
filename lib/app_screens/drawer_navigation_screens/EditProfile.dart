@@ -119,7 +119,7 @@ class ProfileScreenPage extends State<EditProfilePage>
                             onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => ProfileUpdate()),
+                                MaterialPageRoute(builder: (context) => const ProfileUpdate()),
                               );
                             },
                             child: Center(
@@ -396,9 +396,9 @@ class ProfileScreenPage extends State<EditProfilePage>
   }
 
   @override
-  userImage(File _image) {
+  userImage(File image) {
     setState(() {
-      this._image = _image;
+      _image = image;
     });
   }
   Future<void> _ackAlert(BuildContext context) {

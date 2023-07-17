@@ -1,12 +1,9 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:http/http.dart' as http;
-
 import 'package:flutter/material.dart';
 import 'package:dakibaa/models/ProductModel.dart';
 import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
-
 import 'rest_api/ApiList.dart';
 import 'ProductDetail.dart';
 import 'app_screens/authorization_screens/login_pagenew.dart';
@@ -29,11 +26,9 @@ class Product extends State<ProductScreen> {
   bool checkValue = false;
   var id;
   String? productId;
-  AnimationController? _controller;
   double? screenHeight;
   double? screenwidth;
   List <ProductModel> productModel= [];
-  File? _image;
   late ProgressDialog pr;
   Map<String, dynamic>? value;
   Map<String, dynamic>? value1;
@@ -153,23 +148,21 @@ class Product extends State<ProductScreen> {
     screenwidth = MediaQuery.of(context).size.width;
 
     // TODO: implement build
-    return Container(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Container(
-          height: screenHeight,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(colors: [
-              Color.fromRGBO(220, 84, 85, 0.8),
-              Color.fromRGBO(140, 53, 52, 1)
-            ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
-          ),
-          child: Stack(
-            children: <Widget>[
-              pageTitle(context),
-              profile_Page(context),
-            ],
-          ),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Container(
+        height: screenHeight,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(colors: [
+            Color.fromRGBO(220, 84, 85, 0.8),
+            Color.fromRGBO(140, 53, 52, 1)
+          ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+        ),
+        child: Stack(
+          children: <Widget>[
+            pageTitle(context),
+            profile_Page(context),
+          ],
         ),
       ),
     );
@@ -212,225 +205,213 @@ class Product extends State<ProductScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
              Container(
-                  child:  Container(
-                    height: 140,
-                    decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(18))),
-                    child: Row(
-                      children: <Widget>[
-                        Container(
-                          margin: const EdgeInsets.only(right: 0, left: 0, top: 0, bottom: 0),
-                          height: 140,
-                          width: 100,
-                          decoration: BoxDecoration(
+               height: 140,
+               decoration: const BoxDecoration(
+                   color: Colors.white,
+                   borderRadius: BorderRadius.all(Radius.circular(18))),
+               child: Row(
+                 children: <Widget>[
+                   Container(
+                     margin: const EdgeInsets.only(right: 0, left: 0, top: 0, bottom: 0),
+                     height: 140,
+                     width: 100,
+                     decoration: BoxDecoration(
 
-                              borderRadius: const BorderRadius.only(topLeft: Radius.circular(18),bottomLeft: Radius.circular(18)),
-                              image:  DecorationImage(
-                                image: NetworkImage(
-                                    "http://adminparty.v2infotech.net/images/productimages/"+
-                                        productModel[index].productImages),
-                                fit: BoxFit.fill,
-                              )),
-                        ),
-                        Expanded(
-                          child: Container(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                               Expanded(
-                                    child: Container(
-                                      padding: const EdgeInsets.only(right: 25, top: 0,),
-                                      child: Text(
-                                       "${productModel[index].Productname}",
-                                        maxLines: 1,
-                                        softWrap: true,
-                                        style: const TextStyle(
-                                            color: Colors.red,
-                                            fontFamily: 'Roboto',
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                            letterSpacing: 1.0),
-                                      ),
-                                    ),
+                         borderRadius: const BorderRadius.only(topLeft: Radius.circular(18),bottomLeft: Radius.circular(18)),
+                         image:  DecorationImage(
+                           image: NetworkImage(
+                               "http://adminparty.v2infotech.net/images/productimages/"+
+                                   productModel[index].productImages),
+                           fit: BoxFit.fill,
+                         )),
+                   ),
+                   Expanded(
+                     child: Container(
+                       padding: const EdgeInsets.all(8.0),
+                       child: Column(
+                         mainAxisSize: MainAxisSize.max,
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         children: <Widget>[
+                          Expanded(
+                               child: Container(
+                                 padding: const EdgeInsets.only(right: 25, top: 0,),
+                                 child: Text(
+                                  "${productModel[index].Productname}",
+                                   maxLines: 1,
+                                   softWrap: true,
+                                   style: const TextStyle(
+                                       color: Colors.red,
+                                       fontFamily: 'Roboto',
+                                       fontSize: 18,
+                                       fontWeight: FontWeight.bold,
+                                       letterSpacing: 1.0),
+                                 ),
+                               ),
 
-                                  ),
+                             ),
 
-                                const SizedBox(
-                                  height: 6,
-                                ),
-                                Expanded(
-                                  child: Row(
-                                    children: <Widget>[
-                                      const Text(
-                                        "Description:- ",
+                           const SizedBox(
+                             height: 6,
+                           ),
+                           Expanded(
+                             child: Row(
+                               children: <Widget>[
+                                 const Text(
+                                   "Description:- ",
 
-                                        style: TextStyle(
-                                            color: Colors.red,
-                                            fontFamily: 'Roboto',
-                                            fontSize: 16,
+                                   style: TextStyle(
+                                       color: Colors.red,
+                                       fontFamily: 'Roboto',
+                                       fontSize: 16,
 
-                                            fontWeight: FontWeight.bold,
-                                            letterSpacing: 1.0),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          child: GestureDetector(
-                                            onTap: () =>
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (
-                                                            context) =>
-                                                            ProductDetail(data: productModel[index].Description, image:productModel[index].productImages))),
-                                            child: Text(
-                                              "${productModel[index].Description}",
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: const TextStyle(
-                                                color: Colors.black,
-                                                fontFamily: 'Roboto',
-                                                fontSize: 14,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      )
+                                       fontWeight: FontWeight.bold,
+                                       letterSpacing: 1.0),
+                                 ),
+                                 Expanded(
+                                   child: GestureDetector(
+                                     onTap: () =>
+                                         Navigator.push(
+                                             context,
+                                             MaterialPageRoute(
+                                                 builder: (
+                                                     context) =>
+                                                     ProductDetail(data: productModel[index].Description, image:productModel[index].productImages))),
+                                     child: Text(
+                                       "${productModel[index].Description}",
+                                       maxLines: 2,
+                                       overflow: TextOverflow.ellipsis,
+                                       style: const TextStyle(
+                                         color: Colors.black,
+                                         fontFamily: 'Roboto',
+                                         fontSize: 14,
+                                       ),
+                                     ),
+                                   ),
+                                 )
 
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Center(
-                                        child: Container(
-                                          height: 30,
-                                          width: 80,
+                               ],
+                             ),
+                           ),
+                           Row(
+                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                             children: <Widget>[
+                               Center(
+                                 child: Container(
+                                   height: 30,
+                                   width: 80,
+                                   decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(20)),
+                                     color: Colors.red,),
 
-                                          child: Center(
-                                            child: Text(
-                                              "Rs ${productModel[index].price}",
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: 'Roboto',
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ),
-                                          decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(20)),
-                                            color: Colors.red,),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                          children: <Widget>[
-                                            GestureDetector(
-                                              onTap: (){
-                                                p=productModel[index].productPrice;
-                                                productId=productModel[index].Id.toString();
-                                                _removeProduct(productId.toString(),index);
-                                              },
-                                              child: Container(
-                                                child: const Icon(
-                                                  Icons.remove_circle,
-                                                  size: 24,
-                                                  color: Colors.redAccent,
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
+                                   child: Center(
+                                     child: Text(
+                                       "Rs ${productModel[index].price}",
+                                       style: const TextStyle(
+                                         color: Colors.white,
+                                         fontFamily: 'Roboto',
+                                         fontSize: 16,
+                                         fontWeight: FontWeight.bold,
+                                       ),
+                                     ),
+                                   ),
+                                 ),
+                               ),
+                               Padding(
+                                 padding: const EdgeInsets.all(8.0),
+                                 child: Row(
+                                   mainAxisAlignment: MainAxisAlignment.center,
+                                   crossAxisAlignment: CrossAxisAlignment.end,
+                                   children: <Widget>[
+                                     GestureDetector(
+                                       onTap: (){
+                                         p=productModel[index].productPrice;
+                                         productId=productModel[index].Id.toString();
+                                         _removeProduct(productId.toString(),index);
+                                       },
+                                       child: const Icon(
+                                         Icons.remove_circle,
+                                         size: 24,
+                                         color: Colors.redAccent,
+                                       ),
+                                     ),
+                                     Container(
 
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 2, right: 8, left: 8),
-                                              child: Text(
-                                                "${productModel[index].count}",
-                                                style:
-                                                const TextStyle(
-                                                  color: Colors.redAccent,
-                                                  fontFamily: 'Roboto',
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                            GestureDetector(
-                                              onTap: (){
+                                       padding: const EdgeInsets.only(
+                                           bottom: 2, right: 8, left: 8),
+                                       child: Text(
+                                         "${productModel[index].count}",
+                                         style:
+                                         const TextStyle(
+                                           color: Colors.redAccent,
+                                           fontFamily: 'Roboto',
+                                           fontSize: 18,
+                                           fontWeight: FontWeight.bold,
+                                         ),
+                                       ),
+                                     ),
+                                     GestureDetector(
+                                       onTap: (){
 
-                                                productId=productModel[index].Id.toString();
-                                                p=productModel[index].productPrice;
+                                         productId=productModel[index].Id.toString();
+                                         p=productModel[index].productPrice;
 
-                                                _addProduct(productId.toString(),index);
-                                              },
-                                              child: Container(
-                                                child: const Icon(
-                                                  Icons.add_circle,
-                                                  size: 24,
-                                                  color: Colors.redAccent,
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  child: Text(
+                                         _addProduct(productId.toString(),index);
+                                       },
+                                       child: const Icon(
+                                         Icons.add_circle,
+                                         size: 24,
+                                         color: Colors.redAccent,
+                                       ),
+                                     )
+                                   ],
+                                 ),
+                               )
+                             ],
+                           ),
+                           Text(
 
-                                    " BASE PRICE : Rs ${productModel[index].productPrice}",
-                                    maxLines: 3,
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: 'Roboto',
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                               /* Row(
-                                  children: <Widget>[ Expanded(
-                                    flex:1,
-                                    child: Container(
-                                      alignment: Alignment.bottomRight,
-                                      child: Text(
-                                        "Go to Cart",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontFamily: 'Roboto',
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
+                             " BASE PRICE : Rs ${productModel[index].productPrice}",
+                             maxLines: 3,
+                             style: const TextStyle(
+                               color: Colors.black,
+                               fontFamily: 'Roboto',
+                               fontSize: 14,
+                               fontWeight: FontWeight.bold,
+                             ),
+                           ),
+                          /* Row(
+                             children: <Widget>[ Expanded(
+                               flex:1,
+                               child: Container(
+                                 alignment: Alignment.bottomRight,
+                                 child: Text(
+                                   "Go to Cart",
+                                   style: TextStyle(
+                                     color: Colors.black,
+                                     fontFamily: 'Roboto',
+                                     fontSize: 14,
+                                     fontWeight: FontWeight.bold,
+                                   ),
+                                 ),
+                               ),
 
-                                  ),
-                                    Container(
-                                      child: Icon(
-                                        Icons.arrow_forward,
-                                        size: 24,
-                                        color: Colors.redAccent,
-                                      ),
-                                    ),
-                                  ],
-                                )*/
-                              ],
-                            ),
-                          ),
+                             ),
+                               Container(
+                                 child: Icon(
+                                   Icons.arrow_forward,
+                                   size: 24,
+                                   color: Colors.redAccent,
+                                 ),
+                               ),
+                             ],
+                           )*/
+                         ],
+                       ),
+                     ),
 
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                   )
+                 ],
+               ),
+             ),
    /*     Positioned(
           top: 0,
           right: 0,

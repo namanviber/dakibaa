@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:dakibaa/Colors/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,11 +25,12 @@ class _ForgotPass extends State<ForgotPass> {
   bool? checkValue;
   Map<String, dynamic>? value;
   final _formkey = GlobalKey<FormState>();
-  final user_NameController = TextEditingController();
+  final contactController = TextEditingController();
   late ProgressDialog pr;
 
   @override
   Widget build(BuildContext context) {
+    ToastContext().init(context);//-> This part
     return Form(
       key: _formkey,
       child: Scaffold(
@@ -74,7 +78,7 @@ class _ForgotPass extends State<ForgotPass> {
                     child: Text(
                       'Forgot Password',
                       style: TextStyle(
-                          color: AppTheme().color_white,
+                          color: AppTheme().colorWhite,
                           // fontWeight: FontWeight.w500,
                           fontFamily: "Montserrat",
                           fontSize: 22),
@@ -156,7 +160,7 @@ class _ForgotPass extends State<ForgotPass> {
                     }
                   },
                   textAlign: TextAlign.center,
-                  controller: user_NameController,
+                  controller: contactController,
                   keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
                       border: const OutlineInputBorder(
@@ -184,13 +188,13 @@ class _ForgotPass extends State<ForgotPass> {
                       errorStyle: TextStyle(
                           fontSize: 15,
                           fontFamily: "Montserrat-SemiBold",
-                          color: AppTheme().color_white),
+                          color: AppTheme().colorWhite),
                       hintStyle: TextStyle(
-                          color: AppTheme().color_red,
+                          color: AppTheme().colorRed,
                           fontFamily: "Montserrat-SemiBold"),
                       hintText: "Contact No.",
                       counterText: "",
-                      fillColor: AppTheme().color_white),
+                      fillColor: AppTheme().colorWhite),
                 ),
               ),
               const SizedBox(
@@ -202,31 +206,18 @@ class _ForgotPass extends State<ForgotPass> {
                   width: 100,
                   height: 50,
                   decoration: BoxDecoration(
-                      color: AppTheme().color_red,
+                      color: AppTheme().colorRed,
                       borderRadius: BorderRadius.circular(50),
-                      border: Border.all(color: AppTheme().color_red)),
+                      border: Border.all(color: AppTheme().colorRed)),
                   child: GestureDetector(
                     onTap: () {
                       if (_formkey.currentState!.validate()) {
                         _formkey.currentState!.save();
                         setState(() {});
 
-                        _onChanged(user_NameController.text);
-                        getCheckData();
-                      } else {}
-                      /*    if (_formkey.currentState.validate()) {
-                              _formkey.currentState.save();
-                              setState(() {});
-                              UsernameController.text;
-                              UserPasswordController.text;
-                            }else{
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => Home+
-
-                                Page()),
-                              );
-                            }*/
+                        _onChanged(contactController.text);
+                        verifyData();
+                      }
                     },
                     child: Center(
                       child: Text(
@@ -234,7 +225,7 @@ class _ForgotPass extends State<ForgotPass> {
                         style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontSize: 17,
-                            color: AppTheme().color_white),
+                            color: AppTheme().colorWhite),
                       ),
                     ),
                   ),
@@ -254,32 +245,87 @@ class _ForgotPass extends State<ForgotPass> {
     });
   }
 
-  Future<Map<String, dynamic>> getCheckData() async {
+  void verifyData() async {
     pr = ProgressDialog(
       context: context,
     );
-    pr.show(msg: "Loading..", barrierDismissible: true);
-    // print(token);
-    final response = await http.post(Uri.parse(APIS.checkRegistration),
-        headers: {'Accept': 'application/json'},
-        body: {"value": user_NameController.text});
-    var parsedJson = json.decode(response.body);
-    value = parsedJson['result'];
-    if (parsedJson['status'] == "1") {
-      pr.close();
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (context) =>
-                  ForgetForm(number: user_NameController.text)),
-          (Route<dynamic> route) => false);
-    } else if (parsedJson['status'] == "0") {
-      pr.close();
+    pr.show(msg: "Processing..", barrierDismissible: true);
+
+    try {
+      final response = await http.post(Uri.parse(APIS.checkRegistration),
+          headers: {'Accept': 'application/json'},
+          body: {"value": contactController.text});
+
+      if (response.statusCode == 200) {
+        var parsedJson = json.decode(response.body);
+        print("response body: $parsedJson");
+
+        if (parsedJson['status'] == "1") {
+          pr.close();
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      ForgetForm(number: contactController.text)));
+        } else {
+          pr.close();
+
+          Toast.show(
+            parsedJson['message'],
+            duration: Toast.lengthLong,
+            gravity: Toast.bottom,
+          );
+        }
+      } else {
+        pr.close();
+        throw Exception();
+      }
+    } on HttpException {
       Toast.show(
-        parsedJson['message'],
+        "Internal Server Error",
+        duration: Toast.lengthLong,
+        gravity: Toast.bottom,
+      );
+    } on FormatException {
+      Toast.show(
+        "Server Error",
+        duration: Toast.lengthLong,
+        gravity: Toast.bottom,
+      );
+    } on TimeoutException {
+      Toast.show(
+        "Request time out Try again",
         duration: Toast.lengthLong,
         gravity: Toast.bottom,
       );
     }
-    return parsedJson;
   }
+
+  // Future<Map<String, dynamic>> getCheckData() async {
+  //   pr = ProgressDialog(
+  //     context: context,
+  //   );
+  //   pr.show(msg: "Processing..", barrierDismissible: true);
+  //   // print(token);
+  //   final response = await http.post(Uri.parse(APIS.checkRegistration),
+  //       headers: {'Accept': 'application/json'},
+  //       body: {"value": contactController.text});
+  //   var parsedJson = json.decode(response.body);
+  //   value = parsedJson['result'];
+  //   if (parsedJson['status'] == "1") {
+  //     pr.close();
+  //     Navigator.of(context).pushAndRemoveUntil(
+  //         MaterialPageRoute(
+  //             builder: (context) => ForgetForm(number: contactController.text)),
+  //         (Route<dynamic> route) => false);
+  //   } else if (parsedJson['status'] == "0") {
+  //     pr.close();
+  //     Toast.show(
+  //       parsedJson['message'],
+  //       duration: Toast.lengthLong,
+  //       gravity: Toast.bottom,
+  //     );
+  //   }
+  //   return parsedJson;
+  // }
 }

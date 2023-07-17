@@ -3,11 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:dakibaa/rest_api/ApiList.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:dakibaa/Colors/colors.dart';
-import 'package:dakibaa/app_screens/home_screens/number_of_person.dart';
 import 'package:sn_progress_dialog/sn_progress_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
@@ -94,7 +90,7 @@ class Otp extends State<OtpScreen> {
                     child: Text(
                       'OTP Verification',
                       style: TextStyle(
-                          color: AppTheme().color_white,
+                          color: AppTheme().colorWhite,
                           //fontWeight: FontWeight.w500,
                           fontFamily: "Montserrat",
                           fontSize: 22),
@@ -180,229 +176,25 @@ class Otp extends State<OtpScreen> {
                 ),
                 Container(
                   margin: const EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 25.0),
-                  child: Padding(
-                    padding: const EdgeInsets.all(1),
-                    child: Column(
-                      children: <Widget>[
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Pinput(
-                          controller: controller1,
-                          androidSmsAutofillMethod:
-                              AndroidSmsAutofillMethod.smsUserConsentApi,
-                          listenForMultipleSmsOnAndroid: true,
-                          defaultPinTheme: PinTheme(
-                            width: 56,
-                            height: 56,
-                            textStyle: TextStyle(
-                              fontSize: 22,
-                              color: AppTheme().color_red,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(50)),
-                              color: AppTheme().color_white,
-                            ),
-                          ),
-                          hapticFeedbackType: HapticFeedbackType.lightImpact,
-                        ),
-//                         const SizedBox(
-//                           height: 10,
-//                         ),
-//                         Row(
-//                           children: <Widget>[
-//                             Flexible(
-//                               child: Container(
-//                                 //margin: EdgeInsets.fromLTRB(15,0,10,0),
-//                                 padding:
-//                                     const EdgeInsets.only(left: 10, right: 10),
-//                                 child: Padding(
-//                                   padding:
-//                                       const EdgeInsets.only(right: 0, left: 0),
-//                                   child: Container(
-//                                       alignment: Alignment.center,
-//                                       decoration: BoxDecoration(
-//                                           color: AppTheme().color_white,
-//                                           border: Border.all(
-//                                               width: 1.0,
-//                                               color: const Color.fromRGBO(
-//                                                   0, 0, 0, 0.1)),
-//                                           borderRadius: const BorderRadius.all(
-//                                               Radius.circular(100.0))),
-//                                       child: TextFormField(
-//                                         cursorColor: AppTheme().color_red,
-//                                         decoration: const InputDecoration(
-//                                             border: InputBorder.none),
-//                                         keyboardType: TextInputType.phone,
-//                                         textInputAction: TextInputAction.next,
-//                                         onFieldSubmitted: (String value) {
-//                                           FocusScope.of(context).requestFocus(
-//                                               textSecondFocusNode);
-//                                         },
-//                                         inputFormatters: [
-//                                           LengthLimitingTextInputFormatter(1),
-//                                         ],
-//                                         enabled: true,
-//                                         controller: controller1,
-//                                         textAlign: TextAlign.center,
-//                                         style: TextStyle(
-//                                             fontSize: 24.0,
-//                                             color: AppTheme().color_red,
-//                                             fontFamily: "Montserrat-SemiBold"),
-//                                       )),
-//                                 ),
-// //                                PinInputTextField(
-// //                                  pinLength: 4,
-// //                                  decoration: UnderlineDecoration(
-// //                                      textStyle: TextStyle(
-// //                                          color: Colors.black)),
-// //                                ),
-//                               ),
-//                             ),
-//                             Flexible(
-//                               child: Container(
-//                                 // margin: EdgeInsets.fromLTRB(10,0,10,0),
-//                                 padding:
-//                                     const EdgeInsets.only(left: 10, right: 10),
-//                                 child: Padding(
-//                                   padding:
-//                                       const EdgeInsets.only(right: 0, left: 0),
-//                                   child: Container(
-//                                       alignment: Alignment.center,
-//                                       decoration: BoxDecoration(
-//                                           color: AppTheme().color_white,
-//                                           border: Border.all(
-//                                               width: 1.0,
-//                                               color: const Color.fromRGBO(
-//                                                   0, 0, 0, 0.1)),
-//                                           borderRadius: const BorderRadius.all(
-//                                               Radius.circular(100.0))),
-//                                       child: TextFormField(
-//                                         cursorColor: AppTheme().color_red,
-//                                         decoration: const InputDecoration(
-//                                             border: InputBorder.none),
-//                                         keyboardType: TextInputType.phone,
-//                                         focusNode: textSecondFocusNode,
-//                                         textInputAction: TextInputAction.next,
-//                                         onFieldSubmitted: (String value) {
-//                                           FocusScope.of(context)
-//                                               .requestFocus(textThirdFocusNode);
-//                                         },
-//                                         inputFormatters: [
-//                                           LengthLimitingTextInputFormatter(1),
-//                                         ],
-//                                         enabled: true,
-//                                         controller: controller2,
-//                                         textAlign: TextAlign.center,
-//                                         style: TextStyle(
-//                                             fontSize: 24.0,
-//                                             color: AppTheme().color_red,
-//                                             fontFamily: "Montserrat-SemiBold"),
-//                                       )),
-//                                 ),
-// //                                ),
-//                               ),
-//                             ),
-//                             Flexible(
-//                               child: Container(
-//                                 // margin: EdgeInsets.fromLTRB(10,0,10,0),
-//                                 padding:
-//                                     const EdgeInsets.only(left: 10, right: 10),
-//                                 child: Padding(
-//                                   padding:
-//                                       const EdgeInsets.only(right: 0, left: 0),
-//                                   child: Container(
-//                                       alignment: Alignment.center,
-//                                       decoration: BoxDecoration(
-//                                         color: AppTheme().color_white,
-//                                         border: Border.all(
-//                                             width: 1.0,
-//                                             color: const Color.fromRGBO(
-//                                                 0, 0, 0, 0.1)),
-//                                         borderRadius: const BorderRadius.all(
-//                                             Radius.circular(200.0)),
-//                                       ),
-//                                       child: TextFormField(
-//                                         cursorColor: AppTheme().color_red,
-//                                         decoration: const InputDecoration(
-//                                             border: InputBorder.none),
-//                                         keyboardType: TextInputType.phone,
-//                                         focusNode: textThirdFocusNode,
-//                                         textInputAction: TextInputAction.next,
-//                                         onFieldSubmitted: (value) {
-//                                           FocusScope.of(context).requestFocus(
-//                                               textFourthFocusNode);
-//                                         },
-//                                         inputFormatters: [
-//                                           LengthLimitingTextInputFormatter(1),
-//                                         ],
-//                                         enabled: true,
-//                                         controller: controller3,
-//                                         textAlign: TextAlign.center,
-//                                         style: TextStyle(
-//                                             fontSize: 24.0,
-//                                             color: AppTheme().color_red,
-//                                             fontFamily: "Montserrat-SemiBold"),
-//                                       )),
-//                                 ),
-// //                                PinInputTextField(
-// //                                  pinLength: 4,
-// //                                  decoration: UnderlineDecoration(
-// //                                      textStyle: TextStyle(
-// //                                          color: Colors.black)),
-// //                                ),
-//                               ),
-//                             ),
-//                             Flexible(
-//                               child: Container(
-//                                 //  margin: EdgeInsets.fromLTRB(10,0,15,0),
-//                                 padding:
-//                                     const EdgeInsets.only(left: 10, right: 10),
-//                                 child: Padding(
-//                                   padding:
-//                                       const EdgeInsets.only(right: 0, left: 0),
-//                                   child: Container(
-//                                       alignment: Alignment.center,
-//                                       decoration: BoxDecoration(
-//                                           color: AppTheme().color_white,
-//                                           border: Border.all(
-//                                               width: 1.0,
-//                                               color: const Color.fromRGBO(
-//                                                   0, 0, 0, 0.1)),
-//                                           borderRadius: const BorderRadius.all(
-//                                               Radius.circular(100.0))),
-//                                       child: TextFormField(
-//                                         cursorColor: AppTheme().color_red,
-//                                         decoration: const InputDecoration(
-//                                             border: InputBorder.none),
-//                                         keyboardType: TextInputType.phone,
-//                                         focusNode: textFourthFocusNode,
-//                                         textInputAction: TextInputAction.done,
-//                                         inputFormatters: [
-//                                           LengthLimitingTextInputFormatter(1),
-//                                         ],
-//                                         enabled: true,
-//                                         controller: controller4,
-//                                         textAlign: TextAlign.center,
-//                                         style: TextStyle(
-//                                             fontSize: 24.0,
-//                                             color: AppTheme().color_red,
-//                                             fontFamily: "Montserrat-SemiBold"),
-//                                       )),
-//                                 ),
-// //                                PinInputTextField(
-// //                                  pinLength: 4,
-// //                                  decoration: UnderlineDecoration(
-// //                                      textStyle: TextStyle(
-// //                                          color: Colors.black)),
-// //                                ),
-//                               ),
-//                             ),
-//                           ],
-//                         ),
-                      ],
+                  child: Pinput(
+                    controller: controller1,
+                    androidSmsAutofillMethod:
+                        AndroidSmsAutofillMethod.smsUserConsentApi,
+                    listenForMultipleSmsOnAndroid: true,
+                    defaultPinTheme: PinTheme(
+                      width: 56,
+                      height: 56,
+                      textStyle: TextStyle(
+                        fontSize: 22,
+                        color: AppTheme().colorRed,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(50)),
+                        color: AppTheme().colorWhite,
+                      ),
                     ),
+                    hapticFeedbackType: HapticFeedbackType.lightImpact,
                   ),
                 ),
                 Padding(
@@ -410,26 +202,18 @@ class Otp extends State<OtpScreen> {
                   child: Container(
                     height: 50,
                     decoration: BoxDecoration(
-                        color: AppTheme().color_red,
+                        color: AppTheme().colorRed,
                         borderRadius: BorderRadius.circular(50),
-                        border: Border.all(color: AppTheme().color_red)),
+                        border: Border.all(color: AppTheme().colorRed)),
                     child: GestureDetector(
                       onTap: () {
                         if (controller1.text.isNotEmpty) {
-                          // &&
-                          // controller2.text.isNotEmpty &&
-                          // controller3.text.isNotEmpty &&
-                          // controller4.text.isNotEmpty
-                          // sendOtp(controller1.text +
-                          //     controller2.text +
-                          //     controller3.text +
-                          //     controller4.text);
                           sendOtp(controller1.text);
                         } else {
                           Toast.show(
                             "Please enter full otp",
                             duration: Toast.lengthLong,
-                            gravity: Toast.top,
+                            gravity: Toast.bottom,
                           );
                         }
                       },
@@ -439,7 +223,7 @@ class Otp extends State<OtpScreen> {
                           style: TextStyle(
                               fontFamily: 'Montserrat',
                               fontSize: 20,
-                              color: AppTheme().color_white),
+                              color: AppTheme().colorWhite),
                         ),
                       ),
                     ),
@@ -465,7 +249,7 @@ class Otp extends State<OtpScreen> {
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "Montserrat-SemiBold",
-                                color: AppTheme().color_red),
+                                color: AppTheme().colorRed),
                           ),
                         )
                       : Text(
@@ -493,16 +277,16 @@ class Otp extends State<OtpScreen> {
       final response = await http.post(Uri.parse(APIS.otpAuth), headers: {
         'Accept': 'application/json'
       }, body: {
-        "type": type.toString(),
+        "ActionType": type.toString(),
         "otp": otp,
-        "Mobile": widget.mobile,
+        "phone": widget.mobile,
       });
 
       print("Data:  ${Uri.parse(APIS.otpAuth)}");
       print("body ${{
         "type": type.toString(),
-        "otp": otp,
-        "Mobile": widget.mobile,
+        "Otp": otp,
+        "phone": widget.mobile,
       }}");
 
       if (response.statusCode == 200) {
@@ -520,13 +304,18 @@ class Otp extends State<OtpScreen> {
 
             if (parsedJson["message"]['accRegistered'] == "otp matched") {
               _timer!.cancel();
-              setState(() {
-                _onChanged(true, value);
-              });
+              // setState(() {
+                // _onChanged(true, value);
+              // });
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(
-                      builder: (context) => const Number_of_Person()),
+                      builder: (context) => const LoginPage()),
                   (Route<dynamic> route) => false);
+              Toast.show(
+                "Account Created Successfully",
+                duration: Toast.lengthShort,
+                gravity: Toast.bottom,
+              );
             } else {
               Toast.show(
                 "OTP doesn't match",
@@ -552,19 +341,19 @@ class Otp extends State<OtpScreen> {
       Toast.show(
         "Internal Server Error",
         duration: Toast.lengthLong,
-        gravity: Toast.top,
+        gravity: Toast.bottom,
       );
     } on FormatException {
       Toast.show(
         "Server Error",
         duration: Toast.lengthLong,
-        gravity: Toast.top,
+        gravity: Toast.bottom,
       );
     } on TimeoutException {
       Toast.show(
         "Request time out Try again",
         duration: Toast.lengthLong,
-        gravity: Toast.top,
+        gravity: Toast.bottom,
       );
     }
   }
@@ -711,10 +500,8 @@ class Otp extends State<OtpScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     currController = controller1;
-    // receiveMsg();
     startTimer();
   }
 

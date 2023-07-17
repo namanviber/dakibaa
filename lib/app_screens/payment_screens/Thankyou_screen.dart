@@ -50,7 +50,7 @@ class ThankYouScreen extends StatelessWidget {
                         Text(
                           "Thank You",
                           style: TextStyle(
-                              color: AppTheme().color_white,
+                              color: AppTheme().colorWhite,
                               fontSize: 35,
                               fontFamily: 'Montserrat'),
                         ),
@@ -65,7 +65,7 @@ class ThankYouScreen extends StatelessWidget {
                         Text(
                           "We will Contact You Soon",
                           style: TextStyle(
-                              color: AppTheme().color_white,
+                              color: AppTheme().colorWhite,
                               fontSize: 14,
                               fontFamily: 'Montserrat'),
                         ),
@@ -81,7 +81,7 @@ class ThankYouScreen extends StatelessWidget {
                           "Order ID :  $OrderID",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              color: AppTheme().color_white,
+                              color: AppTheme().colorWhite,
                               fontSize: 15,
                               fontFamily: 'Montserrat-SemiBold'),
                         ),
@@ -96,16 +96,16 @@ class ThankYouScreen extends StatelessWidget {
                         onTap: () {
                           Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
-                                  builder: (context) => Number_of_Person()),
+                                  builder: (context) => const Number_of_Person()),
                               (Route<dynamic> route) => false);
                         },
                         child: Container(
                             height: 45,
                             decoration: BoxDecoration(
-                                color: AppTheme().color_red,
+                                color: AppTheme().colorRed,
                                 borderRadius: BorderRadius.circular(50),
                                 border:
-                                    Border.all(color: AppTheme().color_red)),
+                                    Border.all(color: AppTheme().colorRed)),
                             //margin: EdgeInsets.only(top: 5.0,left: 80,right: 80),
                             child: Center(
                               child: Text(
@@ -113,7 +113,7 @@ class ThankYouScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 20,
-                                    color: AppTheme().color_white),
+                                    color: AppTheme().colorWhite),
                               ),
                             )
 
