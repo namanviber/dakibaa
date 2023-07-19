@@ -1,17 +1,18 @@
 import 'dart:convert';
+import 'package:dakibaa/widgets/appBody.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'Colors/colors.dart';
-import 'checkout_screen.dart';
-import 'package:dakibaa/desciption.dart';
+import '../../Colors/colors.dart';
+import 'checkoutScreen.dart';
+import 'package:dakibaa/app_screens/home_screens/itemDescription.dart';
 import 'package:dakibaa/models/product_model_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:toast/toast.dart';
-import 'models/serviceModel.dart';
-import 'rest_api/ApiList.dart';
-import 'common/constant.dart';
-import 'widgets/appDrawer.dart';
+import '../../models/serviceModel.dart';
+import '../../rest_api/ApiList.dart';
+import '../../common/constant.dart';
+import '../../widgets/appButton.dart';
 
 class Services extends StatefulWidget {
   const Services({super.key});
@@ -59,7 +60,6 @@ class ServicesPage extends State<Services> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getData();
   }
@@ -71,247 +71,145 @@ class ServicesPage extends State<Services> {
     }
   }
 
-  Future<bool> _onWillPop() async {
-    return false;
-  }
-
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: _onWillPop,
-      child: Scaffold(
-        drawer: AppDrawer(),
-        resizeToAvoidBottomInset: false,
-        body: Container(
-          // height:  queryData.size.height,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Colors.black.withOpacity(0.8),
-                  Colors.black.withOpacity(0.8),
-                ],
-              ),
-              image: DecorationImage(
-                image: const AssetImage("images/services_background.jpg"),
-                fit: BoxFit.cover,
-                colorFilter: ColorFilter.mode(
-                    Colors.black.withOpacity(0.3), BlendMode.dstATop),
-              )),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(top: 50),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Expanded(
-                        flex: 1,
-                        child: InkWell(
-                          onTap: () {
-                            // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                            //     Number_of_Person()), (Route<dynamic> route) => false);
-                            Navigator.of(context).pop();
-                            //_scaffoldKey.currentState.openDrawer();
-                          },
-                          child: SizedBox(
-                            height: 18,
-                            child: Image.asset(
-                              "images/back_button.png",
-                            ),
-                          ),
-                        )),
-                    //
-
-                    Expanded(
-                      flex: 4,
-                      child: SizedBox(
-                        height: 45,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 15, top: 10),
-                          child: Text(
-                            "SERVICES",
-                            style: TextStyle(
-                                fontSize: 25,
-                                color: AppTheme().colorWhite,
-                                fontWeight: FontWeight.w600,
-                                letterSpacing: 2),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: Padding(
-                          padding: const EdgeInsets.only(left: 20, right: 20),
-                          child: InkWell(
-                            onTap: () {
-                              if (totalAmount == 0) {
-                                Toast.show(
-                                  "Please select any one product",
-                                  duration: Toast.lengthShort,
-                                  gravity: Toast.bottom,
-                                );
-                              } else {
+    return Scaffold(
+      backgroundColor: AppTheme().colorBlack,
+      appBar: AppBar(
+        scrolledUnderElevation: 1,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "Services",
+              style: TextStyle(
+                  fontSize: 20,
+                  color: AppTheme().colorWhite,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 2),
+            ),
+            AppButton(
+              onPressed: () {
+                if (totalAmount == 0) {
+                  Toast.show(
+                    "Please select any one product",
+                    duration: Toast.lengthLong,
+                    gravity: Toast.bottom,
+                  );
+                } else {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CheckOutScreen()));
+                }
+              },
+              title: "Next",
+              width: 100,
+            ),
+          ],
+        ),
+      ),
+      extendBodyBehindAppBar: true,
+      body: AppBody(
+        imgPath: "images/services_background.jpg",
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(height: 40,),
+            SERVICES_LIST == null
+                ? Expanded(
+                    child: ListView(
+                    shrinkWrap: true,
+                    children: [itemLoading()],
+                  ))
+                : Expanded(
+                    child: GridView.builder(
+                        shrinkWrap: true,
+                        gridDelegate:
+                            SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio:
+                                    MediaQuery.of(context).size.height < 700.0
+                                        ? MediaQuery.of(context).size.height /
+                                            780
+                                        : MediaQuery.of(context).size.height /
+                                            1000,
+                                mainAxisSpacing: 22),
+                        itemCount:
+                            SERVICES_LIST == null ? 0 : SERVICES_LIST!.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return InkWell(
+                              onTap: () {
+                                setState(() {
+                                  titlename =
+                                      SERVICES_LIST![index].productname;
+                                  imageProduct = pic_list[index];
+                                  descp = SERVICES_LIST![index].productDescr;
+                                  if (person! >= 15 && person! < 30) {
+                                    price = SERVICES_LIST![index]
+                                        .rate15
+                                        .toString();
+                                  } else if (person! >= 30 && person! < 50) {
+                                    price = SERVICES_LIST![index]
+                                        .rate30
+                                        .toString();
+                                  } else if (person! >= 50 && person! < 75) {
+                                    price = SERVICES_LIST![index]
+                                        .rate50
+                                        .toString();
+                                  } else if (person! >= 75 &&
+                                      person! < 1000) {
+                                    price = SERVICES_LIST![index]
+                                        .rate75
+                                        .toString();
+                                  } else if (person! > 1000) {
+                                    price = SERVICES_LIST![index]
+                                        .rate100
+                                        .toString();
+                                  }
+                                });
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            CheckOutScreen()));
-                              }
-                            },
-                            child: Container(
-                                decoration: BoxDecoration(
-                                    color: AppTheme().colorRed,
-                                    borderRadius: BorderRadius.circular(50)),
-                                height: 35,
-                                child: Center(
-                                  child: Text(
-                                    "Next",
-                                    style: TextStyle(
-                                        fontSize: 17,
-                                        color: AppTheme().colorWhite,
-                                        fontWeight: FontWeight.w600,
-                                        letterSpacing: 2),
-                                  ),
-                                )),
-                          )),
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ItemDescription()),
+                                );
+                              },
+                              child: Counter(
+                                index: index,
+                                listData: SERVICES_LIST,
+                              ));
+                        })),
+            const SizedBox(
+              height: 20,
+            ),
+            SERVICES_LIST == null
+                ? itemtotalLoading()
+                : AppButton(
+                    onPressed: () {
+                      if (totalAmount == 0) {
+                        Toast.show(
+                          "Please select any one product",
+                          duration: Toast.lengthLong,
+                          gravity: Toast.bottom,
+                        );
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CheckOutScreen()));
+                      }
+                    },
+                    title: "Total Amount: $totalAmount",
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
-                  ],
-                ),
-              ),
-              SERVICES_LIST == null
-                  ? Expanded(
-                      child: ListView(
-                      shrinkWrap: true,
-                      children: [itemLoading()],
-                    ))
-                  : Expanded(
-                      child: GridView.builder(
-                          shrinkWrap: true,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  childAspectRatio:
-                                      MediaQuery.of(context).size.height < 700.0
-                                          ? MediaQuery.of(context).size.height /
-                                              780
-                                          : MediaQuery.of(context).size.height /
-                                              1000,
-                                  mainAxisSpacing: 22),
-                          itemCount:
-                              SERVICES_LIST == null ? 0 : SERVICES_LIST!.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    titlename =
-                                        SERVICES_LIST![index].productname;
-                                    imageProduct = pic_list[index];
-                                    descp = SERVICES_LIST![index].productDescr;
-                                    if (person! >= 15 && person! < 30) {
-                                      price = SERVICES_LIST![index]
-                                          .rate15
-                                          .toString();
-                                    } else if (person! >= 30 && person! < 50) {
-                                      price = SERVICES_LIST![index]
-                                          .rate30
-                                          .toString();
-                                    } else if (person! >= 50 && person! < 75) {
-                                      price = SERVICES_LIST![index]
-                                          .rate50
-                                          .toString();
-                                    } else if (person! >= 75 &&
-                                        person! < 1000) {
-                                      price = SERVICES_LIST![index]
-                                          .rate75
-                                          .toString();
-                                    } else if (person! > 1000) {
-                                      price = SERVICES_LIST![index]
-                                          .rate100
-                                          .toString();
-                                    }
-                                  });
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const ItemDescription()),
-                                  );
-                                },
-                                child: Counter(
-                                  index: index,
-                                  listData: SERVICES_LIST,
-                                ));
-                          })),
-              const SizedBox(
-                height: 20,
-              ),
-              SERVICES_LIST == null
-                  ? itemtotalLoading()
-                  : Padding(
-                      padding: const EdgeInsets.only(left: 30, right: 30),
-                      child: InkWell(
-                        onTap: () {
-                          if (totalAmount == 0) {
-                            Toast.show(
-                              "Please select any one product",
-                              duration: Toast.lengthShort,
-                              gravity: Toast.bottom,
-                            );
-                          } else {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => CheckOutScreen()));
-                          }
-                        },
-                        child: Container(
-                          height: 45,
-                          decoration: BoxDecoration(
-                              color: AppTheme().colorRed,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Total Amount",
-                                style: TextStyle(
-                                    color: AppTheme().colorWhite,
-                                    fontSize: 18,
-                                    fontFamily: "Montserrat"),
-                              ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              Text(
-                                ":",
-                                style: TextStyle(
-                                    color: AppTheme().colorWhite,
-                                    fontSize: 18,
-                                    fontFamily: "Montserrat"),
-                              ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              Text(
-                                totalAmount.toString(),
-                                style: TextStyle(
-                                    color: AppTheme().colorWhite,
-                                    fontSize: 18,
-                                    fontFamily: "Montserrat"),
-                              )
-                              /*new Expanded(child: new Text("Total")),
-                        new Expanded(child: new Text(":")),
-                        new Expanded(child: new Text(""))*/
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-              const Padding(padding: EdgeInsets.only(top: 20))
-            ],
-          ),
+                    width: MediaQuery.of(context).size.width,
+                  ),
+            const Padding(padding: EdgeInsets.only(top: 20))
+          ],
         ),
       ),
     );
@@ -1127,8 +1025,8 @@ class _CounterState extends State<Counter> {
                                                     textAlign: TextAlign.left,
                                                     //overflow:TextOverflow.ellipsis ,
                                                     style: TextStyle(
-                                                      color: AppTheme()
-                                                          .colorBlack,
+                                                      color:
+                                                          AppTheme().colorBlack,
                                                       fontFamily:
                                                           'Montserrat-SemiBold',
                                                       fontSize: 12,
@@ -1203,8 +1101,8 @@ class _CounterState extends State<Counter> {
                                                     textAlign: TextAlign.left,
                                                     //overflow:TextOverflow.ellipsis ,
                                                     style: TextStyle(
-                                                      color: AppTheme()
-                                                          .colorBlack,
+                                                      color:
+                                                          AppTheme().colorBlack,
                                                       fontFamily:
                                                           'Montserrat-SemiBold',
                                                       fontSize: 12,
@@ -1314,9 +1212,9 @@ class _CounterState extends State<Counter> {
                                             "Beverage"
                                         ? '₹$person_mult_price'
                                         :
-                                // rate10000000
+                                        // rate10000000
 
-                                '₹${widget.listData![widget.index!].rate15! * services}',
+                                        '₹${widget.listData![widget.index!].rate15! * services}',
                                 style: TextStyle(
                                     color: AppTheme().colorWhite,
                                     fontFamily: "Montserrat",

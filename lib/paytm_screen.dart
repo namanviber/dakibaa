@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:dakibaa/Colors/colors.dart';
-import 'package:dakibaa/app_screens/payment_screens/Thankyou_screen.dart';
+import 'package:dakibaa/app_screens/payment_screens/txnSuccess.dart';
 import 'package:dakibaa/models/paytm_model.dart';
 import 'package:dakibaa/paytm_presenter.dart';
 import 'package:dakibaa/app_screens/payment_screens/tnxfailScreen.dart';

@@ -6,7 +6,7 @@ import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:shar
 import 'package:toast/toast.dart';
 import 'rest_api/ApiList.dart';
 import 'ProductDetail.dart';
-import 'app_screens/authorization_screens/login_pagenew.dart';
+import 'app_screens/authorization_screens/signIn.dart';
 
 class ProductScreen extends StatefulWidget {
   Map? data;
@@ -128,7 +128,7 @@ class Product extends State<ProductScreen> {
     } else {
       pr.close();
       Toast.show(parsedJson['message'],
-          duration: Toast.lengthShort, gravity: Toast.bottom,);
+          duration: Toast.lengthLong, gravity: Toast.bottom,);
 
     }
     return parsedJson;
@@ -462,7 +462,7 @@ class Product extends State<ProductScreen> {
     if (parsedJson['status'] == "1") {
       // pr.dismiss();
       Toast.show(parsedJson['message'],
-          duration: Toast.lengthShort, gravity: Toast.bottom,);
+          duration: Toast.lengthLong, gravity: Toast.bottom,);
       /*//_onChanged(value);
       Navigator.push(
         context,
@@ -471,7 +471,7 @@ class Product extends State<ProductScreen> {
     } if(parsedJson['status'] == "0") {
       //pr.dismiss();
       Toast.show(parsedJson['message'],
-          duration: Toast.lengthShort, gravity: Toast.bottom,);
+          duration: Toast.lengthLong, gravity: Toast.bottom,);
       _ackAlert(context);
       /*   Navigator.push(
         context,

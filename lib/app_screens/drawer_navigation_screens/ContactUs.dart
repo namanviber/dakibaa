@@ -9,6 +9,7 @@ import 'package:sn_progress_dialog/sn_progress_dialog.dart';
 import 'package:http/http.dart' as http;
 import 'package:toast/toast.dart';
 import '../../rest_api/ApiList.dart';
+import '../../widgets/appButton.dart';
 
 class ContactUs extends StatefulWidget {
   const ContactUs({super.key});
@@ -132,7 +133,7 @@ class ContactUsPage extends State<ContactUs> {
       pr.close();
       Toast.show(
         parsedJson['message'],
-        duration: Toast.lengthShort,
+        duration: Toast.lengthLong,
         gravity: Toast.bottom,
       );
     }
@@ -256,84 +257,23 @@ class ContactUsPage extends State<ContactUs> {
                       const SizedBox(
                         height: 20,
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          launchUrl(Uri.parse("tel:// $number"));
-                        },
-                        child: Container(
-                            decoration: BoxDecoration(
-                                color: AppTheme().colorRed,
-                                borderRadius: BorderRadius.circular(50)),
-                            width: MediaQuery.of(context).size.width / 2.6,
-                            height: 45,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 10, right: 10),
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    "images/call.png",
-                                    height: 20,
-                                    width: 30,
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    "Call Us",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: AppTheme().colorWhite,
-                                      fontFamily: "Montserrat-SemiBold",
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )),
+                      AppButton(
+                          onPressed: () {
+                            launchUrl(Uri.parse("tel:// $number"));
+                          },
+                          title: "Call Us",
+                        icon: Icons.call,
                       ),
-                      const SizedBox(
-                        height: 20,
+                      AppButton(
+                          onPressed: () {
+                            setState(() {
+                              mesg = true;
+                            });
+                          },
+                          title: "Message",
+                        icon: Icons.message,
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            mesg = true;
-                          });
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: AppTheme().colorRed,
-                              borderRadius: BorderRadius.circular(50)),
-                          width: MediaQuery.of(context).size.width / 2.3,
-                          height: 45,
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 10, right: 10),
-                            child: Row(
-                              children: [
-                                Image.asset(
-                                  "images/mesg.png",
-                                  height: 20,
-                                  width: 30,
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  "Message",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: AppTheme().colorWhite,
-                                    fontFamily: "Montserrat-SemiBold",
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+
                       mesg == false
                           ? Container()
                           : Column(
@@ -608,12 +548,8 @@ class ContactUsPage extends State<ContactUs> {
                                         fillColor: AppTheme().colorWhite),
                                   ),
                                 ),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width / 2.2,
-                                  height: 45,
-                                  child: GestureDetector(
-                                    onTap: () {
+                                AppButton(
+                                    onPressed: () {
                                       if (_formkey.currentState!.validate()) {
                                         _formkey.currentState!.save();
                                         setState(() {});
@@ -621,29 +557,7 @@ class ContactUsPage extends State<ContactUs> {
                                         // getData();
                                       }
                                     },
-                                    child: Container(
-                                        decoration: BoxDecoration(
-                                            color: AppTheme().colorRed,
-                                            borderRadius:
-                                                BorderRadius.circular(50)),
-                                        width: MediaQuery.of(context)
-                                                .size
-                                                .width /
-                                            2.6,
-                                        height: 45,
-                                        child: Center(
-                                          child: Text(
-                                            "SEND",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color: AppTheme().colorWhite,
-                                              fontFamily:
-                                                  "Montserrat-SemiBold",
-                                              fontSize: 20,
-                                            ),
-                                          ),
-                                        )),
-                                  ),
+                                    title: "Send"
                                 ),
                               ],
                             )

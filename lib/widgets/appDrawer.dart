@@ -5,11 +5,11 @@ import 'package:dakibaa/app_screens/drawer_navigation_screens/Privacy.dart';
 import 'package:dakibaa/app_screens/drawer_navigation_screens/TermsCon.dart';
 import 'package:dakibaa/app_screens/home_screens/about_dakibaa.dart';
 import 'package:dakibaa/app_screens/drawer_navigation_screens/about_us.dart';
-import 'package:dakibaa/app_screens/drawer_navigation_screens/change_password.dart';
+import 'package:dakibaa/app_screens/drawer_navigation_screens/changePassword.dart';
 import 'package:dakibaa/app_screens/drawer_navigation_screens/dakibaa_services.dart';
 import 'package:dakibaa/app_screens/drawer_navigation_screens/faq_screen.dart';
 import 'package:dakibaa/app_screens/drawer_navigation_screens/orderhistoy.dart';
-import 'package:dakibaa/profile_update.dart';
+import 'package:dakibaa/app_screens/drawer_navigation_screens/updateProfile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../common/constant.dart';
 import '../app_screens/drawer_navigation_screens/gallery.dart';
@@ -364,7 +364,7 @@ class _AppDrawerState extends State<AppDrawer> {
                         height: 30,
                       )),
                   onTap: () {
-                    dialogs("Confirm LogOut");
+                    dialogs("Confirm Logout");
                   },
                 )
               : const SizedBox(),
@@ -401,7 +401,7 @@ class _AppDrawerState extends State<AppDrawer> {
                             mesg,
                             style: TextStyle(
                                 color: AppTheme().colorWhite,
-                                fontSize: 25,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "Montserrat-SemiBold"),
                           ),

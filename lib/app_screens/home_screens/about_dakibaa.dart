@@ -1,7 +1,8 @@
+import 'package:dakibaa/widgets/appButton.dart';
 import 'package:flutter/material.dart';
 import 'package:dakibaa/Colors/colors.dart';
-import 'package:dakibaa/app_screens/authorization_screens/login_pagenew.dart';
-import 'package:dakibaa/app_screens/home_screens/number_of_person.dart';
+import 'package:dakibaa/app_screens/authorization_screens/signIn.dart';
+import 'package:dakibaa/app_screens/home_screens/guestCount.dart';
 import 'package:dakibaa/widgets/appDrawer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,6 +22,10 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
     getCredential();
   }
 
+  Future<bool> _onWillPop() async {
+    return false;
+  }
+
   getCredential() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
@@ -33,14 +38,11 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
     });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      drawer: AppDrawer(
-      ),
+      drawer: AppDrawer(),
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         scrolledUnderElevation: 1,
@@ -120,14 +122,14 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
                       right: 15),
                   child: Padding(
                     padding: const EdgeInsets.only(
-                    top: 10, bottom: 10, left: 5, right: 5),
+                        top: 10, bottom: 10, left: 5, right: 5),
                     child: Text(
-                  "We are well-experienced in what it takes to arrange and execute a successful event whether it's large or small, casual or formal. Don't worry about the effort of arranging an ideal one. Whether you are planning a party for five or a corporate function for 5000, Dakibaa is here to help you make your next event a grand success. Dakibaa, your event party planner is ready to offer all party supplies from your beverage order to glassware, bartenders and butler services.",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 17,
-                      color: AppTheme().colorWhite,
-                      fontFamily: "Montserrat-SemiBold"),
+                      "We are well-experienced in what it takes to arrange and execute a successful event whether it's large or small, casual or formal. Don't worry about the effort of arranging an ideal one. Whether you are planning a party for five or a corporate function for 5000, Dakibaa is here to help you make your next event a grand success. Dakibaa, your event party planner is ready to offer all party supplies from your beverage order to glassware, bartenders and butler services.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 17,
+                          color: AppTheme().colorWhite,
+                          fontFamily: "Montserrat-SemiBold"),
                     ),
                   ),
                 ),
@@ -182,49 +184,35 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: Text(
-                  "CORPORATE PARTY",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: AppTheme().colorWhite,
-                      fontFamily: "MontBlancDemo-Bold"),
+                      "CORPORATE PARTY",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: AppTheme().colorWhite,
+                          fontFamily: "MontBlancDemo-Bold"),
                     ),
                   ),
                 ),
-                Padding(
-                    padding: const EdgeInsets.only(
-                        top: 30, left: 20, right: 20, bottom: 20),
-                    child: InkWell(
-                      onTap: () {
-                        if (checkValue!) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Number_of_Person()));
-                        } else {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const LoginPage()));
-                        }
-                      },
-                      child: Container(
-                        height: 45,
-                        decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(Radius.circular(10)),
-                            color: AppTheme().colorRed),
-                        child: Center(
-                          child: Text(
-                            "Book Now",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: AppTheme().colorWhite,
-                                fontFamily: "MontBlancDemo-Bold"),
-                          ),
-                        ),
-                      ),
-                    ))
+                AppButton(
+                  onPressed: () {
+                    if (checkValue!) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                              const Number_of_Person()));
+                    } else {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginPage()));
+                    }
+                  },
+                  title: "Book Now",
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),),
+                  width: MediaQuery.of(context).size.width,
+                ),
               ],
             )
           ],

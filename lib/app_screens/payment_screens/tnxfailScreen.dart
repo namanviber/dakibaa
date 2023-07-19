@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dakibaa/Colors/colors.dart';
 
-import '../home_screens/number_of_person.dart';
+import '../home_screens/guestCount.dart';
 
 class FailScreen extends StatefulWidget {
   const FailScreen({super.key});
