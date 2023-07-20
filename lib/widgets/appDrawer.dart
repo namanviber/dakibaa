@@ -95,7 +95,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                                 fit: BoxFit.cover,
                                               )
                                             : Image.network(
-                                                "http://partyapp.v2infotech.net/resources/${profile_pic!}",
+                                                "http://192.168.1.6:3500/resources/${profile_pic!}",
                                                 fit: BoxFit.cover,
                                                 errorBuilder: (BuildContext
                                                         context,

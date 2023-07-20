@@ -108,29 +108,10 @@ flutter:
     - images/forgot.png
     - images/faqs.png
     - images/phone.png
-    - images/party.png
-    - images/edit.png
-    - images/cart.png
-    - images/order.png
-    - images/setting.png
-    - images/user.png
-    - images/LOCK_1.png
-    - images/gear.png
-    - images/lock.png
-    - images/password.png
     - images/phone_call.png
-    - images/rightarrow.png
-    - images/shopping_cart.png
-    - images/terms.png
-    - images/user_red.png
-    - images/agreement.png
-    - images/email.png
     - images/chat.png
     - images/call.png
     - images/cat.jpg
-    - images/back.png
-    - images/partylogo.jpg
-    - images/phonesetting.png
     - images/logout.png
     - images/dakiba_logo.png
     - images/background.jpg
@@ -161,7 +142,6 @@ flutter:
     - images/thumsup.gif
     - images/payment_failed.gif
     - images/fail.png
-    - images/right_tick.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

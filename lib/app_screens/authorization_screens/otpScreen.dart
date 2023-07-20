@@ -2,6 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:dakibaa/app_screens/authorization_screens/changeForgotPassword.dart';
+import 'package:dakibaa/app_screens/authorization_screens/signIn.dart';
+import 'package:dakibaa/app_screens/home_screens/about_dakibaa.dart';
+import 'package:dakibaa/app_screens/home_screens/guestCount.dart';
 import 'package:dakibaa/rest_api/ApiList.dart';
 import 'package:dakibaa/widgets/appBody.dart';
 import 'package:flutter/material.dart';
@@ -166,7 +169,7 @@ class Otp extends State<OtpScreen> {
                             ),
                             decoration: BoxDecoration(
                               borderRadius:
-                                  const BorderRadius.all(Radius.circular(50)),
+                                  const BorderRadius.all(Radius.circular(10)),
                               color: AppTheme().colorWhite,
                             ),
                           ),
@@ -283,12 +286,17 @@ class Otp extends State<OtpScreen> {
         final response = await http.post(Uri.parse(APIS.otpAuth), headers: {
           'Accept': 'application/json'
         }, body: {
-          "ActionType": "OtpAuth",
+          "ActionType": type.toString(),
           "otp": otp,
           "phone": widget.mobile,
         });
 
         print("Data:  ${Uri.parse(APIS.otpAuth)}");
+        print("body ${{
+          "type": type.toString(),
+          "Otp": otp,
+          "phone": widget.mobile,
+        }}");
 
         if (response.statusCode == 200) {
           var parsedJson = json.decode(response.body);
@@ -296,16 +304,19 @@ class Otp extends State<OtpScreen> {
 
           if (parsedJson['status'] == "1") {
             pr.close();
-            value = parsedJson['data'];
-            if (parsedJson["message"]['checkotp'] == "CORRECT OTP") {
+            if (parsedJson["message"]['accRegistered'] ==
+                "otp matched") {
               _timer!.cancel();
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ForgetForm(number: widget.mobile)));
+              value = parsedJson["message"];
+              setState(() {
+                _onChanged(true, value!);
+              });
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => Number_of_Person()),
+                      (Route<dynamic> route) => false);
               Toast.show(
-                "Otp Matched",
-                duration: Toast.lengthLong,
+                "Account Created Successfully",
+                duration: Toast.lengthShort,
                 gravity: Toast.bottom,
               );
             } else {
@@ -318,7 +329,7 @@ class Otp extends State<OtpScreen> {
           } else {
             pr.close();
             Toast.show(
-              parsedJson["message"]['checkotp'],
+              parsedJson["message"]['accRegistered'],
               duration: Toast.lengthLong,
               gravity: Toast.bottom,
             );
@@ -360,7 +371,7 @@ class Otp extends State<OtpScreen> {
           headers: {'Accept': 'application/json'},
           body: {"number": widget.mobile});
 
-      print("Data:  ${Uri.parse(APIS.otpAuth)}");
+      print("Data:  ${Uri.parse(APIS.resendOtp)}");
 
       if (response.statusCode == 200) {
         var parsedJson = json.decode(response.body);
@@ -372,7 +383,7 @@ class Otp extends State<OtpScreen> {
               .toString()
               .replaceAll("New otp send to your Mobile", "");
           setState(() {
-            _start = 5;
+            _start = 60;
             resendotpbool = false;
             widget.otpphone = otp;
           });
@@ -409,12 +420,12 @@ class Otp extends State<OtpScreen> {
     }
   }
 
-  _onChanged(bool value, Map<String, dynamic>? response) async {
+  _onChanged(bool value, Map<String, dynamic> response) async {
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
       checkValue = value;
       sharedPreferences.setBool("check", checkValue);
-      sharedPreferences.setString("name", response!["Name"]);
+      sharedPreferences.setString("name", response["Name"]);
       sharedPreferences.setString("id", response["Id"].toString());
       sharedPreferences.setString("gender", response["Gender"]);
       sharedPreferences.setString("dob", response["DOB"]);

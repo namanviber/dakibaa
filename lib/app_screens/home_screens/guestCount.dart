@@ -113,6 +113,7 @@ class _Number_of_PersonState extends State<Number_of_Person> {
               AppTextField(
                   validator: (value) {},
                   controller: personContoller,
+                  textAlign: TextAlign.center,
                   hinttext: "Enter No. of Persons"),
               AppButton(
                 onPressed: () {
@@ -120,7 +121,7 @@ class _Number_of_PersonState extends State<Number_of_Person> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Services()));
+                            builder: (context) => Services()));
                   }
                 },
                 title: "Continue",
