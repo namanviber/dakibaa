@@ -11,7 +11,7 @@ import 'package:sn_progress_dialog/sn_progress_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import '../../rest_api/ApiList.dart';
-import '../../image_picker_handler.dart';
+import '../../utils/image_picker_handler.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 

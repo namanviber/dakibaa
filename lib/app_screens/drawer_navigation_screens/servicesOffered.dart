@@ -1,3 +1,4 @@
+import 'package:dakibaa/widgets/appBody.dart';
 import 'package:flutter/material.dart';
 import 'package:dakibaa/Colors/colors.dart';
 
@@ -12,44 +13,16 @@ class _DakibaaServicesState extends State<DakibaaServices> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppTheme().colorBlack,
       appBar: AppBar(
         scrolledUnderElevation: 1,
         elevation: 0,
-        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
-        leading: Builder(
-          builder: (BuildContext context) {
-            return GestureDetector(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-              child: SizedBox(
-                height: 18,
-                child: Image.asset(
-                  "images/back_button.png",
-                ),
-              ),
-            );
-          },
-        ),
       ),
       extendBodyBehindAppBar: true,
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.black.withOpacity(0.8),
-                Colors.black.withOpacity(0.8),
-              ],
-            ),
-            image: DecorationImage(
-              image: const AssetImage("images/services_background.jpg"),
-              fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.3), BlendMode.dstATop),
-            )),
-        child: SingleChildScrollView(
+      body: AppBody(
+        imgPath: "images/services_background.jpg",
+        body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
               const SizedBox(height: 70,),

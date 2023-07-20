@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:dakibaa/widgets/appBody.dart';
 import 'package:flutter/material.dart';
 import 'package:dakibaa/Colors/colors.dart';
 import 'package:sn_progress_dialog/sn_progress_dialog.dart';import 'package:http/http.dart' as http;
@@ -38,43 +39,16 @@ class TermsSettingPage extends State<TermsCondition> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      backgroundColor: AppTheme().colorBlack,
       appBar: AppBar(
         scrolledUnderElevation: 1,
         elevation: 0,
-        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
-        leading: Builder(
-          builder: (BuildContext context) {
-            return GestureDetector(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-              child: SizedBox(
-                height: 18,
-                child: Image.asset(
-                  "images/back_button.png",
-                ),
-              ),
-            );
-          },
-        ),
       ),
       extendBodyBehindAppBar: true,
-      body: Container(
-        decoration: BoxDecoration(
-            gradient: RadialGradient(colors: [
-              Colors.black.withOpacity(0.9)
-            ], stops: const [
-              0.0,
-            ]),
-            image: DecorationImage(
-              image: const AssetImage("images/services_background.jpg"),
-              fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.3), BlendMode.dstATop),
-            )),
-        child: Column(
+      body: AppBody(
+        imgPath: "images/services_background.jpg",
+        body: Column(
           children: <Widget>[
             const SizedBox(
               height: 70,

@@ -5,12 +5,12 @@ import 'package:http/http.dart' as http;
 import 'package:dakibaa/Colors/colors.dart';
 import 'package:dakibaa/app_screens/payment_screens/txnSuccess.dart';
 import 'package:dakibaa/models/paytm_model.dart';
-import 'package:dakibaa/paytm_presenter.dart';
+import 'package:dakibaa/utils/paytm_presenter.dart';
 import 'package:dakibaa/app_screens/payment_screens/tnxfailScreen.dart';
 import 'package:paytm/paytm.dart';
 import 'package:sn_progress_dialog/sn_progress_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'common/constant.dart';
+import '../../common/constant.dart';
 
 class Paytmscreen extends StatefulWidget {
   const Paytmscreen({super.key});

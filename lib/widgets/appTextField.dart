@@ -9,7 +9,7 @@ class AppTextField extends StatefulWidget {
   bool ispass;
   bool readonly;
   bool enabled;
-  String hinttext;
+  String hinttext;    
   AppTextField(
       {required this.validator,
       required this.controller,

@@ -1,3 +1,4 @@
+import 'package:dakibaa/widgets/appBody.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -89,108 +90,71 @@ class _GalleryState extends State<Gallery> {
       //     ),
       //   ),
       // ),
-      body: ListView(
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          Column(
+      backgroundColor: AppTheme().colorBlack,
+      appBar: AppBar(
+        scrolledUnderElevation: 1,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
+      extendBodyBehindAppBar: true,
+      body: AppBody(
+        imgPath: "images/services_background.jpg",
+        body: SingleChildScrollView(
+          child: Column(
             children: [
-              Container(
-                height: MediaQuery.of(context).size.height,
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.black.withOpacity(0.8),
-                        Colors.black.withOpacity(0.8),
-                      ],
-                    ),
-                    image: DecorationImage(
-                      image: const AssetImage("images/services_background.jpg"),
-                      fit: BoxFit.cover,
-                      colorFilter: ColorFilter.mode(
-                          Colors.black.withOpacity(0.3), BlendMode.dstATop),
-                    )),
-                child: Column(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-                      child: Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10, left: 20),
-                            child: Row(
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: SizedBox(
-                                    width: 30,
-                                    height: 20,
-                                    child:
-                                        Image.asset("images/back_button.png"),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          Center(
-                            child: Container(
-                                padding: const EdgeInsets.only(
-                                  left: 0.0,
-                                  right: 0.0,
-                                  top: 10.0,
-                                ),
-                                child: Center(
-                                  child: Image.asset(
-                                    "images/gallery.png",
-                                    color: AppTheme().colorWhite,
-                                    fit: BoxFit.cover,
-                                    height: 60,
-                                  ),
-                                )),
-                          ),
-                          Center(
-                            child: Text(
-                              "Gallery",
-                              style: TextStyle(
-                                fontSize: 30,
-                                color: AppTheme().colorWhite,
-                                //fontWeight: FontWeight.w600,
-                                fontFamily: "Montserrat-SemiBold",
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height / 1.6,
-                      child: GridView.builder(
-                        itemCount: imageslist.length,
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
+              Column(
+                children: <Widget>[
+                  Center(
+                    child: Container(
+                        padding: const EdgeInsets.only(
+                          left: 0.0,
+                          right: 0.0,
+                          top: 100.0,
                         ),
-                        itemBuilder: (BuildContext context, int index) {
-                          return Card(
-                            child: GridTile(
-                              child: Image.asset(
-                                imageslist[index],
-                                fit: BoxFit.cover,
-                              ), //just for testing, will fill with image later
-                            ),
-                          );
-                        },
+                        child: Center(
+                          child: Image.asset(
+                            "images/gallery.png",
+                            color: AppTheme().colorWhite,
+                            fit: BoxFit.cover,
+                            height: 60,
+                          ),
+                        )),
+                  ),
+                  Center(
+                    child: Text(
+                      "Gallery",
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: AppTheme().colorWhite,
+                        //fontWeight: FontWeight.w600,
+                        fontFamily: "Montserrat-SemiBold",
                       ),
-                    )
-                  ],
-                ),
+                    ),
+                  ),
+                ],
               ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height* 0.7,
+                child: GridView.builder(
+                  itemCount: imageslist.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                  ),
+                  itemBuilder: (BuildContext context, int index) {
+                    return Card(
+                      child: GridTile(
+                        child: Image.asset(
+                          imageslist[index],
+                          fit: BoxFit.cover,
+                        ), //just for testing, will fill with image later
+                      ),
+                    );
+                  },
+                ),
+              )
             ],
-          )
-        ],
+          ),
+        ),
       ),
     );
   }

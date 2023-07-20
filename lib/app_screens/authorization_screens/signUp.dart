@@ -11,7 +11,7 @@ import 'package:sn_progress_dialog/sn_progress_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import '../../rest_api/ApiList.dart';
-import '../../image_picker_handler.dart';
+import '../../utils/image_picker_handler.dart';
 import 'package:http_parser/http_parser.dart';
 import '../../widgets/appButton.dart';
 import 'otpScreen.dart';
@@ -151,6 +151,7 @@ class _SignupPageState extends State<SignupPage>
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  SizedBox(height: 100,),
                   Stack(
                     children: [
                       Container(
