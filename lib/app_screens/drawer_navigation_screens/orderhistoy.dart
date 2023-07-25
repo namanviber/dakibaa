@@ -56,12 +56,12 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
         // getCount();
         _isProgressBarShown = false;
       });
-      Toast.show(""+data!["message"],
+      Toast.show(data!["message"],
           duration: Toast.lengthLong, gravity: Toast.bottom,);
     }
 
    // hasData = true;
-    /*Toast.show(""+listData.toString(), context,
+    /*Toast.show(listData.toString(), context,
           duration: Toast.lengthLong, gravity: Toast.bottom,);*/
   }
   @override

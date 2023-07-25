@@ -64,7 +64,7 @@ class ThankYouScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
-                              builder: (context) => AboutDakibaa()),
+                              builder: (context) => const AboutDakibaa()),
                           (Route<dynamic> route) => false);
                     },
                     title: "OK"),

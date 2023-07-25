@@ -1,11 +1,7 @@
-// ignore_for_file: missing_return
-
 import 'dart:convert';
-
 import 'package:dakibaa/widgets/appBody.dart';
 import 'package:dakibaa/widgets/appTextField.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:dakibaa/Colors/colors.dart';
 import 'package:dakibaa/common/constant.dart';
@@ -258,7 +254,7 @@ class _CheckOutScreen extends State<CheckOutScreen> {
             }
           }
 
-          print("payment_response" + value['response']['TXNID']);
+          print("payment_response ${value['response']['TXNID']}");
         });
       });
     } catch (e) {

@@ -2,8 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:dakibaa/app_screens/authorization_screens/changeForgotPassword.dart';
-import 'package:dakibaa/app_screens/authorization_screens/signIn.dart';
-import 'package:dakibaa/app_screens/home_screens/about_dakibaa.dart';
 import 'package:dakibaa/app_screens/home_screens/guestCount.dart';
 import 'package:dakibaa/rest_api/ApiList.dart';
 import 'package:dakibaa/widgets/appBody.dart';
@@ -23,7 +21,7 @@ class OtpScreen extends StatefulWidget {
 
   OtpScreen({super.key, this.type, this.otpphone, required this.mobile});
   @override
-  Otp createState() => Otp(type: type);
+  Otp createState() => Otp();
 }
 
 class Otp extends State<OtpScreen> {
@@ -312,7 +310,7 @@ class Otp extends State<OtpScreen> {
                 _onChanged(true, value!);
               });
               Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => Number_of_Person()),
+                  MaterialPageRoute(builder: (context) => const Number_of_Person()),
                       (Route<dynamic> route) => false);
               Toast.show(
                 "Account Created Successfully",

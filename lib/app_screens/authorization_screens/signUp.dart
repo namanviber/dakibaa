@@ -151,7 +151,7 @@ class _SignupPageState extends State<SignupPage>
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(height: 100,),
+                  const SizedBox(height: 100,),
                   Stack(
                     children: [
                       Container(

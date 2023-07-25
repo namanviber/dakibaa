@@ -16,6 +16,8 @@ import 'package:dakibaa/Colors/colors.dart';
 import 'package:dakibaa/models/serviceModel.dart';
 
 class Services extends StatefulWidget {
+  const Services({super.key});
+
   @override
   ServicesPage createState() => ServicesPage();
 }
@@ -120,7 +122,7 @@ class ServicesPage extends State<Services> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 120,
             ),
             SERVICES_LIST == null
@@ -165,7 +167,7 @@ class ServicesPage extends State<Services> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ItemDescription()),
+                                      builder: (context) => const ItemDescription()),
                                 );
                               },
                               child: Counter(
@@ -196,7 +198,7 @@ class ServicesPage extends State<Services> {
                     title: "Total Amount: $totalAmount",
                     width: MediaQuery.of(context).size.width,
                   ),
-            Padding(padding: EdgeInsets.only(top: 20))
+            const Padding(padding: EdgeInsets.only(top: 20))
           ],
         ),
       ),

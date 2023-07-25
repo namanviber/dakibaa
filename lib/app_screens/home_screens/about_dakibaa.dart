@@ -8,6 +8,8 @@ import 'package:dakibaa/widgets/appDrawer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AboutDakibaa extends StatefulWidget {
+  const AboutDakibaa({super.key});
+
   @override
   _AboutDakibaaState createState() => _AboutDakibaaState();
 }
@@ -43,7 +45,7 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      drawer: AppDrawer(),
+      drawer: const AppDrawer(),
       backgroundColor: AppTheme().colorBlack,
       appBar: AppBar(
         scrolledUnderElevation: 1,
@@ -189,7 +191,7 @@ class _AboutDakibaaState extends State<AboutDakibaa> {
                 ),
                 width: MediaQuery.of(context).size.width,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               )
             ],

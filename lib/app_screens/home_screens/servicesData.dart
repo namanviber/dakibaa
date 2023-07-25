@@ -9,7 +9,7 @@ class Counter extends StatefulWidget {
   final int? index;
   final List<ServiceModelNew>? listData;
 
-  Counter({this.index, this.listData});
+  const Counter({super.key, this.index, this.listData});
 
   @override
   _CounterState createState() => _CounterState();

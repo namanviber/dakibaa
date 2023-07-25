@@ -144,7 +144,7 @@ class TermsSettingPage extends State<TermsCondition> {
       _isProgressBarShown = false;
     });
     hasData = true;
-    /*Toast.show(""+listData.toString(), context,
+    /*Toast.show(listData.toString(), context,
           duration: Toast.lengthLong, gravity: Toast.bottom,);*/
   }
 

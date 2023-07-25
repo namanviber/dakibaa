@@ -70,7 +70,7 @@ class _Number_of_PersonState extends State<Number_of_Person> {
     screenwidth = MediaQuery.of(context).size.width;
     return Scaffold(
       key: _scaffoldKey,
-      drawer: AppDrawer(),
+      drawer: const AppDrawer(),
       extendBodyBehindAppBar: true,
       backgroundColor: AppTheme().colorBlack,
       resizeToAvoidBottomInset: false,
@@ -121,7 +121,7 @@ class _Number_of_PersonState extends State<Number_of_Person> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Services()));
+                            builder: (context) => const Services()));
                   }
                 },
                 title: "Continue",

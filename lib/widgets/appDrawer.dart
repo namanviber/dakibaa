@@ -15,7 +15,7 @@ import '../common/constant.dart';
 import '../app_screens/drawer_navigation_screens/gallery.dart';
 
 class AppDrawer extends StatefulWidget {
-  AppDrawer({super.key});
+  const AppDrawer({super.key});
 
   @override
   State<AppDrawer> createState() => _AppDrawerState();
@@ -180,7 +180,7 @@ class _AppDrawerState extends State<AppDrawer> {
                 )),
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AboutDakibaa()));
+                  MaterialPageRoute(builder: (context) => const AboutDakibaa()));
             },
           ),
           (checkValue && !isguest)
@@ -472,7 +472,7 @@ class _AppDrawerState extends State<AppDrawer> {
       sharedPreferences.setBool("check", false);
     });
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => AboutDakibaa()),
+        MaterialPageRoute(builder: (context) => const AboutDakibaa()),
         (Route<dynamic> route) => false);
   }
 }

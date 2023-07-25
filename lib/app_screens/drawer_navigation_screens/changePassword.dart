@@ -63,7 +63,7 @@ class _ChangePassword extends State<ChangePassword> {
                       Center(
                         child: Container(
                             alignment: Alignment.center,
-                            padding: EdgeInsets.only(
+                            padding: const EdgeInsets.only(
                                 left: 0.0, top: 200, bottom: 30.0),
                             child: Text(
                               'Change Password',
@@ -185,7 +185,7 @@ class _ChangePassword extends State<ChangePassword> {
             sharedPreferences.setBool("check", false);
           });
           Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => AboutDakibaa()),
+              MaterialPageRoute(builder: (context) => const AboutDakibaa()),
               (Route<dynamic> route) => false);
         } else {
           pr.close();

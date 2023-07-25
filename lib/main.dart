@@ -25,7 +25,7 @@ class _myApp extends  State<MyApp>{
     ToastContext().init(context);//-> This part
     getCredential();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    return MaterialApp(
+    return const MaterialApp(
       title: 'DAKIBA',
       debugShowCheckedModeBanner: false,
       home:AboutDakibaa(),

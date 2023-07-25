@@ -49,7 +49,7 @@ class _ForgotPass extends State<ForgotPass> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox(
+                const SizedBox(
                   height: 100,
                 ),
                 Text(

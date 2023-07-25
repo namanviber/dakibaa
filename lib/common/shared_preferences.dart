@@ -54,8 +54,4 @@ class SharedPreferencesClass{
     return gettokenprefs.getString('token')!;
   }
 
-
-
-
-
 }

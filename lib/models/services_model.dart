@@ -10,7 +10,7 @@ class ServicesModel {
   @JsonKey(name: 'message')
   final String? message;
   @JsonKey(name: 'data')
-  List<ServicesModel_list>? servicesModel_list = null;
+  List<ServicesModel_list>? servicesModel_list;
   factory ServicesModel.fromJson(Map<String, dynamic> json) => _$ServicesModelFromJson(json);
   Map<String, dynamic> toJson() => _$ServicesModelToJson(this);
 }
